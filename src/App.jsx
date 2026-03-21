@@ -120,7 +120,7 @@ let B = getTheme() === "dark" ? DARK : LIGHT;
 
 // ── Resources ──
 const SECTIONS = [
-  { title:"Transport Canada - RPAS", color:"#ef4444", icon:"✈️", links:[
+  { title:"Transport Canada — RPAS", color:"#00dd66", icon:"✈️", links:[
     {n:"CARs Part IX (Full Regulations)",u:"https://laws-lois.justice.gc.ca/eng/regulations/sor-96-433/page-112.html"},
     {n:"Flying Your Drone Safely & Legally",u:"https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/flying-your-drone-safely-legally"},
     {n:"2025 Regulation Changes Summary",u:"https://tc.canada.ca/en/aviation/drone-safety/2025-summary-changes-canada-drone-regulations"},
@@ -129,9 +129,19 @@ const SECTIONS = [
     {n:"SFOC Application Guide",u:"https://tc.canada.ca/en/aviation/drone-safety/drone-pilot-licensing/get-permission-special-drone-operations"},
     {n:"NAV Drone (NAVCANADA)",u:"https://www.navcanada.ca/en/flight-planning/drone-flight-planning.aspx"},
     {n:"Drone Site Selection Tool",u:"https://nrc.canada.ca/en/drone-tool/"},
-    {n:"CFPS NOTAMs Search",u:"https://plan.navcanada.ca/wxrecall/"},
+    {n:"AirData (Flight Logging)",u:"https://app.airdata.com/"},
   ]},
-  { title:"NRCan - Geodetic & Geomatics", color:"#22c55e", icon:"🌐", links:[
+  { title:"NOTAMs & Airspace", color:"#00dd66", icon:"🚨", links:[
+    {n:"CFPS NOTAMs (NAV CANADA)",u:"https://plan.navcanada.ca/wxrecall/"},
+    {n:"NAV CANADA Flight Planning",u:"https://plan.navcanada.ca/"},
+    {n:"Aviation Weather (AWWS)",u:"https://plan.navcanada.ca/wxrecall/"},
+    {n:"Designated Airspace Handbook",u:"https://www.navcanada.ca/en/aeronautical-information/operational-guides.aspx"},
+    {n:"Canada Flight Supplement",u:"https://products.navcanada.ca/shop-vfr/Canada-Flight-Supplement/"},
+    {n:"TC Airspace Classifications",u:"https://tc.canada.ca/en/aviation/publications/transport-canada-aeronautical-information-manual-tc-aim-tp-14371"},
+    {n:"Aurora Forecast (NOAA)",u:"https://www.swpc.noaa.gov/products/aurora-30-minute-forecast"},
+    {n:"NOAA SWPC Dashboard",u:"https://www.swpc.noaa.gov/"},
+  ]},
+  { title:"NRCan — Geodetic & Geomatics", color:"#00dd66", icon:"🌍", links:[
     {n:"CSRS-PPP Online Service",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/ppp.php"},
     {n:"CSRS-PPP Updates & Info",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/ppp-info.php?locale=en"},
     {n:"About CSRS",u:"https://natural-resources.canada.ca/science-data/science-research/geomatics/geodetic-reference-systems/canadian-spatial-reference-system-csrs"},
@@ -144,36 +154,7 @@ const SECTIONS = [
     {n:"CACS Station Map",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/data-donnees/cacs-scca.php"},
     {n:"GPS-H (Geoid Height)",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/gpsh.php"},
   ]},
-  { title:"British Columbia - Provincial", color:"#3b82f6", icon:"🏔️", links:[
-    {n:"BC Data Catalogue",u:"https://catalogue.data.gov.bc.ca/"},
-    {n:"iMapBC (Web Mapping)",u:"https://maps.gov.bc.ca/ess/hm/imap4m/"},
-    {n:"ParcelMap BC (Open Data)",u:"https://catalogue.data.gov.bc.ca/dataset/parcelmap-bc-parcel-fabric"},
-    {n:"BC Geographic Warehouse",u:"https://www2.gov.bc.ca/gov/content/data/finding-and-sharing/bc-geographic-warehouse"},
-    {n:"BC Geographic Data & Svcs",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services"},
-    {n:"LTSA - myLTSA Portal",u:"https://www.ltsa.ca/"},
-    {n:"BC 1:20K Topo Maps",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/topographic-data/raster-base-maps"},
-    {n:"BC Air Photo Viewer",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/digital-imagery/air-photos"},
-    {n:"GeoBC Base Mapping",u:"https://www2.gov.bc.ca/gov/content/data/about-data-management/geobc"},
-  ]},
-  { title:"GIS & Remote Sensing", color:"#a855f7", icon:"🛰️", links:[
-    {n:"EPSG.io (CRS Lookup)",u:"https://epsg.io/"},
-    {n:"QGIS Downloads",u:"https://qgis.org/download/"},
-    {n:"Esri ArcGIS Online",u:"https://www.arcgis.com/index.html"},
-    {n:"Copernicus Data Space",u:"https://dataspace.copernicus.eu/"},
-    {n:"USGS EarthExplorer",u:"https://earthexplorer.usgs.gov/"},
-    {n:"OpenTopography (LiDAR)",u:"https://opentopography.org/"},
-    {n:"Canada Open Data Portal",u:"https://open.canada.ca/data/en/dataset"},
-    {n:"CloudCompare",u:"https://www.danielgm.net/cc/"},
-    {n:"PDAL",u:"https://pdal.io/"},
-  ]},
-  { title:"Professional & Standards", color:"#f59e0b", icon:"📐", links:[
-    {n:"ASTTBC",u:"https://asttbc.org/"},{n:"ABCLS",u:"https://www.abcls.ca/"},
-    {n:"ACLS",u:"https://www.acls-aatc.ca/"},{n:"GoGeomatics",u:"https://gogeomatics.ca/"},
-    {n:"CIG",u:"https://www.cig-acsg.ca/"},{n:"ASPRS",u:"https://www.asprs.org/"},
-    {n:"ACEC-BC",u:"https://www.acec-bc.ca/"},{n:"TAC",u:"https://www.tac-atc.ca/"},
-    {n:"CSA Group",u:"https://www.csagroup.org/"},
-  ]},
-  { title:"GNSS & Coordinate Tools", color:"#06b6d4", icon:"📡", links:[
+  { title:"GNSS & Coordinate Tools", color:"#00dd66", icon:"📡", links:[
     {n:"GNSS Planning (Trimble)",u:"https://www.gnssplanning.com/"},
     {n:"IGS Network",u:"https://igs.org/network/"},
     {n:"UNAVCO GNSS Data",u:"https://www.unavco.org/"},
@@ -181,18 +162,44 @@ const SECTIONS = [
     {n:"WMM (NOAA/BGS)",u:"https://www.ncei.noaa.gov/products/world-magnetic-model"},
     {n:"NGS Coord Converter",u:"https://www.ngs.noaa.gov/NCAT/"},
     {n:"SpaceWeatherLive",u:"https://www.spaceweatherlive.com/"},
-    {n:"AirData",u:"https://app.airdata.com/"},
-    {n:"NavDrone",u:"https://www.navcanada.ca/en/flight-planning/drone-flight-planning.aspx"},
   ]},
-  { title:"NOTAMs & Airspace", color:"#f43f5e", icon:"🚨", links:[
-    {n:"CFPS NOTAMs (NAV CANADA)",u:"https://plan.navcanada.ca/wxrecall/"},
-    {n:"NAV CANADA Flight Planning",u:"https://plan.navcanada.ca/"},
-    {n:"Aviation Weather (AWWS)",u:"https://plan.navcanada.ca/wxrecall/"},
-    {n:"Designated Airspace Handbook",u:"https://www.navcanada.ca/en/aeronautical-information/operational-guides.aspx"},
-    {n:"Canada Flight Supplement",u:"https://products.navcanada.ca/shop-vfr/Canada-Flight-Supplement/"},
-    {n:"TC Airspace Classifications",u:"https://tc.canada.ca/en/aviation/publications/transport-canada-aeronautical-information-manual-tc-aim-tp-14371"},
-    {n:"Aurora Forecast (NOAA)",u:"https://www.swpc.noaa.gov/products/aurora-30-minute-forecast"},
-    {n:"NOAA SWPC Dashboard",u:"https://www.swpc.noaa.gov/"},
+  { title:"Spatial Ops", color:"#00dd66", icon:"🗺️", links:[
+    {n:"EPSG.io (CRS Lookup)",u:"https://epsg.io/"},
+    {n:"QGIS Downloads",u:"https://qgis.org/download/"},
+    {n:"Esri ArcGIS Online",u:"https://www.arcgis.com/index.html"},
+    {n:"Canada Open Data Portal",u:"https://open.canada.ca/data/en/dataset"},
+    {n:"GEO.ca",u:"https://geo.ca/"},
+    {n:"GDAL/OGR",u:"https://gdal.org/"},
+    {n:"PostGIS",u:"https://postgis.net/"},
+    {n:"PROJ",u:"https://proj.org/"},
+    {n:"GeoServer",u:"https://geoserver.org/"},
+    {n:"MapLibre GL JS",u:"https://maplibre.org/"},
+    {n:"Statistics Canada Boundaries",u:"https://www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites/index-eng.cfm"},
+    {n:"Nominatim (Geocoder)",u:"https://nominatim.org/"},
+  ]},
+  { title:"Recon & Sensing", color:"#00dd66", icon:"👁️", links:[
+    {n:"Copernicus Data Space",u:"https://dataspace.copernicus.eu/"},
+    {n:"USGS EarthExplorer",u:"https://earthexplorer.usgs.gov/"},
+    {n:"OpenTopography (LiDAR)",u:"https://opentopography.org/"},
+    {n:"CloudCompare",u:"https://www.danielgm.net/cc/"},
+    {n:"PDAL",u:"https://pdal.io/"},
+    {n:"EODMS (NRCan Satellite Imagery)",u:"https://www.eodms-sgdot.nrcan-rncan.gc.ca/"},
+    {n:"Canada HRDEM (CanElevation)",u:"https://open.canada.ca/data/en/dataset/957782bf-847c-4644-a757-e383c0057995"},
+    {n:"ESA SNAP (SAR Processing)",u:"https://step.esa.int/main/toolboxes/snap/"},
+    {n:"Google Earth Engine",u:"https://earthengine.google.com/"},
+    {n:"Sentinel Hub EO Browser",u:"https://apps.sentinel-hub.com/eo-browser/"},
+    {n:"OpenDroneMap / WebODM",u:"https://opendronemap.org/"},
+    {n:"LAStools",u:"https://lastools.github.io/"},
+    {n:"Orfeo ToolBox",u:"https://www.orfeo-toolbox.org/"},
+    {n:"Potree (Point Cloud Viewer)",u:"https://potree.github.io/"},
+    {n:"NRCan Air Photo Library",u:"https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/air-photos-library"},
+  ]},
+  { title:"Regs & Standards", color:"#00dd66", icon:"📜", links:[
+    {n:"ASTTBC",u:"https://asttbc.org/"},{n:"ABCLS",u:"https://www.abcls.ca/"},
+    {n:"ACLS",u:"https://www.acls-aatc.ca/"},{n:"GoGeomatics",u:"https://gogeomatics.ca/"},
+    {n:"CIG",u:"https://www.cig-acsg.ca/"},{n:"ASPRS",u:"https://www.asprs.org/"},
+    {n:"ACEC-BC",u:"https://www.acec-bc.ca/"},{n:"TAC",u:"https://www.tac-atc.ca/"},
+    {n:"CSA Group",u:"https://www.csagroup.org/"},
   ]},
 ];
 
@@ -1155,12 +1162,30 @@ export default function App(){
         </div>
       )}
 
-      {/* GIS & DATA */}
+      {/* SPATIAL OPS */}
       {tab==="spatial"&&(
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-          {SECTIONS.filter(s=>s.title.includes("British Columbia")||s.title.includes("GIS")).map(s=>(
+        <div style={{display:"grid",gridTemplateColumns:"1fr",gap:12}}>
+          {SECTIONS.filter(s=>s.title==="Spatial Ops").map(s=>(
             <LinkCard key={s.title} section={s}/>
           ))}
+        </div>
+      )}
+
+      {/* RECON & SENSING */}
+      {tab==="recon"&&(
+        <div style={{display:"grid",gridTemplateColumns:"1fr",gap:12}}>
+          {SECTIONS.filter(s=>s.title==="Recon & Sensing").map(s=>(
+            <LinkCard key={s.title} section={s}/>
+          ))}
+        </div>
+      )}
+
+      {/* PROVINCIAL INTEL */}
+      {tab==="provincial"&&(
+        <div style={{...cardStyle,textAlign:"center",padding:40}}>
+          <span style={{fontSize:32}}>🏛️</span>
+          <h2 style={{fontFamily:B.font,fontSize:14,color:B.text,margin:"12px 0 4px"}}>Provincial Intel</h2>
+          <p style={{fontSize:11,color:B.textMid}}>Geospatial data portals for all 13 Canadian provinces and territories. Coming soon.</p>
         </div>
       )}
 
@@ -1206,15 +1231,15 @@ export default function App(){
       {/* CALCULATOR */}
       {tab==="calcs"&&<CalcPanel/>}
 
-      {/* STANDARDS */}
+      {/* REGS & STANDARDS */}
       {tab==="regs"&&(
         <div style={{...cardStyle,maxWidth:580}}>
           <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-            <span>{"\uD83D\uDCD0"}</span>
-            <h3 style={{margin:0,fontSize:13,fontWeight:700,color:B.sec}}>Professional & Standards</h3>
+            <span>📜</span>
+            <h3 style={{margin:0,fontSize:13,fontWeight:700,color:B.sec}}>Regs & Standards</h3>
           </div>
           <div style={{display:"grid",gap:2}}>
-            {(SECTIONS.find(s=>s.title.includes("Professional"))?.links||[]).map(l=>(
+            {(SECTIONS.find(s=>s.title==="Regs & Standards")?.links||[]).map(l=>(
               <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer"
                 style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"8px 12px",textDecoration:"none",color:B.text,fontSize:12,background:"transparent",transition:"all .12s",border:"1px solid transparent",borderRadius:5}}
                 onMouseEnter={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.borderHi;e.currentTarget.style.color="#fff";}}
@@ -1253,7 +1278,7 @@ export default function App(){
           <div style={{...cardStyle,marginBottom:12}}>
             <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
               <span>{"\u24D8"}</span>
-              <h2 style={{margin:0,fontSize:14,fontWeight:700,color:B.priBr}}>About BCKGeo</h2>
+              <h2 style={{margin:0,fontSize:14,fontWeight:700,color:B.priBr}}>Mission Brief</h2>
             </div>
             <div style={{fontSize:12,color:B.text,lineHeight:1.7}}>
               <p style={{marginBottom:12}}><b style={{color:B.text}}>BCKGeo</b> is a geospatial operations dashboard built for geomatics professionals working in municipal infrastructure, surveying, and remote sensing. It consolidates the tools, data feeds, and reference material that a working geomatics technologist needs into a single command centre.</p>
