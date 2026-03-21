@@ -421,7 +421,7 @@ function CoordConverter({initialLat=53.9171,initialLon=-122.7497}){
 
   return(<div>
     <HelpPanel text="Enter geographic coordinates in Decimal Degrees (DD) or Degrees-Minutes-Seconds (DMS). UTM and MTM projections are computed automatically for your location. To override the auto-detected zone, click the lock icon. For heights, enter your ellipsoidal height from GNSS and geoid undulation (N) from NRCan's GPS\u00B7H tool \u2014 orthometric height is computed as H = h \u2212 N. All coordinates reference NAD83(CSRS) on the GRS80 ellipsoid. Heights reference CGVD2013."/>
-    <div style={{fontSize:11,color:B.textMid,marginBottom:4}}>Convert between geographic (DD/DMS), UTM, and MTM projections.</div>
+    <div style={{fontSize:11,color:B.textMid,marginBottom:4}}>Convert between geographic coordinates (DD/DMS) and projected coordinates (UTM, MTM).</div>
     <div style={{fontSize:10,color:B.textDim,marginBottom:8}}>NAD83(CSRS) {"\u00B7"} GRS80 {"\u00B7"} CGVD2013</div>
     <div style={{display:"flex",gap:4,marginBottom:10}}>
       <button onClick={()=>switchMode("dd")} style={toggleBtn(inputMode==="dd","DD")}>DD</button>
@@ -542,7 +542,7 @@ function ScaleCalc({initialLat=53.9171,initialLon=-122.7497}){
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:12}}>
       {[
         {label:"Grid Scale",val:gsf.toFixed(6),sub:`${effectiveProj.toUpperCase()} ${zone}${effectiveProj==="utm"?(pLat>=0?"N":"S"):""}`,color:B.sec,tip:"How much the projection distorts distances at this location. Equals k\u2080 at the central meridian; increases with distance from it."},
-        {label:"Elev Factor",val:ef.toFixed(6),sub:`${h}m MSL`,color:B.text,tip:"Accounts for the difference between measurements at your elevation and on the ellipsoid surface. Higher elevation = smaller factor."},
+        {label:"Elev Factor",val:ef.toFixed(6),sub:`${elev||0}m`,color:B.text,tip:"Accounts for the difference between measurements at your elevation and on the ellipsoid surface. Higher elevation = smaller factor."},
         {label:"Combined",val:csf.toFixed(6),sub:"CSF",color:B.priBr,tip:"Grid Scale \u00D7 Elevation Factor. Multiply ground distance by CSF to get grid distance."}
       ].map(x=>(
         <div key={x.label} style={{...insetStyle,padding:10,textAlign:"center"}}>
@@ -1198,7 +1198,7 @@ export default function App(){
             <a href="https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/trx.php" target="_blank" rel="noopener noreferrer" style={{color:"#3b82f6",textDecoration:"underline"}}>NRCan TRX</a>
             {" "}and{" "}
             <a href="https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/gpsh.php" target="_blank" rel="noopener noreferrer" style={{color:"#3b82f6",textDecoration:"underline"}}>GPS{"\u00B7"}H</a>.
-            {" "}Projections computed on GRS80 ellipsoid (NAD83). Heights reference CGVD2013.
+            {" "}Projections computed on NAD83(CSRS), GRS80 ellipsoid. Heights reference CGVD2013.
           </div>
         </div>
       )}
