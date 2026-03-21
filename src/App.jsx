@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { ddToDms, dmsToDd, getUtmZone, utmCM, getMtmZone, mtmCM, geoToTM, tmToGeo, geoToUtm, geoToMtm, gridScaleFactor, elevFactor } from "./geo.js";
 
 // ── API Endpoints ──
 const NOAA_KP = "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json";
@@ -80,6 +81,7 @@ function calcMagDec(lat, lon, altKm=0, date=new Date()) {
   }}
   return {declination:Math.atan2(Y,X)/DEG, inclination:Math.atan2(Z,Math.sqrt(X*X+Y*Y))/DEG, totalField:Math.sqrt(X*X+Y*Y+Z*Z)};
 }
+
 
 // ── Brand Colors (Slytherin: green + silver) ──
 const DARK = {
@@ -315,6 +317,167 @@ function MagPanel({initialLat=53.9171,initialLon=-122.7497}){
       <div style={{background:B.bg,borderRadius:6,padding:8,textAlign:"center",border:`1px solid ${B.border}`}}><div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1.5,textTransform:"uppercase"}}>Inclination</div><div style={{fontSize:14,fontWeight:700,color:B.textMid,fontFamily:B.font}}>{m.inclination.toFixed(1)}°</div></div>
       <div style={{background:B.bg,borderRadius:6,padding:8,textAlign:"center",border:`1px solid ${B.border}`}}><div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1.5,textTransform:"uppercase"}}>Total Field</div><div style={{fontSize:14,fontWeight:700,color:B.textMid,fontFamily:B.font}}>{Math.round(m.totalField)} nT</div></div></div>
     <div style={{background:"#f59e0b10",border:"1px solid #f59e0b20",borderRadius:5,padding:"6px 8px",marginTop:10,fontSize:10,color:"#b45309",lineHeight:1.4}}>Approximate only (WMM2025, n=3). Not for navigation or survey use. Always verify with <a href="https://geomag.nrcan.gc.ca/mag_fld/magdec-en.php" target="_blank" rel="noopener noreferrer" style={{color:"#f59e0b",textDecoration:"underline"}}>NRCan</a> or <a href="https://www.ngdc.noaa.gov/geomag/calculators/magcalc.shtml" target="_blank" rel="noopener noreferrer" style={{color:"#f59e0b",textDecoration:"underline"}}>NOAA NCEI</a> before field use.</div></div>);}
+
+// ── Coordinate Converter Component ──
+function CoordConverter({initialLat=53.9171,initialLon=-122.7497}){
+  const [inputMode,setInputMode]=useState("dd");
+  const [ddLat,setDdLat]=useState(String(initialLat));
+  const [ddLon,setDdLon]=useState(String(initialLon));
+  const initLatDms=ddToDms(initialLat),initLonDms=ddToDms(Math.abs(initialLon));
+  const [dLatD,setDLatD]=useState(String(initLatDms.d));
+  const [dLatM,setDLatM]=useState(String(initLatDms.mAdj));
+  const [dLatS,setDLatS]=useState(String(initLatDms.s));
+  const [dLatDir,setDLatDir]=useState(initialLat>=0?"N":"S");
+  const [dLonD,setDLonD]=useState(String(initLonDms.d));
+  const [dLonM,setDLonM]=useState(String(initLonDms.mAdj));
+  const [dLonS,setDLonS]=useState(String(initLonDms.s));
+  const [dLonDir,setDLonDir]=useState(initialLon>=0?"E":"W");
+  const [copied,setCopied]=useState("");
+
+  // Canonical DD from whichever input mode is active
+  let pLat,pLon;
+  if(inputMode==="dd"){
+    pLat=parseFloat(ddLat)||0; pLon=parseFloat(ddLon)||0;
+  }else{
+    const sgnLat=dLatDir==="N"?1:-1, sgnLon=dLonDir==="E"?1:-1;
+    pLat=dmsToDd(parseInt(dLatD)||0,parseInt(dLatM)||0,parseFloat(dLatS)||0,sgnLat);
+    pLon=dmsToDd(parseInt(dLonD)||0,parseInt(dLonM)||0,parseFloat(dLonS)||0,sgnLon);
+  }
+
+  // Compute all outputs
+  const latDms=ddToDms(pLat),lonDms=ddToDms(Math.abs(pLon));
+  const utm=geoToUtm(pLat,pLon), mtm=geoToMtm(pLat,pLon);
+
+  const ddStr=`${pLat.toFixed(6)}, ${pLon.toFixed(6)}`;
+  const dmsStr=`${latDms.d}\u00B0 ${latDms.mAdj}' ${latDms.s.toFixed(2)}" ${pLat>=0?"N":"S"}, ${lonDms.d}\u00B0 ${lonDms.mAdj}' ${lonDms.s.toFixed(2)}" ${pLon>=0?"E":"W"}`;
+  const utmStr=`${utm.zone}${utm.hemi}  ${utm.easting.toFixed(2)} E  ${utm.northing.toFixed(2)} N`;
+  const mtmStr=`MTM ${mtm.zone}  ${mtm.easting.toFixed(2)} E  ${mtm.northing.toFixed(2)} N`;
+
+  // Sync: when DD changes, update DMS display (only if DD is input mode)
+  const syncDdToDms=()=>{
+    const la=ddToDms(parseFloat(ddLat)||0),lo=ddToDms(Math.abs(parseFloat(ddLon)||0));
+    setDLatD(String(la.d));setDLatM(String(la.mAdj));setDLatS(String(la.s));setDLatDir((parseFloat(ddLat)||0)>=0?"N":"S");
+    setDLonD(String(lo.d));setDLonM(String(lo.mAdj));setDLonS(String(lo.s));setDLonDir((parseFloat(ddLon)||0)>=0?"E":"W");
+  };
+  const syncDmsToDd=()=>{
+    const sgnLa=dLatDir==="N"?1:-1,sgnLo=dLonDir==="E"?1:-1;
+    setDdLat(dmsToDd(parseInt(dLatD)||0,parseInt(dLatM)||0,parseFloat(dLatS)||0,sgnLa).toFixed(6));
+    setDdLon(dmsToDd(parseInt(dLonD)||0,parseInt(dLonM)||0,parseFloat(dLonS)||0,sgnLo).toFixed(6));
+  };
+
+  const switchMode=(m)=>{if(m===inputMode)return;if(m==="dms")syncDdToDms();else syncDmsToDd();setInputMode(m);};
+  const copyText=(txt,label)=>{try{navigator.clipboard.writeText(txt);setCopied(label);setTimeout(()=>setCopied(""),1500);}catch{}};
+
+  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,outline:"none",fontFamily:B.font};
+  const dmsInp={...inp,width:48,textAlign:"center"};
+  const toggleBtn=(m,label)=>({padding:"4px 10px",fontSize:11,fontWeight:inputMode===m?700:400,fontFamily:B.font,color:inputMode===m?B.bg:B.textMid,background:inputMode===m?B.priBr:"transparent",border:`1px solid ${inputMode===m?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
+  const outRow={display:"flex",alignItems:"center",justifyContent:"space-between",padding:"5px 10px",borderRadius:4,background:B.bg,border:`1px solid ${B.border}`,marginBottom:4};
+  const copyBtn=(txt,label)=><button onClick={()=>copyText(txt,label)} style={{background:"none",border:"none",cursor:"pointer",fontSize:11,color:copied===label?B.priBr:B.textDim,fontFamily:B.font,padding:"2px 6px"}}>{copied===label?"\u2713":"📋"}</button>;
+
+  return(<div>
+    <div style={{fontSize:11,color:B.textMid,marginBottom:8}}>Convert between geographic (DD/DMS), UTM, and MTM projections.</div>
+    <div style={{display:"flex",gap:4,marginBottom:10}}>
+      <button onClick={()=>switchMode("dd")} style={toggleBtn("dd","DD")}>DD</button>
+      <button onClick={()=>switchMode("dms")} style={toggleBtn("dms","DMS")}>DMS</button>
+    </div>
+    {inputMode==="dd"?(
+      <div style={{display:"flex",gap:8,marginBottom:12,alignItems:"center",flexWrap:"wrap"}}>
+        <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={ddLat} onChange={e=>setDdLat(e.target.value)} style={{...inp,width:120}}/>
+        <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={ddLon} onChange={e=>setDdLon(e.target.value)} style={{...inp,width:120}}/></div>
+    ):(
+      <div style={{marginBottom:12}}>
+        <div style={{display:"flex",gap:4,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
+          <label style={{fontSize:10,color:B.textDim,width:24}}>Lat</label>
+          <input value={dLatD} onChange={e=>setDLatD(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
+          <input value={dLatM} onChange={e=>setDLatM(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
+          <input value={dLatS} onChange={e=>setDLatS(e.target.value)} style={{...dmsInp,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+          <button onClick={()=>setDLatDir(d=>d==="N"?"S":"N")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{dLatDir}</button></div>
+        <div style={{display:"flex",gap:4,alignItems:"center",flexWrap:"wrap"}}>
+          <label style={{fontSize:10,color:B.textDim,width:24}}>Lon</label>
+          <input value={dLonD} onChange={e=>setDLonD(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
+          <input value={dLonM} onChange={e=>setDLonM(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
+          <input value={dLonS} onChange={e=>setDLonS(e.target.value)} style={{...dmsInp,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+          <button onClick={()=>setDLonDir(d=>d==="E"?"W":"E")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{dLonDir}</button></div>
+      </div>
+    )}
+    <div style={{borderTop:`1px solid ${B.border}`,paddingTop:10}}>
+      <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1,marginBottom:6,textTransform:"uppercase"}}>All Formats</div>
+      <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>DD</span><span style={{fontFamily:B.font,fontSize:12,color:B.text,flex:1}}>{pLat.toFixed(6)}{"\u00B0"}, {pLon.toFixed(6)}{"\u00B0"}</span>{copyBtn(ddStr,"dd")}</div>
+      <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>DMS</span><span style={{fontFamily:B.font,fontSize:12,color:B.text,flex:1}}>{dmsStr}</span>{copyBtn(dmsStr,"dms")}</div>
+      <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>UTM</span><span style={{fontFamily:B.font,fontSize:12,color:B.priBr,flex:1}}>{utmStr}</span>{copyBtn(utmStr,"utm")}</div>
+      <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>MTM</span><span style={{fontFamily:B.font,fontSize:12,color:B.priBr,flex:1}}>{mtmStr}</span>{copyBtn(mtmStr,"mtm")}</div>
+    </div>
+  </div>);
+}
+
+// ── Scale & Distance Component ──
+function ScaleCalc({initialLat=53.9171,initialLon=-122.7497}){
+  const [lat,setLat]=useState(String(initialLat));
+  const [lon,setLon]=useState(String(initialLon));
+  const [elev,setElev]=useState("580");
+  const [groundDist,setGroundDist]=useState("");
+  const [gridDist,setGridDist]=useState("");
+  const [projType,setProjType]=useState("utm");
+  const [lastEdited,setLastEdited]=useState("ground");
+
+  const pLat=parseFloat(lat)||initialLat,pLon=parseFloat(lon)||initialLon,h=parseFloat(elev)||0;
+  const zone=projType==="utm"?getUtmZone(pLon):getMtmZone(pLon);
+  const cm=projType==="utm"?utmCM(zone):mtmCM(zone);
+  const k0=projType==="utm"?0.9996:0.9999;
+  const gsf=gridScaleFactor(pLat,pLon,cm,k0);
+  const ef=elevFactor(pLat,h);
+  const csf=gsf*ef;
+
+  const gd=parseFloat(groundDist),grd=parseFloat(gridDist);
+  const computedGrid=gd&&lastEdited==="ground"?(gd*csf).toFixed(4):"";
+  const computedGround=grd&&lastEdited==="grid"?(grd/csf).toFixed(4):"";
+
+  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,outline:"none",fontFamily:B.font};
+  const toggleBtn=(m,label)=>({padding:"4px 10px",fontSize:11,fontWeight:projType===m?700:400,fontFamily:B.font,color:projType===m?B.bg:B.textMid,background:projType===m?B.priBr:"transparent",border:`1px solid ${projType===m?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
+  const insetStyle={background:B.inset,border:`2px solid ${B.border}`,borderTopColor:B.bvD,borderLeftColor:B.bvD,borderBottomColor:B.bvL,borderRightColor:B.bvL};
+
+  return(<div>
+    <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
+      <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={lat} onChange={e=>setLat(e.target.value)} style={{...inp,width:100}}/>
+      <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={lon} onChange={e=>setLon(e.target.value)} style={{...inp,width:100}}/>
+      <label style={{fontSize:11,color:B.textMid}}>Elev</label><input value={elev} onChange={e=>setElev(e.target.value)} style={{...inp,width:60}}/><span style={{fontSize:10,color:B.textDim}}>m</span>
+    </div>
+    <div style={{display:"flex",gap:4,marginBottom:10}}>
+      <button onClick={()=>setProjType("utm")} style={toggleBtn("utm","UTM")}>UTM</button>
+      <button onClick={()=>setProjType("mtm")} style={toggleBtn("mtm","MTM")}>MTM</button>
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:12}}>
+      {[
+        {label:"Grid Scale",val:gsf.toFixed(6),sub:`${projType.toUpperCase()} ${zone}${projType==="utm"?(pLat>=0?"N":"S"):""}`,color:B.sec},
+        {label:"Elev Factor",val:ef.toFixed(6),sub:`${h}m MSL`,color:B.text},
+        {label:"Combined",val:csf.toFixed(6),sub:"CSF",color:B.priBr}
+      ].map(x=>(
+        <div key={x.label} style={{...insetStyle,padding:10,textAlign:"center"}}>
+          <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1.5,textTransform:"uppercase"}}>{x.label}</div>
+          <div style={{fontFamily:B.display,fontSize:14,fontWeight:800,color:x.color,margin:"4px 0"}}>{x.val}</div>
+          <div style={{fontFamily:B.font,fontSize:10,color:B.textDim}}>{x.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{borderTop:`1px solid ${B.border}`,paddingTop:10}}>
+      <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1,marginBottom:6,textTransform:"uppercase"}}>Distance Conversion</div>
+      <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
+        <label style={{fontSize:11,color:B.textMid,width:60}}>Ground</label>
+        <input value={lastEdited==="ground"?groundDist:computedGround} onChange={e=>{setGroundDist(e.target.value);setLastEdited("ground");}} style={{...inp,width:120}} placeholder="0.0000"/>
+        <span style={{fontSize:11,color:B.textDim}}>m</span>
+        <span style={{fontSize:11,color:B.textDim}}>{"\u2192"}</span>
+        <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="ground"&&computedGrid?computedGrid+" m":"—"}</span>
+      </div>
+      <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
+        <label style={{fontSize:11,color:B.textMid,width:60}}>Grid</label>
+        <input value={lastEdited==="grid"?gridDist:computedGrid} onChange={e=>{setGridDist(e.target.value);setLastEdited("grid");}} style={{...inp,width:120}} placeholder="0.0000"/>
+        <span style={{fontSize:11,color:B.textDim}}>m</span>
+        <span style={{fontSize:11,color:B.textDim}}>{"\u2192"}</span>
+        <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="grid"&&computedGround?computedGround+" m":"—"}</span>
+      </div>
+    </div>
+  </div>);
+}
 
 // ── Calculator Component ──
 function CalcPanel(){
@@ -924,32 +1087,14 @@ export default function App(){
                 <span>{"\uD83D\uDCE1"}</span>
                 <h2 style={{margin:0,fontSize:13,fontWeight:700,color:B.text}}>Coordinate Converter</h2>
               </div>
-              <div style={{fontSize:11,color:B.textMid,marginBottom:10}}>Convert between geographic (DD/DMS), UTM, and MTM projections.</div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-                <div>
-                  <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1,marginBottom:3}}>INPUT (DD)</div>
-                  <div style={{...insetStyle,padding:"6px 10px",fontFamily:B.font,fontSize:12,color:B.text}}>53.92{"\u00B0"}, -122.75{"\u00B0"}</div>
-                </div>
-                <div>
-                  <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1,marginBottom:3}}>UTM 10N</div>
-                  <div style={{...insetStyle,padding:"6px 10px",fontFamily:B.font,fontSize:12,color:B.priBr}}>516,842 E {"\u00B7"} 5,977,431 N</div>
-                </div>
-              </div>
+              <CoordConverter initialLat={lat} initialLon={lon}/>
             </div>
             <div style={{...cardStyle,marginBottom:12}}>
               <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
                 <span>{"\uD83D\uDCCF"}</span>
                 <h2 style={{margin:0,fontSize:13,fontWeight:700,color:B.text}}>Scale & Distance</h2>
               </div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
-                {[{label:"Grid Scale",val:"0.99968",sub:"UTM 10N",color:B.sec},{label:"Elev Factor",val:"0.99991",sub:"580m MSL",color:B.text},{label:"Combined",val:"0.99959",sub:"CSF",color:B.priBr}].map(x=>(
-                  <div key={x.label} style={{...insetStyle,padding:10,textAlign:"center"}}>
-                    <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1.5,textTransform:"uppercase"}}>{x.label}</div>
-                    <div style={{fontFamily:B.display,fontSize:15,fontWeight:800,color:x.color,margin:"4px 0"}}>{x.val}</div>
-                    <div style={{fontFamily:B.font,fontSize:10,color:B.textDim}}>{x.sub}</div>
-                  </div>
-                ))}
-              </div>
+              <ScaleCalc initialLat={lat} initialLon={lon}/>
             </div>
           </div>
         </div>
