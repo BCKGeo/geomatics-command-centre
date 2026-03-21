@@ -1055,10 +1055,8 @@ function ProvIntel({initialProv="bc"}){
             {cat.category.toUpperCase()}
           </div>
           {cat.links.map(l=>(
-            <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer"
-              style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",textDecoration:"none",color:B.text,fontSize:12,background:"transparent",transition:"all .12s",border:"1px solid transparent",borderRadius:4}}
-              onMouseEnter={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.borderHi;}}
-              onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.borderColor="transparent";}}>
+            <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" className="lnk"
+              style={{padding:"6px 10px",color:B.text,fontSize:12}}>
               <div>
                 <span>{l.n}</span>
                 {l.paid&&<span style={{fontSize:9,color:B.gold,marginLeft:6}}>💲</span>}
@@ -1173,9 +1171,8 @@ export default function App(){
         </div>
         <div style={{display:"grid",gap:2}}>
           {section.links.map(l=>(
-            <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" style={linkStyle}
-              onMouseEnter={e=>{e.currentTarget.style.background=section.color+"10";e.currentTarget.style.borderColor=section.color+"28";e.currentTarget.style.color="#fff";}}
-              onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.borderColor="transparent";e.currentTarget.style.color=B.text;}}>
+            <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" className="lnk-card"
+              style={{padding:"6px 9px",fontSize:12,color:B.text}}>
               <div><span>{l.n}</span>{l.d && <div style={{fontSize:10,color:B.textDim,marginTop:1}}>{l.d}</div>}</div><span style={{color:B.textDim,fontSize:11}}>{"\u2192"}</span>
             </a>
           ))}
@@ -1199,6 +1196,14 @@ export default function App(){
       @media(max-width:768px){.cmd-stations{grid-template-columns:1fr 1fr !important;}}
       @media(max-width:480px){.cmd-stations{grid-template-columns:1fr !important;}}
       @media(max-width:768px){.prov-btns{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;}}
+      .lnk{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
+      .lnk:hover{background:${B.surface};border-color:${B.borderHi}}
+      .lnk-card{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
+      .lnk-card:hover{background:${B.priBr}10;border-color:${B.priBr}28}
+      .station-card{transition:all .15s}
+      .station-card:hover{background:${B.surfaceHi} !important;border-color:${B.pri} !important}
+      .codex-row{border:1px solid transparent;transition:border-color .12s;border-radius:4px}
+      .codex-row:hover{border-color:${B.border}}
     `}</style>
 
     <div className="scanlines"/>
@@ -1421,10 +1426,8 @@ export default function App(){
                   {i:"📜",t:"Regs & Standards",d:"Professional orgs, regulations",g:"regs"},
                   {i:"🔎",t:"Codex",d:"Terms & acronyms by domain",g:"codex"},
                 ].map(s=>(
-                  <div key={s.t} onClick={()=>setTab(s.g)}
-                    style={{background:B.surface,border:`2px solid ${B.border}`,borderTopColor:B.bvL,borderLeftColor:B.bvL,borderBottomColor:B.bvD,borderRightColor:B.bvD,padding:"14px 16px",cursor:"pointer",transition:"all .15s",display:"flex",alignItems:"center",gap:12}}
-                    onMouseEnter={e=>{e.currentTarget.style.background=B.surfaceHi;e.currentTarget.style.borderColor=B.pri;}}
-                    onMouseLeave={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.border;}}>
+                  <div key={s.t} onClick={()=>setTab(s.g)} className="station-card"
+                    style={{background:B.surface,border:`2px solid ${B.border}`,borderTopColor:B.bvL,borderLeftColor:B.bvL,borderBottomColor:B.bvD,borderRightColor:B.bvD,padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12}}>
                     <div style={{fontSize:22,width:36,textAlign:"center"}}>{s.i}</div>
                     <div style={{flex:1,minWidth:0}}>
                       <h3 style={{fontFamily:B.font,fontSize:12,fontWeight:700,letterSpacing:".06em",margin:0,color:B.priBr}}>{s.t}</h3>
@@ -1536,10 +1539,8 @@ export default function App(){
           </div>
           <div style={{display:"grid",gap:2}}>
             {(SECTIONS.find(s=>s.title==="Regs & Standards")?.links||[]).map(l=>(
-              <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer"
-                style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"8px 12px",textDecoration:"none",color:B.text,fontSize:12,background:"transparent",transition:"all .12s",border:"1px solid transparent",borderRadius:5}}
-                onMouseEnter={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.borderHi;e.currentTarget.style.color="#fff";}}
-                onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.borderColor="transparent";e.currentTarget.style.color=B.text;}}>
+              <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" className="lnk"
+                style={{padding:"8px 12px",color:B.text,fontSize:12}}>
                 <div><span>{l.n}</span>{l.d && <div style={{fontSize:10,color:B.textDim,marginTop:1}}>{l.d}</div>}</div><span style={{color:B.textDim,fontSize:11}}>{"\u2192"}</span>
               </a>
             ))}
@@ -1555,9 +1556,7 @@ export default function App(){
               <div style={{fontFamily:B.font,fontSize:11,fontWeight:700,letterSpacing:".1em",padding:"6px 12px",marginBottom:8,borderBottom:`2px solid ${B.border}`}}>{section}</div>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(340px,1fr))",gap:"4px 16px"}}>
                 {terms.map(t=>(
-                  <dl key={t.dt} style={{display:"flex",gap:10,padding:"6px 12px",fontSize:11,border:"1px solid transparent",transition:"border-color .12s",borderRadius:4}}
-                    onMouseEnter={e=>{e.currentTarget.style.borderColor=B.border;}}
-                    onMouseLeave={e=>{e.currentTarget.style.borderColor="transparent";}}>
+                  <dl key={t.dt} className="codex-row" style={{display:"flex",gap:10,padding:"6px 12px",fontSize:11}}>
                     <dt style={{fontFamily:B.font,fontWeight:700,color:B.text,whiteSpace:"nowrap",minWidth:110,flexShrink:0}}>{t.dt}</dt>
                     <dd style={{color:B.textMid,lineHeight:1.4,margin:0}}>{t.dd}</dd>
                   </dl>
@@ -1590,10 +1589,8 @@ export default function App(){
             </div>
             <div style={{display:"grid",gap:2}}>
               {[{n:"NOAA SWPC",u:"https://www.swpc.noaa.gov/",d:"Space weather scales, Kp index, solar wind"},{n:"Open-Meteo",u:"https://open-meteo.com/",d:"Local weather forecasts & conditions"},{n:"WMM2025",u:"https://www.ncei.noaa.gov/products/world-magnetic-model",d:"Magnetic declination model (2025–2030)"},{n:"BigDataCloud",u:"https://www.bigdatacloud.com/",d:"Reverse geocoding (browser-side only)"}].map(l=>(
-                <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer"
-                  style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"8px 12px",textDecoration:"none",color:B.text,fontSize:12,background:"transparent",transition:"all .12s",border:"1px solid transparent",borderRadius:5}}
-                  onMouseEnter={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.borderHi;}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.borderColor="transparent";}}>
+                <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" className="lnk"
+                  style={{padding:"8px 12px",color:B.text,fontSize:12}}>
                   <div>
                     <div style={{fontWeight:600}}>{l.n}</div>
                     <div style={{fontSize:10,color:B.textMid,marginTop:1}}>{l.d}</div>
