@@ -244,12 +244,14 @@ const GLOSSARY = {
     {dt:"RINEX",dd:"Receiver Independent Exchange Format. Standard file format for GNSS observation and navigation data."},
     {dt:"IGS",dd:"International GNSS Service. Global network providing precise satellite orbits, clocks, and station coordinates."},
   ],
-  "GIS & Data": [
+  "Spatial Ops": [
     {dt:"EPSG",dd:"European Petroleum Survey Group codes. Numeric identifiers for coordinate reference systems (e.g. EPSG:26910 = UTM 10N NAD83)."},
     {dt:"WFS / WMS",dd:"Web Feature Service / Web Map Service. OGC standards for serving vector features and rendered map tiles over HTTP."},
     {dt:"BCGW",dd:"BC Geographic Warehouse. Provincial spatial data repository accessible via WFS/WMS and direct download."},
     {dt:"TRIM",dd:"Terrain Resource Information Management. BC's 1:20,000 base mapping program (contours, hydro, roads)."},
     {dt:"PID / PIN",dd:"Parcel Identifier / Parcel Identification Number. Unique identifiers for land parcels in BC's cadastral system."},
+  ],
+  "Recon & Sensing": [
     {dt:"LiDAR",dd:"Light Detection and Ranging. Laser-based remote sensing for high-density 3D point cloud capture."},
     {dt:"DEM / DSM / DTM",dd:"Digital Elevation/Surface/Terrain Model. Raster representations of ground (DTM), surface (DSM), or general elevation (DEM)."},
     {dt:"PDAL",dd:"Point Data Abstraction Library. Open-source C++ library for point cloud processing pipelines."},
@@ -257,7 +259,12 @@ const GLOSSARY = {
     {dt:"SAR",dd:"Synthetic Aperture Radar. Active microwave sensor that works through clouds, rain, and at night."},
     {dt:"LTSA",dd:"Land Title and Survey Authority of BC. Manages land title and survey systems for the province."},
   ],
-  "Field Tools": [
+  "Provincial Intel": [
+    {dt:"SDI",dd:"Spatial Data Infrastructure. Framework of policies, standards, and technology for sharing geospatial data across jurisdictions."},
+    {dt:"Cadastre",dd:"Official register of land parcels. Provincial cadastral systems map parcel boundaries, ownership, and legal descriptions."},
+    {dt:"OGL",dd:"Open Government Licence. Licence under which most provincial open data is published. Permits free use with attribution."},
+  ],
+  "Field Kit": [
     {dt:"WMM2025",dd:"World Magnetic Model 2025. Current-epoch global geomagnetic model, valid 2025-2030. Joint NOAA/BGS product."},
     {dt:"Inclination",dd:"Magnetic dip angle. The angle between the magnetic field vector and the horizontal plane at a location."},
     {dt:"Total Field",dd:"Total intensity of Earth's magnetic field at a location, measured in nanotesla (nT). ~58,000 nT in northern BC."},
@@ -268,7 +275,7 @@ const GLOSSARY = {
     {dt:"CSF",dd:"Combined Scale Factor. Product of grid scale factor and elevation factor. Applied to convert ground to grid distances."},
     {dt:"DD / DMS",dd:"Decimal Degrees / Degrees Minutes Seconds. Two common formats for expressing geographic coordinates."},
   ],
-  "Standards": [
+  "Regs & Standards": [
     {dt:"ASTTBC",dd:"Applied Science Technologists and Technicians of BC. Regulatory body for AScT, CTech, and RFT designations."},
     {dt:"AScT",dd:"Applied Science Technologist. Professional designation granted by ASTTBC for engineering/geomatics technologists."},
     {dt:"ABCLS",dd:"Association of British Columbia Land Surveyors. Regulatory body for BCLS (licensed land surveyors) in BC."},
