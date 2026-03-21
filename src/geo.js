@@ -9,8 +9,10 @@ export function dmsToDd(d,m,s,sign){return sign*(Math.abs(d)+m/60+s/3600);}
 
 export function getUtmZone(lon){return Math.max(1,Math.min(60,Math.floor((lon+180)/6)+1));}
 export function utmCM(z){return z*6-183;}
-export function getMtmZone(lon){return Math.max(1,Math.min(32,Math.round((-lon-50.5)/3)));}
+export function getMtmZone(lon){return Math.max(1,Math.min(17,Math.round((-lon-50.5)/3)));}
 export function mtmCM(z){return-(50.5+3*z);}
+export const MTM_WEST_LIMIT = -103.0; // Western boundary of MTM zone 17
+export function isMtmApplicable(lon) { return lon >= MTM_WEST_LIMIT; }
 
 export function geoToTM(latD,lonD,cm,k0,fe,fn){
   const R=Math.PI/180,p=latD*R,l=(lonD-cm)*R,sp=Math.sin(p),cp=Math.cos(p),tp=Math.tan(p);

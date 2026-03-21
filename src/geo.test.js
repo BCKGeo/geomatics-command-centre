@@ -6,6 +6,7 @@ import {
   getUtmZone, utmCM, getMtmZone, mtmCM,
   geoToTM, tmToGeo, geoToUtm, geoToMtm,
   gridScaleFactor, elevFactor,
+  isMtmApplicable,
 } from './geo.js';
 
 // ── proj4 reference definitions ──
@@ -224,13 +225,9 @@ describe('UTM Central Meridian', () => {
 // 4. MTM ZONE DETECTION
 // ═══════════════════════════════════════════════════════════════
 describe('MTM Zone Detection', () => {
-  it('Prince George (-122.75) → reasonable MTM zone', () => {
+  it('Prince George (-122.75) → clamped to zone 17 (MTM does not cover western Canada)', () => {
     const z = getMtmZone(-122.7497);
-    expect(z).toBeGreaterThanOrEqual(1);
-    expect(z).toBeLessThanOrEqual(32);
-    // CM should be close to the longitude
-    const cm = mtmCM(z);
-    expect(Math.abs(cm - (-122.7497))).toBeLessThan(1.5);
+    expect(z).toBe(17); // Clamped — MTM not applicable west of -103.0°
   });
 
   it('Ottawa (-75.70) → reasonable MTM zone', () => {
@@ -241,7 +238,7 @@ describe('MTM Zone Detection', () => {
 
   it('clamps to valid range', () => {
     expect(getMtmZone(-40)).toBeGreaterThanOrEqual(1);
-    expect(getMtmZone(-180)).toBeLessThanOrEqual(32);
+    expect(getMtmZone(-180)).toBeLessThanOrEqual(17);
   });
 });
 
@@ -296,9 +293,7 @@ describe('Forward UTM Projection (cross-validated vs proj4)', () => {
 
 describe('Forward MTM Projection (cross-validated vs proj4)', () => {
   const points = [
-    { name: 'Prince George', lat: 53.9171, lon: -122.7497 },
     { name: 'Ottawa', lat: 45.4215, lon: -75.6972 },
-    { name: 'Calgary', lat: 51.0447, lon: -114.0719 },
     { name: 'Toronto', lat: 43.6532, lon: -79.3832 },
     { name: 'Halifax', lat: 44.6488, lon: -63.5752 },
   ];
@@ -347,9 +342,7 @@ describe('Inverse UTM Projection', () => {
 
 describe('Inverse MTM Projection', () => {
   const points = [
-    { name: 'Prince George', lat: 53.9171, lon: -122.7497 },
     { name: 'Ottawa', lat: 45.4215, lon: -75.6972 },
-    { name: 'Calgary', lat: 51.0447, lon: -114.0719 },
   ];
 
   points.forEach(({ name, lat, lon }) => {
@@ -590,4 +583,38 @@ describe('Random point stress tests (proj4 cross-validation)', () => {
       expect(Math.abs(ours.northing - ref.northing)).toBeLessThan(0.1);
     });
   }
+});
+
+describe('MTM Applicability', () => {
+  it('returns true for Ottawa (-75.70)', () => {
+    expect(isMtmApplicable(-75.7)).toBe(true);
+  });
+
+  it('returns true for Halifax (-63.58)', () => {
+    expect(isMtmApplicable(-63.58)).toBe(true);
+  });
+
+  it('returns true at the boundary (-103.0)', () => {
+    expect(isMtmApplicable(-103.0)).toBe(true);
+  });
+
+  it('returns false for Calgary (-114.07)', () => {
+    expect(isMtmApplicable(-114.07)).toBe(false);
+  });
+
+  it('returns false for Prince George (-122.75)', () => {
+    expect(isMtmApplicable(-122.75)).toBe(false);
+  });
+
+  it('returns false for Vancouver (-123.12)', () => {
+    expect(isMtmApplicable(-123.12)).toBe(false);
+  });
+
+  it('returns true just east of boundary (-102.99)', () => {
+    expect(isMtmApplicable(-102.99)).toBe(true);
+  });
+
+  it('returns false just west of boundary (-103.01)', () => {
+    expect(isMtmApplicable(-103.01)).toBe(false);
+  });
 });
