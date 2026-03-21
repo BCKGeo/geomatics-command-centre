@@ -426,13 +426,65 @@ function GaugeRing({level, label}){const levelNum=parseInt(level?.replace(/\D/g,
 
 function MagPanel({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const [lat,setLat]=useState(String(initialLat)),[lon,setLon]=useState(String(initialLon));
-  const m=calcMagDec(parseFloat(lat)||initialLat,parseFloat(lon)||initialLon);
+  const [inputMode,setInputMode]=useState("dd");
+  const initLatDms2=ddToDms(initialLat),initLonDms2=ddToDms(Math.abs(initialLon));
+  const [dmsLatD,setDmsLatD]=useState(String(initLatDms2.d));
+  const [dmsLatM,setDmsLatM]=useState(String(initLatDms2.mAdj));
+  const [dmsLatS,setDmsLatS]=useState(String(initLatDms2.s));
+  const [dmsLatDir,setDmsLatDir]=useState(initialLat>=0?"N":"S");
+  const [dmsLonD,setDmsLonD]=useState(String(initLonDms2.d));
+  const [dmsLonM,setDmsLonM]=useState(String(initLonDms2.mAdj));
+  const [dmsLonS,setDmsLonS]=useState(String(initLonDms2.s));
+  const [dmsLonDir,setDmsLonDir]=useState(initialLon>=0?"E":"W");
+  const syncDdToDms=()=>{
+    const la=ddToDms(parseFloat(lat)||0),lo=ddToDms(Math.abs(parseFloat(lon)||0));
+    setDmsLatD(String(la.d));setDmsLatM(String(la.mAdj));setDmsLatS(String(la.s));setDmsLatDir((parseFloat(lat)||0)>=0?"N":"S");
+    setDmsLonD(String(lo.d));setDmsLonM(String(lo.mAdj));setDmsLonS(String(lo.s));setDmsLonDir((parseFloat(lon)||0)>=0?"E":"W");
+  };
+  const syncDmsToDd=()=>{
+    const sgnLa=dmsLatDir==="N"?1:-1,sgnLo=dmsLonDir==="E"?1:-1;
+    setLat(dmsToDd(parseInt(dmsLatD)||0,parseInt(dmsLatM)||0,parseFloat(dmsLatS)||0,sgnLa).toFixed(6));
+    setLon(dmsToDd(parseInt(dmsLonD)||0,parseInt(dmsLonM)||0,parseFloat(dmsLonS)||0,sgnLo).toFixed(6));
+  };
+  const switchMode=(m2)=>{if(m2===inputMode)return;if(m2==="dms")syncDdToDms();else syncDmsToDd();setInputMode(m2);};
+  let magLat,magLon;
+  if(inputMode==="dd"){
+    magLat=parseFloat(lat)||initialLat; magLon=parseFloat(lon)||initialLon;
+  }else{
+    const sgnLa=dmsLatDir==="N"?1:-1, sgnLo=dmsLonDir==="E"?1:-1;
+    magLat=dmsToDd(parseInt(dmsLatD)||0,parseInt(dmsLatM)||0,parseFloat(dmsLatS)||0,sgnLa);
+    magLon=dmsToDd(parseInt(dmsLonD)||0,parseInt(dmsLonM)||0,parseFloat(dmsLonS)||0,sgnLo);
+  }
+  const m=calcMagDec(magLat,magLon);
   const da=Math.abs(m.declination),dd=Math.floor(da),dm=Math.round((da-dd)*60),dir=m.declination>0?"E":"W";
   const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,width:100,outline:"none",fontFamily:B.font};
+  const dmsInp={...inp,width:48,textAlign:"center"};
+  const toggleBtn=(active)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   return(<div>
+    <div style={{display:"flex",gap:4,marginBottom:10}}>
+      <button onClick={()=>switchMode("dd")} style={toggleBtn(inputMode==="dd")}>DD</button>
+      <button onClick={()=>switchMode("dms")} style={toggleBtn(inputMode==="dms")}>DMS</button>
+    </div>
+    {inputMode==="dd"?(
     <div style={{display:"flex",gap:8,marginBottom:12,alignItems:"center",flexWrap:"wrap"}}>
       <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={lat} onChange={e=>setLat(e.target.value)} style={inp}/>
       <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={lon} onChange={e=>setLon(e.target.value)} style={inp}/></div>
+    ):(
+    <div style={{marginBottom:12}}>
+      <div style={{display:"flex",gap:4,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
+        <label style={{fontSize:10,color:B.textDim,width:24}}>Lat</label>
+        <input value={dmsLatD} onChange={e=>setDmsLatD(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
+        <input value={dmsLatM} onChange={e=>setDmsLatM(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
+        <input value={dmsLatS} onChange={e=>setDmsLatS(e.target.value)} style={{...dmsInp,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+        <button onClick={()=>setDmsLatDir(d=>d==="N"?"S":"N")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{dmsLatDir}</button></div>
+      <div style={{display:"flex",gap:4,alignItems:"center",flexWrap:"wrap"}}>
+        <label style={{fontSize:10,color:B.textDim,width:24}}>Lon</label>
+        <input value={dmsLonD} onChange={e=>setDmsLonD(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
+        <input value={dmsLonM} onChange={e=>setDmsLonM(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
+        <input value={dmsLonS} onChange={e=>setDmsLonS(e.target.value)} style={{...dmsInp,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+        <button onClick={()=>setDmsLonDir(d=>d==="E"?"W":"E")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{dmsLonDir}</button></div>
+    </div>
+    )}
     <div style={{display:"flex",gap:16,alignItems:"center"}}>
       <div style={{textAlign:"center"}}>
         <div style={{fontSize:30,fontWeight:800,color:"#f59e0b",fontFamily:B.font,lineHeight:1}}>{dd}° {dm}′</div>
@@ -631,8 +683,38 @@ function ScaleCalc({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   // Zone override
   const [zoneLocked,setZoneLocked]=useState(true);
   const [zoneOverride,setZoneOverride]=useState("");
+  // DD/DMS toggle
+  const [coordMode,setCoordMode]=useState("dd");
+  const initLatDms3=ddToDms(initialLat),initLonDms3=ddToDms(Math.abs(initialLon));
+  const [scDmsLatD,setScDmsLatD]=useState(String(initLatDms3.d));
+  const [scDmsLatM,setScDmsLatM]=useState(String(initLatDms3.mAdj));
+  const [scDmsLatS,setScDmsLatS]=useState(String(initLatDms3.s));
+  const [scDmsLatDir,setScDmsLatDir]=useState(initialLat>=0?"N":"S");
+  const [scDmsLonD,setScDmsLonD]=useState(String(initLonDms3.d));
+  const [scDmsLonM,setScDmsLonM]=useState(String(initLonDms3.mAdj));
+  const [scDmsLonS,setScDmsLonS]=useState(String(initLonDms3.s));
+  const [scDmsLonDir,setScDmsLonDir]=useState(initialLon>=0?"E":"W");
+  const scSyncDdToDms=()=>{
+    const la=ddToDms(parseFloat(lat)||0),lo=ddToDms(Math.abs(parseFloat(lon)||0));
+    setScDmsLatD(String(la.d));setScDmsLatM(String(la.mAdj));setScDmsLatS(String(la.s));setScDmsLatDir((parseFloat(lat)||0)>=0?"N":"S");
+    setScDmsLonD(String(lo.d));setScDmsLonM(String(lo.mAdj));setScDmsLonS(String(lo.s));setScDmsLonDir((parseFloat(lon)||0)>=0?"E":"W");
+  };
+  const scSyncDmsToDd=()=>{
+    const sgnLa=scDmsLatDir==="N"?1:-1,sgnLo=scDmsLonDir==="E"?1:-1;
+    setLat(dmsToDd(parseInt(scDmsLatD)||0,parseInt(scDmsLatM)||0,parseFloat(scDmsLatS)||0,sgnLa).toFixed(6));
+    setLon(dmsToDd(parseInt(scDmsLonD)||0,parseInt(scDmsLonM)||0,parseFloat(scDmsLonS)||0,sgnLo).toFixed(6));
+  };
+  const switchCoordMode=(m2)=>{if(m2===coordMode)return;if(m2==="dms")scSyncDdToDms();else scSyncDmsToDd();setCoordMode(m2);};
 
-  const pLat=parseFloat(lat)||initialLat,pLon=parseFloat(lon)||initialLon,h=parseFloat(elev)||0;
+  let pLat,pLon;
+  if(coordMode==="dd"){
+    pLat=parseFloat(lat)||initialLat; pLon=parseFloat(lon)||initialLon;
+  }else{
+    const sgnLat=scDmsLatDir==="N"?1:-1, sgnLon=scDmsLonDir==="E"?1:-1;
+    pLat=dmsToDd(parseInt(scDmsLatD)||0,parseInt(scDmsLatM)||0,parseFloat(scDmsLatS)||0,sgnLat);
+    pLon=dmsToDd(parseInt(scDmsLonD)||0,parseInt(scDmsLonM)||0,parseFloat(scDmsLonS)||0,sgnLon);
+  }
+  const h=parseFloat(elev)||0;
   const showMtm=isMtmApplicable(pLon);
   // If MTM not applicable and projType is mtm, force to utm
   const effectiveProj=(!showMtm&&projType==="mtm")?"utm":projType;
@@ -651,18 +733,45 @@ function ScaleCalc({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const maxZone=effectiveProj==="utm"?60:17;
 
   const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,outline:"none",fontFamily:B.font};
+  const dmsInpSc={...inp,width:48,textAlign:"center"};
+  const coordToggleBtn=(active)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   const toggleBtn=(m)=>({padding:"4px 10px",fontSize:11,fontWeight:effectiveProj===m?700:400,fontFamily:B.font,color:effectiveProj===m?B.bg:B.textMid,background:effectiveProj===m?B.priBr:"transparent",border:`1px solid ${effectiveProj===m?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   const insetStyle={background:B.inset,border:`2px solid ${B.border}`,borderTopColor:B.bvD,borderLeftColor:B.bvD,borderBottomColor:B.bvL,borderRightColor:B.bvL};
   const lockBtn=(locked,onToggle)=><button onClick={onToggle} style={{background:"none",border:"none",cursor:"pointer",fontSize:12,padding:"2px 4px",color:locked?B.textDim:B.priBr}} title={locked?"Auto-detected. Click to override.":"Manual override. Click to auto-detect."}>{locked?"\uD83D\uDD12":"\uD83D\uDD13"}</button>;
 
   return(<div>
     <HelpPanel text={"Enter a position and elevation to compute scale factors for your projection zone. The Combined Scale Factor (CSF) converts between ground-level measurements and grid distances on the projection. Ground Distance \u00D7 CSF = Grid Distance. For precise work, ensure your elevation references CGVD2013."}/>
+    <div style={{display:"flex",gap:4,marginBottom:10}}>
+      <button onClick={()=>switchCoordMode("dd")} style={coordToggleBtn(coordMode==="dd")}>DD</button>
+      <button onClick={()=>switchCoordMode("dms")} style={coordToggleBtn(coordMode==="dms")}>DMS</button>
+    </div>
+    {coordMode==="dd"?(
     <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
       <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={lat} onChange={e=>setLat(e.target.value)} style={{...inp,width:100}}/>
       <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={lon} onChange={e=>setLon(e.target.value)} style={{...inp,width:100}}/>
       <label style={{fontSize:11,color:B.textMid}}>H<Tip text="Orthometric height above mean sea level (CGVD2013). Used to compute the elevation factor. Using orthometric height instead of ellipsoidal height introduces negligible error at 6 decimal places."/></label>
       <input value={elev} onChange={e=>setElev(e.target.value)} style={{...inp,width:60}}/><span style={{fontSize:10,color:B.textDim}}>m (CGVD2013)</span>
     </div>
+    ):(
+    <div style={{marginBottom:10}}>
+      <div style={{display:"flex",gap:4,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
+        <label style={{fontSize:10,color:B.textDim,width:24}}>Lat</label>
+        <input value={scDmsLatD} onChange={e=>setScDmsLatD(e.target.value)} style={dmsInpSc}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
+        <input value={scDmsLatM} onChange={e=>setScDmsLatM(e.target.value)} style={dmsInpSc}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
+        <input value={scDmsLatS} onChange={e=>setScDmsLatS(e.target.value)} style={{...dmsInpSc,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+        <button onClick={()=>setScDmsLatDir(d=>d==="N"?"S":"N")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{scDmsLatDir}</button></div>
+      <div style={{display:"flex",gap:4,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
+        <label style={{fontSize:10,color:B.textDim,width:24}}>Lon</label>
+        <input value={scDmsLonD} onChange={e=>setScDmsLonD(e.target.value)} style={dmsInpSc}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
+        <input value={scDmsLonM} onChange={e=>setScDmsLonM(e.target.value)} style={dmsInpSc}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
+        <input value={scDmsLonS} onChange={e=>setScDmsLonS(e.target.value)} style={{...dmsInpSc,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+        <button onClick={()=>setScDmsLonDir(d=>d==="E"?"W":"E")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{scDmsLonDir}</button></div>
+      <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
+        <label style={{fontSize:11,color:B.textMid}}>H<Tip text="Orthometric height above mean sea level (CGVD2013). Used to compute the elevation factor. Using orthometric height instead of ellipsoidal height introduces negligible error at 6 decimal places."/></label>
+        <input value={elev} onChange={e=>setElev(e.target.value)} style={{...inp,width:60}}/><span style={{fontSize:10,color:B.textDim}}>m (CGVD2013)</span>
+      </div>
+    </div>
+    )}
     <div style={{display:"flex",gap:4,marginBottom:10,alignItems:"center"}}>
       <button onClick={()=>{setProjType("utm");setZoneLocked(true);}} style={toggleBtn("utm")}>UTM</button>
       {showMtm&&<button onClick={()=>{setProjType("mtm");setZoneLocked(true);}} style={toggleBtn("mtm")}>MTM</button>}
