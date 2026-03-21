@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import proj4 from 'proj4';
 import {
-  WGS_A, WGS_F, WGS_E2, WGS_EP2,
+  GRS80_A, GRS80_F, GRS80_E2, GRS80_EP2,
   ddToDms, dmsToDd,
   getUtmZone, utmCM, getMtmZone, mtmCM,
   geoToTM, tmToGeo, geoToUtm, geoToMtm,
@@ -11,13 +11,13 @@ import {
 // ── proj4 reference definitions ──
 // UTM zones used in testing (with +south for southern hemisphere)
 function utmDef(zone, south) {
-  return `+proj=utm +zone=${zone}${south ? ' +south' : ''} +datum=WGS84 +units=m +no_defs`;
+  return `+proj=utm +zone=${zone}${south ? ' +south' : ''} +ellps=GRS80 +units=m +no_defs`;
 }
 
 // MTM definitions (NRCan convention: 3° zones, k0=0.9999, FE=304800)
 function mtmProj4Def(zone) {
   const cm = -(50.5 + 3 * zone);
-  return `+proj=tmerc +lat_0=0 +lon_0=${cm} +k=0.9999 +x_0=304800 +y_0=0 +datum=WGS84 +units=m +no_defs`;
+  return `+proj=tmerc +lat_0=0 +lon_0=${cm} +k=0.9999 +x_0=304800 +y_0=0 +ellps=GRS80 +units=m +no_defs`;
 }
 
 // Helper: convert with proj4 as reference
@@ -34,28 +34,30 @@ function proj4Mtm(lat, lon, zone) {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// 1. WGS84 ELLIPSOID CONSTANTS
+// 1. GRS80 ELLIPSOID CONSTANTS (NAD83)
 // ═══════════════════════════════════════════════════════════════
-describe('WGS84 Constants', () => {
+describe('GRS80 Constants', () => {
   it('semi-major axis is exactly 6378137', () => {
-    expect(WGS_A).toBe(6378137);
+    expect(GRS80_A).toBe(6378137);
   });
 
-  it('flattening matches WGS84 definition', () => {
-    expect(WGS_F).toBeCloseTo(1 / 298.257223563, 15);
+  it('flattening matches GRS80 definition', () => {
+    expect(GRS80_F).toBeCloseTo(1 / 298.257222101, 15);
   });
 
   it('first eccentricity squared is correct', () => {
-    expect(WGS_E2).toBeCloseTo(0.00669437999014, 14);
+    const expected = 2 * GRS80_F - GRS80_F * GRS80_F;
+    expect(GRS80_E2).toBeCloseTo(expected, 15);
   });
 
   it('second eccentricity squared is correct', () => {
-    expect(WGS_EP2).toBeCloseTo(0.00673949674228, 14);
+    const expected = GRS80_E2 / (1 - GRS80_E2);
+    expect(GRS80_EP2).toBeCloseTo(expected, 15);
   });
 
   it('semi-minor axis b = a(1-f) is correct', () => {
-    const b = WGS_A * (1 - WGS_F);
-    expect(b).toBeCloseTo(6356752.314245, 3);
+    const b = GRS80_A * (1 - GRS80_F);
+    expect(b).toBeCloseTo(6356752.314140, 3);
   });
 });
 

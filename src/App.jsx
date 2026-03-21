@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ddToDms, dmsToDd, getUtmZone, utmCM, getMtmZone, mtmCM, geoToTM, tmToGeo, geoToUtm, geoToMtm, gridScaleFactor, elevFactor } from "./geo.js";
+import { ddToDms, dmsToDd, getUtmZone, utmCM, getMtmZone, mtmCM, geoToTM, tmToGeo, geoToUtm, geoToMtm, gridScaleFactor, elevFactor, utmEpsgStr } from "./geo.js";
 
 // ── API Endpoints ──
 const NOAA_KP = "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json";
@@ -375,7 +375,8 @@ function CoordConverter({initialLat=53.9171,initialLon=-122.7497}){
   const copyBtn=(txt,label)=><button onClick={()=>copyText(txt,label)} style={{background:"none",border:"none",cursor:"pointer",fontSize:11,color:copied===label?B.priBr:B.textDim,fontFamily:B.font,padding:"2px 6px"}}>{copied===label?"\u2713":"📋"}</button>;
 
   return(<div>
-    <div style={{fontSize:11,color:B.textMid,marginBottom:8}}>Convert between geographic (DD/DMS), UTM, and MTM projections.</div>
+    <div style={{fontSize:11,color:B.textMid,marginBottom:4}}>Convert between geographic (DD/DMS), UTM, and MTM projections.</div>
+    <div style={{fontSize:10,color:B.textDim,marginBottom:8}}>Datum: NAD83(CSRS) {"\u00B7"} GRS80 Ellipsoid</div>
     <div style={{display:"flex",gap:4,marginBottom:10}}>
       <button onClick={()=>switchMode("dd")} style={toggleBtn("dd","DD")}>DD</button>
       <button onClick={()=>switchMode("dms")} style={toggleBtn("dms","DMS")}>DMS</button>
@@ -404,7 +405,7 @@ function CoordConverter({initialLat=53.9171,initialLon=-122.7497}){
       <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1,marginBottom:6,textTransform:"uppercase"}}>All Formats</div>
       <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>DD</span><span style={{fontFamily:B.font,fontSize:12,color:B.text,flex:1}}>{pLat.toFixed(6)}{"\u00B0"}, {pLon.toFixed(6)}{"\u00B0"}</span>{copyBtn(ddStr,"dd")}</div>
       <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>DMS</span><span style={{fontFamily:B.font,fontSize:12,color:B.text,flex:1}}>{dmsStr}</span>{copyBtn(dmsStr,"dms")}</div>
-      <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>UTM</span><span style={{fontFamily:B.font,fontSize:12,color:B.priBr,flex:1}}>{utmStr}</span>{copyBtn(utmStr,"utm")}</div>
+      <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>UTM</span><span style={{fontFamily:B.font,fontSize:12,color:B.priBr,flex:1}}>{utmStr}</span><span style={{fontFamily:B.font,fontSize:9,color:B.textDim}}>{utmEpsgStr(utm.zone,utm.hemi)}</span>{copyBtn(utmStr,"utm")}</div>
       <div style={outRow}><span style={{fontFamily:B.font,fontSize:10,color:B.textDim,width:32}}>MTM</span><span style={{fontFamily:B.font,fontSize:12,color:B.priBr,flex:1}}>{mtmStr}</span>{copyBtn(mtmStr,"mtm")}</div>
     </div>
   </div>);
@@ -440,11 +441,12 @@ function ScaleCalc({initialLat=53.9171,initialLon=-122.7497}){
     <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
       <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={lat} onChange={e=>setLat(e.target.value)} style={{...inp,width:100}}/>
       <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={lon} onChange={e=>setLon(e.target.value)} style={{...inp,width:100}}/>
-      <label style={{fontSize:11,color:B.textMid}}>Elev</label><input value={elev} onChange={e=>setElev(e.target.value)} style={{...inp,width:60}}/><span style={{fontSize:10,color:B.textDim}}>m</span>
+      <label style={{fontSize:11,color:B.textMid}}>Elev</label><input value={elev} onChange={e=>setElev(e.target.value)} style={{...inp,width:60}}/><span style={{fontSize:10,color:B.textDim}}>m (CGVD2013)</span>
     </div>
-    <div style={{display:"flex",gap:4,marginBottom:10}}>
+    <div style={{display:"flex",gap:4,marginBottom:10,alignItems:"center"}}>
       <button onClick={()=>setProjType("utm")} style={toggleBtn("utm","UTM")}>UTM</button>
       <button onClick={()=>setProjType("mtm")} style={toggleBtn("mtm","MTM")}>MTM</button>
+      <span style={{fontSize:10,color:B.textDim,marginLeft:6}}>NAD83(CSRS) {"\u00B7"} GRS80</span>
     </div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:12}}>
       {[
@@ -1096,6 +1098,7 @@ export default function App(){
               </div>
               <ScaleCalc initialLat={lat} initialLon={lon}/>
             </div>
+            <div style={{background:"#3b82f610",border:"1px solid #3b82f620",borderRadius:5,padding:"6px 8px",fontSize:10,color:B.textDim,lineHeight:1.5}}>Reference tool only {"\u2014"} not for legal survey or navigation use. Always verify with <a href="https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/trx.php" target="_blank" rel="noopener noreferrer" style={{color:"#3b82f6",textDecoration:"underline"}}>NRCan TRX</a> or professional software (e.g. CSRS-PPP) before field use. Projections computed on GRS80 ellipsoid (NAD83). Elevation heights reference CGVD2013.</div>
           </div>
         </div>
       )}

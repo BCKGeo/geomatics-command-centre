@@ -1,7 +1,8 @@
-// ── WGS84 Ellipsoid & Projection Math ──
-// All geodetic functions used by the dashboard, extracted for testability.
+// ── GRS80 Ellipsoid (NAD83) & Projection Math ──
+// NAD83(CSRS) uses the GRS80 ellipsoid. All projections reference this datum.
+// Vertical datum: CGVD2013 (Canadian Geodetic Vertical Datum of 2013)
 
-export const WGS_A=6378137,WGS_F=1/298.257223563,WGS_E2=2*WGS_F-WGS_F*WGS_F,WGS_EP2=WGS_E2/(1-WGS_E2);
+export const GRS80_A=6378137,GRS80_F=1/298.257222101,GRS80_E2=2*GRS80_F-GRS80_F*GRS80_F,GRS80_EP2=GRS80_E2/(1-GRS80_E2);
 
 export function ddToDms(dd){const s=dd<0?-1:1,a=Math.abs(dd),d=Math.floor(a),mr=(a-d)*60,m=Math.floor(mr),sec=Math.round((mr-m)*6000)/100;return{d,m,s:sec>=60?0:sec,sign:s,mAdj:sec>=60?m+1:m};}
 export function dmsToDd(d,m,s,sign){return sign*(Math.abs(d)+m/60+s/3600);}
@@ -13,7 +14,7 @@ export function mtmCM(z){return-(50.5+3*z);}
 
 export function geoToTM(latD,lonD,cm,k0,fe,fn){
   const R=Math.PI/180,p=latD*R,l=(lonD-cm)*R,sp=Math.sin(p),cp=Math.cos(p),tp=Math.tan(p);
-  const e2=WGS_E2,ep2=WGS_EP2,a=WGS_A;
+  const e2=GRS80_E2,ep2=GRS80_EP2,a=GRS80_A;
   const N=a/Math.sqrt(1-e2*sp*sp),T=tp*tp,C=ep2*cp*cp,A=cp*l;
   const M=a*((1-e2/4-3*e2*e2/64-5*e2*e2*e2/256)*p-(3*e2/8+3*e2*e2/32+45*e2*e2*e2/1024)*Math.sin(2*p)+(15*e2*e2/256+45*e2*e2*e2/1024)*Math.sin(4*p)-(35*e2*e2*e2/3072)*Math.sin(6*p));
   const A2=A*A,A3=A2*A,A4=A3*A,A5=A4*A,A6=A5*A;
@@ -23,7 +24,7 @@ export function geoToTM(latD,lonD,cm,k0,fe,fn){
 }
 
 export function tmToGeo(easting,northing,cm,k0,fe,fn){
-  const e2=WGS_E2,ep2=WGS_EP2,a=WGS_A,R=Math.PI/180;
+  const e2=GRS80_E2,ep2=GRS80_EP2,a=GRS80_A,R=Math.PI/180;
   const M1=(northing-fn)/k0;
   const mu=M1/(a*(1-e2/4-3*e2*e2/64-5*e2*e2*e2/256));
   const e1=(1-Math.sqrt(1-e2))/(1+Math.sqrt(1-e2));
@@ -39,16 +40,21 @@ export function tmToGeo(easting,northing,cm,k0,fe,fn){
 export function geoToUtm(lat,lon){const z=getUtmZone(lon),h=lat>=0?"N":"S",fn=lat>=0?0:1e7;const r=geoToTM(lat,lon,utmCM(z),0.9996,500000,fn);return{zone:z,hemi:h,...r};}
 export function geoToMtm(lat,lon){const z=getMtmZone(lon);const r=geoToTM(lat,lon,mtmCM(z),0.9999,304800,0);return{zone:z,...r};}
 
+// NAD83 EPSG codes: UTM zones 7-22 (covering Canada) = EPSG:269xx (north)
+export function utmEpsg(zone,hemi){return hemi==="N"?26900+zone:32700+zone;}
+// NAD83(CSRS) UTM = EPSG:22xx (e.g., zone 10 = EPSG:2956..ish, but simpler: NAD83 = 269xx)
+export function utmEpsgStr(zone,hemi){return`EPSG:${utmEpsg(zone,hemi)}`;}
+
 export function gridScaleFactor(latD,lonD,cm,k0){
   const R=Math.PI/180,p=latD*R,dl=(lonD-cm)*R,cp=Math.cos(p),sp=Math.sin(p);
-  const N=WGS_A/Math.sqrt(1-WGS_E2*sp*sp),T=Math.tan(p)*Math.tan(p),C=WGS_EP2*cp*cp,A=cp*dl;
+  const N=GRS80_A/Math.sqrt(1-GRS80_E2*sp*sp),T=Math.tan(p)*Math.tan(p),C=GRS80_EP2*cp*cp,A=cp*dl;
   const A2=A*A,A4=A2*A2;
-  return k0*(1+(1+C)*A2/2+(5-4*T+42*C+13*C*C-28*WGS_EP2)*A4/24);
+  return k0*(1+(1+C)*A2/2+(5-4*T+42*C+13*C*C-28*GRS80_EP2)*A4/24);
 }
 
 export function elevFactor(latD,h){
   const R=Math.PI/180,sp=Math.sin(latD*R);
-  const N=WGS_A/Math.sqrt(1-WGS_E2*sp*sp),M=WGS_A*(1-WGS_E2)/Math.pow(1-WGS_E2*sp*sp,1.5);
+  const N=GRS80_A/Math.sqrt(1-GRS80_E2*sp*sp),M=GRS80_A*(1-GRS80_E2)/Math.pow(1-GRS80_E2*sp*sp,1.5);
   const Rm=Math.sqrt(M*N);
   return Rm/(Rm+h);
 }
