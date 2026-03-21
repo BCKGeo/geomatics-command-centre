@@ -7,10 +7,10 @@ const NOAA_SCALES = "https://services.swpc.noaa.gov/products/noaa-scales.json";
 const NOAA_WIND_SPEED = "https://services.swpc.noaa.gov/products/summary/solar-wind-speed.json";
 const NOAA_WIND_MAG = "https://services.swpc.noaa.gov/products/summary/solar-wind-mag-field.json";
 const NOAA_XRAY = "https://services.swpc.noaa.gov/products/summary/10cm-flux.json";
-const DEFAULT_LAT = 53.9171;
-const DEFAULT_LON = -122.7497;
-const DEFAULT_CITY = "Prince George, BC";
-const DEFAULT_TZ = "America/Vancouver";
+const DEFAULT_LAT = 45.4215;
+const DEFAULT_LON = -75.6972;
+const DEFAULT_CITY = "Ottawa, ON (default)";
+const DEFAULT_TZ = "America/Toronto";
 
 function buildWeatherUrl(lat, lon, tz) {
   return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code,apparent_temperature,precipitation,cloud_cover,surface_pressure&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,sunrise,sunset,uv_index_max&timezone=${encodeURIComponent(tz)}&forecast_days=7`;
@@ -27,8 +27,8 @@ const WMO = {
   95:{i:"⛈️",d:"Thunderstorm"},96:{i:"⛈️",d:"T-Storm Hail"},99:{i:"⛈️",d:"T-Storm Hvy Hail"},
 };
 
-// ── Sun Position (for PG default) ──
-function calcSun(date, lat=53.9171, lon=-122.7497) {
+// ── Sun Position ──
+function calcSun(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
   const r=Math.PI/180, jd=Math.floor(365.25*(date.getUTCFullYear()+4716))+Math.floor(30.6001*((date.getUTCMonth()+1<3?date.getUTCMonth()+13:date.getUTCMonth()+1)))+date.getUTCDate()+(date.getUTCHours()+date.getUTCMinutes()/60)/24-1524.5;
   const T=(jd-2451545)/36525, L0=(280.46646+T*(36000.76983+.0003032*T))%360, M=(357.52911+T*(35999.05029-.0001537*T))*r;
   const C=(1.914602-T*.004817)*Math.sin(M)+.019993*Math.sin(2*M), sL=(L0+C)*r, ob=(23.439291-.0130042*T)*r;
@@ -424,7 +424,7 @@ function GaugeRing({level, label}){const levelNum=parseInt(level?.replace(/\D/g,
       <div style={{position:"relative",zIndex:1,fontFamily:B.display,fontSize:22,fontWeight:900,color:color,textShadow:`0 0 8px ${color}`}}>{level}</div></div>
     <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1.5,textTransform:"uppercase"}}>{label}</div></div>);}
 
-function MagPanel({initialLat=53.9171,initialLon=-122.7497}){
+function MagPanel({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const [lat,setLat]=useState(String(initialLat)),[lon,setLon]=useState(String(initialLon));
   const m=calcMagDec(parseFloat(lat)||initialLat,parseFloat(lon)||initialLon);
   const da=Math.abs(m.declination),dd=Math.floor(da),dm=Math.round((da-dd)*60),dir=m.declination>0?"E":"W";
@@ -473,7 +473,7 @@ function HelpPanel({text}){
 }
 
 // ── Coordinate Converter Component ──
-function CoordConverter({initialLat=53.9171,initialLon=-122.7497}){
+function CoordConverter({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const [inputMode,setInputMode]=useState("dd");
   const [ddLat,setDdLat]=useState(String(initialLat));
   const [ddLon,setDdLon]=useState(String(initialLon));
@@ -620,7 +620,7 @@ function CoordConverter({initialLat=53.9171,initialLon=-122.7497}){
 }
 
 // ── Scale & Distance Component ──
-function ScaleCalc({initialLat=53.9171,initialLon=-122.7497}){
+function ScaleCalc({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const [lat,setLat]=useState(String(initialLat));
   const [lon,setLon]=useState(String(initialLon));
   const [elev,setElev]=useState("580");
@@ -982,36 +982,41 @@ export default function App(){
   const [userLon,setUserLon]=useState(null);
   const [cityName,setCityName]=useState(DEFAULT_CITY);
   const [locSource,setLocSource]=useState("default");
+  const [locLoading,setLocLoading]=useState(false);
   const lat=userLat??DEFAULT_LAT;
   const lon=userLon??DEFAULT_LON;
   const userTz=typeof Intl!=="undefined"?Intl.DateTimeFormat().resolvedOptions().timeZone:DEFAULT_TZ;
 
+  // Check localStorage for saved location on mount
   useEffect(()=>{
-    const saved=localStorage.getItem("bckgeo-location");
-    if(saved){try{const p=JSON.parse(saved);setUserLat(p.lat);setUserLon(p.lon);setCityName(p.city);setLocSource("gps");return;}catch{}}
-    if(!navigator.geolocation){setLocSource("default");return;}
-    setLocSource("loading");
+    const saved=localStorage.getItem("bckgeo_location");
+    if(saved){try{const p=JSON.parse(saved);setUserLat(p.lat);setUserLon(p.lon);setCityName(p.city);if(p.tz)setLocSource("gps");else setLocSource("gps");}catch{}}
+  },[]);
+
+  const requestLocation=()=>{
+    if(!navigator.geolocation)return;
+    setLocLoading(true);
     navigator.geolocation.getCurrentPosition(
       (pos)=>{
         const{latitude,longitude}=pos.coords;
         setUserLat(latitude);setUserLon(longitude);setLocSource("gps");
         fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
           .then(r=>r.json()).then(data=>{
-            const city=data.city||data.locality||"";
-            const region=data.principalSubdivision||data.countryName||"";
-            const name=city&&region?`${city}, ${region}`:city||region||userTz.split('/').pop().replace(/_/g,' ');
-            setCityName(name);
-            localStorage.setItem("bckgeo-location",JSON.stringify({lat:latitude,lon:longitude,city:name}));
-          }).catch(()=>{
-            const name=userTz.split('/').pop().replace(/_/g,' ');
-            setCityName(name);
-            localStorage.setItem("bckgeo-location",JSON.stringify({lat:latitude,lon:longitude,city:name}));
-          });
+            const cityStr=`${data.city||data.locality||"Unknown"}, ${data.principalSubdivisionCode?.replace("CA-","")||data.countryCode}`;
+            setCityName(cityStr);
+            localStorage.setItem("bckgeo_location",JSON.stringify({lat:latitude,lon:longitude,city:cityStr}));
+            setLocLoading(false);
+          }).catch(()=>setLocLoading(false));
       },
-      ()=>{setLocSource("default");},
-      {timeout:8000,maximumAge:600000}
+      ()=>setLocLoading(false),
+      {enableHighAccuracy:false,timeout:10000}
     );
-  },[]);
+  };
+
+  const resetLocation=()=>{
+    localStorage.removeItem("bckgeo_location");
+    setUserLat(null);setUserLon(null);setCityName(DEFAULT_CITY);setLocSource("default");
+  };
 
   // ── Clock & Typewriter ──
   useEffect(()=>{const t=setInterval(()=>{const n=new Date();setUtc(n);setSun(calcSun(n,lat,lon));},1000);return()=>clearInterval(t);},[lat,lon]);
@@ -1174,7 +1179,11 @@ export default function App(){
             <div style={{...cardStyle,display:"flex",flexDirection:"column"}}>
               <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
                 <span>{"\uD83C\uDF24\uFE0F"}</span>
-                <h2 style={{margin:0,fontSize:13,fontWeight:700,color:B.text}}>{locSource==="gps"?"\uD83D\uDCCD ":""}{cityName}{locSource==="default"?" (default)":locSource==="loading"?" \u2013 Locating...":""}</h2>
+                <div style={{display:"flex",alignItems:"center",gap:8}}>
+                  <span style={{fontSize:12,fontWeight:700,color:B.text}}>{locSource==="gps"?"\uD83D\uDCCD ":""}{cityName}</span>
+                  <button onClick={requestLocation} style={{background:"none",border:`1px solid ${B.border}`,borderRadius:3,padding:"2px 6px",fontSize:10,color:B.textMid,cursor:"pointer",fontFamily:B.font}} title="Use my location">{locLoading?"\u23F3":"\uD83D\uDCCD"}</button>
+                  {cityName!==DEFAULT_CITY&&<button onClick={resetLocation} style={{background:"none",border:"none",padding:0,fontSize:9,color:B.textDim,cursor:"pointer",fontFamily:B.font,textDecoration:"underline"}} title="Reset to default">reset</button>}
+                </div>
                 <span style={{fontSize:10,color:B.textDim,marginLeft:"auto"}}>Open-Meteo</span>
               </div>
               {wErr ? <div style={{color:"#ef4444",fontSize:12}}>Unable to load</div>
