@@ -911,6 +911,8 @@ export default function App(){
       .tagline::after {content:'_';animation:blink-cursor .6s step-end infinite;color:${B.priBr}}
       @media(max-width:768px){.cmd-hero{grid-template-columns:1fr !important}.cmd-split{grid-template-columns:1fr !important}}
       @media(max-width:480px){.header-inner{flex-direction:column;align-items:flex-start}}
+      @media(max-width:768px){.cmd-stations{grid-template-columns:1fr 1fr !important;}}
+      @media(max-width:480px){.cmd-stations{grid-template-columns:1fr !important;}}
     `}</style>
 
     <div className="scanlines"/>
@@ -1117,15 +1119,17 @@ export default function App(){
             </div>
             <div>
               <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:2,marginBottom:8}}>STATIONS</div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+              <div className="cmd-stations" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8}}>
                 {[
-                  {i:"\u2708\uFE0F",t:"Flight Ops",d:"RPAS regs, NOTAMs, airspace",c:"#ef4444",g:"flight"},
-                  {i:"\uD83C\uDF10",t:"Geodesy",d:"NRCan, CSRS-PPP, GNSS",c:B.priBr,g:"geodesy"},
-                  {i:"\uD83D\uDEF0\uFE0F",t:"GIS & Data",d:"BC data, remote sensing, LiDAR",c:"#aa66ff",g:"spatial"},
-                  {i:"\uD83D\uDD27",t:"Field Tools",d:"Mag dec, coordinates, scale factors",c:B.priBr,g:"fieldkit"},
-                  {i:"\uD83E\uDDEE",t:"Calculator",d:"Unit, speed & temp conversions",c:"#06b6d4",g:"calcs"},
-                  {i:"\uD83D\uDCD0",t:"Standards",d:"Professional orgs, CSA",c:B.sec,g:"regs"},
-                  {i:"\uD83D\uDCDA",t:"Glossary",d:"Terms & acronyms by domain",c:"#66bbcc",g:"codex"}
+                  {i:"✈️",t:"Flight Ops",d:"RPAS regs, NOTAMs, airspace",g:"flight"},
+                  {i:"🌍",t:"Geodesy",d:"NRCan, CSRS-PPP, GNSS",g:"geodesy"},
+                  {i:"🗺️",t:"Spatial Ops",d:"GIS tools, databases, CRS",g:"spatial"},
+                  {i:"👁️",t:"Recon & Sensing",d:"Imagery, LiDAR, photogrammetry",g:"recon"},
+                  {i:"🏛️",t:"Provincial Intel",d:"Open data by province",g:"provincial"},
+                  {i:"⚙️",t:"Field Kit",d:"Coordinates, scale factors, mag dec",g:"fieldkit"},
+                  {i:"➗",t:"Quick Calcs",d:"Unit, speed & temp conversions",g:"calcs"},
+                  {i:"📜",t:"Regs & Standards",d:"Professional orgs, regulations",g:"regs"},
+                  {i:"🔎",t:"Codex",d:"Terms & acronyms by domain",g:"codex"},
                 ].map(s=>(
                   <div key={s.t} onClick={()=>setTab(s.g)}
                     style={{background:B.surface,border:`2px solid ${B.border}`,borderTopColor:B.bvL,borderLeftColor:B.bvL,borderBottomColor:B.bvD,borderRightColor:B.bvD,padding:"14px 16px",cursor:"pointer",transition:"all .15s",display:"flex",alignItems:"center",gap:12}}
@@ -1133,7 +1137,7 @@ export default function App(){
                     onMouseLeave={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.border;}}>
                     <div style={{fontSize:22,width:36,textAlign:"center"}}>{s.i}</div>
                     <div style={{flex:1,minWidth:0}}>
-                      <h3 style={{fontFamily:B.font,fontSize:12,fontWeight:700,letterSpacing:".06em",margin:0,color:s.c}}>{s.t}</h3>
+                      <h3 style={{fontFamily:B.font,fontSize:12,fontWeight:700,letterSpacing:".06em",margin:0,color:B.priBr}}>{s.t}</h3>
                       <p style={{fontSize:10,color:B.textDim,lineHeight:1.4,margin:"2px 0 0"}}>{s.d}</p>
                     </div>
                   </div>
