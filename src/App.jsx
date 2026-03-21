@@ -965,7 +965,7 @@ export default function App(){
         </div>
       </div>
       <div style={{display:"flex",gap:2,marginTop:10,flexWrap:"wrap"}}>
-        {[{id:"command",l:"Command Centre",ic:"\u26A1"},{id:"flight",l:"Flight Ops",ic:"\u2708\uFE0F"},{id:"geodesy",l:"Geodesy",ic:"\uD83C\uDF10"},{id:"gis",l:"GIS & Data",ic:"\uD83D\uDEF0\uFE0F"},{id:"fieldtools",l:"Field Tools",ic:"\uD83D\uDD27"},{id:"calculator",l:"Calculator",ic:"\uD83E\uDDEE"},{id:"standards",l:"Standards",ic:"\uD83D\uDCD0"},{id:"glossary",l:"Glossary",ic:"\uD83D\uDCDA"},{id:"about",l:"About",ic:"\u24D8"}].map(t=>(
+        {[{id:"command",l:"Command Centre",ic:"\uD83D\uDDA5\uFE0F"},{id:"flight",l:"Flight Ops",ic:"\u2708\uFE0F"},{id:"geodesy",l:"Geodesy",ic:"\uD83C\uDF0D"},{id:"spatial",l:"Spatial Ops",ic:"\uD83D\uDDFA\uFE0F"},{id:"recon",l:"Recon & Sensing",ic:"\uD83D\uDC41\uFE0F"},{id:"provincial",l:"Provincial Intel",ic:"\uD83C\uDFDB\uFE0F"},{id:"fieldkit",l:"Field Kit",ic:"\u2699\uFE0F"},{id:"calcs",l:"Quick Calcs",ic:"\u2797"},{id:"regs",l:"Regs & Standards",ic:"\uD83D\uDCDC"},{id:"codex",l:"Codex",ic:"\uD83D\uDD0E"},{id:"brief",l:"Mission Brief",ic:"\uD83D\uDCDD"}].map(t=>(
           <button key={t.id} onClick={()=>{setTab(t.id);setSearch("");}}
             style={{background:tab===t.id?B.surface:"transparent",border:tab===t.id?`2px solid ${B.borderHi}`:"2px solid transparent",borderTopColor:tab===t.id?B.bvL:undefined,borderLeftColor:tab===t.id?B.bvL:undefined,borderBottomColor:tab===t.id?B.bvD:undefined,borderRightColor:tab===t.id?B.bvD:undefined,padding:"6px 14px",color:tab===t.id?B.text:B.textDim,fontSize:11,fontWeight:tab===t.id?700:500,cursor:"pointer",display:"flex",alignItems:"center",gap:5,fontFamily:B.font,letterSpacing:".08em",transition:"all .1s"}}>
             <span style={{fontSize:12}}>{t.ic}</span>{t.l}
@@ -1114,11 +1114,11 @@ export default function App(){
                 {[
                   {i:"\u2708\uFE0F",t:"Flight Ops",d:"RPAS regs, NOTAMs, airspace",c:"#ef4444",g:"flight"},
                   {i:"\uD83C\uDF10",t:"Geodesy",d:"NRCan, CSRS-PPP, GNSS",c:B.priBr,g:"geodesy"},
-                  {i:"\uD83D\uDEF0\uFE0F",t:"GIS & Data",d:"BC data, remote sensing, LiDAR",c:"#aa66ff",g:"gis"},
-                  {i:"\uD83D\uDD27",t:"Field Tools",d:"Mag dec, coordinates, scale factors",c:B.priBr,g:"fieldtools"},
-                  {i:"\uD83E\uDDEE",t:"Calculator",d:"Unit, speed & temp conversions",c:"#06b6d4",g:"calculator"},
-                  {i:"\uD83D\uDCD0",t:"Standards",d:"Professional orgs, CSA",c:B.sec,g:"standards"},
-                  {i:"\uD83D\uDCDA",t:"Glossary",d:"Terms & acronyms by domain",c:"#66bbcc",g:"glossary"}
+                  {i:"\uD83D\uDEF0\uFE0F",t:"GIS & Data",d:"BC data, remote sensing, LiDAR",c:"#aa66ff",g:"spatial"},
+                  {i:"\uD83D\uDD27",t:"Field Tools",d:"Mag dec, coordinates, scale factors",c:B.priBr,g:"fieldkit"},
+                  {i:"\uD83E\uDDEE",t:"Calculator",d:"Unit, speed & temp conversions",c:"#06b6d4",g:"calcs"},
+                  {i:"\uD83D\uDCD0",t:"Standards",d:"Professional orgs, CSA",c:B.sec,g:"regs"},
+                  {i:"\uD83D\uDCDA",t:"Glossary",d:"Terms & acronyms by domain",c:"#66bbcc",g:"codex"}
                 ].map(s=>(
                   <div key={s.t} onClick={()=>setTab(s.g)}
                     style={{background:B.surface,border:`2px solid ${B.border}`,borderTopColor:B.bvL,borderLeftColor:B.bvL,borderBottomColor:B.bvD,borderRightColor:B.bvD,padding:"14px 16px",cursor:"pointer",transition:"all .15s",display:"flex",alignItems:"center",gap:12}}
@@ -1156,7 +1156,7 @@ export default function App(){
       )}
 
       {/* GIS & DATA */}
-      {tab==="gis"&&(
+      {tab==="spatial"&&(
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
           {SECTIONS.filter(s=>s.title.includes("British Columbia")||s.title.includes("GIS")).map(s=>(
             <LinkCard key={s.title} section={s}/>
@@ -1165,7 +1165,7 @@ export default function App(){
       )}
 
       {/* FIELD TOOLS */}
-      {tab==="fieldtools"&&(
+      {tab==="fieldkit"&&(
         <div style={{display:"flex",flexDirection:"column",gap:12}}>
           {/* Full-width Coordinate Converter */}
           <div style={cardStyle}>
@@ -1204,10 +1204,10 @@ export default function App(){
       )}
 
       {/* CALCULATOR */}
-      {tab==="calculator"&&<CalcPanel/>}
+      {tab==="calcs"&&<CalcPanel/>}
 
       {/* STANDARDS */}
-      {tab==="standards"&&(
+      {tab==="regs"&&(
         <div style={{...cardStyle,maxWidth:580}}>
           <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
             <span>{"\uD83D\uDCD0"}</span>
@@ -1227,7 +1227,7 @@ export default function App(){
       )}
 
       {/* GLOSSARY */}
-      {tab==="glossary"&&(
+      {tab==="codex"&&(
         <div>
           {Object.entries(GLOSSARY).map(([section,terms])=>(
             <div key={section} style={{marginBottom:18}}>
@@ -1248,7 +1248,7 @@ export default function App(){
       )}
 
       {/* ABOUT */}
-      {tab==="about"&&(
+      {tab==="brief"&&(
         <div style={{maxWidth:720}}>
           <div style={{...cardStyle,marginBottom:12}}>
             <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
