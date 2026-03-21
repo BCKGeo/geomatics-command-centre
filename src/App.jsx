@@ -203,6 +203,125 @@ const SECTIONS = [
   ]},
 ];
 
+// ── Provincial Intel Data ──
+const PROVINCES = [
+  {id:"bc",name:"British Columbia",abbr:"BC",categories:[
+    {category:"Open Data Portal",links:[{n:"BC Data Catalogue",d:"Province-wide open geospatial data repository",u:"https://catalogue.data.gov.bc.ca/"}]},
+    {category:"Map Viewer",links:[{n:"iMapBC",d:"Interactive web map for exploring BC geographic data",u:"https://maps.gov.bc.ca/ess/hm/imap4m/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"ParcelMap BC",d:"Province-wide, survey-quality cadastral fabric",u:"https://ltsa.ca/products-services/parcelmap-bc/"}]},
+    {category:"Base Mapping",links:[{n:"TRIM (1:20K Base Maps)",d:"Terrain Resource Information Management base maps",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/topographic-data/trim"}]},
+    {category:"Imagery",links:[{n:"BC Air Photos",d:"Historical and current aerial photography archive",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/digital-imagery/air-photos"}]},
+    {category:"LiDAR / Elevation",links:[{n:"LidarBC",d:"Provincial LiDAR acquisition and distribution program",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/lidarbc"}]},
+    {category:"Geodetic Control",links:[{n:"BC Geodetic Control",d:"Provincial geodetic control monument database",u:"https://apps.gov.bc.ca/pub/geometadata/metadataDetail.do?recordUID=51836&recordSet=ISO19115"}]},
+    {category:"Land Registry",links:[{n:"myLTSA",d:"Land Title and Survey Authority — title search and registration",u:"https://www.ltsa.ca/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"BC Geological Survey",d:"Geoscience maps, publications, and mineral data",u:"https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/british-columbia-geological-survey"}]},
+    {category:"Hydrography",links:[{n:"BC Water Resources Atlas",d:"Surface water, groundwater, and watershed data",u:"https://www2.gov.bc.ca/gov/content/environment/air-land-water/water"}]},
+  ]},
+  {id:"ab",name:"Alberta",abbr:"AB",categories:[
+    {category:"Open Data Portal",links:[{n:"GeoDiscover Alberta",d:"Alberta's geospatial data discovery and access portal",u:"https://geodiscover.alberta.ca/"}]},
+    {category:"Map Viewer",links:[{n:"Alberta Map Viewer",d:"Interactive provincial map application",u:"https://maps.alberta.ca/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"AltaLIS",d:"Alberta's authoritative cadastral and land-related geospatial data",u:"https://www.altalis.com/",paid:true}]},
+    {category:"Base Mapping",links:[{n:"Alberta Base Features",d:"Provincial-scale base mapping and feature data",u:"https://www.altalis.com/products/base-features"}]},
+    {category:"Imagery",links:[{n:"SPIN2 / ARLO",d:"Satellite and aerial imagery products for Alberta",u:"https://www.altalis.com/products/satellite-imagery"}]},
+    {category:"LiDAR / Elevation",links:[{n:"Alberta LiDAR",d:"Provincial LiDAR elevation datasets",u:"https://geodiscover.alberta.ca/geoportal/rest/find/document?searchText=lidar"}]},
+    {category:"Geodetic Control",links:[{n:"Alberta Survey Control",d:"Provincial survey control monument network",u:"https://geodiscover.alberta.ca/geoportal/rest/find/document?searchText=survey+control"}]},
+    {category:"Land Registry",links:[{n:"SPIN2 Land Titles",d:"Alberta land titles search and document retrieval",u:"https://www.spin2.ca/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"Alberta Geological Survey",d:"Geological mapping and subsurface data for Alberta",u:"https://ags.aer.ca/"}]},
+    {category:"Hydrography",links:[{n:"Alberta River Basins",d:"Real-time river conditions and basin data",u:"https://rivers.alberta.ca/"}]},
+  ]},
+  {id:"sk",name:"Saskatchewan",abbr:"SK",categories:[
+    {category:"Open Data Portal",links:[{n:"Saskatchewan GeoHub",d:"Provincial geospatial open data portal",u:"https://geohub.saskatchewan.ca/"}]},
+    {category:"Map Viewer",links:[{n:"Saskatchewan Map Viewer",d:"Interactive provincial GIS map viewer",u:"https://gis.saskatchewan.ca/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"ISC Land Registry",d:"Information Services Corporation — cadastral and land data",u:"https://www.isc.ca/",paid:true}]},
+    {category:"Imagery",links:[{n:"FlySask2",d:"Provincial aerial orthoimagery program",u:"https://flysask2.ca/"}]},
+    {category:"Geodetic Control",links:[{n:"CACS (Federal)",d:"Canadian Active Control System — NRCan GNSS reference stations",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/data-donnees/cacs-scca.php"}]},
+    {category:"Land Registry",links:[{n:"ISC",d:"Saskatchewan land registry and title search",u:"https://www.isc.ca/LandRegistry/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"Saskatchewan Geological Survey",d:"Provincial geological publications and maps",u:"https://publications.saskatchewan.ca/api/v1/products?subjectId=1108"}]},
+  ]},
+  {id:"mb",name:"Manitoba",abbr:"MB",categories:[
+    {category:"Open Data Portal",links:[{n:"DataMB",d:"Manitoba's geoportal for open geographic data",u:"https://geoportal.gov.mb.ca/"}]},
+    {category:"Map Viewer",links:[{n:"Manitoba GIS Map Gallery",d:"Collection of interactive provincial maps",u:"https://www.gov.mb.ca/iem/geo/mapgallery/index.html"}]},
+    {category:"Parcel / Cadastral",links:[{n:"Manitoba Land Titles",d:"Provincial land titles and property registration",u:"https://www.tprmb.ca/tpr/"}]},
+    {category:"Base Mapping",links:[{n:"Manitoba Topographic Maps",d:"Provincial topographic map series",u:"https://www.gov.mb.ca/iem/geo/topo-maps/index.html"}]},
+    {category:"LiDAR / Elevation",links:[{n:"Manitoba LiDAR",d:"Provincial LiDAR elevation data",u:"https://geoportal.gov.mb.ca/search?q=lidar"}]},
+    {category:"Land Registry",links:[{n:"Teranet Manitoba",d:"Manitoba property registry services",u:"https://www.tprmb.ca/tpr/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"Manitoba Geological Survey",d:"Geological mapping and mineral resource data",u:"https://www.gov.mb.ca/iem/geo/geosurvey/index.html"}]},
+  ]},
+  {id:"on",name:"Ontario",abbr:"ON",categories:[
+    {category:"Open Data Portal",links:[{n:"Ontario GeoHub",d:"Ontario's authoritative open geospatial data",u:"https://geohub.lio.gov.on.ca/"}]},
+    {category:"Map Viewer",links:[{n:"Ontario Topographic Map Viewer",d:"Interactive topographic map of Ontario",u:"https://www.ontario.ca/page/topographic-maps"}]},
+    {category:"Parcel / Cadastral",links:[{n:"OnLand / Teranet",d:"Ontario's electronic land registration system",u:"https://www.onland.ca/",paid:true}]},
+    {category:"Base Mapping",links:[{n:"Ontario Base Map (OBM)",d:"Provincial base mapping at multiple scales",u:"https://geohub.lio.gov.on.ca/"}]},
+    {category:"Imagery",links:[{n:"SWOOP / SCOOP",d:"Southwestern/South-Central Ontario Orthophotography",u:"https://geohub.lio.gov.on.ca/documents/southwestern-ontario-orthophotography-project-swoop/about"}]},
+    {category:"LiDAR / Elevation",links:[{n:"Ontario LiDAR",d:"Provincial LiDAR point cloud and DEM data",u:"https://geohub.lio.gov.on.ca/datasets?q=lidar"}]},
+    {category:"Geodetic Control",links:[{n:"Ontario Geodetic Control",d:"Provincial geodetic control network",u:"https://www.ontario.ca/page/geodetic-control"}]},
+    {category:"Land Registry",links:[{n:"Teranet",d:"Ontario's land registry and property data provider",u:"https://www.teranet.ca/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"Ontario Geological Survey",d:"Geoscience data, maps, and publications",u:"https://www.geologyontario.mndm.gov.on.ca/"}]},
+    {category:"Hydrography",links:[{n:"Ontario Flow Assessment Tool",d:"Surface water monitoring and flow data",u:"https://www.ontario.ca/page/surface-water-monitoring"}]},
+  ]},
+  {id:"qc",name:"Quebec",abbr:"QC",categories:[
+    {category:"Open Data Portal",links:[{n:"Données Québec",d:"Portail de données ouvertes du gouvernement du Québec",u:"https://www.donneesquebec.ca/"}]},
+    {category:"Map Viewer",links:[{n:"Géoboutique Québec",d:"Geospatial product catalogue and map viewer",u:"https://geoboutique.mrnf.gouv.qc.ca/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"Infolot",d:"Quebec cadastral lot information system",u:"https://infolot.mern.gouv.qc.ca/"}]},
+    {category:"Base Mapping",links:[{n:"BDTQ (1:20K)",d:"Base de données topographiques du Québec",u:"https://www.donneesquebec.ca/recherche/dataset/base-de-donnees-topographiques-du-quebec-a-l-echelle-de-1-20-000-bdtq-20k"}]},
+    {category:"Imagery",links:[{n:"Géoindex",d:"Aerial and satellite imagery index for Quebec",u:"https://geoindex.mrnf.gouv.qc.ca/"}]},
+    {category:"LiDAR / Elevation",links:[{n:"MRNF LiDAR",d:"Forêt numérique — provincial LiDAR coverage",u:"https://foretnumerique.mrnf.gouv.qc.ca/"}]},
+    {category:"Geodetic Control",links:[{n:"Géodésie Québec III",d:"Provincial geodetic control network and data",u:"https://geodesie.mrnf.gouv.qc.ca/"}]},
+    {category:"Land Registry",links:[{n:"Registre foncier",d:"Quebec official land registry",u:"https://www.registrefoncier.gouv.qc.ca/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"SIGÉOM",d:"Système d'information géominière du Québec",u:"https://sigeom.mines.gouv.qc.ca/signet/classes/I1108_index_S_E"}]},
+  ]},
+  {id:"nb",name:"New Brunswick",abbr:"NB",categories:[
+    {category:"Open Data Portal",links:[{n:"GeoNB Data Catalogue",d:"New Brunswick geographic data and services",u:"https://geonb.snb.ca/geonb/"}]},
+    {category:"Map Viewer",links:[{n:"GeoNB Map Viewer",d:"Interactive map of New Brunswick spatial data",u:"https://geonb.snb.ca/geonb/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"GeoNB Parcels",d:"Provincial property parcel mapping",u:"https://geonb.snb.ca/geonb/"}]},
+    {category:"LiDAR / Elevation",links:[{n:"GeoNB LiDAR",d:"Provincial LiDAR point cloud data",u:"https://geonb.snb.ca/li/"}]},
+    {category:"Geodetic Control",links:[{n:"GeoNB Survey Control",d:"Provincial survey control monuments",u:"https://geonb.snb.ca/geonb/"}]},
+    {category:"Land Registry",links:[{n:"SNB Land Registry",d:"Service New Brunswick land registration",u:"https://www.snb.ca/e/4000/4500/4500e.asp",paid:true}]},
+    {category:"Geological Survey",links:[{n:"NB Geological Survey",d:"Geological mapping and mineral resource data",u:"https://www2.gnb.ca/content/gnb/en/departments/erd/energy/content/minerals/content/geological-surveys.html"}]},
+  ]},
+  {id:"ns",name:"Nova Scotia",abbr:"NS",categories:[
+    {category:"Open Data Portal",links:[{n:"GeoNOVA",d:"Nova Scotia's geographic information portal",u:"https://geonova.novascotia.ca/"}]},
+    {category:"Map Viewer",links:[{n:"Nova Scotia DataLocator",d:"Interactive map for provincial spatial data",u:"https://nsgi.novascotia.ca/datalocator/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"NS Property Records",d:"Property Valuation Services Corporation",u:"https://www.pvsc.ca/"}]},
+    {category:"Imagery",links:[{n:"Nova Scotia Ortho Imagery",d:"Provincial orthoimagery and aerial photos",u:"https://nsgi.novascotia.ca/datalocator/"}]},
+    {category:"LiDAR / Elevation",links:[{n:"Elevation Explorer",d:"Interactive LiDAR-derived elevation viewer",u:"https://elevationexplorer.novascotia.ca/"}]},
+    {category:"Land Registry",links:[{n:"Property Online",d:"Nova Scotia property information and title search",u:"https://www.nsproperty.ca/",paid:true}]},
+    {category:"Geological Survey",links:[{n:"NS Geological Survey",d:"Provincial geological mapping and publications",u:"https://novascotia.ca/natr/meb/"}]},
+  ]},
+  {id:"pe",name:"Prince Edward Island",abbr:"PE",categories:[
+    {category:"Open Data Portal",links:[{n:"PEI Open Data",d:"Provincial open data and service catalogue",u:"https://www.princeedwardisland.ca/en/search/site?f%5B0%5D=type%3Aservice"}]},
+    {category:"Map Viewer",links:[{n:"PEI GIS Data Layers",d:"Provincial GIS datasets and map layers",u:"https://www.gov.pe.ca/gis/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"PEI Land Online",d:"Provincial parcel and property mapping",u:"https://www.gov.pe.ca/gis/"}]},
+    {category:"Land Registry",links:[{n:"PEI Land Registration",d:"Provincial land registration office",u:"https://www.gov.pe.ca/land/",paid:true}]},
+  ]},
+  {id:"nl",name:"Newfoundland & Labrador",abbr:"NL",categories:[
+    {category:"Open Data Portal",links:[{n:"Open Data NL",d:"Provincial open data catalogue",u:"https://opendata.gov.nl.ca/"}]},
+    {category:"Map Viewer",links:[{n:"GeoHub NL",d:"Provincial ArcGIS geospatial hub",u:"https://geohub-gnl.hub.arcgis.com/"}]},
+    {category:"Parcel / Cadastral",links:[{n:"CADO (Crown Lands)",d:"Crown lands maps and cadastral data",u:"https://www.gov.nl.ca/crownlands/maps-and-data/"}]},
+    {category:"LiDAR / Elevation",links:[{n:"NL LiDAR",d:"Provincial LiDAR elevation datasets",u:"https://geohub-gnl.hub.arcgis.com/search?q=lidar"}]},
+    {category:"Land Registry",links:[{n:"NL Land Use Atlas",d:"Provincial land use planning and registry",u:"https://www.gov.nl.ca/ecc/oea/land-use-atlas/"}]},
+    {category:"Geological Survey",links:[{n:"NL Geological Survey",d:"Provincial geoscience data and maps",u:"https://www.gov.nl.ca/iet/mines/geoscience/"}]},
+  ]},
+  {id:"yt",name:"Yukon",abbr:"YT",categories:[
+    {category:"Open Data Portal",links:[{n:"GeoYukon",d:"Yukon's geospatial data discovery portal",u:"https://geoyukon.gov.yk.ca/"}]},
+    {category:"Map Viewer",links:[{n:"GeoYukon Map Viewer",d:"Interactive territorial map application",u:"https://mapservices.gov.yk.ca/GeoYukon/"}]},
+    {category:"Land Registry",links:[{n:"Yukon Land Titles",d:"Territorial land titles office",u:"https://yukon.ca/en/legal-and-social-services/land-titles-office"}]},
+    {category:"Geological Survey",links:[{n:"Yukon Geological Survey",d:"Territorial geoscience data and mapping",u:"https://yukon.ca/en/science-and-natural-resources/geology"}]},
+  ]},
+  {id:"nt",name:"Northwest Territories",abbr:"NT",categories:[
+    {category:"Open Data Portal",links:[{n:"NWT Centre for Geomatics",d:"Territorial geospatial data and mapping services",u:"https://www.maps.gov.nt.ca/"}]},
+    {category:"Map Viewer",links:[{n:"ATLAS (NWT)",d:"NWT interactive atlas and map viewer",u:"https://atlas.gov.nt.ca/"}]},
+    {category:"Land Registry",links:[{n:"NWT Land Titles",d:"Territorial land titles registration",u:"https://www.justice.gov.nt.ca/en/land-titles/"}]},
+    {category:"Geological Survey",links:[{n:"NWT Geological Survey",d:"Territorial geoscience office",u:"https://www.nwtgeoscience.ca/"}]},
+  ]},
+  {id:"nu",name:"Nunavut",abbr:"NU",categories:[
+    {category:"Open Data Portal",links:[{n:"Nunavut Open Data (Federal via CLSS)",d:"Federal open data filtered for Nunavut",u:"https://open.canada.ca/data/en/dataset?q=nunavut"}]},
+    {category:"Map Viewer",links:[{n:"Nunavut Planning Commission Maps",d:"Territorial land use planning maps",u:"https://www.nunavut.ca/"}]},
+    {category:"Land Registry",links:[{n:"Nunavut Land Titles",d:"Territorial land titles office",u:"https://www.gov.nu.ca/departments/justice/land-titles-office"}]},
+    {category:"Geological Survey",links:[{n:"Canada-Nunavut Geoscience Office",d:"Joint federal-territorial geoscience research",u:"https://cngo.ca/"}]},
+  ]},
+];
+
 // ── Glossary Terms ──
 const GLOSSARY = {
   "Command Centre": [
@@ -800,6 +919,51 @@ function CalcPanel(){
   );
 }
 
+// ── Provincial Intel Component ──
+function ProvIntel({initialProv="bc"}){
+  const [prov,setProv]=useState(initialProv);
+  const data=PROVINCES.find(p=>p.id===prov);
+  return(
+    <div>
+      <div className="prov-btns" style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:12}}>
+        {PROVINCES.map(p=>(
+          <button key={p.id} onClick={()=>setProv(p.id)}
+            style={{
+              padding:"4px 10px",fontSize:11,fontWeight:prov===p.id?700:400,
+              fontFamily:B.font,color:prov===p.id?B.bg:B.textMid,
+              background:prov===p.id?B.priBr:"transparent",
+              border:`1px solid ${prov===p.id?B.priBr:B.border}`,
+              borderRadius:3,cursor:"pointer",whiteSpace:"nowrap"
+            }}>
+            {p.abbr}
+          </button>
+        ))}
+      </div>
+      <h3 style={{fontFamily:B.font,fontSize:13,fontWeight:700,color:B.text,margin:"0 0 10px"}}>{data.name}</h3>
+      {data.categories.map(cat=>(
+        <div key={cat.category} style={{marginBottom:12}}>
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:".08em",color:B.textDim,fontFamily:B.font,padding:"4px 0",borderBottom:`1px solid ${B.border}`,marginBottom:4}}>
+            {cat.category.toUpperCase()}
+          </div>
+          {cat.links.map(l=>(
+            <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer"
+              style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 10px",textDecoration:"none",color:B.text,fontSize:12,background:"transparent",transition:"all .12s",border:"1px solid transparent",borderRadius:4}}
+              onMouseEnter={e=>{e.currentTarget.style.background=B.surface;e.currentTarget.style.borderColor=B.borderHi;}}
+              onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.borderColor="transparent";}}>
+              <div>
+                <span>{l.n}</span>
+                {l.paid&&<span style={{fontSize:9,color:B.gold,marginLeft:6}}>💲</span>}
+                {l.d&&<div style={{fontSize:10,color:B.textDim,marginTop:1}}>{l.d}</div>}
+              </div>
+              <span style={{color:B.textDim,fontSize:11}}>→</span>
+            </a>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Main Component ──
 export default function App(){
   const [sw,setSw]=useState(null),[wx,setWx]=useState(null);
@@ -920,6 +1084,7 @@ export default function App(){
       @media(max-width:480px){.header-inner{flex-direction:column;align-items:flex-start}}
       @media(max-width:768px){.cmd-stations{grid-template-columns:1fr 1fr !important;}}
       @media(max-width:480px){.cmd-stations{grid-template-columns:1fr !important;}}
+      @media(max-width:768px){.prov-btns{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;}}
     `}</style>
 
     <div className="scanlines"/>
@@ -1193,10 +1358,12 @@ export default function App(){
 
       {/* PROVINCIAL INTEL */}
       {tab==="provincial"&&(
-        <div style={{...cardStyle,textAlign:"center",padding:40}}>
-          <span style={{fontSize:32}}>🏛️</span>
-          <h2 style={{fontFamily:B.font,fontSize:14,color:B.text,margin:"12px 0 4px"}}>Provincial Intel</h2>
-          <p style={{fontSize:11,color:B.textMid}}>Geospatial data portals for all 13 Canadian provinces and territories. Coming soon.</p>
+        <div style={{...cardStyle,maxWidth:720}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
+            <span style={{fontSize:16}}>🏛️</span>
+            <h2 style={{margin:0,fontSize:14,fontWeight:700,color:B.priBr}}>Provincial Intel</h2>
+          </div>
+          <ProvIntel initialProv="bc"/>
         </div>
       )}
 
