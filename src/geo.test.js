@@ -618,3 +618,34 @@ describe('MTM Applicability', () => {
     expect(isMtmApplicable(-103.01)).toBe(false);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════
+// 10. HEIGHT COMPUTATION (H = h - N)
+// ═══════════════════════════════════════════════════════════════
+describe('Height Computation (H = h - N)', () => {
+  const computeH = (h, N) => h - N;
+
+  it('typical BC point: h=620, N=16.432 → H=603.568', () => {
+    expect(computeH(620, 16.432)).toBeCloseTo(603.568, 3);
+  });
+
+  it('sea level: h=16, N=16 → H=0', () => {
+    expect(computeH(16, 16)).toBeCloseTo(0, 6);
+  });
+
+  it('zero geoid undulation: h=580, N=0 → H=580', () => {
+    expect(computeH(580, 0)).toBe(580);
+  });
+
+  it('negative N (geoid below ellipsoid): h=100, N=-5 → H=105', () => {
+    expect(computeH(100, -5)).toBe(105);
+  });
+
+  it('negative H (below geoid, low-lying area): h=2, N=10 → H=-8', () => {
+    expect(computeH(2, 10)).toBe(-8);
+  });
+
+  it('large N value: h=500, N=40 → H=460', () => {
+    expect(computeH(500, 40)).toBe(460);
+  });
+});
