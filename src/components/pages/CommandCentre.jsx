@@ -7,6 +7,7 @@ import { useWeather } from "../../hooks/useWeather.js";
 import { GaugeRing } from "../ui/GaugeRing.jsx";
 import { KpCell } from "../ui/KpCell.jsx";
 import { FreshBadge } from "../ui/FreshBadge.jsx";
+import { ForecastRow } from "../ui/ForecastRow.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
 import { WMO, DEFAULT_TZ } from "../../data/constants.js";
 
@@ -66,6 +67,26 @@ export function CommandCentre() {
 
   return (
     <div>
+      {/* Active NOAA Alerts */}
+      {sw?.alerts?.length > 0 && sw.alerts.slice(0, 3).map((a, i) => {
+        const msg = a.message || "";
+        const isWarning = /WARNING/i.test(msg);
+        const isAlert = /ALERT/i.test(msg);
+        const borderColor = isAlert ? "#ef4444" : isWarning ? "#f97316" : B.acc;
+        const firstLine = msg.split("\r\n").find(l => l.trim() && !/^Space Weather|^Serial|^Issue/.test(l.trim())) || "Space Weather Alert";
+        return (
+          <div key={i} style={{ background: `linear-gradient(135deg,${B.surface},${theme === "dark" ? "#1a0a0a" : "#fef2f2"})`, border: `2px solid ${B.border}`, borderLeft: `3px solid ${borderColor}`, padding: "8px 12px", marginBottom: 4, display: "flex", alignItems: "flex-start", gap: 8 }}>
+            <span style={{ fontSize: 13, lineHeight: 1 }}>{isAlert ? "\uD83D\uDEA8" : isWarning ? "\u26A0\uFE0F" : "\u2139\uFE0F"}</span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: borderColor, fontFamily: B.font }}>{isAlert ? "ALERT" : isWarning ? "WARNING" : "WATCH"}</div>
+              <div style={{ fontSize: 10, color: B.textMid, marginTop: 2, whiteSpace: "pre-wrap", lineHeight: 1.4, maxHeight: 40, overflow: "hidden" }}>{firstLine.trim()}</div>
+            </div>
+            <span style={{ fontSize: 9, color: B.textDim, whiteSpace: "nowrap" }}>{a.issue_datetime?.substring(0, 16)}</span>
+          </div>
+        );
+      })}
+      {sw?.alerts?.length > 0 && <div style={{ marginBottom: 8 }} />}
+
       {/* Advisory Banner */}
       <div style={{ background: `linear-gradient(135deg,${B.surface},${theme === "dark" ? "#0a1530" : "#eef1f5"})`, border: `2px solid ${B.border}`, borderLeft: `3px solid ${B.acc}`, padding: 12, marginBottom: 12, display: "flex", alignItems: "flex-start", gap: 10 }}>
         <span style={{ fontSize: 17, lineHeight: 1 }}>{"\u26A0\uFE0F"}</span>
@@ -218,6 +239,13 @@ export function CommandCentre() {
           </div>
         )}
       </div>
+
+      {/* 3-Day Forecast */}
+      {sw && !sErr && (
+        <div style={{ ...cardStyle, marginBottom: 12 }}>
+          <ForecastRow scales={sw.scales} />
+        </div>
+      )}
 
       {/* Mag Dec + Stations */}
       <div className="cmd-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "start" }}>
