@@ -176,8 +176,8 @@ Horizontal tab bar at the top of the Survey Tools page, using the same beveled b
 | delta + C | R = C / (2 * sin(delta/2)), then direct |
 | delta + E | R = E / (sec(delta/2) - 1), then direct |
 | delta + M | R = M / (1 - cos(delta/2)), then direct |
-| T + E | delta = 2 * acos(T / (T + E)), then R from T |
-| E + M | delta = 2 * acos(1 / (E/M + 1)), then R from M (note: this pair requires iterative confirmation) |
+| T + E | delta = 4 * atan(E / T), then R from T |
+| E + M | delta = 2 * acos(M / E), then R from M |
 
 Unsupported pairs (e.g. L + C, T + C) that require transcendental/numerical solutions are greyed out in the UI with a tooltip: "This combination requires iterative solution -- use R or delta as one input."
 
