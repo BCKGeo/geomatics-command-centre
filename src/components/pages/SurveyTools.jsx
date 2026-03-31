@@ -5,6 +5,12 @@ import { CoordConverter } from "../field/CoordConverter.jsx";
 import { ScaleCalc } from "../field/ScaleCalc.jsx";
 import { MagPanel } from "../field/MagPanel.jsx";
 import { CalcPanel } from "../field/CalcPanel.jsx";
+import { InverseCalc } from "../field/InverseCalc.jsx";
+import { ForwardCalc } from "../field/ForwardCalc.jsx";
+import { AreaCalc } from "../field/AreaCalc.jsx";
+import { PhotoScale } from "../field/PhotoScale.jsx";
+import { CurveCalc } from "../field/CurveCalc.jsx";
+import { IntersectCalc } from "../field/IntersectCalc.jsx";
 
 const TABS = [
   { id: "coords", label: "Coordinates", icon: "\uD83D\uDCE1" },
@@ -39,12 +45,12 @@ export function SurveyTools() {
       case "scale": return <ScaleCalc initialLat={lat} initialLon={lon} />;
       case "mag": return <MagPanel initialLat={lat} initialLon={lon} />;
       case "units": return <CalcPanel />;
-      case "inverse": return <div style={{ color: B.textDim, fontSize: 12 }}>Inverse calculator — coming soon</div>;
-      case "forward": return <div style={{ color: B.textDim, fontSize: 12 }}>Forward calculator — coming soon</div>;
-      case "area": return <div style={{ color: B.textDim, fontSize: 12 }}>Area calculator — coming soon</div>;
-      case "photo": return <div style={{ color: B.textDim, fontSize: 12 }}>Photo scale calculator — coming soon</div>;
-      case "curves": return <div style={{ color: B.textDim, fontSize: 12 }}>Curve calculator — coming soon</div>;
-      case "intersect": return <div style={{ color: B.textDim, fontSize: 12 }}>Intersections calculator — coming soon</div>;
+      case "inverse": return <InverseCalc />;
+      case "forward": return <ForwardCalc />;
+      case "area": return <AreaCalc />;
+      case "photo": return <PhotoScale />;
+      case "curves": return <CurveCalc />;
+      case "intersect": return <IntersectCalc />;
       default: return null;
     }
   };
