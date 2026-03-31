@@ -1,11 +1,14 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
+import { useSpaceWeather } from "../../hooks/useSpaceWeather.js";
+import { useWeather } from "../../hooks/useWeather.js";
 import { GaugeRing } from "../ui/GaugeRing.jsx";
 import { KpCell } from "../ui/KpCell.jsx";
+import { FreshBadge } from "../ui/FreshBadge.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
-import { WMO, NOAA_KP, NOAA_SCALES, NOAA_WIND_SPEED, NOAA_WIND_MAG, NOAA_XRAY, NOAA_XRAY_FLUX, DEFAULT_TZ, buildWeatherUrl } from "../../data/constants.js";
+import { WMO, DEFAULT_TZ } from "../../data/constants.js";
 
 const stations = [
   { i: "\u2708\uFE0F", t: "Flight Ops", d: "RPAS regs, NOTAMs, airspace", to: "/flight-ops" },
@@ -23,17 +26,15 @@ export function CommandCentre() {
   const { lat, lon, cityName, locSource, locLoading, requestLocation, resetLocation } = useLocation();
   const navigate = useNavigate();
 
-  const [sw, setSw] = useState(null);
-  const [wx, setWx] = useState(null);
-  const [sErr, setSErr] = useState(false);
-  const [wErr, setWErr] = useState(false);
+  const userTz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : DEFAULT_TZ;
+  const DEFAULT_CITY = "Ottawa, ON (default)";
+
+  const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
+  const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
   const [utc, setUtc] = useState(new Date());
   const [sun, setSun] = useState({ altitude: 0, azimuth: 0 });
   const [fieldTz, setFieldTz] = useState("");
   const [typewriterText, setTypewriterText] = useState("");
-
-  const userTz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : DEFAULT_TZ;
-  const DEFAULT_CITY = "Ottawa, ON (default)";
 
   // ── Clock & Typewriter ──
   useEffect(() => {
@@ -52,39 +53,6 @@ export function CommandCentre() {
     }, 65);
     return () => clearInterval(t);
   }, []);
-
-  // ── Fetch Space Weather & Weather ──
-  const fS = useCallback(async () => {
-    try {
-      const [a, b, c, d, e, f] = await Promise.allSettled([
-        fetch(NOAA_KP).then(r => r.json()),
-        fetch(NOAA_SCALES).then(r => r.json()),
-        fetch(NOAA_WIND_SPEED).then(r => r.json()),
-        fetch(NOAA_WIND_MAG).then(r => r.json()),
-        fetch(NOAA_XRAY).then(r => r.json()),
-        fetch(NOAA_XRAY_FLUX).then(r => r.json()),
-      ]);
-      setSw({
-        kp: a.status === "fulfilled" ? a.value : [],
-        scales: b.status === "fulfilled" ? b.value : {},
-        wind: c.status === "fulfilled" ? c.value : {},
-        mag: d.status === "fulfilled" ? d.value : {},
-        flux: e.status === "fulfilled" ? e.value : {},
-        xray: f.status === "fulfilled" ? f.value : [],
-      });
-      setSErr(false);
-    } catch { setSErr(true); }
-  }, []);
-
-  const fW = useCallback(async () => {
-    try { setWx(await fetch(buildWeatherUrl(lat, lon, userTz)).then(r => r.json())); setWErr(false); } catch { setWErr(true); }
-  }, [lat, lon, userTz]);
-
-  useEffect(() => {
-    fS(); fW();
-    const a = setInterval(fS, 12e4), b = setInterval(fW, 6e5);
-    return () => { clearInterval(a); clearInterval(b); };
-  }, [fS, fW]);
 
   // ── Extract Data ──
   const kp = sw?.kp?.slice(-9) || [], sc = sw?.scales || {}, gS = sc["0"]?.G?.Scale || "0", sS = sc["0"]?.S?.Scale || "0", rS = sc["0"]?.R?.Scale || "0";
@@ -118,7 +86,7 @@ export function CommandCentre() {
               <button onClick={requestLocation} style={{ background: "none", border: `1px solid ${B.border}`, borderRadius: 3, padding: "2px 6px", fontSize: 10, color: B.textMid, cursor: "pointer", fontFamily: B.font }} title="Use my location">{locLoading ? "\u23F3" : "\uD83D\uDCCD"}</button>
               {cityName !== DEFAULT_CITY && <button onClick={resetLocation} style={{ background: "none", border: "none", padding: 0, fontSize: 9, color: B.textDim, cursor: "pointer", fontFamily: B.font, textDecoration: "underline" }} title="Reset to default">reset</button>}
             </div>
-            <span style={{ fontSize: 10, color: B.textDim, marginLeft: "auto" }}>Open-Meteo</span>
+            <span style={{ fontSize: 10, color: B.textDim, marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}>Open-Meteo <FreshBadge lastUpdated={wxUpdated} interval={6e5} /></span>
           </div>
           {wErr ? <div style={{ color: "#ef4444", fontSize: 12 }}>Unable to load</div>
             : !wx ? <div style={{ color: B.textMid, fontSize: 12 }}>Loading...</div>
@@ -159,6 +127,7 @@ export function CommandCentre() {
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
             <span>{"\u2600\uFE0F"}</span>
             <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>NOAA Space Weather</h2>
+            <span style={{ marginLeft: "auto" }}><FreshBadge lastUpdated={swUpdated} interval={12e4} /></span>
           </div>
           {sErr ? <div style={{ color: "#ef4444", fontSize: 12 }}>Unable to load</div>
             : !sw ? <div style={{ color: B.textMid, fontSize: 12 }}>Loading...</div>
