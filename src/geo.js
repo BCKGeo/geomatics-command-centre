@@ -125,3 +125,29 @@ export function vincentyDirect(lat1D, lon1D, azD, dist) {
   if (rev < 0) rev += 360;
   return { lat: lat2 / R, lon: lon1D + L / R, revAzimuth: rev };
 }
+
+const AUTHALIC_R = 6371007.2;
+
+export function geodesicArea(points) {
+  const n = points.length;
+  if (n < 3) return 0;
+  const R = Math.PI / 180;
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    const j = (i + 1) % n;
+    sum += (points[j].lon - points[i].lon) * R * (2 + Math.sin(points[i].lat * R) + Math.sin(points[j].lat * R));
+  }
+  return Math.abs(sum * AUTHALIC_R * AUTHALIC_R / 2);
+}
+
+export function geodesicPerimeter(points) {
+  const n = points.length;
+  if (n < 2) return 0;
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    const j = (i + 1) % n;
+    const r = vincentyInverse(points[i].lat, points[i].lon, points[j].lat, points[j].lon);
+    sum += r.distance;
+  }
+  return sum;
+}

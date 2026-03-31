@@ -9,6 +9,8 @@ import {
   isMtmApplicable,
   vincentyInverse,
   vincentyDirect,
+  geodesicArea,
+  geodesicPerimeter,
 } from './geo.js';
 
 // ── proj4 reference definitions ──
@@ -757,5 +759,85 @@ describe('Vincenty Direct', () => {
   it('returns reverse azimuth', () => {
     const r = vincentyDirect(45.0, -75.0, 0, 100000);
     expect(r.revAzimuth).toBeCloseTo(180, 0);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// 13. GEODESIC AREA & PERIMETER
+// ═══════════════════════════════════════════════════════════════
+describe('Geodesic Area', () => {
+  it('small triangle near Ottawa: ~area > 0', () => {
+    const pts = [
+      { lat: 45.42, lon: -75.70 },
+      { lat: 45.42, lon: -75.69 },
+      { lat: 45.43, lon: -75.695 },
+    ];
+    const area = geodesicArea(pts);
+    expect(area).toBeGreaterThan(0);
+    expect(area).toBeLessThan(1e6);
+  });
+
+  it('known ~1 km² square', () => {
+    const pts = [
+      { lat: 45.0, lon: -75.0 },
+      { lat: 45.0, lon: -74.9873 },
+      { lat: 45.009, lon: -74.9873 },
+      { lat: 45.009, lon: -75.0 },
+    ];
+    const area = geodesicArea(pts);
+    expect(area).toBeGreaterThan(900000);
+    expect(area).toBeLessThan(1100000);
+  });
+
+  it('collinear points return area ~0', () => {
+    const pts = [
+      { lat: 45.0, lon: -75.0 },
+      { lat: 45.5, lon: -75.0 },
+      { lat: 46.0, lon: -75.0 },
+    ];
+    const area = geodesicArea(pts);
+    expect(area).toBeLessThan(1);
+  });
+
+  it('fewer than 3 points returns 0', () => {
+    expect(geodesicArea([{ lat: 0, lon: 0 }])).toBe(0);
+    expect(geodesicArea([{ lat: 0, lon: 0 }, { lat: 1, lon: 1 }])).toBe(0);
+  });
+
+  it('winding order does not matter (absolute value)', () => {
+    const cw = [
+      { lat: 45.0, lon: -75.0 },
+      { lat: 45.0, lon: -74.99 },
+      { lat: 45.01, lon: -74.99 },
+    ];
+    const ccw = [...cw].reverse();
+    expect(geodesicArea(cw)).toBeCloseTo(geodesicArea(ccw), 0);
+  });
+});
+
+describe('Geodesic Perimeter', () => {
+  it('triangle perimeter equals sum of 3 sides', () => {
+    const pts = [
+      { lat: 45.0, lon: -75.0 },
+      { lat: 45.0, lon: -74.99 },
+      { lat: 45.01, lon: -74.995 },
+    ];
+    const p = geodesicPerimeter(pts);
+    const d1 = vincentyInverse(pts[0].lat, pts[0].lon, pts[1].lat, pts[1].lon).distance;
+    const d2 = vincentyInverse(pts[1].lat, pts[1].lon, pts[2].lat, pts[2].lon).distance;
+    const d3 = vincentyInverse(pts[2].lat, pts[2].lon, pts[0].lat, pts[0].lon).distance;
+    expect(p).toBeCloseTo(d1 + d2 + d3, 2);
+  });
+
+  it('fewer than 2 points returns 0', () => {
+    expect(geodesicPerimeter([])).toBe(0);
+    expect(geodesicPerimeter([{ lat: 0, lon: 0 }])).toBe(0);
+  });
+
+  it('2 points returns double the distance (there and back)', () => {
+    const pts = [{ lat: 45.0, lon: -75.0 }, { lat: 45.01, lon: -75.0 }];
+    const p = geodesicPerimeter(pts);
+    const d = vincentyInverse(pts[0].lat, pts[0].lon, pts[1].lat, pts[1].lon).distance;
+    expect(p).toBeCloseTo(2 * d, 2);
   });
 });
