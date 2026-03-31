@@ -8,6 +8,7 @@ import {
   gridScaleFactor, elevFactor,
   isMtmApplicable,
   vincentyInverse,
+  vincentyDirect,
 } from './geo.js';
 
 // ── proj4 reference definitions ──
@@ -715,5 +716,46 @@ describe('Vincenty Inverse', () => {
     const r = vincentyInverse(0, 0, 0, 170);
     expect(r.converged).toBe(true);
     expect(r.distance).toBeGreaterThan(18000000);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// 12. VINCENTY DIRECT (destination from start + bearing + distance)
+// ═══════════════════════════════════════════════════════════════
+describe('Vincenty Direct', () => {
+  it('zero distance returns input point', () => {
+    const r = vincentyDirect(45.0, -75.0, 90, 0);
+    expect(r.lat).toBeCloseTo(45.0, 8);
+    expect(r.lon).toBeCloseTo(-75.0, 8);
+  });
+
+  it('1 degree north from equator: ~111 km', () => {
+    const r = vincentyDirect(0, 0, 0, 111320);
+    expect(r.lat).toBeCloseTo(1.0, 1);
+    expect(r.lon).toBeCloseTo(0, 2);
+  });
+
+  it('round-trip: direct then inverse recovers distance and azimuth', () => {
+    const start = { lat: 53.9171, lon: -122.7497 };
+    const az = 135.0, dist = 50000;
+    const dest = vincentyDirect(start.lat, start.lon, az, dist);
+    const inv = vincentyInverse(start.lat, start.lon, dest.lat, dest.lon);
+    expect(inv.distance).toBeCloseTo(dist, 2);
+    expect(inv.fwdAzimuth).toBeCloseTo(az, 2);
+  });
+
+  it('round-trip: 5 different azimuths at 100 km', () => {
+    const lat0 = 49.0, lon0 = -123.0, dist = 100000;
+    [0, 45, 90, 180, 270].forEach(az => {
+      const dest = vincentyDirect(lat0, lon0, az, dist);
+      const inv = vincentyInverse(lat0, lon0, dest.lat, dest.lon);
+      expect(inv.distance).toBeCloseTo(dist, 2);
+      expect(inv.fwdAzimuth).toBeCloseTo(az, 1);
+    });
+  });
+
+  it('returns reverse azimuth', () => {
+    const r = vincentyDirect(45.0, -75.0, 0, 100000);
+    expect(r.revAzimuth).toBeCloseTo(180, 0);
   });
 });

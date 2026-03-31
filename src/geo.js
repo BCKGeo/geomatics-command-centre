@@ -93,3 +93,35 @@ export function vincentyInverse(lat1D, lon1D, lat2D, lon2D) {
   rev = ((rev % 360) + 360) % 360;
   return { distance: dist, fwdAzimuth: fwd, revAzimuth: rev, converged: true };
 }
+
+export function vincentyDirect(lat1D, lon1D, azD, dist) {
+  if (dist === 0) return { lat: lat1D, lon: lon1D, revAzimuth: (azD + 180) % 360 };
+  const R = Math.PI / 180, a = GRS80_A, f = GRS80_F, b = a * (1 - f);
+  const az = azD * R, sAz = Math.sin(az), cAz = Math.cos(az);
+  const U1 = Math.atan((1 - f) * Math.tan(lat1D * R)), sU1 = Math.sin(U1), cU1 = Math.cos(U1);
+  const sig1 = Math.atan2(sU1, cU1 * cAz);
+  const sAlpha = cU1 * sAz, cos2a = 1 - sAlpha * sAlpha;
+  const uSq = cos2a * (a * a - b * b) / (b * b);
+  const A2 = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
+  const B2 = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
+  let sig = dist / (b * A2), sigPrev;
+  let cos2sm, sinS, cosS;
+  do {
+    cos2sm = Math.cos(2 * sig1 + sig);
+    sinS = Math.sin(sig);
+    cosS = Math.cos(sig);
+    const dS = B2 * sinS * (cos2sm + B2 / 4 * (cosS * (-1 + 2 * cos2sm * cos2sm) - B2 / 6 * cos2sm * (-3 + 4 * sinS * sinS) * (-3 + 4 * cos2sm * cos2sm)));
+    sigPrev = sig;
+    sig = dist / (b * A2) + dS;
+  } while (Math.abs(sig - sigPrev) > 1e-12);
+  cos2sm = Math.cos(2 * sig1 + sig);
+  sinS = Math.sin(sig);
+  cosS = Math.cos(sig);
+  const lat2 = Math.atan2(sU1 * cosS + cU1 * sinS * cAz, (1 - f) * Math.sqrt(sAlpha * sAlpha + (sU1 * sinS - cU1 * cosS * cAz) ** 2));
+  const lam = Math.atan2(sinS * sAz, cU1 * cosS - sU1 * sinS * cAz);
+  const C = f / 16 * cos2a * (4 + f * (4 - 3 * cos2a));
+  const L = lam - (1 - C) * f * sAlpha * (sig + C * sinS * (cos2sm + C * cosS * (-1 + 2 * cos2sm * cos2sm)));
+  let rev = Math.atan2(sAlpha, sU1 * sinS - cU1 * cosS * cAz) / R;
+  if (rev < 0) rev += 360;
+  return { lat: lat2 / R, lon: lon1D + L / R, revAzimuth: rev };
+}
