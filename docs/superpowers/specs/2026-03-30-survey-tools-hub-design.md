@@ -309,6 +309,58 @@ All new calculator components follow the existing field component conventions:
 - Card wrapper: gradient background with beveled 3D borders
 - Responsive: `cmd-split` class for two-column layouts that collapse at 768px
 
+## SVG Visualizers
+
+Five calculators include a real-time SVG diagram that updates as the user enters values. Zero external dependencies — inline SVG themed with `B` colors, same pattern as the existing MagPanel compass and header north arrow.
+
+**General SVG conventions:**
+- ViewBox sized to content (typically 200-300px square)
+- Background: `B.bg` or transparent
+- Lines/strokes: `B.textMid` for construction lines, `B.priBr` for primary elements, `B.acc` for highlights
+- Labels: `B.text` fill, `B.font` family, 10-11px
+- Points: small filled circles (r=4), `B.priBr` for input points, `B.gold` for computed points
+- Responsive: SVG scales with container via `width="100%" preserveAspectRatio="xMidYMid meet"`
+- Position: right side of the calculator on desktop (two-column layout), below inputs on mobile (collapses via `cmd-split`)
+
+### Inverse Visualizer
+- Two labeled points (A, B) connected by a dashed line
+- Forward azimuth shown as an arc from north at Point A, labeled with degrees
+- Reverse azimuth arc at Point B
+- Distance label centered on the connecting line
+- North arrow indicator at top of diagram
+
+### Forward Visualizer
+- Origin point (A) with a north arrow
+- Bearing ray from A at the specified azimuth (dashed line extending beyond destination)
+- Destination point (B) plotted on the ray at proportional distance
+- Distance label along the ray
+- Reverse azimuth arc at destination point
+
+### Area Visualizer
+- Polygon drawn with vertices as numbered circles (1, 2, 3...)
+- Filled polygon with semi-transparent `B.priBr` fill (10-15% opacity)
+- Solid `B.priBr` border stroke
+- Closing segment (last to first) drawn as dashed line
+- Area value displayed in center of polygon
+
+### Curve Visualizer
+- Arc drawn as a curved path segment
+- Two tangent lines extending from PC (Point of Curvature) and PT (Point of Tangency) meeting at PI (Point of Intersection)
+- Radius line from center to midpoint of arc
+- Labeled elements: R, T, L, C, E, M with leader lines
+- Chord drawn as dashed line from PC to PT
+- External distance and middle ordinate shown as dimensioned lines
+
+### Intersections Visualizer
+- **Bearing-Bearing mode:** Two points with bearing rays extending as dashed lines, intersection point highlighted in gold
+- **Bearing-Distance mode:** One bearing ray + one circle (dashed), intersection point(s) in gold
+- **Distance-Distance mode:** Two circles (dashed) centered on each point, intersection point(s) in gold
+- Input points labeled A and B
+- "No solution" state: elements drawn but no gold intersection point, faded styling
+
+### Calculators without visualizers
+- Coordinates, Scale Factors, Mag Declination (already has compass SVG), Unit Converter, Photo Scale / GSD — these are numeric-only or already have visual elements.
+
 ## Input Validation
 
 All calculators that accept lat/lon inputs reject values outside valid ranges (lat: -90 to 90, lon: -180 to 180) with an inline error message. No output is computed until inputs are valid. Numeric fields that require positive values (distances, focal lengths, sensor dimensions) show no output if zero, blank, or negative.
