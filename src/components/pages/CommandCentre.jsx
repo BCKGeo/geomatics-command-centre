@@ -4,6 +4,7 @@ import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
 import { useSpaceWeather } from "../../hooks/useSpaceWeather.js";
 import { useWeather } from "../../hooks/useWeather.js";
+import { useAQHI } from "../../hooks/useAQHI.js";
 import { GaugeRing } from "../ui/GaugeRing.jsx";
 import { KpCell } from "../ui/KpCell.jsx";
 import { FreshBadge } from "../ui/FreshBadge.jsx";
@@ -32,6 +33,7 @@ export function CommandCentre() {
 
   const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
+  const { data: aqhi, lastUpdated: aqhiUpdated } = useAQHI(lat, lon);
   const [utc, setUtc] = useState(new Date());
   const [sun, setSun] = useState({ altitude: 0, azimuth: 0 });
   const [fieldTz, setFieldTz] = useState("");
@@ -139,6 +141,19 @@ export function CommandCentre() {
                     );
                   })}
                 </div>
+                {aqhi && aqhi.aqhi != null && (() => {
+                  const v = aqhi.aqhi, color = v <= 3 ? "#22c55e" : v <= 6 ? "#eab308" : v <= 10 ? "#ef4444" : "#dc2626";
+                  const risk = v <= 3 ? "Low Risk" : v <= 6 ? "Moderate Risk" : v <= 10 ? "High Risk" : "Very High Risk";
+                  return (
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8, padding: "6px 8px", background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL }}>
+                      <span style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1 }}>AIR QUALITY</span>
+                      <span style={{ fontFamily: B.display, fontSize: 16, fontWeight: 800, color }}>{Math.round(v)}</span>
+                      <span style={{ fontSize: 10, color, fontWeight: 600 }}>{risk}</span>
+                      <span style={{ fontSize: 9, color: B.textDim, marginLeft: "auto" }}>{aqhi.station}</span>
+                      <FreshBadge lastUpdated={aqhiUpdated} interval={18e5} />
+                    </div>
+                  );
+                })()}
               </div>
             )}
         </div>
