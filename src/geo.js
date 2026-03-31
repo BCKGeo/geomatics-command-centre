@@ -151,3 +151,35 @@ export function geodesicPerimeter(points) {
   }
   return sum;
 }
+
+export function curveElements(params) {
+  const { stationLength = 30 } = params;
+  const D2R = Math.PI / 180;
+  let R = params.R, delta = params.delta, T = params.T, L = params.L, C = params.C, E = params.E, M = params.M;
+
+  if (R != null && delta != null) { /* both known */ }
+  else if (R != null && T != null) { delta = 2 * Math.atan(T / R) / D2R; }
+  else if (R != null && L != null) { delta = (L / R) / D2R; }
+  else if (R != null && C != null) { delta = 2 * Math.asin(C / (2 * R)) / D2R; }
+  else if (R != null && E != null) { delta = 2 * Math.acos(R / (R + E)) / D2R; }
+  else if (R != null && M != null) { delta = 2 * Math.acos((R - M) / R) / D2R; }
+  else if (delta != null && T != null) { R = T / Math.tan(delta * D2R / 2); }
+  else if (delta != null && L != null) { R = L / (delta * D2R); }
+  else if (delta != null && C != null) { R = C / (2 * Math.sin(delta * D2R / 2)); }
+  else if (delta != null && E != null) { R = E / (1 / Math.cos(delta * D2R / 2) - 1); }
+  else if (delta != null && M != null) { R = M / (1 - Math.cos(delta * D2R / 2)); }
+  else if (T != null && E != null) { delta = 4 * Math.atan(E / T) / D2R; R = T / Math.tan(delta * D2R / 2); }
+  else if (E != null && M != null) { delta = 2 * Math.acos(M / E) / D2R; R = M / (1 - Math.cos(delta * D2R / 2)); }
+  else { return null; }
+
+  const dRad = delta * D2R;
+  T = R * Math.tan(dRad / 2);
+  L = R * dRad;
+  C = 2 * R * Math.sin(dRad / 2);
+  E = R * (1 / Math.cos(dRad / 2) - 1);
+  M = R * (1 - Math.cos(dRad / 2));
+  const D_arc = 180 * stationLength / (Math.PI * R);
+  const D_chord = 2 * Math.asin(stationLength / (2 * R)) / D2R;
+
+  return { R, delta, T, L, C, E, M, D_arc, D_chord };
+}

@@ -11,6 +11,7 @@ import {
   vincentyDirect,
   geodesicArea,
   geodesicPerimeter,
+  curveElements,
 } from './geo.js';
 
 // ── proj4 reference definitions ──
@@ -839,5 +840,113 @@ describe('Geodesic Perimeter', () => {
     const p = geodesicPerimeter(pts);
     const d = vincentyInverse(pts[0].lat, pts[0].lon, pts[1].lat, pts[1].lon).distance;
     expect(p).toBeCloseTo(2 * d, 2);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// 14. HORIZONTAL CURVE ELEMENTS
+// ═══════════════════════════════════════════════════════════════
+describe('Curve Elements', () => {
+  it('R=500 + delta=30°: computes all elements', () => {
+    const c = curveElements({ R: 500, delta: 30 });
+    const dRad = 30 * Math.PI / 180;
+    expect(c.T).toBeCloseTo(500 * Math.tan(dRad / 2), 4);
+    expect(c.L).toBeCloseTo(500 * dRad, 4);
+    expect(c.C).toBeCloseTo(2 * 500 * Math.sin(dRad / 2), 4);
+    expect(c.E).toBeCloseTo(500 * (1 / Math.cos(dRad / 2) - 1), 4);
+    expect(c.M).toBeCloseTo(500 * (1 - Math.cos(dRad / 2)), 4);
+    expect(c.R).toBe(500);
+    expect(c.delta).toBe(30);
+  });
+
+  it('R=200 + T known: recovers delta', () => {
+    const dRad = 45 * Math.PI / 180;
+    const T = 200 * Math.tan(dRad / 2);
+    const c = curveElements({ R: 200, T });
+    expect(c.delta).toBeCloseTo(45, 4);
+    expect(c.L).toBeCloseTo(200 * dRad, 4);
+  });
+
+  it('delta + L: recovers R', () => {
+    const c = curveElements({ delta: 60, L: 500 });
+    const expectedR = 500 / (60 * Math.PI / 180);
+    expect(c.R).toBeCloseTo(expectedR, 2);
+  });
+
+  it('delta + T: recovers R', () => {
+    const dRad = 40 * Math.PI / 180;
+    const T = 300 * Math.tan(dRad / 2);
+    const c = curveElements({ delta: 40, T });
+    expect(c.R).toBeCloseTo(300, 2);
+  });
+
+  it('delta + C: recovers R', () => {
+    const dRad = 50 * Math.PI / 180;
+    const C = 2 * 400 * Math.sin(dRad / 2);
+    const c = curveElements({ delta: 50, C });
+    expect(c.R).toBeCloseTo(400, 2);
+  });
+
+  it('delta + E: recovers R', () => {
+    const dRad = 35 * Math.PI / 180;
+    const E = 250 * (1 / Math.cos(dRad / 2) - 1);
+    const c = curveElements({ delta: 35, E });
+    expect(c.R).toBeCloseTo(250, 2);
+  });
+
+  it('delta + M: recovers R', () => {
+    const dRad = 55 * Math.PI / 180;
+    const M = 350 * (1 - Math.cos(dRad / 2));
+    const c = curveElements({ delta: 55, M });
+    expect(c.R).toBeCloseTo(350, 2);
+  });
+
+  it('R + C: recovers delta', () => {
+    const dRad = 25 * Math.PI / 180;
+    const C = 2 * 600 * Math.sin(dRad / 2);
+    const c = curveElements({ R: 600, C });
+    expect(c.delta).toBeCloseTo(25, 4);
+  });
+
+  it('R + L: recovers delta', () => {
+    const dRad = 70 * Math.PI / 180;
+    const L = 300 * dRad;
+    const c = curveElements({ R: 300, L });
+    expect(c.delta).toBeCloseTo(70, 4);
+  });
+
+  it('semicircle: delta=180', () => {
+    const c = curveElements({ R: 100, delta: 180 });
+    expect(c.L).toBeCloseTo(100 * Math.PI, 4);
+    expect(c.C).toBeCloseTo(200, 4);
+    expect(c.M).toBeCloseTo(100, 4);
+  });
+
+  it('degree of curve (arc, 30m station)', () => {
+    const c = curveElements({ R: 500, delta: 30, stationLength: 30 });
+    expect(c.D_arc).toBeCloseTo(180 * 30 / (Math.PI * 500), 4);
+  });
+
+  it('T + E: recovers delta', () => {
+    const dRad = 60 * Math.PI / 180;
+    const T = 500 * Math.tan(dRad / 2);
+    const E = 500 * (1 / Math.cos(dRad / 2) - 1);
+    const c = curveElements({ T, E });
+    expect(c.delta).toBeCloseTo(60, 2);
+    expect(c.R).toBeCloseTo(500, 2);
+  });
+
+  it('E + M: recovers delta', () => {
+    const dRad = 45 * Math.PI / 180;
+    const E = 400 * (1 / Math.cos(dRad / 2) - 1);
+    const M = 400 * (1 - Math.cos(dRad / 2));
+    const c = curveElements({ E, M });
+    expect(c.delta).toBeCloseTo(45, 2);
+    expect(c.R).toBeCloseTo(400, 2);
+  });
+
+  it('returns null for unsupported pair', () => {
+    const c = curveElements({ L: 100, C: 95 });
+    expect(c).toBeNull();
   });
 });
