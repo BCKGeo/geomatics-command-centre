@@ -210,7 +210,7 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/geomatics-command-centre">
       <ThemeProvider>
         <LocationProvider>
           <Layout />

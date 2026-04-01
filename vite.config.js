@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: '/geomatics-command-centre/',
   resolve: {
     alias: {
       // satellite.js v7 re-exports WASM modules that use top-level await
