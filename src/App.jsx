@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, NavLink, useLocation as useRouterLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { LocationProvider } from "./context/LocationContext.jsx";
 import { DARK, LIGHT } from "./lib/theme.js";
 
-// Pages
-import { CommandCentre } from "./components/pages/CommandCentre.jsx";
-import { FlightOps } from "./components/pages/FlightOps.jsx";
-import { Geodesy } from "./components/pages/Geodesy.jsx";
-import { SpatialOps } from "./components/pages/SpatialOps.jsx";
-import { Recon } from "./components/pages/Recon.jsx";
-import { Provincial } from "./components/pages/Provincial.jsx";
-import { SurveyTools } from "./components/pages/SurveyTools.jsx";
-import { Regs } from "./components/pages/Regs.jsx";
-import { Codex } from "./components/pages/Codex.jsx";
-import { MissionBrief } from "./components/pages/MissionBrief.jsx";
+// Pages — lazy-loaded so each tab is its own chunk
+const CommandCentre = lazy(() => import("./components/pages/CommandCentre.jsx").then(m => ({ default: m.CommandCentre })));
+const FlightOps = lazy(() => import("./components/pages/FlightOps.jsx").then(m => ({ default: m.FlightOps })));
+const Geodesy = lazy(() => import("./components/pages/Geodesy.jsx").then(m => ({ default: m.Geodesy })));
+const SpatialOps = lazy(() => import("./components/pages/SpatialOps.jsx").then(m => ({ default: m.SpatialOps })));
+const Recon = lazy(() => import("./components/pages/Recon.jsx").then(m => ({ default: m.Recon })));
+const Provincial = lazy(() => import("./components/pages/Provincial.jsx").then(m => ({ default: m.Provincial })));
+const SurveyTools = lazy(() => import("./components/pages/SurveyTools.jsx").then(m => ({ default: m.SurveyTools })));
+const Regs = lazy(() => import("./components/pages/Regs.jsx").then(m => ({ default: m.Regs })));
+const Codex = lazy(() => import("./components/pages/Codex.jsx").then(m => ({ default: m.Codex })));
+const MissionBrief = lazy(() => import("./components/pages/MissionBrief.jsx").then(m => ({ default: m.MissionBrief })));
 
 const NAV = [
   { path: "/", label: "Command Centre", icon: "\uD83D\uDDA5\uFE0F" },
@@ -79,6 +79,11 @@ function Layout() {
         @media(max-width:768px){.cmd-kp-telem{grid-template-columns:1fr !important}}
         @media(max-width:768px){.cmd-sw-forecast{grid-template-columns:1fr !important}}
         @media(max-width:768px){.cmd-ref{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.geo-ref{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.geo-links{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.recon-ref{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.forecast-days{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.calc-results{grid-template-columns:1fr !important}}
         @media(max-width:480px){.header-inner{flex-direction:column;align-items:flex-start}}
         @media(max-width:768px){.cmd-stations{grid-template-columns:1fr 1fr !important;}}
         @media(max-width:480px){.cmd-stations{grid-template-columns:1fr !important;}}
@@ -182,6 +187,7 @@ function Layout() {
 
       {/* Main Content */}
       <div style={{ padding: "14px 20px", maxWidth: 1280, margin: "0 auto" }}>
+        <Suspense fallback={<div style={{ padding: 40, textAlign: "center", color: B.textDim, fontFamily: B.font, fontSize: 12, letterSpacing: 2 }}>LOADING...</div>}>
         <Routes>
           <Route path="/" element={<CommandCentre />} />
           <Route path="/flight-ops" element={<FlightOps />} />
@@ -194,6 +200,7 @@ function Layout() {
           <Route path="/codex" element={<Codex />} />
           <Route path="/mission-brief" element={<MissionBrief />} />
         </Routes>
+        </Suspense>
       </div>
 
       {/* Footer */}

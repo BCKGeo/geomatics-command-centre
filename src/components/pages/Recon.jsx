@@ -41,7 +41,7 @@ export function Recon() {
       </div>
 
       {/* Reference Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 12 }}>
+      <div className="recon-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 12 }}>
         {/* Sensor Types */}
         <div style={cardStyle}>
           <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Sensor Types</h3>

@@ -33,7 +33,7 @@ export function ForecastRow({ scales }) {
         <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>3-Day Forecast</h2>
         <span style={{ fontSize: 10, color: B.textDim, marginLeft: "auto" }}>NOAA SWPC</span>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: `repeat(${days.length}, 1fr)`, gap: 8 }}>
+      <div className="forecast-days" style={{ display: "grid", gridTemplateColumns: `repeat(${days.length}, 1fr)`, gap: 8 }}>
         {days.map((d, i) => {
           const g = d.G?.Scale || "0", s = d.S?.Scale || "0", r = d.R?.Scale || "0";
           const date = d.DateStamp || "";

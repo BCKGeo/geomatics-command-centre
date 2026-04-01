@@ -44,7 +44,7 @@ export function Geodesy() {
       </div>
 
       {/* Quick Reference Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 12 }}>
+      <div className="geo-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 12 }}>
         {/* Datum Table */}
         <div style={cardStyle}>
           <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Datum Reference</h3>
@@ -97,7 +97,7 @@ export function Geodesy() {
       </div>
 
       {/* Link Sections */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="geo-links" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {SECTIONS.filter(s => s.title.includes("NRCan") || s.title.includes("GNSS")).map(s => (
           <LinkCard key={s.title} section={s} />
         ))}

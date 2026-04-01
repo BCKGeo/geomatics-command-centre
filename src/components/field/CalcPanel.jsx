@@ -74,7 +74,7 @@ export function CalcPanel(){
             {Object.entries(distUnits).map(([k,u])=><option key={k} value={k}>{u.name}</option>)}
           </select>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4}}>
+        <div className="calc-results" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4}}>
           {Object.entries(distUnits).filter(([k])=>k!==unitFrom).map(([k,u])=>{
             const converted=metres/u.toM;
             const display=converted>=1e6||converted<0.001&&converted!==0?converted.toExponential(4):converted<1?converted.toPrecision(6):converted.toLocaleString("en-CA",{maximumFractionDigits:4});
@@ -101,7 +101,7 @@ export function CalcPanel(){
             {Object.entries(speedUnits).map(([k,u])=><option key={k} value={k}>{u.name}</option>)}
           </select>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,marginBottom:16}}>
+        <div className="calc-results" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,marginBottom:16}}>
           {Object.entries(speedUnits).filter(([k])=>k!==speedFrom).map(([k,u])=>{
             const converted=ms/u.toMs;
             return(
@@ -123,7 +123,7 @@ export function CalcPanel(){
           <span style={{fontSize:15}}>{"\uD83C\uDF21\uFE0F"}</span>
           <h2 style={{margin:0,fontSize:13,fontWeight:700,color:B.text}}>Temperature</h2>
         </div>
-        <div style={{display:"flex",gap:8,marginBottom:14,alignItems:"center"}}>
+        <div style={{display:"flex",gap:8,marginBottom:14,alignItems:"center",flexWrap:"wrap"}}>
           <input value={tempC} onChange={e=>setTempC(e.target.value)} style={inp} type="number" step="any"/>
           <span style={{fontFamily:B.font,fontSize:12,color:B.textMid}}>{"\u00B0"}C</span>
           <span style={{fontFamily:B.font,fontSize:14,color:B.textDim}}>=</span>
@@ -162,7 +162,7 @@ export function CalcPanel(){
         <div style={{display:"grid",gap:3}}>
           {surveyPairs.map(x=>(
             <div key={x.l} style={{...inS,padding:"8px 12px",display:"flex",alignItems:"center",gap:10}}>
-              <span style={{fontFamily:B.font,fontSize:11,fontWeight:700,color:B.text,minWidth:120}}>{x.l}</span>
+              <span style={{fontFamily:B.font,fontSize:11,fontWeight:700,color:B.text,minWidth:80}}>{x.l}</span>
               <span style={{fontFamily:B.font,fontSize:12,color:B.priBr,flex:1}}>{x.v}</span>
               <span style={{fontFamily:B.font,fontSize:10,color:B.textDim}}>{x.v2}</span>
             </div>

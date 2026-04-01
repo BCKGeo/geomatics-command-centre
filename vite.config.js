@@ -13,6 +13,16 @@ export default defineConfig({
       'satellite.js': path.resolve(__dirname, 'src/lib/satellite-shim.js'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-satellite': ['satellite.js'],
+        },
+      },
+    },
+  },
   server: {
     // SPA fallback for dev server
     historyApiFallback: true,
