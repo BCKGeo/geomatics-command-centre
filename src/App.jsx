@@ -76,10 +76,15 @@ function Layout() {
         .north-arrow-svg:hover {animation-duration:1.5s}
         .tagline::after {content:'_';animation:blink-cursor .6s step-end infinite;color:${B.priBr}}
         @media(max-width:768px){.cmd-hero{grid-template-columns:1fr !important}.cmd-split{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.cmd-kp-telem{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.cmd-sw-forecast{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.cmd-ref{grid-template-columns:1fr !important}}
         @media(max-width:480px){.header-inner{flex-direction:column;align-items:flex-start}}
         @media(max-width:768px){.cmd-stations{grid-template-columns:1fr 1fr !important;}}
         @media(max-width:480px){.cmd-stations{grid-template-columns:1fr !important;}}
         @media(max-width:768px){.prov-btns{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;}}
+        @media(max-width:768px){.cmd-telemetry{grid-template-columns:1fr 1fr !important}}
+        @media(max-width:480px){.cmd-telemetry{grid-template-columns:1fr !important}}
         .lnk{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
         .lnk:hover{background:${B.surface};border-color:${B.borderHi}}
         .lnk-card{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
