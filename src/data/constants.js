@@ -7,6 +7,7 @@ export const NOAA_XRAY = "https://services.swpc.noaa.gov/products/summary/10cm-f
 export const NOAA_XRAY_FLUX = "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json";
 export const NOAA_ALERTS = "https://services.swpc.noaa.gov/products/alerts.json";
 export const EC_AQHI = "https://api.weather.gc.ca/collections/aqhi-observations-realtime/items";
+export const CELESTRAK_PROXY = "https://celestrak-proxy.bckgeo.workers.dev";
 export const DEFAULT_LAT = 45.4215;
 export const DEFAULT_LON = -75.6972;
 export const DEFAULT_CITY = "Ottawa, ON (default)";

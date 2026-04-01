@@ -5,10 +5,12 @@ import { useLocation } from "../../context/LocationContext.jsx";
 import { useSpaceWeather } from "../../hooks/useSpaceWeather.js";
 import { useWeather } from "../../hooks/useWeather.js";
 import { useAQHI } from "../../hooks/useAQHI.js";
+import { useSatellites } from "../../hooks/useSatellites.js";
 import { GaugeRing } from "../ui/GaugeRing.jsx";
 import { KpCell } from "../ui/KpCell.jsx";
 import { FreshBadge } from "../ui/FreshBadge.jsx";
 import { ForecastRow } from "../ui/ForecastRow.jsx";
+import { Skyplot, SkyplotFallback } from "../ui/Skyplot.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
 import { WMO, DEFAULT_TZ } from "../../data/constants.js";
 
@@ -34,6 +36,7 @@ export function CommandCentre() {
   const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
   const { data: aqhi, lastUpdated: aqhiUpdated } = useAQHI(lat, lon);
+  const { satellites: sat, tleLastUpdated: satUpdated, proxyAvailable: satProxy } = useSatellites(lat, lon);
   const [utc, setUtc] = useState(new Date());
   const [sun, setSun] = useState({ altitude: 0, azimuth: 0 });
   const [fieldTz, setFieldTz] = useState("");
@@ -59,6 +62,14 @@ export function CommandCentre() {
 
   // ── Extract Data ──
   const kp = sw?.kp?.slice(-9) || [], sc = sw?.scales || {}, gS = sc["0"]?.G?.Scale || "0", sS = sc["0"]?.S?.Scale || "0", rS = sc["0"]?.R?.Scale || "0";
+  // NOAA summary endpoints return arrays: [{proton_speed,time_tag}], [{bt,bz_gsm,time_tag}], [{flux,time_tag}]
+  const swWind = Array.isArray(sw?.wind) ? sw.wind[0] : sw?.wind;
+  const swMag = Array.isArray(sw?.mag) ? sw.mag[0] : sw?.mag;
+  const swFlux = Array.isArray(sw?.flux) ? sw.flux[0] : sw?.flux;
+  const windSpeed = swWind?.WindSpeed || swWind?.proton_speed || "--";
+  const magBt = swMag?.Bt || swMag?.bt || "--";
+  const magBz = swMag?.Bz || swMag?.bz_gsm || "--";
+  const fluxVal = swFlux?.Flux || swFlux?.flux || "--";
   const cur = wx?.current || {}, dy = wx?.daily || {}, wc = cur.weather_code ?? 0, wi = WMO[wc] || { i: "\u2753", d: "Unknown" };
   const moon = getMoon(new Date());
 
@@ -98,7 +109,7 @@ export function CommandCentre() {
         </div>
       </div>
 
-      {/* Weather + NOAA Hero */}
+      {/* ═══ ROW 1: Weather + GNSS Skyplot ═══ */}
       <div className="cmd-hero" style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
         {/* Weather */}
         <div style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
@@ -158,112 +169,126 @@ export function CommandCentre() {
             )}
         </div>
 
-        {/* NOAA Space Weather */}
+        {/* GNSS Satellite Visibility */}
+        <div style={cardStyle}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <span>{"\uD83D\uDEF0\uFE0F"}</span>
+            <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Satellite Visibility</h2>
+            {satProxy && satUpdated && <span style={{ marginLeft: "auto" }}><FreshBadge lastUpdated={satUpdated} interval={216e5} /></span>}
+          </div>
+          {satProxy && sat ? (
+            <Skyplot visible={sat.visible} count={sat.count} pdop={sat.pdop} />
+          ) : (
+            <SkyplotFallback />
+          )}
+        </div>
+      </div>
+
+      {/* ═══ ROW 2: Kp Index + Telemetry ═══ */}
+      <div className="cmd-kp-telem" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
+        {/* Kp Index */}
+        <div style={cardStyle}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <span>{"\uD83D\uDCCA"}</span>
+            <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Kp Index</h2>
+            <span style={{ fontSize: 10, color: B.textDim, marginLeft: "auto" }}>24h</span>
+          </div>
+          {(!sw || kp.length === 0) ? <div style={{ color: B.textMid, fontSize: 12 }}>Loading...</div> : (
+            <div>
+              <div style={{ display: "flex", gap: 2 }}>
+                {kp.map((r, i) => {
+                  if (i === 0 || !Array.isArray(r)) return null;
+                  const v = parseFloat(r[1]) || 0;
+                  return <KpCell key={i} val={v} time={r[0]?.substring(11, 16) || ""} />;
+                })}
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
+                <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim }}>Kp 5+ degrades GNSS {"\u00B7"} Kp 7+ disrupts RTK</div>
+                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                  {[{ c: "#22c55e", l: "0-3" }, { c: "#84cc16", l: "4" }, { c: "#d4a017", l: "5-6" }, { c: "#ef4444", l: "7+" }].map(x => (
+                    <div key={x.l} style={{ display: "flex", alignItems: "center", gap: 2 }}>
+                      <div style={{ width: 10, height: 4, background: x.c, borderRadius: 1 }} />
+                      <span style={{ fontFamily: B.font, fontSize: 10, color: B.textDim }}>{x.l}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Telemetry */}
+        {sw && !sErr ? (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+            <div style={cardStyle}>
+              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>FLUX (F10.7)</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: B.pri, fontFamily: B.display }}>{fluxVal}</div>
+              <div style={{ fontSize: 10, color: B.textMid }}>sfu</div>
+              <div style={{ height: 4, background: B.border, borderRadius: 2, marginTop: 6 }}>
+                <div style={{ height: 4, borderRadius: 2, background: B.pri, width: `${Math.min(100, Math.max(2, ((parseFloat(fluxVal) || 70) - 60) / 1.4))}%`, transition: "width .3s" }} />
+              </div>
+            </div>
+            <div style={cardStyle}>
+              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>X-RAY</div>
+              {(() => {
+                const entries = (sw.xray || []).filter(e => e.energy === "0.1-0.8nm");
+                const last = entries[entries.length - 1];
+                const xr = xrayClass(last?.flux);
+                return (<>
+                  <div style={{ fontSize: 28, fontWeight: 800, color: xr.color, fontFamily: B.display }}>{xr.cls}</div>
+                  <div style={{ fontSize: 10, color: B.textMid }}>GOES 1-8 {"\u212B"}</div>
+                  {(xr.cls.startsWith("M") || xr.cls.startsWith("X")) && <div style={{ width: 8, height: 8, borderRadius: "50%", background: xr.color, display: "inline-block", marginTop: 4, animation: "pulse-ring 1.5s ease-in-out infinite" }} />}
+                </>);
+              })()}
+            </div>
+            <div style={cardStyle}>
+              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>SOLAR WIND</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: B.priBr, fontFamily: B.display }}>{windSpeed}</div>
+              <div style={{ fontSize: 10, color: B.textMid }}>km/s</div>
+              <div style={{ display: "flex", gap: 8, marginTop: 6, fontSize: 10 }}>
+                <span style={{ color: B.textMid }}>Bt <b style={{ color: B.text }}>{magBt}</b></span>
+                <span style={{ color: B.textMid }}>Bz <b style={{ color: parseFloat(magBz) < 0 ? B.acc : B.priBr }}>{magBz}</b></span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div style={cardStyle}><div style={{ color: B.textMid, fontSize: 12 }}>Loading telemetry...</div></div>
+        )}
+      </div>
+
+      {/* ═══ ROW 3: Space Weather Gauges + 3-Day Forecast ═══ */}
+      <div className="cmd-sw-forecast" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
+        {/* Current G/S/R Scales */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
             <span>{"\u2600\uFE0F"}</span>
-            <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>NOAA Space Weather</h2>
+            <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Space Weather</h2>
             <span style={{ marginLeft: "auto" }}><FreshBadge lastUpdated={swUpdated} interval={12e4} /></span>
           </div>
           {sErr ? <div style={{ color: "#ef4444", fontSize: 12 }}>Unable to load</div>
             : !sw ? <div style={{ color: B.textMid, fontSize: 12 }}>Loading...</div>
             : (
-              <div>
-                <div style={{ display: "flex", gap: 24, marginBottom: 14, justifyContent: "center" }}>
-                  <GaugeRing level={`G${gS}`} label="Geomag" />
-                  <GaugeRing level={`S${sS}`} label="Solar Rad" />
-                  <GaugeRing level={`R${rS}`} label="Radio" />
-                </div>
-                <div style={{ display: "flex", gap: 6 }}>
-                  {[{ l: "SOLAR WIND", v: sw.wind?.WindSpeed || "--", u: "km/s" }, { l: "MAG BT", v: sw.mag?.Bt || "--", u: "nT" }, { l: "Bz", v: sw.mag?.Bz || "--", u: "nT", c: parseFloat(sw.mag?.Bz || 0) < 0 ? B.acc : B.priBr }, { l: "10.7CM FLUX", v: sw.flux?.Flux || "--", u: "sfu" }].map(x => (
-                    <div key={x.l} style={{ flex: 1, ...insetStyle, padding: 6, textAlign: "center" }}>
-                      <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, letterSpacing: 2 }}>{x.l}</div>
-                      <div style={{ fontFamily: B.display, fontSize: 18, fontWeight: 800, color: x.c || B.text, margin: "2px 0" }}>{x.v}</div>
-                      <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim }}>{x.u}</div>
-                    </div>
-                  ))}
-                </div>
+              <div style={{ display: "flex", gap: 24, justifyContent: "center" }}>
+                <GaugeRing level={`G${gS}`} label="Geomag" />
+                <GaugeRing level={`S${sS}`} label="Solar Rad" />
+                <GaugeRing level={`R${rS}`} label="Radio" />
               </div>
             )}
         </div>
+
+        {/* 3-Day Forecast */}
+        <div style={cardStyle}>
+          {sw && !sErr ? (
+            <ForecastRow scales={sw.scales} />
+          ) : (
+            <div style={{ color: B.textMid, fontSize: 12 }}>Loading forecast...</div>
+          )}
+        </div>
       </div>
 
-      {/* Telemetry Row */}
-      {sw && !sErr && (
-        <div className="cmd-telemetry" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 12 }}>
-          <div style={cardStyle}>
-            <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>SOLAR FLUX (F10.7)</div>
-            <div style={{ fontSize: 36, fontWeight: 800, color: B.pri, fontFamily: B.display }}>{sw.flux?.Flux || "--"}</div>
-            <div style={{ fontSize: 11, color: B.textMid }}>sfu</div>
-            <div style={{ height: 4, background: B.border, borderRadius: 2, marginTop: 8 }}>
-              <div style={{ height: 4, borderRadius: 2, background: B.pri, width: `${Math.min(100, Math.max(2, ((parseFloat(sw.flux?.Flux) || 70) - 60) / 1.4))}%`, transition: "width .3s" }} />
-            </div>
-          </div>
-          <div style={cardStyle}>
-            <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>X-RAY INTENSITY</div>
-            {(() => {
-              const entries = (sw.xray || []).filter(e => e.energy === "0.1-0.8nm");
-              const last = entries[entries.length - 1];
-              const xr = xrayClass(last?.flux);
-              return (<>
-                <div style={{ fontSize: 36, fontWeight: 800, color: xr.color, fontFamily: B.display }}>{xr.cls}</div>
-                <div style={{ fontSize: 11, color: B.textMid }}>GOES 1-8 {"\u212B"}</div>
-                {(xr.cls.startsWith("M") || xr.cls.startsWith("X")) && <div style={{ width: 8, height: 8, borderRadius: "50%", background: xr.color, display: "inline-block", marginTop: 6, animation: "pulse-ring 1.5s ease-in-out infinite" }} />}
-              </>);
-            })()}
-          </div>
-          <div style={cardStyle}>
-            <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>SOLAR WIND</div>
-            <div style={{ fontSize: 36, fontWeight: 800, color: B.priBr, fontFamily: B.display }}>{sw.wind?.WindSpeed || "--"}</div>
-            <div style={{ fontSize: 11, color: B.textMid }}>km/s</div>
-            <div style={{ display: "flex", gap: 12, marginTop: 8, fontSize: 11 }}>
-              <span style={{ color: B.textMid }}>Bt <b style={{ color: B.text }}>{sw.mag?.Bt || "--"}</b> nT</span>
-              <span style={{ color: B.textMid }}>Bz <b style={{ color: parseFloat(sw.mag?.Bz || 0) < 0 ? B.acc : B.priBr }}>{sw.mag?.Bz || "--"}</b> nT</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Kp Index */}
-      <div style={{ ...cardStyle, marginBottom: 12 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-          <span>{"\uD83D\uDCCA"}</span>
-          <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Kp Index</h2>
-          <span style={{ fontSize: 10, color: B.textDim, marginLeft: "auto" }}>24h</span>
-        </div>
-        {(!sw || kp.length === 0) ? <div style={{ color: B.textMid, fontSize: 12 }}>Loading...</div> : (
-          <div>
-            <div style={{ display: "flex", gap: 2 }}>
-              {kp.map((r, i) => {
-                if (i === 0 || !Array.isArray(r)) return null;
-                const v = parseFloat(r[1]) || 0;
-                return <KpCell key={i} val={v} time={r[0]?.substring(11, 16) || ""} />;
-              })}
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
-              <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim }}>Kp 5+ degrades GNSS {"\u00B7"} Kp 7+ disrupts RTK</div>
-              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                {[{ c: "#22c55e", l: "0-3" }, { c: "#84cc16", l: "4" }, { c: "#d4a017", l: "5-6" }, { c: "#ef4444", l: "7+" }].map(x => (
-                  <div key={x.l} style={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <div style={{ width: 10, height: 4, background: x.c, borderRadius: 1 }} />
-                    <span style={{ fontFamily: B.font, fontSize: 10, color: B.textDim }}>{x.l}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* 3-Day Forecast */}
-      {sw && !sErr && (
-        <div style={{ ...cardStyle, marginBottom: 12 }}>
-          <ForecastRow scales={sw.scales} />
-        </div>
-      )}
-
-      {/* Mag Dec + Stations */}
-      <div className="cmd-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "start" }}>
+      {/* ═══ ROW 4: Mag Dec + AQHI/Sun/Moon ═══ */}
+      <div className="cmd-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "start" }}>
+        {/* Magnetic Declination */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <span>{"\uD83E\uDDED"}</span>
@@ -280,20 +305,42 @@ export function CommandCentre() {
             );
           })()}
         </div>
-        <div>
-          <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, letterSpacing: 2, marginBottom: 8 }}>STATIONS</div>
-          <div className="cmd-stations" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
-            {stations.map(s => (
-              <div key={s.t} onClick={() => navigate(s.to)} className="station-card"
-                style={{ background: B.surface, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, padding: "14px 16px", cursor: "pointer", display: "flex", alignItems: "center", gap: 12 }}>
-                <div style={{ fontSize: 22, width: 36, textAlign: "center" }}>{s.i}</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <h3 style={{ fontFamily: B.font, fontSize: 12, fontWeight: 700, letterSpacing: ".06em", margin: 0, color: B.priBr }}>{s.t}</h3>
-                  <p style={{ fontSize: 10, color: B.textDim, lineHeight: 1.4, margin: "2px 0 0" }}>{s.d}</p>
-                </div>
-              </div>
-            ))}
+
+        {/* Sun & Moon */}
+        <div style={cardStyle}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <span>{sun.altitude > 0 ? "\u2600\uFE0F" : "\uD83C\uDF19"}</span>
+            <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Sun & Moon</h2>
           </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            <div style={{ ...insetStyle, padding: 8, textAlign: "center" }}>
+              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>SUN ALT</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: sun.altitude > 0 ? B.gold : B.textDim, fontFamily: B.display }}>{sun.altitude.toFixed(1)}{"\u00B0"}</div>
+              <div style={{ fontSize: 10, color: B.textMid }}>Az {sun.azimuth.toFixed(1)}{"\u00B0"}</div>
+            </div>
+            <div style={{ ...insetStyle, padding: 8, textAlign: "center" }}>
+              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>MOON</div>
+              <div style={{ fontSize: 20, marginBottom: 2 }}>{moon.icon}</div>
+              <div style={{ fontSize: 10, color: B.textMid }}>{moon.name} {moon.illum}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ═══ ROW 5: Stations ═══ */}
+      <div style={{ marginBottom: 12 }}>
+        <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, letterSpacing: 2, marginBottom: 8 }}>STATIONS</div>
+        <div className="cmd-stations" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8 }}>
+          {stations.map(s => (
+            <div key={s.t} onClick={() => navigate(s.to)} className="station-card"
+              style={{ background: B.surface, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, padding: "14px 16px", cursor: "pointer", display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ fontSize: 22, width: 36, textAlign: "center" }}>{s.i}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <h3 style={{ fontFamily: B.font, fontSize: 12, fontWeight: 700, letterSpacing: ".06em", margin: 0, color: B.priBr }}>{s.t}</h3>
+                <p style={{ fontSize: 10, color: B.textDim, lineHeight: 1.4, margin: "2px 0 0" }}>{s.d}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
