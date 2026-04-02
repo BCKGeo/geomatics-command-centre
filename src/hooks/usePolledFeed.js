@@ -22,12 +22,13 @@ export function usePolledFeed({ fetchFn, interval, enabled = true }) {
     }
   }, []);
 
+  // Re-run when fetchFn identity changes (e.g. new lat/lon)
   useEffect(() => {
     if (!enabled) return;
     doFetch(true);
     const id = setInterval(() => doFetch(false), interval);
     return () => clearInterval(id);
-  }, [enabled, interval, doFetch]);
+  }, [enabled, interval, doFetch, fetchFn]);
 
   const stale = lastUpdated ? Date.now() - lastUpdated.getTime() > interval * 2 : false;
 

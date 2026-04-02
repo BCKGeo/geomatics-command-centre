@@ -11,6 +11,7 @@ import { KpCell } from "../ui/KpCell.jsx";
 import { FreshBadge } from "../ui/FreshBadge.jsx";
 import { ForecastRow } from "../ui/ForecastRow.jsx";
 import { Skyplot, SkyplotFallback } from "../ui/Skyplot.jsx";
+import { LocationMap } from "../ui/LocationMap.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
 import { WMO, DEFAULT_TZ } from "../../data/constants.js";
 
@@ -27,11 +28,10 @@ const stations = [
 
 export function CommandCentre() {
   const { theme, B } = useTheme();
-  const { lat, lon, cityName, locSource, locLoading, requestLocation, resetLocation } = useLocation();
+  const { lat, lon, cityName } = useLocation();
   const navigate = useNavigate();
 
   const userTz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : DEFAULT_TZ;
-  const DEFAULT_CITY = "Ottawa, ON (default)";
 
   const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
@@ -111,15 +111,14 @@ export function CommandCentre() {
 
       {/* ═══ ROW 1: Weather + GNSS Skyplot ═══ */}
       <div className="cmd-hero" style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
-        {/* Weather */}
+        {/* Weather + Location Map */}
         <div style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+          <div style={{ marginBottom: 10 }}>
+            <LocationMap />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
             <span>{"\uD83C\uDF24\uFE0F"}</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: B.text }}>{locSource === "gps" ? "\uD83D\uDCCD " : ""}{cityName}</span>
-              <button onClick={requestLocation} style={{ background: "none", border: `1px solid ${B.border}`, borderRadius: 3, padding: "2px 6px", fontSize: 10, color: B.textMid, cursor: "pointer", fontFamily: B.font }} title="Use my location">{locLoading ? "\u23F3" : "\uD83D\uDCCD"}</button>
-              {cityName !== DEFAULT_CITY && <button onClick={resetLocation} style={{ background: "none", border: "none", padding: 0, fontSize: 9, color: B.textDim, cursor: "pointer", fontFamily: B.font, textDecoration: "underline" }} title="Reset to default">reset</button>}
-            </div>
+            <span style={{ fontSize: 12, fontWeight: 700, color: B.text }}>Weather</span>
             <span style={{ fontSize: 10, color: B.textDim, marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}>Open-Meteo <FreshBadge lastUpdated={wxUpdated} interval={6e5} /></span>
           </div>
           {wErr ? <div style={{ color: "#ef4444", fontSize: 12 }}>Unable to load</div>

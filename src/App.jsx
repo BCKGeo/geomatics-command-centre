@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, NavLink, useLocation as useRouterLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink, Link, useLocation as useRouterLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { LocationProvider } from "./context/LocationContext.jsx";
 import { DARK, LIGHT } from "./lib/theme.js";
@@ -15,6 +15,7 @@ const SurveyTools = lazy(() => import("./components/pages/SurveyTools.jsx").then
 const Regs = lazy(() => import("./components/pages/Regs.jsx").then(m => ({ default: m.Regs })));
 const Codex = lazy(() => import("./components/pages/Codex.jsx").then(m => ({ default: m.Codex })));
 const MissionBrief = lazy(() => import("./components/pages/MissionBrief.jsx").then(m => ({ default: m.MissionBrief })));
+const Terms = lazy(() => import("./components/pages/Terms.jsx").then(m => ({ default: m.Terms })));
 
 const NAV = [
   { path: "/", label: "Command Centre", icon: "\uD83D\uDDA5\uFE0F" },
@@ -90,6 +91,15 @@ function Layout() {
         @media(max-width:768px){.prov-btns{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;}}
         @media(max-width:768px){.cmd-telemetry{grid-template-columns:1fr 1fr !important}}
         @media(max-width:480px){.cmd-telemetry{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.regs-cats{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.codex-grid{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.survey-tabs{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch}}
+        @media(max-width:768px){.geod-hero{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.spatial-tabs button{font-size:10px;padding:4px 8px}}
+        @media(max-width:768px){.recon-pipeline{flex-direction:column !important}}
+        @media(max-width:768px){.fops-grid{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.mission-steps{flex-direction:column !important}}
+        @media print{.no-print{display:none !important}}
         .lnk{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
         .lnk:hover{background:${B.surface};border-color:${B.borderHi}}
         .lnk-card{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
@@ -199,15 +209,19 @@ function Layout() {
           <Route path="/regs" element={<Regs />} />
           <Route path="/codex" element={<Codex />} />
           <Route path="/mission-brief" element={<MissionBrief />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
         </Suspense>
       </div>
 
       {/* Footer */}
-      <div style={{ borderTop: `2px solid ${B.border}`, padding: "10px 24px", marginTop: 16 }}>
+      <div className="no-print" style={{ borderTop: `2px solid ${B.border}`, padding: "10px 24px", marginTop: 16 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
           <span style={{ fontSize: 11, fontWeight: 700, color: B.pri, fontFamily: B.display, letterSpacing: ".1em" }}>BCKGeo</span>
-          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font }}>Weather: Open-Meteo {"\u00B7"} Space Wx: NOAA SWPC {"\u00B7"} Mag Dec: WMM2025</div>
+          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font }}>Weather: Open-Meteo {"\u00B7"} Space Wx: NOAA SWPC {"\u00B7"} Mag Dec: WMM2025 {"\u00B7"} <Link to="/terms" style={{ color: B.pri, textDecoration: "none" }}>Terms of Use</Link></div>
+        </div>
+        <div className="footer-disclaimer" style={{ fontSize: 9, color: B.textDim, fontFamily: B.font, lineHeight: 1.5, marginTop: 6, textAlign: "center" }}>
+          Reference and estimation tool only. Not for legal survey, navigation, or regulatory compliance. Verify all data against authoritative sources. No warranty expressed or implied.
         </div>
         <div style={{ height: 3, background: `linear-gradient(90deg,${B.pri},${B.sec},${B.gold},${B.acc},${B.priBr})`, marginTop: 8 }} />
       </div>
@@ -217,7 +231,7 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/geomatics-command-centre">
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <ThemeProvider>
         <LocationProvider>
           <Layout />

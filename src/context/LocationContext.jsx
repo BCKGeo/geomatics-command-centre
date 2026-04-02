@@ -58,8 +58,25 @@ export function LocationProvider({ children }) {
     setLocSource("default");
   }, []);
 
+  const setManualLocation = useCallback((newLat, newLon) => {
+    setUserLat(newLat);
+    setUserLon(newLon);
+    setLocSource("manual");
+    fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${newLat}&longitude=${newLon}&localityLanguage=en`)
+      .then(r => r.json())
+      .then(data => {
+        const cityStr = `${data.city || data.locality || "Unknown"}, ${data.principalSubdivisionCode?.replace("CA-", "") || data.countryCode}`;
+        setCityName(cityStr);
+        localStorage.setItem("bckgeo_location", JSON.stringify({ lat: newLat, lon: newLon, city: cityStr }));
+      })
+      .catch(() => {
+        setCityName(`${newLat.toFixed(4)}, ${newLon.toFixed(4)}`);
+        localStorage.setItem("bckgeo_location", JSON.stringify({ lat: newLat, lon: newLon, city: `${newLat.toFixed(4)}, ${newLon.toFixed(4)}` }));
+      });
+  }, []);
+
   return (
-    <LocationContext.Provider value={{ lat, lon, cityName, locSource, locLoading, requestLocation, resetLocation }}>
+    <LocationContext.Provider value={{ lat, lon, cityName, locSource, locLoading, requestLocation, resetLocation, setManualLocation }}>
       {children}
     </LocationContext.Provider>
   );

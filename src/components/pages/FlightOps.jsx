@@ -33,14 +33,14 @@ export function FlightOps() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid #3bbffa` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>RPAS OPERATIONS &mdash; CANADA</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>RPAS OPERATIONS {"\u2014"} CANADA</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           Canadian RPAS regulations (CARs Part IX) classify operations as Basic or Advanced based on airspace, proximity to people, and operational risk. All pilots need a valid certificate and registered drone. SFOC required for BVLOS, night ops without Advanced cert + lights, or operations outside standard rules.
         </div>
       </div>
 
       {/* Quick Reference Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+      <div className="fops-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
         {/* RPAS Rules */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, cursor: "pointer" }} onClick={() => setShowRules(!showRules)}>
