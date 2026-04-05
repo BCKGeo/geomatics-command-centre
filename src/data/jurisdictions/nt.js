@@ -3,8 +3,8 @@ export default {id:"nt",name:"Northwest Territories",abbr:"NT",categories:[
     {n:"ACLS",d:"Association of Canada Lands Surveyors (federal jurisdiction)",u:"https://www.acls-aatc.ca/"},
     {n:"NAPEG",d:"Northwest Territories and Nunavut Association of Professional Engineers and Geoscientists",u:"https://www.napeg.nt.ca/"},
   ]},
-  {category:"Open Data Portal",links:[{n:"NWT Centre for Geomatics",d:"Territorial geospatial data and mapping services",u:"https://www.maps.gov.nt.ca/"}]},
-  {category:"Map Viewer",links:[{n:"ATLAS (NWT)",d:"NWT interactive atlas and map viewer",u:"https://atlas.gov.nt.ca/"}]},
+  {category:"Open Data Portal",links:[{n:"NWT Centre for Geomatics",d:"Territorial geospatial data and mapping services",u:"https://www.geomatics.gov.nt.ca/en"}]},
+  {category:"Map Viewer",links:[{n:"ATLAS (NWT)",d:"NWT interactive atlas and map viewer",u:"https://www.maps.geomatics.gov.nt.ca/HTML5Viewer_Prod/index.html?viewer=ATLAS"}]},
   {category:"Land Registry",links:[{n:"NWT Land Titles",d:"Territorial land titles registration",u:"https://www.justice.gov.nt.ca/en/land-titles/"}]},
   {category:"Geological Survey",links:[{n:"NWT Geological Survey",d:"Territorial geoscience office",u:"https://www.nwtgeoscience.ca/"}]},
   {category:"Legislation",links:[

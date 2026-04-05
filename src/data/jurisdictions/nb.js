@@ -9,8 +9,8 @@ export default {id:"nb",name:"New Brunswick",abbr:"NB",categories:[
   {category:"Parcel / Cadastral",links:[{n:"GeoNB Parcels",d:"Provincial property parcel mapping",u:"https://geonb.snb.ca/geonb/"}]},
   {category:"LiDAR / Elevation",links:[{n:"GeoNB LiDAR",d:"Provincial LiDAR point cloud data",u:"https://geonb.snb.ca/li/"}]},
   {category:"Geodetic Control",links:[{n:"GeoNB Survey Control",d:"Provincial survey control monuments",u:"https://geonb.snb.ca/geonb/"}]},
-  {category:"Land Registry",links:[{n:"SNB Land Registry",d:"Service New Brunswick land registration",u:"https://www.snb.ca/e/4000/4500/4500e.asp",paid:true}]},
-  {category:"Geological Survey",links:[{n:"NB Geological Survey",d:"Geological mapping and mineral resource data",u:"https://www2.gnb.ca/content/gnb/en/departments/erd/energy/content/minerals/content/geological-surveys.html"}]},
+  {category:"Land Registry",links:[{n:"SNB Land Registry",d:"Service New Brunswick land registration",u:"https://www2.snb.ca/content/snb/en/sites/land-registry.html",paid:true}]},
+  {category:"Geological Survey",links:[{n:"NB Geological Survey",d:"Geological mapping and mineral resource data",u:"https://www2.gnb.ca/content/gnb/en/departments/erd/energy/content/minerals.html"}]},
   {category:"Legislation",links:[
     {n:"New Brunswick Land Surveyors Act",d:"2017",u:"https://www.canlii.org/en/nb/laws/stat/snb-2017-c-53/latest/"},
   ]},

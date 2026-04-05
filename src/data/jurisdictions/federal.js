@@ -9,7 +9,7 @@ export default {id:"ca",name:"Federal / National",abbr:"CA",categories:[
     {n:"GoGeomatics",d:"Canada's geomatics community and career hub",u:"https://gogeomatics.ca/"},
   ]},
   {category:"NRCan & Geodetic Services",links:[
-    {n:"Canadian Geodetic Survey (CSRS)",d:"Canadian Spatial Reference System",u:"https://www.nrcan.gc.ca/maps-tools-and-publications/tools/geodetic-reference-systems/canadian-spatial-reference-system-csrs/9052"},
+    {n:"Canadian Geodetic Survey (CSRS)",d:"Canadian Spatial Reference System",u:"https://natural-resources.canada.ca/maps-tools-and-publications/tools/geodetic-reference-systems/canadian-spatial-reference-system-csrs/9052"},
     {n:"CSRS-PPP Service",d:"Precise Point Positioning online processing",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/ppp.php"},
     {n:"TRX Coordinate Transform",d:"Online datum and projection transformation tool",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/trx.php"},
     {n:"GPS-H Geoid Tool",d:"Compute geoid undulation using CGG2013 or CGG2023",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/gpsh.php"},
@@ -22,11 +22,11 @@ export default {id:"ca",name:"Federal / National",abbr:"CA",categories:[
   ]},
   {category:"Standards",links:[
     {n:"CSA Group",d:"Canadian standards development organization",u:"https://www.csagroup.org/"},
-    {n:"Standards Council of Canada",d:"Canada's representative to ISO and IEC",u:"https://www.scc.ca/"},
+    {n:"Standards Council of Canada",d:"Canada's representative to ISO and IEC",u:"https://scc-ccn.ca/"},
     {n:"ISO TC 211",d:"Geographic Information/Geomatics standards",u:"https://www.isotc211.org/"},
   ]},
   {category:"Canada Lands & Indigenous Survey",links:[
-    {n:"CLSR Search",d:"Canada Lands Survey Records search",u:"https://clss.nrcan.gc.ca/clsr-satc/"},
+    {n:"CLSR Search",d:"Canada Lands Survey Records search",u:"https://clss.nrcan-rncan.gc.ca/clss/plan/search-recherche"},
     {n:"Surveyor General Branch",d:"Federal authority for Canada Lands surveys",u:"https://natural-resources.canada.ca/maps-tools-publications/maps/boundaries-land-surveys"},
     {n:"First Nations Land Management Resource Centre",d:"Resources for surveys under land codes",u:"https://labrc.com/"},
     {n:"Surveying First Nation Lands (Indian Act)",d:"NRCan guide for Indian Act reserve surveys",u:"https://natural-resources.canada.ca/maps-tools-publications/maps/boundaries-land-surveys/surveying-first-nation-lands-managed-under-indian-act"},
