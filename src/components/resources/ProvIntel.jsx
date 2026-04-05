@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
-import { PROVINCES } from "../../data/provinces.js";
+import { PROVINCES } from "../../data/jurisdictions/index.js";
 
 export function ProvIntel({ initialProv = "bc" }) {
   const { B } = useTheme();
