@@ -42,7 +42,7 @@ export function SpatialOps() {
       {/* Tab Buttons */}
       <div className="spatial-tabs" style={{ display: "flex", gap: 4, marginBottom: 12 }}>
         {[["crs", "CRS Reference"], ["fmt", "Format Guide"]].map(([k, label]) => (
-          <button key={k} onClick={() => setTab(k)} style={{ background: tab === k ? B.pri : "transparent", color: tab === k ? B.bg : B.textMid, border: `1px solid ${tab === k ? B.pri : B.border}`, padding: "6px 14px", fontSize: 11, fontFamily: B.font, cursor: "pointer", fontWeight: tab === k ? 700 : 400, letterSpacing: ".04em" }}>{label}</button>
+          <button key={k} onClick={(e) => { setTab(k); e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }} style={{ background: tab === k ? B.pri : "transparent", color: tab === k ? B.bg : B.textMid, border: `1px solid ${tab === k ? B.pri : B.border}`, padding: "6px 14px", fontSize: 11, fontFamily: B.font, cursor: "pointer", fontWeight: tab === k ? 700 : 400, letterSpacing: ".04em", whiteSpace: "nowrap" }}>{label}</button>
         ))}
       </div>
 

@@ -184,7 +184,7 @@ export function CommandCentre() {
       </div>
 
       {/* ═══ ROW 2: Kp Index + Telemetry ═══ */}
-      <div className="cmd-kp-telem" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
+      <div className="cmd-kp-telem" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
         {/* Kp Index */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
@@ -218,7 +218,7 @@ export function CommandCentre() {
 
         {/* Telemetry */}
         {sw && !sErr ? (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+          <div className="cmd-telemetry" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 8 }}>
             <div style={cardStyle}>
               <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 2, marginBottom: 4 }}>FLUX (F10.7)</div>
               <div style={{ fontSize: 28, fontWeight: 800, color: B.pri, fontFamily: B.display }}>{fluxVal}</div>
@@ -256,7 +256,7 @@ export function CommandCentre() {
       </div>
 
       {/* ═══ ROW 3: Space Weather Gauges + 3-Day Forecast ═══ */}
-      <div className="cmd-sw-forecast" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
+      <div className="cmd-sw-forecast" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 12, marginBottom: 12, alignItems: "stretch" }}>
         {/* Current G/S/R Scales */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
@@ -286,7 +286,7 @@ export function CommandCentre() {
       </div>
 
       {/* ═══ ROW 4: Mag Dec + AQHI/Sun/Moon ═══ */}
-      <div className="cmd-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12, alignItems: "start" }}>
+      <div className="cmd-ref" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 12, marginBottom: 12, alignItems: "start" }}>
         {/* Magnetic Declination */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
@@ -329,7 +329,7 @@ export function CommandCentre() {
       {/* ═══ ROW 5: Stations ═══ */}
       <div style={{ marginBottom: 12 }}>
         <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, letterSpacing: 2, marginBottom: 8 }}>STATIONS</div>
-        <div className="cmd-stations" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8 }}>
+        <div className="cmd-stations" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 8 }}>
           {stations.map(s => (
             <div key={s.t} onClick={() => navigate(s.to)} className="station-card"
               style={{ background: B.surface, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, padding: "14px 16px", cursor: "pointer", display: "flex", alignItems: "center", gap: 12 }}>

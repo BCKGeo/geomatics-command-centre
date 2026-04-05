@@ -45,8 +45,8 @@ export function ForwardCalc() {
 
   const copyText = (txt, label) => { try { navigator.clipboard.writeText(txt); setCopied(label); setTimeout(() => setCopied(""), 1500); } catch {} };
 
-  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 12, outline: "none", fontFamily: B.font };
-  const dmsInp = { ...inp, width: 48, textAlign: "center" };
+  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 16, outline: "none", fontFamily: B.font, boxSizing: "border-box" };
+  const dmsInp = { ...inp, width: "100%", maxWidth: 48, textAlign: "center" };
   const toggleBtn = (active) => ({ padding: "4px 10px", fontSize: 11, fontWeight: active ? 700 : 400, fontFamily: B.font, color: active ? B.bg : B.textMid, background: active ? B.priBr : "transparent", border: `1px solid ${active ? B.priBr : B.border}`, borderRadius: 3, cursor: "pointer" });
   const outRow = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px 10px", borderRadius: 4, background: B.bg, border: `1px solid ${B.border}`, marginBottom: 4 };
   const copyBtn = (txt, label) => <button onClick={() => copyText(txt, label)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 11, color: copied === label ? B.priBr : B.textDim, fontFamily: B.font, padding: "2px 6px" }}>{copied === label ? "\u2713" : "\uD83D\uDCCB"}</button>;
@@ -69,26 +69,26 @@ export function ForwardCalc() {
     const largeArc = az > 180 ? 1 : 0;
 
     return (
-      <svg viewBox={`0 0 ${sz} ${sz}`} width="100%" style={{ maxWidth: 220 }} preserveAspectRatio="xMidYMid meet">
+      <svg viewBox={`0 0 ${sz} ${sz}`} width="100%" style={{ maxWidth: 280 }} preserveAspectRatio="xMidYMid meet">
         <rect width={sz} height={sz} fill="none" />
         {/* North arrow */}
         <line x1={ax} y1={ay} x2={ax} y2={ay - 55} stroke={B.textDim} strokeWidth={1} strokeDasharray="3,3" />
         <polygon points={`${ax},${ay - 60} ${ax - 4},${ay - 50} ${ax + 4},${ay - 50}`} fill={B.textDim} />
-        <text x={ax + 6} y={ay - 52} fill={B.textDim} fontSize={9} fontFamily={B.font}>N</text>
+        <text x={ax + 6} y={ay - 52} fill={B.textDim} fontSize={11} fontFamily={B.font}>N</text>
         {/* Bearing ray */}
         <line x1={ax} y1={ay} x2={ex} y2={ey} stroke={B.textMid} strokeWidth={1} strokeDasharray="4,3" />
         {/* Main line A to B */}
         <line x1={ax} y1={ay} x2={bx} y2={by} stroke={B.priBr} strokeWidth={1.5} />
         {/* Azimuth arc */}
         <path d={`M ${northX} ${northY} A ${arcR} ${arcR} 0 ${largeArc} 1 ${arcEndX} ${arcEndY}`} fill="none" stroke={B.acc} strokeWidth={1.5} />
-        <text x={(northX + arcEndX) / 2 + 10} y={(northY + arcEndY) / 2} fill={B.acc} fontSize={9} fontFamily={B.font}>{az.toFixed(1)}{"\u00B0"}</text>
+        <text x={(northX + arcEndX) / 2 + 10} y={(northY + arcEndY) / 2} fill={B.acc} fontSize={11} fontWeight="600" fontFamily={B.font}>{az.toFixed(1)}{"\u00B0"}</text>
         {/* Distance label */}
-        <text x={(ax + bx) / 2 + 8} y={(ay + by) / 2 - 4} fill={B.text} fontSize={9} fontFamily={B.font}>{dist >= 1000 ? (dist / 1000).toFixed(1) + " km" : dist.toFixed(0) + " m"}</text>
+        <text x={(ax + bx) / 2 + 10} y={(ay + by) / 2 - 6} fill={B.text} fontSize={11} fontWeight="600" fontFamily={B.font}>{dist >= 1000 ? (dist / 1000).toFixed(1) + " km" : dist.toFixed(0) + " m"}</text>
         {/* Points */}
-        <circle cx={ax} cy={ay} r={4} fill={B.priBr} />
-        <text x={ax - 14} y={ay + 14} fill={B.priBr} fontSize={10} fontWeight="700" fontFamily={B.font}>A</text>
-        <circle cx={bx} cy={by} r={4} fill={B.gold} />
-        <text x={bx + 6} y={by + 4} fill={B.gold} fontSize={10} fontWeight="700" fontFamily={B.font}>B</text>
+        <circle cx={ax} cy={ay} r={5} fill={B.priBr} />
+        <text x={ax - 14} y={ay + 16} fill={B.priBr} fontSize={12} fontWeight="700" fontFamily={B.font}>A</text>
+        <circle cx={bx} cy={by} r={5} fill={B.gold} />
+        <text x={bx + 8} y={by + 5} fill={B.gold} fontSize={12} fontWeight="700" fontFamily={B.font}>B</text>
       </svg>
     );
   };
@@ -106,8 +106,8 @@ export function ForwardCalc() {
           <div style={{ fontSize: 10, color: B.textDim, marginBottom: 3, fontWeight: 600 }}>Origin Point</div>
           {mode === "dd" ? (
             <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "center", flexWrap: "wrap" }}>
-              <label style={{ fontSize: 11, color: B.textMid }}>Lat</label><input value={ddLat} onChange={e => setDdLat(e.target.value)} style={{ ...inp, width: 120 }} />
-              <label style={{ fontSize: 11, color: B.textMid }}>Lon</label><input value={ddLon} onChange={e => setDdLon(e.target.value)} style={{ ...inp, width: 120 }} />
+              <label style={{ fontSize: 11, color: B.textMid }}>Lat</label><input value={ddLat} onChange={e => setDdLat(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 130, flex: 1, minWidth: 80 }} />
+              <label style={{ fontSize: 11, color: B.textMid }}>Lon</label><input value={ddLon} onChange={e => setDdLon(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 130, flex: 1, minWidth: 80 }} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}>
@@ -115,23 +115,23 @@ export function ForwardCalc() {
                 <label style={{ fontSize: 10, color: B.textDim, width: 24 }}>Lat</label>
                 <input value={dLatD} onChange={e => setDLatD(e.target.value)} style={dmsInp} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u00B0"}</span>
                 <input value={dLatM} onChange={e => setDLatM(e.target.value)} style={dmsInp} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u2032"}</span>
-                <input value={dLatS} onChange={e => setDLatS(e.target.value)} style={{ ...dmsInp, width: 60 }} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u2033"}</span>
+                <input value={dLatS} onChange={e => setDLatS(e.target.value)} inputMode="decimal" style={{ ...dmsInp, maxWidth: 60 }} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u2033"}</span>
                 <button onClick={() => setDLatDir(d => d === "N" ? "S" : "N")} style={{ ...inp, width: 28, textAlign: "center", cursor: "pointer", fontWeight: 700, color: B.priBr }}>{dLatDir}</button>
               </div>
               <div style={{ display: "flex", gap: 4, alignItems: "center", flexWrap: "wrap" }}>
                 <label style={{ fontSize: 10, color: B.textDim, width: 24 }}>Lon</label>
                 <input value={dLonD} onChange={e => setDLonD(e.target.value)} style={dmsInp} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u00B0"}</span>
                 <input value={dLonM} onChange={e => setDLonM(e.target.value)} style={dmsInp} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u2032"}</span>
-                <input value={dLonS} onChange={e => setDLonS(e.target.value)} style={{ ...dmsInp, width: 60 }} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u2033"}</span>
+                <input value={dLonS} onChange={e => setDLonS(e.target.value)} inputMode="decimal" style={{ ...dmsInp, maxWidth: 60 }} /><span style={{ fontSize: 11, color: B.textDim }}>{"\u2033"}</span>
                 <button onClick={() => setDLonDir(d => d === "E" ? "W" : "E")} style={{ ...inp, width: 28, textAlign: "center", cursor: "pointer", fontWeight: 700, color: B.priBr }}>{dLonDir}</button>
               </div>
             </div>
           )}
           <div style={{ display: "flex", gap: 8, marginBottom: 12, alignItems: "center", flexWrap: "wrap" }}>
             <label style={{ fontSize: 11, color: B.textMid }}>Azimuth ({"\u00B0"})</label>
-            <input value={azimuth} onChange={e => setAzimuth(e.target.value)} style={{ ...inp, width: 90 }} />
+            <input value={azimuth} onChange={e => setAzimuth(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 90, flex: 1, minWidth: 60 }} />
             <label style={{ fontSize: 11, color: B.textMid }}>Distance (m)</label>
-            <input value={distance} onChange={e => setDistance(e.target.value)} style={{ ...inp, width: 110 }} />
+            <input value={distance} onChange={e => setDistance(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 110, flex: 1, minWidth: 70 }} />
           </div>
           {result && (
             <div style={{ borderTop: `1px solid ${B.border}`, paddingTop: 10 }}>

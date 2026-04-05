@@ -78,8 +78,8 @@ export function CoordConverter({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const switchMode=(m)=>{if(m===inputMode)return;if(m==="dms")syncDdToDms();else syncDmsToDd();setInputMode(m);};
   const copyText=(txt,label)=>{try{navigator.clipboard.writeText(txt);setCopied(label);setTimeout(()=>setCopied(""),1500);}catch{}};
 
-  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,outline:"none",fontFamily:B.font};
-  const dmsInp={...inp,width:48,textAlign:"center"};
+  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:16,outline:"none",fontFamily:B.font,boxSizing:"border-box"};
+  const dmsInp={...inp,width:"100%",maxWidth:48,textAlign:"center"};
   const toggleBtn=(active,label)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   const outRow={display:"flex",alignItems:"center",justifyContent:"space-between",padding:"5px 10px",borderRadius:4,background:B.bg,border:`1px solid ${B.border}`,marginBottom:4};
   const copyBtn=(txt,label)=><button onClick={()=>copyText(txt,label)} style={{background:"none",border:"none",cursor:"pointer",fontSize:11,color:copied===label?B.priBr:B.textDim,fontFamily:B.font,padding:"2px 6px"}}>{copied===label?"\u2713":"📋"}</button>;
@@ -95,30 +95,30 @@ export function CoordConverter({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
     </div>
     {inputMode==="dd"?(
       <div style={{display:"flex",gap:8,marginBottom:8,alignItems:"center",flexWrap:"wrap"}}>
-        <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={ddLat} onChange={e=>setDdLat(e.target.value)} style={{...inp,width:120}}/>
-        <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={ddLon} onChange={e=>setDdLon(e.target.value)} style={{...inp,width:120}}/></div>
+        <label style={{fontSize:11,color:B.textMid}}>Lat</label><input value={ddLat} onChange={e=>setDdLat(e.target.value)} inputMode="decimal" style={{...inp,width:"100%",maxWidth:130,flex:1,minWidth:80}}/>
+        <label style={{fontSize:11,color:B.textMid}}>Lon</label><input value={ddLon} onChange={e=>setDdLon(e.target.value)} inputMode="decimal" style={{...inp,width:"100%",maxWidth:130,flex:1,minWidth:80}}/></div>
     ):(
       <div style={{marginBottom:8}}>
         <div style={{display:"flex",gap:4,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
           <label style={{fontSize:10,color:B.textDim,width:24}}>Lat</label>
           <input value={dLatD} onChange={e=>setDLatD(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
           <input value={dLatM} onChange={e=>setDLatM(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
-          <input value={dLatS} onChange={e=>setDLatS(e.target.value)} style={{...dmsInp,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+          <input value={dLatS} onChange={e=>setDLatS(e.target.value)} inputMode="decimal" style={{...dmsInp,maxWidth:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
           <button onClick={()=>setDLatDir(d=>d==="N"?"S":"N")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{dLatDir}</button></div>
         <div style={{display:"flex",gap:4,alignItems:"center",flexWrap:"wrap"}}>
           <label style={{fontSize:10,color:B.textDim,width:24}}>Lon</label>
           <input value={dLonD} onChange={e=>setDLonD(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u00B0"}</span>
           <input value={dLonM} onChange={e=>setDLonM(e.target.value)} style={dmsInp}/><span style={{fontSize:11,color:B.textDim}}>{"\u2032"}</span>
-          <input value={dLonS} onChange={e=>setDLonS(e.target.value)} style={{...dmsInp,width:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
+          <input value={dLonS} onChange={e=>setDLonS(e.target.value)} inputMode="decimal" style={{...dmsInp,maxWidth:60}}/><span style={{fontSize:11,color:B.textDim}}>{"\u2033"}</span>
           <button onClick={()=>setDLonDir(d=>d==="E"?"W":"E")} style={{...inp,width:28,textAlign:"center",cursor:"pointer",fontWeight:700,color:B.priBr}}>{dLonDir}</button></div>
       </div>
     )}
     {/* Height inputs */}
     <div style={{display:"flex",gap:8,marginBottom:12,alignItems:"center",flexWrap:"wrap"}}>
       <label style={{fontSize:11,color:B.textMid}}>h<Tip text={"Ellipsoidal height \u2014 the height above the GRS80 ellipsoid as measured by GNSS. This is NOT the same as elevation above sea level."}/></label>
-      <input value={hElip} onChange={e=>setHElip(e.target.value)} placeholder="Ellipsoidal" style={{...inp,width:100}}/>
+      <input value={hElip} onChange={e=>setHElip(e.target.value)} placeholder="Ellipsoidal" inputMode="decimal" style={{...inp,width:"100%",maxWidth:100,flex:1,minWidth:70}}/>
       <label style={{fontSize:11,color:B.textMid}}>N<Tip text={"Geoid undulation \u2014 the separation between the GRS80 ellipsoid and the geoid at your location. Get this from your GNSS processing software or NRCan\u2019s GPS\u00B7H tool. In most of Canada, N is positive (geoid above ellipsoid)."}/></label>
-      <input value={nGeoid} onChange={e=>setNGeoid(e.target.value)} placeholder="Geoid Und." style={{...inp,width:100}}/>
+      <input value={nGeoid} onChange={e=>setNGeoid(e.target.value)} placeholder="Geoid Und." inputMode="decimal" style={{...inp,width:"100%",maxWidth:100,flex:1,minWidth:70}}/>
       <span style={{fontSize:11,color:B.textMid}}>H<Tip text={"Orthometric height \u2014 height above mean sea level (CGVD2013). Computed as H = h \u2212 N."}/></span>
       <span style={{fontFamily:B.font,fontSize:12,color:!isNaN(orthoH)?B.priBr:B.textDim,fontWeight:600}}>{!isNaN(orthoH)?orthoH.toFixed(3)+" m":"\u2014"}</span>
       <span style={{fontSize:10,color:B.textDim}}>m</span>

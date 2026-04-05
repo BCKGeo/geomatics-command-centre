@@ -60,7 +60,7 @@ export function SurveyTools() {
         <div className="survey-tabs" role="tablist" style={{ display: "flex", gap: 2, flexWrap: "wrap", marginBottom: 12 }}>
           {TABS.map(t => (
             <button key={t.id} role="tab" aria-selected={tab === t.id}
-              onClick={() => setTab(t.id)}
+              onClick={(e) => { setTab(t.id); e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }}
               style={{
                 background: tab === t.id ? B.surface : "transparent",
                 border: tab === t.id ? `2px solid ${B.borderHi}` : "2px solid transparent",

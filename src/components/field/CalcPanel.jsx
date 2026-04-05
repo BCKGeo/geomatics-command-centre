@@ -74,7 +74,7 @@ export function CalcPanel(){
             {Object.entries(distUnits).map(([k,u])=><option key={k} value={k}>{u.name}</option>)}
           </select>
         </div>
-        <div className="calc-results" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4}}>
+        <div className="calc-results" style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(280px, 1fr))",gap:4}}>
           {Object.entries(distUnits).filter(([k])=>k!==unitFrom).map(([k,u])=>{
             const converted=metres/u.toM;
             const display=converted>=1e6||converted<0.001&&converted!==0?converted.toExponential(4):converted<1?converted.toPrecision(6):converted.toLocaleString("en-CA",{maximumFractionDigits:4});
@@ -101,7 +101,7 @@ export function CalcPanel(){
             {Object.entries(speedUnits).map(([k,u])=><option key={k} value={k}>{u.name}</option>)}
           </select>
         </div>
-        <div className="calc-results" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,marginBottom:16}}>
+        <div className="calc-results" style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(280px, 1fr))",gap:4,marginBottom:16}}>
           {Object.entries(speedUnits).filter(([k])=>k!==speedFrom).map(([k,u])=>{
             const converted=ms/u.toMs;
             return(

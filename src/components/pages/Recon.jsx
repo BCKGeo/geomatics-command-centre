@@ -69,20 +69,25 @@ export function Recon() {
       {/* Processing Pipeline */}
       <div style={{ ...cardStyle, marginBottom: 12 }}>
         <h3 style={{ margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: B.text }}>Processing Pipeline</h3>
-        <div className="recon-pipeline" style={{ display: "flex", alignItems: "flex-start", gap: 0 }}>
+        <div className="recon-pipeline" style={{ display: "flex", alignItems: "stretch", gap: 0 }}>
           {PIPELINE.map((p, i) => (
-            <div key={p.step} style={{ display: "flex", alignItems: "flex-start", flex: 1 }}>
-              <div style={{ ...insetStyle, padding: "10px 12px", flex: 1, textAlign: "center" }}>
-                <div style={{ fontSize: 18 }}>{p.icon}</div>
-                <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font, marginTop: 4 }}>{p.step}</div>
-                <div style={{ marginTop: 6 }}>
-                  {p.items.map(item => (
-                    <div key={item} style={{ fontSize: 9, color: B.textDim, lineHeight: 1.6 }}>{item}</div>
-                  ))}
+            <div key={p.step} style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+              <div style={{ display: "flex", alignItems: "flex-start", flex: 1 }}>
+                <div style={{ ...insetStyle, padding: "10px 12px", flex: 1, textAlign: "center" }}>
+                  <div style={{ fontSize: 18 }}>{p.icon}</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font, marginTop: 4 }}>{p.step}</div>
+                  <div style={{ marginTop: 6 }}>
+                    {p.items.map(item => (
+                      <div key={item} style={{ fontSize: 9, color: B.textDim, lineHeight: 1.6 }}>{item}</div>
+                    ))}
+                  </div>
                 </div>
+                {i < PIPELINE.length - 1 && (
+                  <div className="arrow-h" style={{ display: "flex", alignItems: "center", padding: "24px 6px 0", color: B.textDim, fontSize: 16, flexShrink: 0 }}>{"\u2192"}</div>
+                )}
               </div>
               {i < PIPELINE.length - 1 && (
-                <div style={{ display: "flex", alignItems: "center", padding: "24px 6px 0", color: B.textDim, fontSize: 16, flexShrink: 0 }}>{"\u2192"}</div>
+                <div className="arrow-v" style={{ textAlign: "center", color: B.textDim, fontSize: 16, padding: "4px 0" }}>{"\u2193"}</div>
               )}
             </div>
           ))}
@@ -99,7 +104,7 @@ export function Recon() {
       </div>
 
       {/* Reference Row */}
-      <div className="recon-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+      <div className="recon-ref" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 12, marginBottom: 12 }}>
         {/* Sensor Types */}
         <div style={cardStyle}>
           <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Sensor Types</h3>

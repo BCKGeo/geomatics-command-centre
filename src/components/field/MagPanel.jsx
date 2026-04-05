@@ -39,8 +39,8 @@ export function MagPanel({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   }
   const m=calcMagDec(magLat,magLon);
   const da=Math.abs(m.declination),dd=Math.floor(da),dm=Math.round((da-dd)*60),dir=m.declination>0?"E":"W";
-  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,width:100,outline:"none",fontFamily:B.font};
-  const dmsInp={...inp,width:48,textAlign:"center"};
+  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:16,width:"100%",maxWidth:100,outline:"none",fontFamily:B.font,boxSizing:"border-box"};
+  const dmsInp={...inp,maxWidth:48,textAlign:"center"};
   const toggleBtn=(active)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   return(<div>
     <div style={{display:"flex",gap:4,marginBottom:10}}>

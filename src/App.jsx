@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Link, useLocation as useRouterLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { LocationProvider } from "./context/LocationContext.jsx";
@@ -63,6 +63,16 @@ function Layout() {
     return utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: fieldTz });
   };
 
+  const navRef = useRef(null);
+
+  // Auto-center active nav tab on route change
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const el = navRef.current?.querySelector('.nav-active');
+      el?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+  }, [routerLocation.pathname]);
+
   const insetStyle = { background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL };
 
   return (
@@ -72,34 +82,39 @@ function Layout() {
         @keyframes blink-cursor {0%,100%{opacity:1} 50%{opacity:0}}
         @keyframes pulse-ring {0%,100%{box-shadow:0 0 6px currentColor} 50%{box-shadow:0 0 24px currentColor}}
         .scanlines {pointer-events:none;position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(${theme==="dark"?"0,0,0":"100,100,100"},.03) 2px,rgba(${theme==="dark"?"0,0,0":"100,100,100"},.03) 4px);z-index:9999}
-        @media(max-width:768px){.cmd-telemetry{grid-template-columns:1fr !important}}
         .north-arrow-svg {animation:spin-north 12s linear infinite}
         .north-arrow-svg:hover {animation-duration:1.5s}
         .tagline::after {content:'_';animation:blink-cursor .6s step-end infinite;color:${B.priBr}}
-        @media(max-width:768px){.cmd-hero{grid-template-columns:1fr !important}.cmd-split{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.cmd-kp-telem{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.cmd-sw-forecast{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.cmd-ref{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.geo-ref{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.geo-links{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.recon-ref{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.forecast-days{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.calc-results{grid-template-columns:1fr !important}}
-        @media(max-width:480px){.header-inner{flex-direction:column;align-items:flex-start}}
-        @media(max-width:768px){.cmd-stations{grid-template-columns:1fr 1fr !important;}}
-        @media(max-width:480px){.cmd-stations{grid-template-columns:1fr !important;}}
-        @media(max-width:768px){.prov-btns{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;}}
-        @media(max-width:768px){.cmd-telemetry{grid-template-columns:1fr 1fr !important}}
-        @media(max-width:480px){.cmd-telemetry{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.regs-cats{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.codex-grid{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.survey-tabs{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch}}
-        @media(max-width:768px){.geod-hero{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.spatial-tabs button{font-size:10px;padding:4px 8px}}
-        @media(max-width:768px){.recon-pipeline{flex-direction:column !important}}
-        @media(max-width:768px){.fops-grid{grid-template-columns:1fr !important}}
-        @media(max-width:768px){.mission-steps{flex-direction:column !important}}
+
+        /* Scrollable tab bars — shared */
+        .nav-strip::-webkit-scrollbar,.survey-tabs::-webkit-scrollbar,.prov-btns::-webkit-scrollbar,.spatial-tabs::-webkit-scrollbar{display:none}
+        .nav-strip,.survey-tabs,.prov-btns,.spatial-tabs{scrollbar-width:none}
+
+        /* Targeted media queries — behavior changes only */
+        @media(max-width:768px){
+          .cmd-hero{grid-template-columns:1fr !important}
+          .cmd-split{grid-template-columns:1fr !important}
+          .survey-tabs,.prov-btns{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;mask-image:linear-gradient(to right,transparent,black 20px,black calc(100% - 20px),transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 20px,black calc(100% - 20px),transparent)}
+          .survey-tabs>*,.prov-btns>*{scroll-snap-align:center}
+          .nav-strip{overflow-x:auto;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;mask-image:linear-gradient(to right,transparent,black 20px,black calc(100% - 20px),transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 20px,black calc(100% - 20px),transparent)}
+          .nav-strip>*{scroll-snap-align:center}
+          .recon-pipeline{flex-direction:column !important}
+          .recon-pipeline .arrow-h{display:none !important}
+          .recon-pipeline .arrow-v{display:block !important}
+          .mission-steps{flex-direction:column !important}
+          .spatial-tabs button{font-size:10px;padding:4px 8px}
+        }
+        @media(min-width:769px){
+          .recon-pipeline .arrow-v{display:none !important}
+        }
+        @media(max-width:480px){
+          .header-inner{flex-direction:column;align-items:flex-start}
+          .clock-row{flex-wrap:wrap}
+          .footer-wrap{flex-direction:column;align-items:center;text-align:center}
+        }
         @media print{.no-print{display:none !important}}
+
+        /* Component styles */
         .lnk{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
         .lnk:hover{background:${B.surface};border-color:${B.borderHi}}
         .lnk-card{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:transparent;transition:all .12s;border:1px solid transparent;border-radius:5px}
@@ -130,20 +145,20 @@ function Layout() {
               <div style={{ fontSize: 10, color: B.textDim, marginTop: 4, letterSpacing: ".2em", fontFamily: B.font }} className="tagline">{typewriterText}</div>
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+          <div className="clock-row" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
             <button onClick={toggleTheme} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              style={{ background: B.surface, border: `2px solid ${B.borderHi}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, width: 38, height: 38, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 18, padding: 0, color: B.text, transition: "all .15s" }}>
+              style={{ background: B.surface, border: `2px solid ${B.borderHi}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, width: 38, height: 38, minHeight: 38, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 18, padding: 0, color: B.text, transition: "all .15s" }}>
               {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
             </button>
             <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
               <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>ZULU</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: 2, textShadow: `0 0 8px ${B.gold}44` }}>{utc.toISOString().substring(11, 19)}Z</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums", textShadow: `0 0 8px ${B.gold}44` }}>{utc.toISOString().substring(11, 19)}Z</div>
             </div>
             <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
               <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>LOCAL</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: B.text, fontFamily: B.font, letterSpacing: 2 }}>{utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: userTz })}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: B.text, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums" }}>{utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: userTz })}</div>
             </div>
-            <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center", minWidth: 120 }}>
+            <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center", minWidth: 100 }}>
               <select value={fieldTz} onChange={e => setFieldTz(e.target.value)} style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, background: "transparent", border: "none", letterSpacing: 1, cursor: "pointer", textAlign: "center", width: "100%", padding: 0, outline: "none", WebkitAppearance: "none", appearance: "none" }}>
                 <option value="">FIELD TZ</option>
                 <option value="Pacific/Honolulu">HST (UTC-10)</option>
@@ -163,20 +178,21 @@ function Layout() {
                 <option value="Australia/Sydney">AEST (UTC+10)</option>
                 <option value="Pacific/Auckland">NZST (UTC+12)</option>
               </select>
-              <div style={{ fontSize: 16, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: 2 }}>{getFieldTzTime()}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums" }}>{getFieldTzTime()}</div>
             </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <div style={{ display: "flex", gap: 2, marginTop: 10, flexWrap: "wrap" }}>
+        <div ref={navRef} className="nav-strip" style={{ display: "flex", gap: 2, marginTop: 10, flexWrap: "wrap" }}>
           {NAV.map(n => (
             <NavLink key={n.path} to={n.path} end={n.path === "/"}
               className={({ isActive }) => isActive ? "nav-active" : ""}
               style={{
                 background: "transparent",
                 border: "2px solid transparent",
-                padding: "6px 14px",
+                padding: "8px 14px",
+                minHeight: 36,
                 color: B.textDim,
                 fontSize: 11,
                 fontWeight: 500,
@@ -188,6 +204,7 @@ function Layout() {
                 letterSpacing: ".08em",
                 transition: "all .1s",
                 textDecoration: "none",
+                whiteSpace: "nowrap",
               }}>
               <span style={{ fontSize: 12 }}>{n.icon}</span>{n.label}
             </NavLink>
@@ -196,7 +213,7 @@ function Layout() {
       </div>
 
       {/* Main Content */}
-      <div style={{ padding: "14px 20px", maxWidth: 1280, margin: "0 auto" }}>
+      <div style={{ padding: "clamp(10px, 2.5vw, 14px) clamp(10px, 3vw, 20px)", maxWidth: 1600, margin: "0 auto" }}>
         <Suspense fallback={<div style={{ padding: 40, textAlign: "center", color: B.textDim, fontFamily: B.font, fontSize: 12, letterSpacing: 2 }}>LOADING...</div>}>
         <Routes>
           <Route path="/" element={<CommandCentre />} />
@@ -215,12 +232,12 @@ function Layout() {
       </div>
 
       {/* Footer */}
-      <div className="no-print" style={{ borderTop: `2px solid ${B.border}`, padding: "10px 24px", marginTop: 16 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+      <div className="no-print" style={{ borderTop: `2px solid ${B.border}`, padding: "10px clamp(12px, 3vw, 24px)", marginTop: 16, paddingBottom: "calc(10px + env(safe-area-inset-bottom, 0px))" }}>
+        <div className="footer-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
           <span style={{ fontSize: 11, fontWeight: 700, color: B.pri, fontFamily: B.display, letterSpacing: ".1em" }}>BCKGeo</span>
-          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font }}>Weather: Open-Meteo {"\u00B7"} Space Wx: NOAA SWPC {"\u00B7"} Mag Dec: WMM2025 {"\u00B7"} <Link to="/terms" style={{ color: B.pri, textDecoration: "none" }}>Terms of Use</Link></div>
+          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.sans }}>Weather: Open-Meteo {"\u00B7"} Space Wx: NOAA SWPC {"\u00B7"} Mag Dec: WMM2025 {"\u00B7"} <Link to="/terms" style={{ color: B.pri, textDecoration: "none" }}>Terms of Use</Link></div>
         </div>
-        <div className="footer-disclaimer" style={{ fontSize: 9, color: B.textDim, fontFamily: B.font, lineHeight: 1.5, marginTop: 6, textAlign: "center" }}>
+        <div className="footer-disclaimer" style={{ fontSize: 9, color: B.textDim, fontFamily: B.sans, lineHeight: 1.5, marginTop: 6, textAlign: "center" }}>
           Reference and estimation tool only. Not for legal survey, navigation, or regulatory compliance. Verify all data against authoritative sources. No warranty expressed or implied.
         </div>
         <div style={{ height: 3, background: `linear-gradient(90deg,${B.pri},${B.sec},${B.gold},${B.acc},${B.priBr})`, marginTop: 8 }} />

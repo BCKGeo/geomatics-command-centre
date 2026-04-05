@@ -61,7 +61,7 @@ export function Geodesy() {
           <span style={{ fontSize: 14 }}>{"\uD83C\uDF10"}</span>
           <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Active Canadian Reference Frame</h2>
         </div>
-        <div className="geod-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+        <div className="geod-hero" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
           <div style={{ ...insetStyle, padding: "10px 12px", textAlign: "center" }}>
             <div style={{ fontSize: 9, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>DATUM</div>
             <div style={{ fontSize: 14, fontWeight: 800, color: B.priBr, fontFamily: B.display }}>NAD83(CSRS)</div>
@@ -81,7 +81,7 @@ export function Geodesy() {
       </div>
 
       {/* Datum Table + Geoid Models */}
-      <div className="geo-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+      <div className="geo-ref" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 12, marginBottom: 12 }}>
         {/* Datum Table */}
         <div style={cardStyle}>
           <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Datum Reference</h3>
@@ -129,7 +129,7 @@ export function Geodesy() {
       {/* PPP Tips - Categorized */}
       <div style={{ ...cardStyle, marginBottom: 12 }}>
         <h3 style={{ margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: B.text }}>CSRS-PPP Best Practices</h3>
-        <div className="geo-ref" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+        <div className="geo-ref" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
           {Object.entries(PPP_TIPS).map(([category, tips]) => (
             <div key={category}>
               <div style={{ fontSize: 10, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 6 }}>{category.toUpperCase()}</div>
@@ -147,7 +147,7 @@ export function Geodesy() {
       </div>
 
       {/* Link Sections */}
-      <div className="geo-links" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="geo-links" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 12 }}>
         {SECTIONS.filter(s => s.title.includes("NRCan") || s.title.includes("GNSS")).map(s => (
           <LinkCard key={s.title} section={s} />
         ))}

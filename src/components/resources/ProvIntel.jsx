@@ -10,7 +10,7 @@ export function ProvIntel({ initialProv = "bc" }) {
     <div>
       <div className="prov-btns" style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 12 }}>
         {PROVINCES.map(p => (
-          <button key={p.id} onClick={() => setProv(p.id)}
+          <button key={p.id} onClick={(e) => { setProv(p.id); e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }}
             style={{
               padding: "4px 10px", fontSize: 11, fontWeight: prov === p.id ? 700 : 400,
               fontFamily: B.font, color: prov === p.id ? B.bg : B.textMid,

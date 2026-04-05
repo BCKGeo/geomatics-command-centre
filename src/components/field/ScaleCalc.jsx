@@ -66,8 +66,8 @@ export function ScaleCalc({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
 
   const maxZone=effectiveProj==="utm"?60:17;
 
-  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:12,outline:"none",fontFamily:B.font};
-  const dmsInpSc={...inp,width:48,textAlign:"center"};
+  const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:16,outline:"none",fontFamily:B.font,boxSizing:"border-box"};
+  const dmsInpSc={...inp,width:"100%",maxWidth:48,textAlign:"center"};
   const coordToggleBtn=(active)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   const toggleBtn=(m)=>({padding:"4px 10px",fontSize:11,fontWeight:effectiveProj===m?700:400,fontFamily:B.font,color:effectiveProj===m?B.bg:B.textMid,background:effectiveProj===m?B.priBr:"transparent",border:`1px solid ${effectiveProj===m?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   const insetStyle={background:B.inset,border:`2px solid ${B.border}`,borderTopColor:B.bvD,borderLeftColor:B.bvD,borderBottomColor:B.bvL,borderRightColor:B.bvL};
@@ -132,14 +132,14 @@ export function ScaleCalc({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
       <div style={{fontFamily:B.font,fontSize:10,color:B.textDim,letterSpacing:1,marginBottom:6,textTransform:"uppercase"}}>Distance Conversion</div>
       <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:6,flexWrap:"wrap"}}>
         <label style={{fontSize:11,color:B.textMid,width:60}}>Ground</label>
-        <input value={lastEdited==="ground"?groundDist:computedGround} onChange={e=>{setGroundDist(e.target.value);setLastEdited("ground");}} style={{...inp,width:120}} placeholder="0.0000"/>
+        <input value={lastEdited==="ground"?groundDist:computedGround} onChange={e=>{setGroundDist(e.target.value);setLastEdited("ground");}} inputMode="decimal" style={{...inp,width:"100%",maxWidth:120,flex:1,minWidth:70}} placeholder="0.0000"/>
         <span style={{fontSize:11,color:B.textDim}}>m</span>
         <span style={{fontSize:11,color:B.textDim}}>{"\u2192"}</span>
         <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="ground"&&computedGrid?computedGrid+" m":"\u2014"}</span>
       </div>
       <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
         <label style={{fontSize:11,color:B.textMid,width:60}}>Grid</label>
-        <input value={lastEdited==="grid"?gridDist:computedGrid} onChange={e=>{setGridDist(e.target.value);setLastEdited("grid");}} style={{...inp,width:120}} placeholder="0.0000"/>
+        <input value={lastEdited==="grid"?gridDist:computedGrid} onChange={e=>{setGridDist(e.target.value);setLastEdited("grid");}} inputMode="decimal" style={{...inp,width:"100%",maxWidth:120,flex:1,minWidth:70}} placeholder="0.0000"/>
         <span style={{fontSize:11,color:B.textDim}}>m</span>
         <span style={{fontSize:11,color:B.textDim}}>{"\u2192"}</span>
         <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="grid"&&computedGround?computedGround+" m":"\u2014"}</span>
