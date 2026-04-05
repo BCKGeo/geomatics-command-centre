@@ -12,7 +12,6 @@ const SpatialOps = lazy(() => import("./components/pages/SpatialOps.jsx").then(m
 const Recon = lazy(() => import("./components/pages/Recon.jsx").then(m => ({ default: m.Recon })));
 const Provincial = lazy(() => import("./components/pages/Provincial.jsx").then(m => ({ default: m.Provincial })));
 const SurveyTools = lazy(() => import("./components/pages/SurveyTools.jsx").then(m => ({ default: m.SurveyTools })));
-const Regs = lazy(() => import("./components/pages/Regs.jsx").then(m => ({ default: m.Regs })));
 const Codex = lazy(() => import("./components/pages/Codex.jsx").then(m => ({ default: m.Codex })));
 const MissionBrief = lazy(() => import("./components/pages/MissionBrief.jsx").then(m => ({ default: m.MissionBrief })));
 const Terms = lazy(() => import("./components/pages/Terms.jsx").then(m => ({ default: m.Terms })));
@@ -23,9 +22,8 @@ const NAV = [
   { path: "/geodesy", label: "Geodesy", icon: "\uD83C\uDF0D" },
   { path: "/gis", label: "GIS", icon: "\uD83D\uDDFA\uFE0F" },
   { path: "/remote-sensing", label: "Remote Sensing", icon: "\uD83D\uDC41\uFE0F" },
-  { path: "/provincial", label: "Provincial Intel", icon: "\uD83C\uDFDB\uFE0F" },
+  { path: "/jurisdictions", label: "Jurisdictions", icon: "\uD83C\uDFDB\uFE0F" },
   { path: "/survey-tools", label: "Survey Tools", icon: "\uD83D\uDD27" },
-  { path: "/regs", label: "Regs & Standards", icon: "\uD83D\uDCDC" },
   { path: "/codex", label: "Codex", icon: "\uD83D\uDD0E" },
   { path: "/mission-brief", label: "Mission Brief", icon: "\uD83D\uDCDD" },
 ];
@@ -221,9 +219,8 @@ function Layout() {
           <Route path="/geodesy" element={<Geodesy />} />
           <Route path="/gis" element={<SpatialOps />} />
           <Route path="/remote-sensing" element={<Recon />} />
-          <Route path="/provincial" element={<Provincial />} />
+          <Route path="/jurisdictions" element={<Provincial />} />
           <Route path="/survey-tools" element={<SurveyTools />} />
-          <Route path="/regs" element={<Regs />} />
           <Route path="/codex" element={<Codex />} />
           <Route path="/mission-brief" element={<MissionBrief />} />
           <Route path="/terms" element={<Terms />} />

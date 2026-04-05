@@ -74,11 +74,4 @@ export const SECTIONS = [
     {n:"Potree (Point Cloud Viewer)",d:"WebGL-based large point cloud renderer",u:"https://potree.github.io/"},
     {n:"NRCan Air Photo Library",d:"Canada's national collection of aerial photographs",u:"https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/air-photos-library"},
   ]},
-  { title:"Regs & Standards", color:"#3bbffa", icon:"📜", links:[
-    {n:"ASTTBC",d:"Applied Science Technologists and Technicians of BC",u:"https://asttbc.org/"},{n:"ABCLS",d:"Association of British Columbia Land Surveyors",u:"https://www.abcls.ca/"},
-    {n:"ACLS",d:"Association of Canada Lands Surveyors",u:"https://www.acls-aatc.ca/"},{n:"GoGeomatics",d:"Canada's geomatics community and career hub",u:"https://gogeomatics.ca/"},
-    {n:"CIG",d:"Canadian Institute of Geomatics",u:"https://www.cig-acsg.ca/"},{n:"ASPRS",d:"American Society for Photogrammetry and Remote Sensing",u:"https://www.asprs.org/"},
-    {n:"ACEC-BC",d:"Association of Consulting Engineering Companies of BC",u:"https://www.acec-bc.ca/"},{n:"TAC",d:"Transportation Association of Canada",u:"https://www.tac-atc.ca/"},
-    {n:"CSA Group",d:"Canadian standards development organization",u:"https://www.csagroup.org/"},
-  ]},
 ];
