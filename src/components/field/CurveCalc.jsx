@@ -32,7 +32,7 @@ export function CurveCalc() {
 
   const copyText = (txt, label) => { try { navigator.clipboard.writeText(txt); setCopied(label); setTimeout(() => setCopied(""), 1500); } catch {} };
 
-  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 12, outline: "none", fontFamily: B.font };
+  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 16, outline: "none", fontFamily: B.font, boxSizing: "border-box" };
   const outRow = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px 10px", borderRadius: 4, background: B.bg, border: `1px solid ${B.border}`, marginBottom: 4 };
   const toggleBtn = (active) => ({ padding: "4px 10px", fontSize: 11, fontWeight: active ? 700 : 400, fontFamily: B.font, color: active ? B.bg : B.textMid, background: active ? B.priBr : "transparent", border: `1px solid ${active ? B.priBr : B.border}`, borderRadius: 3, cursor: "pointer" });
   const copyBtn = (txt, label) => <button onClick={() => copyText(txt, label)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 11, color: copied === label ? B.priBr : B.textDim, fontFamily: B.font, padding: "2px 6px" }}>{copied === label ? "\u2713" : "\uD83D\uDCCB"}</button>;
@@ -40,7 +40,7 @@ export function CurveCalc() {
   const inputField = (label, value, setter, unit) => (
     <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
       <label style={{ fontSize: 11, color: B.textMid, width: 70 }}>{label}</label>
-      <input value={value} onChange={e => setter(e.target.value)} style={{ ...inp, width: 110 }} placeholder="enter value" />
+      <input value={value} onChange={e => setter(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 110, flex: 1, minWidth: 70 }} placeholder="enter value" />
       <span style={{ fontSize: 10, color: B.textDim }}>{unit}</span>
     </div>
   );

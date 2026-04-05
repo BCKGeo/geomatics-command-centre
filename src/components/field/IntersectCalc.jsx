@@ -91,7 +91,7 @@ export function IntersectCalc() {
 
   const copyText = (txt, label) => { try { navigator.clipboard.writeText(txt); setCopied(label); setTimeout(() => setCopied(""), 1500); } catch {} };
 
-  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 12, outline: "none", fontFamily: B.font };
+  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 16, outline: "none", fontFamily: B.font, boxSizing: "border-box" };
   const outRow = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px 10px", borderRadius: 4, background: B.bg, border: `1px solid ${B.border}`, marginBottom: 4 };
   const toggleBtn = (active) => ({ padding: "4px 10px", fontSize: 11, fontWeight: active ? 700 : 400, fontFamily: B.font, color: active ? B.bg : B.textMid, background: active ? B.priBr : "transparent", border: `1px solid ${active ? B.priBr : B.border}`, borderRadius: 3, cursor: "pointer" });
   const copyBtn = (txt, label) => <button onClick={() => copyText(txt, label)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 11, color: copied === label ? B.priBr : B.textDim, fontFamily: B.font, padding: "2px 6px" }}>{copied === label ? "\u2713" : "\uD83D\uDCCB"}</button>;
@@ -174,22 +174,22 @@ export function IntersectCalc() {
         <div>
           <div style={{ fontSize: 10, color: B.textDim, marginBottom: 3, fontWeight: 600 }}>Point A</div>
           <div style={{ display: "flex", gap: 8, marginBottom: 6, alignItems: "center", flexWrap: "wrap" }}>
-            <label style={{ fontSize: 11, color: B.textMid }}>Lat</label><input value={aLat} onChange={e => setALat(e.target.value)} style={{ ...inp, width: 110 }} />
-            <label style={{ fontSize: 11, color: B.textMid }}>Lon</label><input value={aLon} onChange={e => setALon(e.target.value)} style={{ ...inp, width: 110 }} />
+            <label style={{ fontSize: 11, color: B.textMid }}>Lat</label><input value={aLat} onChange={e => setALat(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 110, flex: 1, minWidth: 70 }} />
+            <label style={{ fontSize: 11, color: B.textMid }}>Lon</label><input value={aLon} onChange={e => setALon(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 110, flex: 1, minWidth: 70 }} />
           </div>
           <div style={{ display: "flex", gap: 8, marginBottom: 10, alignItems: "center", flexWrap: "wrap" }}>
             <label style={{ fontSize: 11, color: B.textMid }}>{labelA}</label>
-            <input value={valA} onChange={e => setValA(e.target.value)} style={{ ...inp, width: 100 }} />
+            <input value={valA} onChange={e => setValA(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 100, flex: 1, minWidth: 60 }} />
           </div>
 
           <div style={{ fontSize: 10, color: B.textDim, marginBottom: 3, fontWeight: 600 }}>Point B</div>
           <div style={{ display: "flex", gap: 8, marginBottom: 6, alignItems: "center", flexWrap: "wrap" }}>
-            <label style={{ fontSize: 11, color: B.textMid }}>Lat</label><input value={bLat} onChange={e => setBLat(e.target.value)} style={{ ...inp, width: 110 }} />
-            <label style={{ fontSize: 11, color: B.textMid }}>Lon</label><input value={bLon} onChange={e => setBLon(e.target.value)} style={{ ...inp, width: 110 }} />
+            <label style={{ fontSize: 11, color: B.textMid }}>Lat</label><input value={bLat} onChange={e => setBLat(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 110, flex: 1, minWidth: 70 }} />
+            <label style={{ fontSize: 11, color: B.textMid }}>Lon</label><input value={bLon} onChange={e => setBLon(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 110, flex: 1, minWidth: 70 }} />
           </div>
           <div style={{ display: "flex", gap: 8, marginBottom: 10, alignItems: "center", flexWrap: "wrap" }}>
             <label style={{ fontSize: 11, color: B.textMid }}>{labelB}</label>
-            <input value={valB} onChange={e => setValB(e.target.value)} style={{ ...inp, width: 100 }} />
+            <input value={valB} onChange={e => setValB(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%", maxWidth: 100, flex: 1, minWidth: 60 }} />
           </div>
 
           {/* Results */}

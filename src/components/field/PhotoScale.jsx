@@ -46,7 +46,7 @@ export function PhotoScale() {
 
   const copyText = (txt, label) => { try { navigator.clipboard.writeText(txt); setCopied(label); setTimeout(() => setCopied(""), 1500); } catch {} };
 
-  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 12, outline: "none", fontFamily: B.font };
+  const inp = { background: B.bg, border: `1px solid ${B.borderHi}`, borderRadius: 4, padding: "4px 8px", color: B.text, fontSize: 16, outline: "none", fontFamily: B.font, boxSizing: "border-box" };
   const outRow = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px 10px", borderRadius: 4, background: B.bg, border: `1px solid ${B.border}`, marginBottom: 4 };
   const copyBtn = (txt, label) => <button onClick={() => copyText(txt, label)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 11, color: copied === label ? B.priBr : B.textDim, fontFamily: B.font, padding: "2px 6px" }}>{copied === label ? "\u2713" : "\uD83D\uDCCB"}</button>;
 
@@ -64,30 +64,30 @@ export function PhotoScale() {
       </div>
 
       {/* Camera inputs */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 12, maxWidth: 420 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))", gap: 8, marginBottom: 12 }}>
         <div>
           <label style={{ fontSize: 10, color: B.textDim, display: "block", marginBottom: 2 }}>Focal Length (mm)</label>
-          <input value={fl} onChange={e => setFL(e.target.value)} style={{ ...inp, width: "100%" }} />
+          <input value={fl} onChange={e => setFL(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%" }} />
         </div>
         <div>
           <label style={{ fontSize: 10, color: B.textDim, display: "block", marginBottom: 2 }}>Sensor W (mm)</label>
-          <input value={sW} onChange={e => setSW(e.target.value)} style={{ ...inp, width: "100%" }} />
+          <input value={sW} onChange={e => setSW(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%" }} />
         </div>
         <div>
           <label style={{ fontSize: 10, color: B.textDim, display: "block", marginBottom: 2 }}>Sensor H (mm)</label>
-          <input value={sH} onChange={e => setSH(e.target.value)} style={{ ...inp, width: "100%" }} />
+          <input value={sH} onChange={e => setSH(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%" }} />
         </div>
         <div>
           <label style={{ fontSize: 10, color: B.textDim, display: "block", marginBottom: 2 }}>Image W (px)</label>
-          <input value={iW} onChange={e => setIW(e.target.value)} style={{ ...inp, width: "100%" }} />
+          <input value={iW} onChange={e => setIW(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%" }} />
         </div>
         <div>
           <label style={{ fontSize: 10, color: B.textDim, display: "block", marginBottom: 2 }}>Image H (px)</label>
-          <input value={iH} onChange={e => setIH(e.target.value)} style={{ ...inp, width: "100%" }} />
+          <input value={iH} onChange={e => setIH(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%" }} />
         </div>
         <div>
           <label style={{ fontSize: 10, color: B.textDim, display: "block", marginBottom: 2 }}>Flying Height AGL (m)</label>
-          <input value={alt} onChange={e => setAlt(e.target.value)} style={{ ...inp, width: "100%" }} />
+          <input value={alt} onChange={e => setAlt(e.target.value)} inputMode="decimal" style={{ ...inp, width: "100%" }} />
         </div>
       </div>
 
