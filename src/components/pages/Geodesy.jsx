@@ -18,6 +18,31 @@ const GEOID_MODELS = [
   { name: "HT2_2010v70", use: "CGVD28 \u2194 CGVD2013", note: "Legacy height conversion only" },
 ];
 
+const RTK_PROVIDERS = [
+  { name: "Cansel SmartNet", coverage: "ON, QC, BC (urban), AB, MB, SK, NB, NS", constellations: "GPS, GLONASS, Galileo, BeiDou", correction: "VRS, iMAX, MAC", cost: "Subscription" },
+  { name: "Leica SmartNet", coverage: "ON, QC (southern), BC (lower mainland)", constellations: "GPS, GLONASS, Galileo, BeiDou", correction: "VRS, iMAX, Nearest", cost: "Subscription" },
+  { name: "Trimble VRS Now", coverage: "ON (southern), QC (southern)", constellations: "GPS, GLONASS, Galileo", correction: "VRS, CMRx", cost: "Subscription" },
+  { name: "BCPOS (BC Gov)", coverage: "BC province-wide", constellations: "GPS, GLONASS", correction: "Nearest, iMAX", cost: "Free (gov)" },
+  { name: "AB CORS (AB Gov)", coverage: "Alberta province-wide", constellations: "GPS, GLONASS", correction: "Single-base", cost: "Free (gov)" },
+];
+
+const OBS_TIME_GUIDE = [
+  { target: "1-2 cm", method: "Static PPP", minTime: "2+ hours", notes: "Dual-frequency RINEX. CSRS-PPP v5 with PPP-AR." },
+  { target: "2-3 cm", method: "Static PPP", minTime: "1 hour", notes: "Convergence depends on satellite geometry and ionosphere." },
+  { target: "2-3 cm", method: "RTK / NRTK", minTime: "5-10 sec", notes: "After initialization. Re-occupy for redundancy." },
+  { target: "5 cm", method: "Fast-static PPP", minTime: "20 min", notes: "Acceptable for many engineering applications." },
+  { target: "5 cm", method: "PPK", minTime: "30 sec/point", notes: "Post-processed kinematic. Needs base data." },
+  { target: "0.5-1 m", method: "Single-frequency PPP", minTime: "30+ min", notes: "L1-only receivers. Not for control surveys." },
+  { target: "1-3 m", method: "Autonomous GNSS", minTime: "Instant", notes: "No corrections. Handheld/phone GPS quality." },
+];
+
+const GNSS_STATUS = [
+  { constellation: "GPS (US)", status_url: "https://www.navcen.uscg.gov/gps-constellation", sats: "31 operational", signal: "L1 C/A, L2C, L5" },
+  { constellation: "GLONASS (Russia)", status_url: "https://www.glonass-iac.ru/en/sostavOG/", sats: "24 operational", signal: "L1OF, L2OF, L3OC" },
+  { constellation: "Galileo (EU)", status_url: "https://www.gsc-europa.eu/system-service-status/constellation-information", sats: "28 operational", signal: "E1, E5a, E5b, E6" },
+  { constellation: "BeiDou (China)", status_url: "https://www.csno-tarc.cn/en/system/constellation", sats: "45 operational", signal: "B1I, B1C, B2a, B3I" },
+];
+
 const PPP_TIPS = {
   "Data Preparation": [
     "Submit dual-frequency RINEX for best results",
@@ -142,6 +167,55 @@ export function Geodesy() {
                 ))}
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* RTK Network Providers */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>RTK Network Providers (Canada)</h3>
+        <div style={{ display: "grid", gap: 4 }}>
+          {RTK_PROVIDERS.map(p => (
+            <div key={p.name} style={{ ...insetStyle, padding: "8px 10px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{p.name}</span>
+                <span style={{ fontSize: 9, color: B.gold, fontWeight: 600 }}>{p.cost}</span>
+              </div>
+              <div style={{ fontSize: 10, color: B.textMid }}>{p.coverage}</div>
+              <div style={{ fontSize: 9, color: B.textDim, marginTop: 2 }}>{p.constellations} | {p.correction}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Observation Time Guide */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Observation Time vs Accuracy</h3>
+        <div style={{ display: "grid", gap: 3 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "65px 1fr 80px 1fr", gap: 8, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: B.textDim }}>
+            <div>Target</div><div>Method</div><div>Min Time</div><div>Notes</div>
+          </div>
+          {OBS_TIME_GUIDE.map((o, i) => (
+            <div key={i} style={{ ...insetStyle, padding: "5px 10px", display: "grid", gridTemplateColumns: "65px 1fr 80px 1fr", gap: 8, alignItems: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{o.target}</div>
+              <div style={{ fontSize: 10, color: B.text }}>{o.method}</div>
+              <div style={{ fontSize: 10, fontWeight: 600, color: B.accent, fontFamily: B.font }}>{o.minTime}</div>
+              <div style={{ fontSize: 9, color: B.textDim }}>{o.notes}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* GNSS Constellation Status */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>GNSS Constellation Status</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 4 }}>
+          {GNSS_STATUS.map(g => (
+            <a key={g.constellation} href={g.status_url} target="_blank" rel="noopener noreferrer" style={{ ...insetStyle, padding: "8px 10px", textDecoration: "none", display: "block" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{g.constellation}</div>
+              <div style={{ fontSize: 10, color: B.textMid }}>{g.sats}</div>
+              <div style={{ fontSize: 9, color: B.textDim, marginTop: 2 }}>{g.signal}</div>
+            </a>
           ))}
         </div>
       </div>

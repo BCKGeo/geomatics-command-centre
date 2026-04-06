@@ -9,14 +9,14 @@ export function MissionBrief() {
   const itemDesc = { color: B.textMid };
 
   const tabs = [
-    { label: "Command Centre", desc: "Real-time weather, space weather, Kp index, satellite tracking." },
-    { label: "Flight Ops", desc: "Transport Canada RPAS regulations, NOTAMs, airspace tools." },
-    { label: "Geodesy", desc: "NRCan CSRS-PPP, datum references, GNSS planning." },
-    { label: "GIS", desc: "CRS reference, format guides, web map tools." },
-    { label: "Remote Sensing", desc: "Sensor types, point cloud formats, processing pipeline." },
-    { label: "Jurisdictions", desc: "Professional bodies, data portals, and legislation for all Canadian jurisdictions." },
-    { label: "Survey Tools", desc: "Coordinate conversion, inverse/forward, scale factors, COGO utilities." },
-    { label: "Codex", desc: "116 domain-specific terms organized by discipline." },
+    { label: "Command Centre", desc: "Real-time weather, space weather, Kp index, GNSS conditions traffic light, satellite tracking." },
+    { label: "Flight Ops", desc: "2025 Canadian RPAS framework: operation categories, pilot certs, pre-flight checklist, weather minimums, SFOC decision helper." },
+    { label: "Geodesy", desc: "NRCan CSRS-PPP, datum references, RTK network providers, observation time guide, GNSS constellation status." },
+    { label: "GIS", desc: "CRS reference (13 projections), UTM zone map, GDAL quick ref, spatial analysis operations, format guides." },
+    { label: "Remote Sensing", desc: "Overlap guides, spectral indices, accuracy specs, processing software comparison, LAS classification, point cloud formats." },
+    { label: "Jurisdictions", desc: "Provincial intel for all 13 jurisdictions plus federal, and an interactive municipal map with 25 Canadian cities." },
+    { label: "Survey Tools", desc: "12 calculators: coordinates, inverse, forward, scale, area, intersections, curves, photo scale, mag dec, units, traverse closure, levelling." },
+    { label: "Codex", desc: "159 domain-specific terms across 10 disciplines." },
     { label: "Mission Brief", desc: "You are here." },
   ];
 

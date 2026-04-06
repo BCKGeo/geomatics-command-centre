@@ -10,6 +10,13 @@ const CRS_CHEAT = [
   { epsg: "3857", name: "WGS84 / Pseudo-Mercator", use: "Web tiles (Google, OSM)", type: "proj" },
   { epsg: "3978", name: "NAD83 / Canada Atlas LCC", use: "National-scale mapping", type: "proj" },
   { epsg: "3979", name: "NAD83(CSRS) / Canada Atlas LCC", use: "National-scale (CSRS)", type: "proj" },
+  { epsg: "2955", name: "NAD83(CSRS) / UTM 11N", use: "Alberta, eastern BC", type: "proj" },
+  { epsg: "2956", name: "NAD83(CSRS) / UTM 13N", use: "Saskatchewan, Manitoba", type: "proj" },
+  { epsg: "2958", name: "NAD83(CSRS) / UTM 17N", use: "Ontario (southern)", type: "proj" },
+  { epsg: "2960", name: "NAD83(CSRS) / UTM 19N", use: "Quebec, New Brunswick", type: "proj" },
+  { epsg: "2953", name: "NAD83(CSRS) / NB Stereo", use: "New Brunswick provincial", type: "proj" },
+  { epsg: "2952", name: "NAD83(CSRS) / PEI Stereo", use: "Prince Edward Island", type: "proj" },
+  { epsg: "32610", name: "WGS84 / UTM 10N", use: "BC coast, Vancouver", type: "proj" },
 ];
 
 const FORMAT_REF = [
@@ -23,11 +30,69 @@ const FORMAT_REF = [
   { fmt: "LAS/LAZ", ext: ".las/.laz", note: "Point cloud, LAZ = compressed", when: "LiDAR data exchange" },
 ];
 
+const UTM_ZONES = [
+  { zone: 7, cm: "-141\u00b0", provinces: "YT (west)" },
+  { zone: 8, cm: "-135\u00b0", provinces: "YT, BC (northwest)" },
+  { zone: 9, cm: "-129\u00b0", provinces: "BC (north coast), YT" },
+  { zone: 10, cm: "-123\u00b0", provinces: "BC (coast, Vancouver, Prince George)" },
+  { zone: 11, cm: "-117\u00b0", provinces: "BC (east), AB (west)" },
+  { zone: 12, cm: "-111\u00b0", provinces: "AB (east), SK (west), NT" },
+  { zone: 13, cm: "-105\u00b0", provinces: "SK, MB (west), NT, NU" },
+  { zone: 14, cm: "-99\u00b0", provinces: "MB, NU" },
+  { zone: 15, cm: "-93\u00b0", provinces: "MB (east), ON (west), NU" },
+  { zone: 16, cm: "-87\u00b0", provinces: "ON (Thunder Bay)" },
+  { zone: 17, cm: "-81\u00b0", provinces: "ON (south, Toronto, Ottawa)" },
+  { zone: 18, cm: "-75\u00b0", provinces: "ON (east), QC (west, Montreal)" },
+  { zone: 19, cm: "-69\u00b0", provinces: "QC (east, Quebec City), NB" },
+  { zone: 20, cm: "-63\u00b0", provinces: "NB, NS, PE" },
+  { zone: 21, cm: "-57\u00b0", provinces: "NS (east), NL (Labrador)" },
+  { zone: 22, cm: "-51\u00b0", provinces: "NL (island)" },
+];
+
+const GDAL_CMDS = [
+  { cmd: "ogr2ogr -f GPKG out.gpkg in.shp", desc: "Shapefile to GeoPackage" },
+  { cmd: "ogr2ogr -f GeoJSON out.geojson in.gpkg", desc: "GeoPackage to GeoJSON" },
+  { cmd: "ogr2ogr -t_srs EPSG:3005 out.gpkg in.gpkg", desc: "Reproject to BC Albers" },
+  { cmd: "ogr2ogr -f GPKG out.gpkg in.gdb", desc: "File GDB to GeoPackage" },
+  { cmd: "ogr2ogr -clipdst clip.gpkg in.gpkg out.gpkg", desc: "Clip by polygon" },
+  { cmd: "ogrinfo -al -so in.gpkg", desc: "List layers + schema (summary)" },
+  { cmd: "gdalwarp -t_srs EPSG:3005 in.tif out.tif", desc: "Reproject raster" },
+  { cmd: "gdal_translate -of COG in.tif out.tif", desc: "Convert to Cloud-Optimized GeoTIFF" },
+  { cmd: "gdalinfo in.tif", desc: "Raster metadata (CRS, extent, bands)" },
+  { cmd: "gdal_merge.py -o out.tif in1.tif in2.tif", desc: "Merge raster tiles" },
+  { cmd: "gdaltindex index.gpkg *.tif", desc: "Build raster tile index" },
+];
+
+const ANALYSIS_OPS = [
+  { op: "Buffer", desc: "Create polygon at fixed distance around feature", use: "Setbacks, proximity zones, road corridors", tool: "ST_Buffer / QGIS Buffer" },
+  { op: "Clip", desc: "Cut features to boundary of another layer", use: "Extract data within study area", tool: "ogr2ogr -clipdst / QGIS Clip" },
+  { op: "Intersect", desc: "Output features where two layers overlap", use: "Find parcels within flood zone", tool: "ST_Intersection / QGIS Intersection" },
+  { op: "Union", desc: "Combine all features from both layers", use: "Merge administrative boundaries", tool: "ST_Union / QGIS Union" },
+  { op: "Dissolve", desc: "Merge features sharing an attribute value", use: "Aggregate parcels by owner", tool: "ST_Union GROUP BY / QGIS Dissolve" },
+  { op: "Difference", desc: "Features in layer A not in layer B", use: "Exclude protected areas from analysis", tool: "ST_Difference / QGIS Difference" },
+  { op: "Spatial Join", desc: "Transfer attributes based on location", use: "Assign zone to each point", tool: "ST_Join / QGIS Join by Location" },
+  { op: "Voronoi", desc: "Divide area into nearest-point regions", use: "Service area assignment", tool: "ST_VoronoiPolygons / QGIS Voronoi" },
+];
+
+const TABS = [
+  ["crs", "CRS Reference"],
+  ["fmt", "Format Guide"],
+  ["utm", "UTM Zones"],
+  ["gdal", "GDAL Quick Ref"],
+  ["analysis", "Analysis Ops"],
+  ["links", "Resources"],
+];
+
 export function SpatialOps() {
   const { B } = useTheme();
   const [tab, setTab] = useState("crs");
+  const [copied, setCopied] = useState(null);
   const cardStyle = { background: `linear-gradient(135deg,${B.surface},${B.surfaceHi})`, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, borderRadius: 0, padding: 16 };
   const insetStyle = { background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL };
+
+  const copyCmd = (cmd, i) => {
+    navigator.clipboard.writeText(cmd).then(() => { setCopied(i); setTimeout(() => setCopied(null), 1500); });
+  };
 
   return (
     <div>
@@ -40,9 +105,9 @@ export function SpatialOps() {
       </div>
 
       {/* Tab Buttons */}
-      <div className="spatial-tabs" style={{ display: "flex", gap: 4, marginBottom: 12 }}>
-        {[["crs", "CRS Reference"], ["fmt", "Format Guide"]].map(([k, label]) => (
-          <button key={k} onClick={(e) => { setTab(k); e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }} style={{ background: tab === k ? B.pri : "transparent", color: tab === k ? B.bg : B.textMid, border: `1px solid ${tab === k ? B.pri : B.border}`, padding: "6px 14px", fontSize: 11, fontFamily: B.font, cursor: "pointer", fontWeight: tab === k ? 700 : 400, letterSpacing: ".04em", whiteSpace: "nowrap" }}>{label}</button>
+      <div className="spatial-tabs" style={{ display: "flex", gap: 4, marginBottom: 12, overflowX: "auto" }}>
+        {TABS.map(([k, label]) => (
+          <button key={k} onClick={(e) => { setTab(k); e.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }); }} style={{ background: tab === k ? B.pri : "transparent", color: tab === k ? B.bg : B.textMid, border: `1px solid ${tab === k ? B.pri : B.border}`, padding: "6px 14px", fontSize: 11, fontFamily: B.font, cursor: "pointer", fontWeight: tab === k ? 700 : 400, letterSpacing: ".04em", whiteSpace: "nowrap" }}>{label}</button>
         ))}
       </div>
 
@@ -51,10 +116,7 @@ export function SpatialOps() {
         <div style={cardStyle}>
           <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Common CRS Codes</h3>
           <div style={{ fontSize: 10, color: B.textDim, marginBottom: 10 }}>
-            For UTM zone lookup by province, use{" "}
-            <a href="https://epsg.io" target="_blank" rel="noopener noreferrer" style={{ color: B.pri, textDecoration: "underline" }}>epsg.io</a>
-            {" "}or{" "}
-            <a href="https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/trx.php" target="_blank" rel="noopener noreferrer" style={{ color: B.pri, textDecoration: "underline" }}>NRCan TRX</a>.
+            Geographic CRS in <span style={{ color: B.gold, fontWeight: 600 }}>gold</span>, projected in <span style={{ color: B.priBr, fontWeight: 600 }}>blue</span>. See UTM Zones tab for province lookup.
           </div>
           <div style={{ display: "grid", gap: 3 }}>
             {CRS_CHEAT.map(c => (
@@ -95,12 +157,81 @@ export function SpatialOps() {
         </div>
       )}
 
-      {/* Links */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12, marginTop: 12 }}>
-        {SECTIONS.filter(s => s.title === "GIS").map(s => (
-          <LinkCard key={s.title} section={s} />
-        ))}
-      </div>
+      {/* UTM Zones Tab */}
+      {tab === "utm" && (
+        <div style={cardStyle}>
+          <h3 style={{ margin: "0 0 4px", fontSize: 13, fontWeight: 700, color: B.text }}>Canadian UTM Zones</h3>
+          <div style={{ fontSize: 10, color: B.textDim, marginBottom: 10 }}>
+            NAD83(CSRS) EPSG codes: 269XX (NAD83) or 326XX (WGS84), where XX = zone number.
+          </div>
+          <div style={{ display: "grid", gap: 2 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "50px 60px 1fr", gap: 8, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: B.textDim }}>
+              <div>Zone</div><div>CM</div><div>Provinces / Territories</div>
+            </div>
+            {UTM_ZONES.map(z => (
+              <div key={z.zone} style={{ ...insetStyle, padding: "5px 10px", display: "grid", gridTemplateColumns: "50px 60px 1fr", gap: 8, alignItems: "center" }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{z.zone}</div>
+                <div style={{ fontSize: 10, color: B.accent, fontFamily: B.font }}>{z.cm}</div>
+                <div style={{ fontSize: 10, color: B.textMid }}>{z.provinces}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* GDAL Quick Ref Tab */}
+      {tab === "gdal" && (
+        <div style={cardStyle}>
+          <h3 style={{ margin: "0 0 4px", fontSize: 13, fontWeight: 700, color: B.text }}>GDAL/OGR Quick Reference</h3>
+          <div style={{ fontSize: 10, color: B.textDim, marginBottom: 10 }}>
+            Click any command to copy. Requires <a href="https://gdal.org/" target="_blank" rel="noopener noreferrer" style={{ color: B.pri, textDecoration: "underline" }}>GDAL</a> installed.
+          </div>
+          <div style={{ display: "grid", gap: 3 }}>
+            {GDAL_CMDS.map((g, i) => (
+              <div key={i} onClick={() => copyCmd(g.cmd, i)} style={{ ...insetStyle, padding: "8px 10px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 11, fontFamily: "monospace", color: B.priBr, wordBreak: "break-all" }}>{g.cmd}</div>
+                  <div style={{ fontSize: 10, color: B.textDim, marginTop: 2 }}>{g.desc}</div>
+                </div>
+                <div style={{ fontSize: 9, color: copied === i ? "#22c55e" : B.textDim, fontFamily: B.font, flexShrink: 0, width: 40, textAlign: "right" }}>
+                  {copied === i ? "Copied" : "Copy"}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Analysis Ops Tab */}
+      {tab === "analysis" && (
+        <div style={cardStyle}>
+          <h3 style={{ margin: "0 0 4px", fontSize: 13, fontWeight: 700, color: B.text }}>Common Spatial Analysis Operations</h3>
+          <div style={{ fontSize: 10, color: B.textDim, marginBottom: 10 }}>
+            Standard vector geoprocessing operations. PostGIS (SQL) and QGIS equivalents shown.
+          </div>
+          <div style={{ display: "grid", gap: 4 }}>
+            {ANALYSIS_OPS.map(a => (
+              <div key={a.op} style={{ ...insetStyle, padding: "8px 12px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{a.op}</div>
+                  <div style={{ fontSize: 9, color: B.textDim, fontFamily: "monospace" }}>{a.tool}</div>
+                </div>
+                <div style={{ fontSize: 10, color: B.textMid }}>{a.desc}</div>
+                <div style={{ fontSize: 9, color: B.gold, marginTop: 2 }}>{a.use}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Resources Tab */}
+      {tab === "links" && (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
+          {SECTIONS.filter(s => s.title === "GIS").map(s => (
+            <LinkCard key={s.title} section={s} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

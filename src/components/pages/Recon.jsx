@@ -33,6 +33,43 @@ const PIPELINE = [
   { step: "Delivery", icon: "\uD83D\uDCE6", items: ["Format conversion", "CRS validation", "Metadata", "Archive"] },
 ];
 
+const OVERLAP_GUIDE = [
+  { deliverable: "Orthophoto / Mosaic", forward: "75%", side: "65%", notes: "Standard mapping. Increase in terrain with large elevation changes." },
+  { deliverable: "3D Model / Mesh", forward: "80%", side: "70%", notes: "Higher overlap for SfM reconstruction quality." },
+  { deliverable: "Corridor (road/pipeline)", forward: "80%", side: "60%", notes: "Cross-track strips. Add oblique passes for steep terrain." },
+  { deliverable: "Stockpile Volume", forward: "80%", side: "75%", notes: "High overlap to resolve steep slopes and shadowed areas." },
+  { deliverable: "Facade / Vertical", forward: "80%", side: "80%", notes: "Add oblique imagery at 45 deg for building faces." },
+  { deliverable: "Agriculture / NDVI", forward: "75%", side: "65%", notes: "Standard, but fly within 2 hrs of solar noon for consistent lighting." },
+];
+
+const SPECTRAL_INDICES = [
+  { index: "NDVI", formula: "(NIR - Red) / (NIR + Red)", use: "Vegetation health, biomass estimation", range: "-1 to +1 (>0.3 healthy)" },
+  { index: "NDRE", formula: "(NIR - RedEdge) / (NIR + RedEdge)", use: "Crop stress, chlorophyll content (better than NDVI for dense canopy)", range: "-1 to +1" },
+  { index: "NDWI", formula: "(Green - NIR) / (Green + NIR)", use: "Water body delineation, moisture content", range: "-1 to +1 (>0 water)" },
+  { index: "SAVI", formula: "((NIR - Red) / (NIR + Red + L)) * (1 + L)", use: "Vegetation in sparse canopy (L=0.5 typical)", range: "-1 to +1" },
+  { index: "EVI", formula: "2.5 * (NIR - Red) / (NIR + 6*Red - 7.5*Blue + 1)", use: "Enhanced vegetation, reduces atmospheric effects", range: "-1 to +1" },
+];
+
+const ACCURACY_SPECS = [
+  { method: "RTK Drone (direct georef)", hz: "2-3 cm", vt: "3-5 cm", notes: "No GCPs needed. PPK equivalent accuracy." },
+  { method: "PPK Drone (post-processed)", hz: "2-3 cm", vt: "3-5 cm", notes: "Process base+rover GNSS after flight." },
+  { method: "GCP-Only Drone", hz: "3-5 cm", vt: "5-10 cm", notes: "Requires 5+ well-distributed GCPs." },
+  { method: "No GCPs, no RTK/PPK", hz: "1-3 m", vt: "1-5 m", notes: "On-board GPS only. Not for surveying." },
+  { method: "Aerial LiDAR (airborne)", hz: "5-15 cm", vt: "5-10 cm", notes: "Depends on flying height, IMU quality." },
+  { method: "Terrestrial Laser Scan", hz: "1-3 mm", vt: "1-3 mm", notes: "At 10 m range. Degrades with distance." },
+  { method: "Mobile LiDAR (MLS)", hz: "1-3 cm", vt: "1-3 cm", notes: "Vehicle/backpack-mounted. Needs GNSS+IMU." },
+  { method: "Satellite Optical (VHR)", hz: "0.3-2 m", vt: "1-5 m", notes: "WorldView, Pleiades. CE90/LE90." },
+];
+
+const PROCESSING_SOFTWARE = [
+  { name: "Pix4Dmapper", type: "Commercial", strengths: "Industry standard, excellent reports, agriculture tools", formats: "LAS, LAZ, GeoTIFF, OBJ", cost: "$$$$" },
+  { name: "Agisoft Metashape", type: "Commercial", strengths: "Flexible, Python API, strong dense matching", formats: "LAS, LAZ, GeoTIFF, OBJ, PLY", cost: "$$$" },
+  { name: "DroneDeploy", type: "SaaS", strengths: "Cloud processing, easy UI, fleet management", formats: "GeoTIFF, OBJ, LAS", cost: "$$$/mo" },
+  { name: "OpenDroneMap", type: "Open Source", strengths: "Free, self-hosted, WebODM GUI, active community", formats: "LAS, GeoTIFF, OBJ, GeoPackage", cost: "Free" },
+  { name: "3DF Zephyr", type: "Commercial", strengths: "Strong mesh/texture, laser scan alignment", formats: "LAS, PLY, OBJ, E57", cost: "$$$" },
+  { name: "RealityCapture", type: "Commercial", strengths: "Fastest processing, laser+photo fusion", formats: "LAS, OBJ, PLY, XYZ", cost: "$$$$" },
+];
+
 const LAS_CODES = [
   { code: 1, label: "Unclassified" },
   { code: 2, label: "Ground" },
@@ -154,11 +191,87 @@ export function Recon() {
         </div>
       </div>
 
+      {/* Overlap / Sidelap Guide */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Overlap / Sidelap Guide</h3>
+        <div style={{ display: "grid", gap: 3 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 55px 55px 1fr", gap: 8, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: B.textDim }}>
+            <div>Deliverable</div><div style={{ textAlign: "center" }}>Fwd</div><div style={{ textAlign: "center" }}>Side</div><div>Notes</div>
+          </div>
+          {OVERLAP_GUIDE.map(o => (
+            <div key={o.deliverable} style={{ ...insetStyle, padding: "6px 10px", display: "grid", gridTemplateColumns: "1fr 55px 55px 1fr", gap: 8, alignItems: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: B.text }}>{o.deliverable}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font, textAlign: "center" }}>{o.forward}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: B.accent, fontFamily: B.font, textAlign: "center" }}>{o.side}</div>
+              <div style={{ fontSize: 10, color: B.textDim }}>{o.notes}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Spectral Indices */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Spectral Indices Reference</h3>
+        <div style={{ display: "grid", gap: 4 }}>
+          {SPECTRAL_INDICES.map(s => (
+            <div key={s.index} style={{ ...insetStyle, padding: "8px 10px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{s.index}</span>
+                <span style={{ fontSize: 9, color: B.textDim, fontFamily: "monospace" }}>{s.range}</span>
+              </div>
+              <div style={{ fontSize: 10, fontFamily: "monospace", color: B.accent, marginBottom: 3 }}>{s.formula}</div>
+              <div style={{ fontSize: 10, color: B.textMid }}>{s.use}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Accuracy Specifications */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Accuracy Specifications by Method</h3>
+        <div style={{ display: "grid", gap: 3 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 70px 70px 1fr", gap: 8, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: B.textDim }}>
+            <div>Method</div><div style={{ textAlign: "center" }}>Hz</div><div style={{ textAlign: "center" }}>Vt</div><div>Notes</div>
+          </div>
+          {ACCURACY_SPECS.map(a => (
+            <div key={a.method} style={{ ...insetStyle, padding: "6px 10px", display: "grid", gridTemplateColumns: "1fr 70px 70px 1fr", gap: 8, alignItems: "center" }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: B.text }}>{a.method}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, color: B.priBr, fontFamily: B.font, textAlign: "center" }}>{a.hz}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, color: B.accent, fontFamily: B.font, textAlign: "center" }}>{a.vt}</div>
+              <div style={{ fontSize: 9, color: B.textDim }}>{a.notes}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 8, fontSize: 9, color: B.textDim, lineHeight: 1.4 }}>
+          Values are typical ranges for well-controlled projects. Actual accuracy depends on flight parameters, sensor quality, control network, and processing workflow.
+        </div>
+      </div>
+
+      {/* Processing Software Comparison */}
+      <div style={{ ...cardStyle, marginBottom: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: B.text }}>Processing Software Comparison</h3>
+        <div style={{ display: "grid", gap: 4 }}>
+          {PROCESSING_SOFTWARE.map(p => (
+            <div key={p.name} style={{ ...insetStyle, padding: "8px 10px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{p.name}</span>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <span style={{ fontSize: 9, color: B.textDim }}>{p.type}</span>
+                  <span style={{ fontSize: 9, color: B.gold, fontWeight: 700 }}>{p.cost}</span>
+                </div>
+              </div>
+              <div style={{ fontSize: 10, color: B.textMid }}>{p.strengths}</div>
+              <div style={{ fontSize: 9, color: B.textDim, marginTop: 2 }}>Formats: {p.formats}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* LAS Classification Codes */}
       <div style={{ ...cardStyle, marginBottom: 12 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8, flexWrap: "wrap", gap: 6 }}>
           <h3 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>ASPRS LAS Classification Codes</h3>
-          <a href="https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, color: B.textDim, textDecoration: "none", fontFamily: B.font }}>LAS 1.4 R15 (2019) {"\u2192"}</a>
+          <a href="https://github.com/ASPRSorg/LAS" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, color: B.textDim, textDecoration: "none", fontFamily: B.font }}>LAS 1.4 R15 (2019) {"\u2192"}</a>
         </div>
         <div className="las-codes" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))", gap: 3 }}>
           {LAS_CODES.map(c => (

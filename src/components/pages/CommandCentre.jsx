@@ -326,6 +326,40 @@ export function CommandCentre() {
         </div>
       </div>
 
+      {/* ═══ GNSS Conditions Summary ═══ */}
+      {(() => {
+        const latestKp = kp.length > 0 ? parseFloat(kp[kp.length - 1]?.Kp || kp[kp.length - 1]?.kp_index || 0) : 0;
+        const gScale = parseInt(gS) || 0;
+        const isStorm = wc >= 95; // thunderstorm codes
+        const isRain = wc >= 51 && wc < 95;
+        const noGo = latestKp > 5 || gScale >= 3 || isStorm;
+        const caution = !noGo && (latestKp >= 4 || gScale >= 2 || isRain);
+        const status = noGo ? "NO-GO" : caution ? "CAUTION" : "GO";
+        const color = noGo ? "#ef4444" : caution ? "#f59e0b" : "#22c55e";
+        const reasons = [];
+        if (latestKp > 5) reasons.push(`Kp ${latestKp} (storm)`);
+        else if (latestKp >= 4) reasons.push(`Kp ${latestKp} (elevated)`);
+        if (gScale >= 3) reasons.push(`G${gScale} geomagnetic storm`);
+        else if (gScale >= 2) reasons.push(`G${gScale} moderate`);
+        if (isStorm) reasons.push("Thunderstorm");
+        else if (isRain) reasons.push("Precipitation");
+        if (reasons.length === 0) reasons.push("Conditions nominal");
+        return (
+          <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${color}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 42, height: 42, borderRadius: "50%", background: `${color}22`, border: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
+                {noGo ? "\u26D4" : caution ? "\u26A0\uFE0F" : "\u2705"}
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color, fontFamily: B.font, letterSpacing: ".08em" }}>GNSS FIELD CONDITIONS: {status}</div>
+                <div style={{ fontSize: 10, color: B.textMid, marginTop: 2 }}>{reasons.join(" | ")}</div>
+                <div style={{ fontSize: 9, color: B.textDim, marginTop: 2 }}>Based on Kp index, geomagnetic scale, and weather. Check DOP before surveying.</div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* ═══ ROW 5: Stations ═══ */}
       <div style={{ marginBottom: 12 }}>
         <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, letterSpacing: 2, marginBottom: 8 }}>STATIONS</div>

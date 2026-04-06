@@ -11,6 +11,8 @@ import { AreaCalc } from "../field/AreaCalc.jsx";
 import { PhotoScale } from "../field/PhotoScale.jsx";
 import { CurveCalc } from "../field/CurveCalc.jsx";
 import { IntersectCalc } from "../field/IntersectCalc.jsx";
+import { TraverseCalc } from "../field/TraverseCalc.jsx";
+import { LevelCalc } from "../field/LevelCalc.jsx";
 
 const TABS = [
   { id: "coords", label: "Coordinates", icon: "\uD83D\uDCE1" },
@@ -23,6 +25,8 @@ const TABS = [
   { id: "photo", label: "Photo Scale", icon: "\uD83D\uDCF7" },
   { id: "mag", label: "Mag Dec", icon: "\uD83E\uDDED" },
   { id: "units", label: "Units", icon: "\u2696\uFE0F" },
+  { id: "traverse", label: "Traverse", icon: "\uD83D\uDCB9" },
+  { id: "level", label: "Levelling", icon: "\uD83D\uDCD0" },
 ];
 
 export function SurveyTools() {
@@ -51,6 +55,8 @@ export function SurveyTools() {
       case "photo": return <PhotoScale />;
       case "curves": return <CurveCalc />;
       case "intersect": return <IntersectCalc />;
+      case "traverse": return <TraverseCalc />;
+      case "level": return <LevelCalc />;
       default: return null;
     }
   };
