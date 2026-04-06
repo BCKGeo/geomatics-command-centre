@@ -10,6 +10,7 @@ export default {id:"qc",name:"Quebec",abbr:"QC",categories:[
   {category:"Base Mapping",links:[{n:"BDTQ (1:20K)",d:"Base de donn\u00e9es topographiques du Qu\u00e9bec",u:"https://www.donneesquebec.ca/recherche/dataset/base-de-donnees-topographiques-du-quebec-a-l-echelle-de-1-20-000-bdtq-20k"}]},
   {category:"Imagery",links:[{n:"G\u00e9oindex",d:"Aerial and satellite imagery index for Quebec",u:"https://mrnf.gouv.qc.ca/repertoire-geographique/imagerie-aerienne-en-donnees-ouvertes/"}]},
   {category:"LiDAR / Elevation",links:[{n:"MRNF LiDAR",d:"For\u00eat num\u00e9rique — provincial LiDAR coverage",u:"https://www.foretouverte.gouv.qc.ca/"}]},
+  {category:"Hydrography",links:[{n:"National Hydro Network (NHN)",d:"Federal 1:50K rivers, lakes, and drainage network",u:"https://open.canada.ca/data/en/dataset/a4b190fe-e090-4e6d-881e-b87956c07977"}]},
   {category:"Geodetic Control",links:[{n:"G\u00e9od\u00e9sie Qu\u00e9bec III",d:"Provincial geodetic control network and data",u:"https://mrnf.gouv.qc.ca/repertoire-geographique/reseau-geodesique-points-geodesiques/"}]},
   {category:"Land Registry",links:[{n:"Registre foncier",d:"Quebec official land registry",u:"https://www.registrefoncier.gouv.qc.ca/",paid:true}]},
   {category:"Geological Survey",links:[{n:"SIG\u00c9OM",d:"Syst\u00e8me d\u2019information g\u00e9omini\u00e8re du Qu\u00e9bec",u:"https://sigeom.mines.gouv.qc.ca/signet/classes/I1102_indexAccueil?l=a"}]},

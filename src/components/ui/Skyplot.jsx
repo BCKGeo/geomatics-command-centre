@@ -93,7 +93,7 @@ export function SkyplotFallback() {
         cd workers/celestrak-proxy<br />
         npx wrangler deploy
       </div>
-      <a href="https://celestrak.org/GNSS/gnss.php" target="_blank" rel="noopener noreferrer"
+      <a href="https://celestrak.org/GPS/" target="_blank" rel="noopener noreferrer"
         style={{ fontSize: 10, color: B.pri, textDecoration: "underline" }}>
         Celestrak Online Tool
       </a>

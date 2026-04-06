@@ -7,7 +7,11 @@ export default {id:"nl",name:"Newfoundland & Labrador",abbr:"NL",categories:[
   {category:"Open Data Portal",links:[{n:"Open Data NL",d:"Provincial open data catalogue",u:"https://opendata.gov.nl.ca/"}]},
   {category:"Map Viewer",links:[{n:"GeoHub NL",d:"Provincial ArcGIS geospatial hub",u:"https://geohub-gnl.hub.arcgis.com/"}]},
   {category:"Parcel / Cadastral",links:[{n:"CADO (Crown Lands)",d:"Crown lands maps and cadastral data",u:"https://www.gov.nl.ca/crownlands/land-use-atlas/"}]},
+  {category:"Base Mapping",links:[{n:"NL Provincial Topographic Mapsheets",d:"Provincial topographic map index and base mapping data",u:"https://geohub-gnl.hub.arcgis.com/datasets/GNL::provincial-topographic-mapsheets/about"}]},
+  {category:"Imagery",links:[{n:"NL Aerial Photography",d:"Provincial aerial photo archive dating from 1930s to present",u:"https://www.gov.nl.ca/ffa/lands/maps/aerialphotos/"}]},
   {category:"LiDAR / Elevation",links:[{n:"NL LiDAR",d:"Provincial LiDAR elevation datasets",u:"https://geohub-gnl.hub.arcgis.com/search?q=lidar"}]},
+  {category:"Hydrography",links:[{n:"NL Water Resources Maps/GIS",d:"Provincial water resource mapping and watershed data",u:"https://www.gov.nl.ca/ecc/waterres/gis/"}]},
+  {category:"Geodetic Control",links:[{n:"NL Public Control Monuments",d:"Provincial geodetic network with ~7,000 survey monuments",u:"https://geohub-gnl.hub.arcgis.com/datasets/GNL::public-control-monuments/about"}]},
   {category:"Land Registry",links:[{n:"NL Land Use Atlas",d:"Provincial land use planning and registry",u:"https://www.gov.nl.ca/crownlands/land-use-atlas/"}]},
   {category:"Geological Survey",links:[{n:"NL Geological Survey",d:"Provincial geoscience data and maps",u:"https://www.gov.nl.ca/em/mines/geoscience/"}]},
   {category:"Legislation",links:[
