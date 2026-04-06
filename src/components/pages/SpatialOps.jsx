@@ -98,7 +98,7 @@ export function SpatialOps() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${B.pri}` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>SPATIAL OPS {"\u2014"} GIS & DATA</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>GIS {"\u2014"} GEOSPATIAL DATA & TOOLS</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           GIS tools, coordinate reference systems, and data formats for Canadian geospatial work. Always verify CRS before combining datasets. GeoPackage is the recommended exchange format; Shapefile for legacy compatibility only.
         </div>

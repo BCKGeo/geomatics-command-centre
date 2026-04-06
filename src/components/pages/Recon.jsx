@@ -97,7 +97,7 @@ export function Recon() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${B.acc}` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.acc, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>RECON & SENSING {"\u2014"} IMAGERY, LiDAR, PHOTOGRAMMETRY</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.acc, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>REMOTE SENSING {"\u2014"} IMAGERY, LiDAR, PHOTOGRAMMETRY</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           Remote sensing and 3D data capture for geomatics. Optical imagery needs clear skies; SAR works through cloud. LiDAR delivers direct 3D point clouds; photogrammetry derives them from overlapping photos. Always check point density specs against your deliverable requirements.
         </div>

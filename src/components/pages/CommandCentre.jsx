@@ -20,9 +20,8 @@ const stations = [
   { i: "\uD83C\uDF0D", t: "Geodesy", d: "NRCan, CSRS-PPP, GNSS", to: "/geodesy" },
   { i: "\uD83D\uDDFA\uFE0F", t: "GIS", d: "GIS tools, databases, CRS", to: "/gis" },
   { i: "\uD83D\uDC41\uFE0F", t: "Remote Sensing", d: "Imagery, LiDAR, photogrammetry", to: "/remote-sensing" },
-  { i: "\uD83C\uDFDB\uFE0F", t: "Provincial Intel", d: "Open data by province", to: "/provincial" },
+  { i: "\uD83C\uDFDB\uFE0F", t: "Jurisdictions", d: "Provincial data, municipal map", to: "/jurisdictions" },
   { i: "\uD83D\uDD27", t: "Survey Tools", d: "Coordinates, scale, calcs, COGO", to: "/survey-tools" },
-  { i: "\uD83D\uDCDC", t: "Regs & Standards", d: "Professional orgs, regulations", to: "/regs" },
   { i: "\uD83D\uDD0E", t: "Codex", d: "Terms & acronyms by domain", to: "/codex" },
 ];
 
@@ -88,7 +87,7 @@ export function CommandCentre() {
         const borderColor = isAlert ? "#ef4444" : isWarning ? "#f97316" : B.acc;
         const firstLine = msg.split("\r\n").find(l => l.trim() && !/^Space Weather|^Serial|^Issue/.test(l.trim())) || "Space Weather Alert";
         return (
-          <div key={i} style={{ background: `linear-gradient(135deg,${B.surface},${theme === "dark" ? "#1a0a0a" : "#fef2f2"})`, border: `2px solid ${B.border}`, borderLeft: `3px solid ${borderColor}`, padding: "8px 12px", marginBottom: 4, display: "flex", alignItems: "flex-start", gap: 8 }}>
+          <div key={a.issue_datetime || i} style={{ background: `linear-gradient(135deg,${B.surface},${theme === "dark" ? "#1a0a0a" : "#fef2f2"})`, border: `2px solid ${B.border}`, borderLeft: `3px solid ${borderColor}`, padding: "8px 12px", marginBottom: 4, display: "flex", alignItems: "flex-start", gap: 8 }}>
             <span style={{ fontSize: 13, lineHeight: 1 }}>{isAlert ? "\uD83D\uDEA8" : isWarning ? "\u26A0\uFE0F" : "\u2139\uFE0F"}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: borderColor, fontFamily: B.font }}>{isAlert ? "ALERT" : isWarning ? "WARNING" : "WATCH"}</div>
@@ -198,7 +197,7 @@ export function CommandCentre() {
                 {kp.map((r, i) => {
                   if (i === 0 || !Array.isArray(r)) return null;
                   const v = parseFloat(r[1]) || 0;
-                  return <KpCell key={i} val={v} time={r[0]?.substring(11, 16) || ""} />;
+                  return <KpCell key={r[0] || i} val={v} time={r[0]?.substring(11, 16) || ""} />;
                 })}
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>

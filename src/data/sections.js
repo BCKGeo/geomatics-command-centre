@@ -1,4 +1,4 @@
-// Resource link sections for Flight Ops, Geodesy, GIS, Remote Sensing, and Regs
+// Resource link sections for Flight Ops, Geodesy, GIS, and Remote Sensing
 export const SECTIONS = [
   { title:"Transport Canada — RPAS", color:"#3bbffa", icon:"✈️", links:[
     {n:"CARs Part IX (Full Regulations)",d:"Canadian Aviation Regulations governing RPAS operations",u:"https://laws-lois.justice.gc.ca/eng/regulations/sor-96-433/page-112.html"},
