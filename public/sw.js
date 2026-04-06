@@ -1,4 +1,4 @@
-const CACHE_NAME = "bckgeo-v1";
+const CACHE_NAME = "bckgeo-v2";
 const PRECACHE = ["/", "/index.html"];
 
 // Install: cache shell

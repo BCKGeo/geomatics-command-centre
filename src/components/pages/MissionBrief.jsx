@@ -14,7 +14,7 @@ export function MissionBrief() {
     { label: "Geodesy", desc: "NRCan CSRS-PPP, datum references, RTK network providers, observation time guide, GNSS constellation status." },
     { label: "GIS", desc: "CRS reference (13 projections), UTM zone map, GDAL quick ref, spatial analysis operations, format guides." },
     { label: "Remote Sensing", desc: "Overlap guides, spectral indices, accuracy specs, processing software comparison, LAS classification, point cloud formats." },
-    { label: "Jurisdictions", desc: "Provincial intel for all 13 jurisdictions plus federal, and an interactive municipal map with 25 Canadian cities." },
+    { label: "Jurisdictions", desc: "Provincial intel for all 13 jurisdictions plus federal, and an interactive municipal map with 40 Canadian cities." },
     { label: "Survey Tools", desc: "12 calculators: coordinates, inverse, forward, scale, area, intersections, curves, photo scale, mag dec, units, traverse closure, levelling." },
     { label: "Codex", desc: "159 domain-specific terms across 10 disciplines." },
     { label: "Mission Brief", desc: "You are here." },
