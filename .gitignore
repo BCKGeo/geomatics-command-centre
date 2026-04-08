@@ -4,3 +4,5 @@ dist/
 *.local
 .claude/
 stitch.zip
+__pycache__/
+data/open-data-portals/baseline/
