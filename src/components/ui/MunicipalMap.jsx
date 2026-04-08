@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef, memo } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
@@ -162,7 +162,7 @@ function MunicipalTable({ rows, B }) {
   );
 }
 
-export function MunicipalMap() {
+export const MunicipalMap = memo(function MunicipalMap() {
   const { B, theme } = useTheme();
   const [province, setProvince] = useState("All");
   const [search, setSearch] = useState("");
@@ -324,4 +324,4 @@ export function MunicipalMap() {
       <MunicipalTable rows={tableRows} B={B} />
     </div>
   );
-}
+});
