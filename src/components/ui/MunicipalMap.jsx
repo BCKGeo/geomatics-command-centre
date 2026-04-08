@@ -81,10 +81,11 @@ export function MunicipalMap() {
                 <div style={{ fontFamily: B.font, fontSize: 12, color: "#222", lineHeight: 1.5 }}>
                   <strong>{m.name}</strong><br />
                   {m.province}<br />
-                  {m.population != null && <>Pop. {m.population.toLocaleString()}<br /></>}
-                  {m.gisPortal && <><a href={m.gisPortal} target="_blank" rel="noopener noreferrer">GIS Portal</a><br /></>}
-                  {m.council && <><a href={m.council} target="_blank" rel="noopener noreferrer">Council</a><br /></>}
-                  {m.surveyStandards && <span style={{ fontSize: 11, color: "#555" }}>{m.surveyStandards}</span>}
+                  {m.entityType && <span style={{ fontSize: 10, color: "#666" }}>{m.entityType}</span>}{m.entityType && <br />}
+                  {m.population != null && m.population > 0 && <>Pop. {m.population.toLocaleString()}<br /></>}
+                  {m.portalUrl && <><a href={m.portalUrl} target="_blank" rel="noopener noreferrer">Open Data</a><br /></>}
+                  {m.councilUrl && <><a href={m.councilUrl} target="_blank" rel="noopener noreferrer">Council</a><br /></>}
+                  {m.surveyStandards && <><a href={m.surveyStandards} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11 }}>Standards</a></>}
                 </div>
               </Popup>
             </CircleMarker>
