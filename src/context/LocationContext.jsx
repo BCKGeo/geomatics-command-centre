@@ -3,6 +3,20 @@ import { DEFAULT_LAT, DEFAULT_LON, DEFAULT_CITY } from "../data/constants.js";
 
 const LocationContext = createContext();
 
+function reverseGeocode(lat, lon) {
+  return fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => `${data.city || data.locality || "Unknown"}, ${data.principalSubdivisionCode?.replace("CA-", "") || data.countryCode}`);
+}
+
+function coordsLabel(lat, lon) {
+  return `${lat.toFixed(4)}N, ${Math.abs(lon).toFixed(4)}W`;
+}
+
+function saveLocation(lat, lon, city) {
+  localStorage.setItem("bckgeo_location", JSON.stringify({ lat, lon, city }));
+}
+
 export function LocationProvider({ children }) {
   const [userLat, setUserLat] = useState(null);
   const [userLon, setUserLon] = useState(null);
@@ -35,17 +49,22 @@ export function LocationProvider({ children }) {
         setUserLat(latitude);
         setUserLon(longitude);
         setLocSource("gps");
-        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
-          .then(r => r.json())
-          .then(data => {
-            const cityStr = `${data.city || data.locality || "Unknown"}, ${data.principalSubdivisionCode?.replace("CA-", "") || data.countryCode}`;
-            setCityName(cityStr);
-            localStorage.setItem("bckgeo_location", JSON.stringify({ lat: latitude, lon: longitude, city: cityStr }));
-            setLocLoading(false);
+        reverseGeocode(latitude, longitude)
+          .then(city => {
+            setCityName(city);
+            saveLocation(latitude, longitude, city);
           })
-          .catch(() => setLocLoading(false));
+          .catch(() => {
+            const fallback = coordsLabel(latitude, longitude);
+            setCityName(fallback);
+            saveLocation(latitude, longitude, fallback);
+          })
+          .finally(() => setLocLoading(false));
       },
-      () => setLocLoading(false),
+      (err) => {
+        console.warn("Geolocation error:", err.message);
+        setLocLoading(false);
+      },
       { enableHighAccuracy: false, timeout: 10000 }
     );
   }, []);
@@ -62,16 +81,15 @@ export function LocationProvider({ children }) {
     setUserLat(newLat);
     setUserLon(newLon);
     setLocSource("manual");
-    fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${newLat}&longitude=${newLon}&localityLanguage=en`)
-      .then(r => r.json())
-      .then(data => {
-        const cityStr = `${data.city || data.locality || "Unknown"}, ${data.principalSubdivisionCode?.replace("CA-", "") || data.countryCode}`;
-        setCityName(cityStr);
-        localStorage.setItem("bckgeo_location", JSON.stringify({ lat: newLat, lon: newLon, city: cityStr }));
+    reverseGeocode(newLat, newLon)
+      .then(city => {
+        setCityName(city);
+        saveLocation(newLat, newLon, city);
       })
       .catch(() => {
-        setCityName(`${newLat.toFixed(4)}, ${newLon.toFixed(4)}`);
-        localStorage.setItem("bckgeo_location", JSON.stringify({ lat: newLat, lon: newLon, city: `${newLat.toFixed(4)}, ${newLon.toFixed(4)}` }));
+        const fallback = coordsLabel(newLat, newLon);
+        setCityName(fallback);
+        saveLocation(newLat, newLon, fallback);
       });
   }, []);
 

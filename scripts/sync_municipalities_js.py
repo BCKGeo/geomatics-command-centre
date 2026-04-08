@@ -101,6 +101,60 @@ def load_existing_municipalities():
     return existing
 
 
+PROXIMITY_THRESHOLD = 0.02  # ~2km -- entities within this distance are grouped
+
+
+def group_nearby_entities(entities):
+    """Group entities within PROXIMITY_THRESHOLD degrees into merged pins.
+
+    Returns a list of entities where nearby entities are merged.
+    The highest-population entity becomes the primary; others go into `related`.
+    """
+    if not entities:
+        return []
+
+    # Regional types that should be secondary (related) when grouped with a city/town
+    REGIONAL_TYPES = {
+        "Regional District", "Regional Municipality", "County", "County Municipality",
+        "District Municipality", "Municipal District", "Rural Municipality",
+    }
+
+    def sort_key(e):
+        """Sort: cities/towns first, then by population. Regional entities go last."""
+        is_regional = e.get("entityType", "") in REGIONAL_TYPES
+        return (is_regional, -(e.get("population", 0) or 0))
+
+    # Sort so cities/towns come before regional entities
+    sorted_ents = sorted(entities, key=sort_key)
+    used = set()
+    merged = []
+
+    for i, primary in enumerate(sorted_ents):
+        if i in used:
+            continue
+        if not primary.get("lat") or not primary.get("lon"):
+            continue
+
+        related = []
+        for j, other in enumerate(sorted_ents):
+            if j <= i or j in used:
+                continue
+            if not other.get("lat") or not other.get("lon"):
+                continue
+            if (abs(primary["lat"] - other["lat"]) < PROXIMITY_THRESHOLD and
+                    abs(primary["lon"] - other["lon"]) < PROXIMITY_THRESHOLD):
+                related.append(other)
+                used.add(j)
+
+        entry = dict(primary)
+        if related:
+            entry["related"] = related
+        merged.append(entry)
+        used.add(i)
+
+    return merged
+
+
 def format_js_value(value):
     """Format a Python value as JS literal."""
     if value is None:
@@ -110,26 +164,53 @@ def format_js_value(value):
     if isinstance(value, (int, float)):
         return str(value)
     if isinstance(value, str):
-        return f'"{value}"'
+        escaped = value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n").replace("\r", "\\r")
+        return f'"{escaped}"'
     return "null"
 
 
+def format_related(related_list):
+    """Format a related entities array as a JS array literal."""
+    items = []
+    for r in related_list:
+        fields = []
+        fields.append(f'name: {format_js_value(r.get("name"))}')
+        fields.append(f'entityType: {format_js_value(r.get("entityType"))}')
+        fields.append(f'population: {r.get("population", 0)}')
+        if r.get("portalUrl"):
+            fields.append(f'portalUrl: {format_js_value(r["portalUrl"])}')
+        if r.get("councilUrl"):
+            fields.append(f'councilUrl: {format_js_value(r["councilUrl"])}')
+        if r.get("surveyStandards"):
+            fields.append(f'surveyStandards: {format_js_value(r["surveyStandards"])}')
+        items.append("{ " + ", ".join(fields) + " }")
+    return "[" + ", ".join(items) + "]"
+
+
 def generate_municipalities_js(entities_by_province):
-    """Generate the municipalities.js file content."""
+    """Generate the municipalities.js file content with proximity-merged pins."""
     lines = ["export const MUNICIPALITIES = ["]
+
+    total_merged = 0
+    total_related = 0
 
     for prov in PROVINCE_ORDER:
         prov_entities = entities_by_province.get(prov, [])
         if not prov_entities:
             continue
 
+        # Group nearby entities
+        merged = group_nearby_entities(prov_entities)
+        prov_related = sum(len(e.get("related", [])) for e in merged)
+        total_merged += len(prov_entities) - len(merged)
+        total_related += prov_related
+
         lines.append(f"  // {PROVINCE_NAMES.get(prov, prov)}")
 
         # Sort by population descending within each province
-        prov_entities.sort(key=lambda e: e.get("population", 0), reverse=True)
+        merged.sort(key=lambda e: e.get("population", 0), reverse=True)
 
-        for entity in prov_entities:
-            # Skip entities without coordinates
+        for entity in merged:
             if not entity.get("lat") or not entity.get("lon"):
                 continue
 
@@ -146,10 +227,16 @@ def generate_municipalities_js(entities_by_province):
             lines.append(f'    portalUrl: {format_js_value(entity.get("portalUrl"))},')
             lines.append(f'    councilUrl: {format_js_value(entity.get("councilUrl"))},')
             lines.append(f'    surveyStandards: {format_js_value(entity.get("surveyStandards"))},')
+            if entity.get("related"):
+                lines.append(f'    related: {format_related(entity["related"])},')
             lines.append("  },")
 
     lines.append("];")
     lines.append("")
+
+    if total_merged > 0:
+        print(f"  Proximity merge: {total_merged} entities merged into nearby pins ({total_related} related entries)")
+
     return "\n".join(lines)
 
 

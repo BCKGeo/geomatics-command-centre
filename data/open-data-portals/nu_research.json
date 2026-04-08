@@ -29,10 +29,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "City in Nunavut. Pop. 7,429 (2021 Census).",
-      "lastVerified": "2026-04-07"
+      "lastVerified": "2026-04-07",
+      "researchStatus": "complete"
     },
     {
       "name": "Rankin Inlet",
@@ -60,10 +61,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 2,975 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Arviat",
@@ -91,10 +93,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 2,864 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Baker Lake",
@@ -122,10 +125,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 2,061 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Igloolik",
@@ -153,10 +157,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 2,049 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Cambridge Bay",
@@ -184,15 +189,16 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,760 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Pond Inlet",
       "entityType": "Hamlet",
-      "population": 1617,
+      "population": 1555,
       "tier": 3,
       "lat": 72.6939,
       "lon": -77.9594,
@@ -215,10 +221,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
-      "description": "Hamlet in Nunavut. Pop. 1,617 (2021 Census).",
-      "lastVerified": null
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
+      "description": "Hamlet in Nunavut. Pop. 1,555 (2021 Census).",
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Pangnirtung",
@@ -246,10 +253,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,504 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Gjoa Haven",
@@ -277,10 +285,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,349 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Clyde River",
@@ -308,15 +317,16 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,181 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Kugluktuk",
       "entityType": "Hamlet",
-      "population": 1491,
+      "population": 1382,
       "tier": 3,
       "lat": 67.8267,
       "lon": -115.0967,
@@ -339,10 +349,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
-      "description": "Hamlet in Nunavut. Pop. 1,491 (2021 Census).",
-      "lastVerified": null
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
+      "description": "Hamlet in Nunavut. Pop. 1,382 (2021 Census).",
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Cape Dorset (Kinngait)",
@@ -370,10 +381,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,441 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Coral Harbour",
@@ -401,10 +413,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,035 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Arctic Bay",
@@ -435,12 +448,13 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 994 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Whale Cove",
       "entityType": "Hamlet",
-      "population": 464,
+      "population": 470,
       "tier": 3,
       "lat": 62.2389,
       "lon": -92.5958,
@@ -465,13 +479,14 @@
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
-      "description": "Hamlet in Nunavut. Pop. 464 (2021 Census).",
-      "lastVerified": null
+      "description": "Hamlet in Nunavut. Pop. 470 (2021 Census).",
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Kugaaruk",
       "entityType": "Hamlet",
-      "population": 933,
+      "population": 1033,
       "tier": 3,
       "lat": 68.5347,
       "lon": -89.8256,
@@ -496,8 +511,9 @@
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
-      "description": "Hamlet in Nunavut. Pop. 933 (2021 Census).",
-      "lastVerified": null
+      "description": "Hamlet in Nunavut. Pop. 1,033 (2021 Census).",
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Naujaat (Repulse Bay)",
@@ -525,10 +541,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 1,073 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Chesterfield Inlet",
@@ -559,12 +576,13 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 397 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Sanikiluaq",
       "entityType": "Hamlet",
-      "population": 936,
+      "population": 1010,
       "tier": 3,
       "lat": 56.5436,
       "lon": -79.2231,
@@ -589,8 +607,9 @@
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
-      "description": "Hamlet in Nunavut. Pop. 936 (2021 Census).",
-      "lastVerified": null
+      "description": "Hamlet in Nunavut. Pop. 1,010 (2021 Census).",
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Qikiqtarjuaq",
@@ -621,7 +640,8 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 598 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Hall Beach (Sanirajak)",
@@ -652,12 +672,13 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 848 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Taloyoak",
       "entityType": "Hamlet",
-      "population": 1029,
+      "population": 934,
       "tier": 3,
       "lat": 69.5403,
       "lon": -93.5339,
@@ -680,10 +701,11 @@
       "wmsWfsEndpoints": null,
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
-      "description": "Hamlet in Nunavut. Pop. 1,029 (2021 Census).",
-      "lastVerified": null
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
+      "description": "Hamlet in Nunavut. Pop. 934 (2021 Census).",
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Resolute",
@@ -714,7 +736,8 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 183 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Grise Fiord",
@@ -745,7 +768,8 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 144 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Bathurst Inlet",
@@ -776,7 +800,8 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Hamlet in Nunavut. Pop. 0 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": null,
+      "researchStatus": "confirmed-no-data"
     }
   ],
   "standards": []

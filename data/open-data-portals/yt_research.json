@@ -24,15 +24,16 @@
       "constructionStandards": null,
       "dataFormats": "SHP, GeoJSON, CSV, KML",
       "coordinateSystem": "NAD83(CSRS) UTM Zone 8N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": true,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": "CKAN API",
       "dataLicence": "OGL",
       "contactDepartment": "IT/GIS",
       "industryFocus": "Geospatial",
       "description": "City in Yukon. Pop. 28,201 (2021 Census).",
-      "lastVerified": "2026-04-07"
+      "lastVerified": "2026-04-07",
+      "researchStatus": "complete"
     },
     {
       "name": "Dawson City",
@@ -55,15 +56,16 @@
       "constructionStandards": null,
       "dataFormats": "SHP, GeoJSON, CSV, KML",
       "coordinateSystem": "NAD83(CSRS) UTM Zone 7N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Town in Yukon. Pop. 1,577 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Watson Lake",
@@ -86,15 +88,16 @@
       "constructionStandards": null,
       "dataFormats": "SHP, GeoJSON, CSV, KML",
       "coordinateSystem": "NAD83(CSRS) UTM Zone 9N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": "ArcGIS REST",
       "dataLicence": "OGL",
-      "contactDepartment": null,
-      "industryFocus": null,
+      "contactDepartment": "GIS/IT",
+      "industryFocus": "Geospatial",
       "description": "Town in Yukon. Pop. 1,133 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "partial"
     },
     {
       "name": "Haines Junction",
@@ -117,15 +120,16 @@
       "constructionStandards": null,
       "dataFormats": null,
       "coordinateSystem": "NAD83(CSRS) UTM Zone 8N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": null,
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Town in Yukon. Pop. 688 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Carmacks",
@@ -148,15 +152,16 @@
       "constructionStandards": null,
       "dataFormats": null,
       "coordinateSystem": "NAD83(CSRS) UTM Zone 8N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": null,
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Town in Yukon. Pop. 588 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Faro",
@@ -179,15 +184,16 @@
       "constructionStandards": null,
       "dataFormats": null,
       "coordinateSystem": "NAD83(CSRS) UTM Zone 8N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": null,
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Town in Yukon. Pop. 440 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Teslin",
@@ -210,15 +216,16 @@
       "constructionStandards": null,
       "dataFormats": null,
       "coordinateSystem": "NAD83(CSRS) UTM Zone 8N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": null,
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Town in Yukon. Pop. 239 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "confirmed-no-data"
     },
     {
       "name": "Mayo",
@@ -241,15 +248,16 @@
       "constructionStandards": null,
       "dataFormats": null,
       "coordinateSystem": "NAD83(CSRS) UTM Zone 8N",
-      "lidarAvailable": false,
+      "lidarAvailable": true,
       "orthophotoAvailable": false,
-      "wmsWfsEndpoints": null,
+      "wmsWfsEndpoints": "https://mapservices.gov.yk.ca/GeoYukon/rest/services",
       "apiEndpoint": null,
       "dataLicence": null,
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Town in Yukon. Pop. 188 (2021 Census).",
-      "lastVerified": null
+      "lastVerified": "2026-04-07",
+      "researchStatus": "confirmed-no-data"
     }
   ],
   "standards": []

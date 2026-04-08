@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Link, useLocation as useRouterLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
-import { LocationProvider } from "./context/LocationContext.jsx";
+import { LocationProvider, useLocation } from "./context/LocationContext.jsx";
 import { DARK, LIGHT } from "./lib/theme.js";
 
 // Pages — lazy-loaded so each tab is its own chunk
@@ -27,6 +27,79 @@ const NAV = [
   { path: "/codex", label: "Codex", icon: "\uD83D\uDD0E" },
   { path: "/mission-brief", label: "Mission Brief", icon: "\uD83D\uDCDD" },
 ];
+
+function LocationChip({ B, insetStyle }) {
+  const { cityName, locSource, locLoading, requestLocation, resetLocation, lat, lon } = useLocation();
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const isDefault = locSource === "default";
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
+
+  return (
+    <div ref={ref} style={{ position: "relative" }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          ...insetStyle,
+          padding: "4px 12px",
+          cursor: "pointer",
+          display: "flex", alignItems: "center", gap: 6,
+          borderColor: isDefault ? B.gold : undefined,
+          minHeight: 38,
+        }}
+      >
+        <span style={{ fontSize: 14 }}>{locLoading ? "\u23F3" : "\uD83D\uDCCD"}</span>
+        <div style={{ textAlign: "left" }}>
+          <div style={{ fontSize: 10, color: isDefault ? B.gold : B.textDim, letterSpacing: 1, fontFamily: B.font }}>
+            {isDefault ? "SET LOCATION" : "LOCATION"}
+          </div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: isDefault ? B.gold : B.text, fontFamily: B.font, whiteSpace: "nowrap", maxWidth: 160, overflow: "hidden", textOverflow: "ellipsis" }}>
+            {cityName}
+          </div>
+        </div>
+      </button>
+      {open && (
+        <div style={{
+          position: "absolute", top: "calc(100% + 4px)", right: 0, zIndex: 9999,
+          background: B.surface, border: `2px solid ${B.borderHi}`, borderRadius: 4,
+          padding: 10, minWidth: 220, fontFamily: B.font,
+          boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+        }}>
+          <div style={{ fontSize: 11, color: B.text, marginBottom: 6 }}>
+            {lat.toFixed(4)}&deg;N, {Math.abs(lon).toFixed(4)}&deg;W
+          </div>
+          <div style={{ display: "flex", gap: 4 }}>
+            <button
+              onClick={() => { requestLocation(); }}
+              style={{ flex: 1, padding: "6px 8px", fontSize: 11, fontFamily: B.font, background: B.pri, color: "#fff", border: "none", borderRadius: 3, cursor: "pointer" }}
+            >
+              {locLoading ? "\u23F3 Acquiring..." : "\uD83D\uDCCD Use GPS"}
+            </button>
+            {!isDefault && (
+              <button
+                onClick={() => { resetLocation(); setOpen(false); }}
+                style={{ padding: "6px 8px", fontSize: 10, fontFamily: B.font, background: "none", color: B.textDim, border: `1px solid ${B.border}`, borderRadius: 3, cursor: "pointer" }}
+              >
+                Reset
+              </button>
+            )}
+          </div>
+          {isDefault && (
+            <div style={{ fontSize: 9, color: B.gold, marginTop: 6 }}>
+              Weather, declination, and survey tools use this position
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Layout() {
   const { theme, B, toggleTheme } = useTheme();
@@ -148,6 +221,7 @@ function Layout() {
               style={{ background: B.surface, border: `2px solid ${B.borderHi}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, width: 38, height: 38, minHeight: 38, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 18, padding: 0, color: B.text, transition: "all .15s" }}>
               {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
             </button>
+            <LocationChip B={B} insetStyle={insetStyle} />
             <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
               <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>ZULU</div>
               <div style={{ fontSize: 16, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums", textShadow: `0 0 8px ${B.gold}44` }}>{utc.toISOString().substring(11, 19)}Z</div>
