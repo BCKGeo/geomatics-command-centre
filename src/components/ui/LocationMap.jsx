@@ -1,31 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
-import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import MapGL, { Marker, NavigationControl } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 
-// Fix default marker icon (Leaflet + bundlers lose the path)
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
-
-function ClickHandler({ onMapClick }) {
-  useMapEvents({ click: (e) => onMapClick(e.latlng) });
-  return null;
-}
-
-function RecenterMap({ lat, lon }) {
-  const map = useMap();
-  useEffect(() => {
-    map.setView([lat, lon], map.getZoom());
-  }, [lat, lon, map]);
-  return null;
-}
-
+const STYLE_DARK = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+const STYLE_LIGHT = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
 const NOMINATIM = "https://nominatim.openstreetmap.org/search";
 
 export function LocationMap() {
@@ -34,10 +14,16 @@ export function LocationMap() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
+  const [viewState, setViewState] = useState({ longitude: lon, latitude: lat, zoom: 6 });
   const debounceRef = useRef(null);
 
-  const handleMapClick = useCallback((latlng) => {
-    setManualLocation(latlng.lat, latlng.lng);
+  // Recenter when coordinates change externally
+  useEffect(() => {
+    setViewState((vs) => ({ ...vs, longitude: lon, latitude: lat }));
+  }, [lat, lon]);
+
+  const handleMapClick = useCallback((e) => {
+    setManualLocation(e.lngLat.lat, e.lngLat.lng);
     setResults([]);
     setQuery("");
   }, [setManualLocation]);
@@ -69,10 +55,6 @@ export function LocationMap() {
     setQuery("");
     setResults([]);
   };
-
-  const tileUrl = theme === "dark"
-    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
   return (
     <div style={{ position: "relative" }}>
@@ -107,12 +89,17 @@ export function LocationMap() {
 
       {/* Map */}
       <div style={{ height: 200, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL }}>
-        <MapContainer center={[lat, lon]} zoom={6} style={{ height: "100%", width: "100%" }} zoomControl={false} attributionControl={false}>
-          <TileLayer url={tileUrl} />
-          <Marker position={[lat, lon]} />
-          <ClickHandler onMapClick={handleMapClick} />
-          <RecenterMap lat={lat} lon={lon} />
-        </MapContainer>
+        <MapGL
+          {...viewState}
+          onMove={(e) => setViewState(e.viewState)}
+          onClick={handleMapClick}
+          mapStyle={theme === "dark" ? STYLE_DARK : STYLE_LIGHT}
+          style={{ width: "100%", height: "100%" }}
+          attributionControl={false}
+        >
+          <Marker longitude={lon} latitude={lat} anchor="bottom" />
+          <NavigationControl position="top-right" showCompass={false} />
+        </MapGL>
       </div>
 
       {/* Location label */}

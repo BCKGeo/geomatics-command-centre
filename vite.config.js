@@ -18,7 +18,7 @@ export default defineConfig({
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-satellite': ['satellite.js'],
-          'vendor-leaflet': ['leaflet', 'react-leaflet'],
+          'vendor-maplibre': ['maplibre-gl'],
         },
       },
     },
