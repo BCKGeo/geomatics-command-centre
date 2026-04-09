@@ -689,8 +689,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.boucherville.ca/mairie-conseil/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -704,7 +704,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 41,743 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -721,8 +721,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://victoriaville.ca/conseil-municipal-et-elections/seances-du-conseil-et-proces-verbaux",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -736,7 +736,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 47,760 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -753,8 +753,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.valleyfield.qc.ca/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -768,7 +768,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 42,787 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -785,8 +785,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.saint-eustache.ca/vie-democratique/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -800,7 +800,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 45,276 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -881,8 +881,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.vaudreuil-dorion.qc.ca/fr/la-ville/mairie/seances-publiques",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -896,7 +896,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 43,268 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -913,8 +913,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.chambly.qc.ca/assemblees-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -928,7 +928,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 31,444 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -945,8 +945,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.alma.qc.ca/seances-du-conseil-municipal/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -960,7 +960,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 30,331 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -977,8 +977,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.sainte-julie.qc.ca/administration/seances-publiques",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -992,7 +992,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 30,045 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1009,8 +1009,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.laprairie.qc.ca/ville/democratie/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1024,7 +1024,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 26,406 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1041,8 +1041,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.sainte-therese.ca/ville/democratie/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1056,7 +1056,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 26,533 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1073,8 +1073,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://candiac.ca/la-ville/vie-democratique/seances-publiques",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1088,7 +1088,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 22,997 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1105,8 +1105,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.magog.qc.ca/evenement/seance-publique-du-conseil-municipal/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1120,7 +1120,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 28,312 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1137,8 +1137,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://villerdl.ca/fr/ville/vie-democratique/seances-du-conseil-36",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1152,7 +1152,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 20,165 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1169,8 +1169,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.saint-georges.ca/ville/vie-democratique/calendrier-des-seances-du-conseil-municipal",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1184,7 +1184,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 32,935 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1201,8 +1201,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.villethetford.ca/vie-municipale/seances-publiques/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1216,7 +1216,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 26,072 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1233,8 +1233,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.joliette.ca/la-ville/democratie/seances-ordres-du-jour-et-proces-verbaux",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1248,7 +1248,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 21,384 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1265,8 +1265,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.septiles.ca/fr/seances-publiques_97/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1280,7 +1280,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 24,569 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1297,8 +1297,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.baie-comeau.qc.ca/ville/vie-democratique/seances-du-conseil-municipal/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1312,7 +1312,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 20,687 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1329,8 +1329,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.valdor.qc.ca/la-ville/democratie/seances-et-proces-verbaux",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1344,7 +1344,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 32,752 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1361,8 +1361,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://amos.quebec/decouvrir-amos/vie-democratique/calendrier-des-seances",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1376,7 +1376,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 12,675 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1393,8 +1393,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://ville.sorel-tracy.qc.ca/ville/vos-elus/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1408,7 +1408,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 35,112 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1425,8 +1425,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://ville.gaspe.qc.ca/mairie-et-conseil-municipal/seances-du-conseil-municipal",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1440,7 +1440,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 15,063 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1457,8 +1457,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.matane.qc.ca/ma-ville/vie-democratique/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1472,7 +1472,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 13,987 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1489,8 +1489,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.sainte-marie.ca/citoyens/calendriers/conseil-municipal/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1504,7 +1504,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 13,134 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1521,8 +1521,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://ville.dolbeau-mistassini.qc.ca/mairie/activites-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1536,7 +1536,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 13,718 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1553,8 +1553,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.roberval.ca/y-vivre/information-generale/assemblees-du-conseil-municipal",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1568,7 +1568,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 9,840 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1585,8 +1585,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.villemontlaurier.qc.ca/vie-municipale/seances-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1600,7 +1600,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 14,180 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1617,8 +1617,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://lachute.ca/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1632,7 +1632,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 13,975 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1649,8 +1649,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.cowansville.ca/vie-municipale/democratie/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1664,7 +1664,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 15,234 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1681,8 +1681,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.bromont.net/administration-municipale/proces-verbaux/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1696,7 +1696,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 11,357 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1713,8 +1713,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.montmagny.qc.ca/fr/ville/vie-democratique/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1728,7 +1728,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 10,999 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1745,8 +1745,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://vdmt.ca/informations-municipales/democratie-et-participation-citoyenne/seances-des-conseils",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1760,7 +1760,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 10,992 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1777,8 +1777,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.varennes.qc.ca/la-ville/vie-democratique/seances-et-proces-verbaux",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1792,7 +1792,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 21,198 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1809,8 +1809,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://beloeil.ca/interagir/conseil-municipal/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1824,7 +1824,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 24,104 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1841,8 +1841,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://stbruno.ca/ville/conseil-municipal/seances-conseil-municipal/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1856,7 +1856,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 26,273 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1873,8 +1873,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.saint-lambert.ca/fr/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1888,7 +1888,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 22,761 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1905,8 +1905,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.villesblg.ca/ville/democratie/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1920,7 +1920,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 17,053 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1937,8 +1937,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.villemsh.ca/ville/conseil-municipal/seances-du-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1952,7 +1952,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 18,859 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1969,8 +1969,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://ville.sainte-adele.qc.ca/seances-conseil.php",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -1984,7 +1984,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 14,010 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2001,8 +2001,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.lassomption.qc.ca/seances-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2016,7 +2016,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 23,442 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2033,8 +2033,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.lavaltrie.qc.ca/conseil-municipal/seances-du-conseil-et-proces-verbaux",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2048,7 +2048,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 14,425 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2065,8 +2065,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.villesadp.ca/ma-ville/vie-democratique/seances-du-conseil-municipal",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2080,7 +2080,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 15,221 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2097,8 +2097,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.boisbriand.qc.ca/ville/vie-democratique/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2112,7 +2112,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 28,308 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2129,8 +2129,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.rosemere.qc.ca/seances-conseil/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2144,7 +2144,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 14,090 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2161,8 +2161,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://ville.lorraine.qc.ca/regard-sur-notre-ville/mairie-et-vie-democratique",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2176,7 +2176,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 9,502 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2193,8 +2193,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.deux-montagnes.qc.ca/ville-de-deux-montagnes/vie-democratique/seances-du-conseil-municipal",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2208,7 +2208,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 17,915 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2225,8 +2225,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://vsmsll.ca/ville/vie-democratique/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2240,7 +2240,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 19,797 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2257,8 +2257,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.pointe-claire.ca/democratie-et-participation-citoyenne/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2272,7 +2272,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 33,488 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2321,8 +2321,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.kirkland.qc.ca/portrait-municipal/conseil-municipal/seances-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2336,7 +2336,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 19,413 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2353,8 +2353,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.dorval.qc.ca/fr/la-cite/page/seances-du-conseil-municipal",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2368,7 +2368,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 19,302 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2385,8 +2385,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://cotesaintluc.org/en/municipal-affairs/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2400,7 +2400,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 34,504 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2417,8 +2417,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.ville.mont-royal.qc.ca/fr/ma-ville/vie-democratique/seances-du-conseil-et-son-calendrier",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2432,7 +2432,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 20,953 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2449,8 +2449,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://westmount.org/seances-du-conseil-2/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2464,7 +2464,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 19,658 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2481,8 +2481,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.beaconsfield.ca/fr/ma-ville/votre-conseil/seances-du-conseil-et-proces-verbaux",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
       "cadStandardsUrl": null,
       "constructionStandards": "Collection Normes -- Ouvrages routiers (provincial)",
@@ -2496,7 +2496,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Ville in Quebec. Pop. 19,277 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

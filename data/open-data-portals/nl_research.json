@@ -113,8 +113,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.conceptionbaysouth.ca/council/council-calendar/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -128,7 +128,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 27,168 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -145,8 +145,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-paradise.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -160,7 +160,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 22,957 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -177,8 +177,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://grandfallswindsor.com/town-hall/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -192,7 +192,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 13,853 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -209,8 +209,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.gandercanada.com/municipal-government/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -224,7 +224,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 11,880 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

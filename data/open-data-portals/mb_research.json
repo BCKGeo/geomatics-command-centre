@@ -2289,8 +2289,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.hanovermb.ca/p/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.mb.ca/mti/contracts/manual.html",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -2304,7 +2304,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Municipality in Manitoba. Pop. 17,216 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3665,8 +3665,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.rmofspringfield.ca/p/meeting-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.mb.ca/mti/contracts/manual.html",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -3680,7 +3680,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Municipality in Manitoba. Pop. 16,142 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3697,8 +3697,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.rmofstandrews.com/p/minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.mb.ca/mti/contracts/manual.html",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -3712,7 +3712,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Municipality in Manitoba. Pop. 11,723 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3729,8 +3729,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://rmofstclements.com/council-meeting-minutes-agendas-and-recordings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.mb.ca/mti/contracts/manual.html",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -3744,7 +3744,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Municipality in Manitoba. Pop. 11,586 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3985,8 +3985,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.rmtache.ca/p/meeting-minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.mb.ca/mti/contracts/manual.html",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -4000,7 +4000,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Municipality in Manitoba. Pop. 11,916 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

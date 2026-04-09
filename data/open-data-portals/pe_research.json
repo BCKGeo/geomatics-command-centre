@@ -113,8 +113,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://cornwallpe.ca/town-hall/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.princeedwardisland.ca/sites/default/files/publications/final_spec_2021_2_4.pdf",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -128,7 +128,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Prince Edward Island. Pop. 6,574 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -145,8 +145,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://threeriverspei.com/councilminutesagendas2023/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.princeedwardisland.ca/sites/default/files/publications/final_spec_2021_2_4.pdf",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -160,7 +160,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Prince Edward Island. Pop. 7,883 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
