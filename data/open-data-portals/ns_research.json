@@ -81,8 +81,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.westhants.ca/government/council-documents.html",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -96,7 +96,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Regional Municipality in Nova Scotia. Pop. 19,509 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -113,8 +113,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.regionofqueens.com/council-governance/council-agendas-minutes-audio/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -128,7 +128,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Regional Municipality in Nova Scotia. Pop. 10,422 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -529,8 +529,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://annapoliscounty.ca/home/208",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -544,7 +544,7 @@
       "contactDepartment": null,
       "industryFocus": null,
       "description": "Town in Nova Scotia. Pop. 530 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "confirmed-no-data"
     },
     {
@@ -753,8 +753,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.townofmahonebay.ca/council-agendas-minutes--meeting-packages.html",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -768,7 +768,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Nova Scotia. Pop. 1,064 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1105,8 +1105,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.easthants.ca/meeting-minutes-agendas/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1120,7 +1120,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 22,892 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1169,8 +1169,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://chester.ca/government/council/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1184,7 +1184,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 10,693 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1201,8 +1201,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.countyofkings.ca/government/council/Agendas-Minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1216,7 +1216,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "County Municipality in Nova Scotia. Pop. 28,832 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1329,8 +1329,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.cumberlandcounty.ns.ca/council-minutes-agendas.html",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1344,7 +1344,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "County Municipality in Nova Scotia. Pop. 17,538 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1425,8 +1425,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.richmondcounty.ca/council/municipal-documents-agendas-minutes-and-finances/regular-council/council-minutes.html",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1440,7 +1440,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "County Municipality in Nova Scotia. Pop. 8,990 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1457,8 +1457,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-victoria.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1472,7 +1472,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "County Municipality in Nova Scotia. Pop. 6,651 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1521,8 +1521,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://munyarmouth.ca/index.php/government/agendas-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1536,7 +1536,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 9,962 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1553,8 +1553,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.barringtonmunicipality.com/council/barrington-council-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1568,7 +1568,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 6,490 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1585,8 +1585,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.munargyle.com/minutes-agendas-and-recordings.html",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1600,7 +1600,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 7,935 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1617,8 +1617,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.clarenovascotia.com/en/governance/council/council-meeting-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1632,7 +1632,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 7,678 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1649,8 +1649,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://digbymun.ca/government/council-meeting-minutes.html",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://novascotia.ca/tran/highways/ssm/",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1664,7 +1664,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "District Municipality in Nova Scotia. Pop. 7,272 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

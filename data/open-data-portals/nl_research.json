@@ -241,8 +241,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pcsp.civicweb.net/Portal/MeetingTypeList.aspx",
+      "councilPlatform": "CivicWeb",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -256,7 +256,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 8,415 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -273,8 +273,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://townhvgb.com/town-hall/council-committees2/meetings-minutes-2/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -288,7 +288,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 8,109 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -337,8 +337,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.stephenville.ca/town-hall/meeting-minutes-live-videos",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -352,7 +352,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 6,540 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -369,8 +369,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://clarenville.ca/town-hall/councilmeetingminutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -384,7 +384,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 6,704 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -433,8 +433,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://marystown.ca/town-hall/minutes-agendas/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -448,7 +448,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 5,204 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -465,8 +465,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://townofdeerlake.ca/town-hall/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -480,7 +480,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 4,864 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -529,8 +529,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://labradorwest.com/town-hall/council/all/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -544,7 +544,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 7,412 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -561,8 +561,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://townofharbourgrace.ca/town-hall/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -576,7 +576,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 2,796 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -625,8 +625,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.townofbonavista.com/minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -640,7 +640,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 3,190 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -657,8 +657,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pasadena.ca/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -672,7 +672,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 3,524 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -689,8 +689,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.portauxbasques.ca/town-hall/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -704,7 +704,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 3,547 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -721,8 +721,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.lewisporte.ca/town/meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -736,7 +736,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 3,288 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -817,8 +817,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://lbmcoc.ca/council-minutes-and-agenda/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -832,7 +832,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 2,370 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -881,8 +881,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://holyrood.ca/local-government/town-council/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -896,7 +896,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 2,463 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -945,8 +945,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://townofflatrock.com/meeting-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -960,7 +960,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 1,722 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1297,8 +1297,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.witlessbay.ca/minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -1312,7 +1312,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 1,640 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1489,8 +1489,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pouchcove.ca/town-hall/meeting-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
       "cadStandardsUrl": null,
       "constructionStandards": "NL Municipal Water, Sewer and Roads Master Specs (2022)",
@@ -1504,7 +1504,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Newfoundland and Labrador. Pop. 2,063 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

@@ -1390,8 +1390,9 @@
       "population": 6619,
       "entityType": "Town",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
-      "lastVerified": "2026-04-07",
-      "researchStatus": "partial"
+      "lastVerified": "2026-04-08",
+      "researchStatus": "partial",
+      "councilUrl": "https://www.peaceriver.ca/town-hall/town-council/agendas-minutes"
     },
     {
       "name": "Ponoka",
@@ -1432,8 +1433,9 @@
       "population": 9184,
       "entityType": "Town",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
-      "lastVerified": "2026-04-07",
-      "researchStatus": "partial"
+      "lastVerified": "2026-04-08",
+      "researchStatus": "partial",
+      "councilPlatform": "Custom"
     },
     {
       "name": "Innisfail",
@@ -1446,8 +1448,9 @@
       "population": 7985,
       "entityType": "Town",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
-      "lastVerified": "2026-04-07",
-      "researchStatus": "partial"
+      "lastVerified": "2026-04-08",
+      "researchStatus": "partial",
+      "councilPlatform": "CivicWeb"
     },
     {
       "name": "Rocky Mountain House",
@@ -1473,8 +1476,9 @@
       "population": 6404,
       "entityType": "Town",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
-      "lastVerified": "2026-04-07",
-      "researchStatus": "partial"
+      "lastVerified": "2026-04-08",
+      "researchStatus": "partial",
+      "councilPlatform": "Custom"
     },
     {
       "name": "Clearwater County",
@@ -1489,8 +1493,10 @@
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
-      "lastVerified": "2026-04-07",
-      "researchStatus": "partial"
+      "lastVerified": "2026-04-08",
+      "researchStatus": "partial",
+      "councilUrl": "https://www.clearwatercounty.ca/p/minutes-and-agendas",
+      "councilPlatform": "Custom"
     },
     {
       "name": "Woodlands County",
@@ -1552,8 +1558,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://banff.ca/agendacenter",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1567,7 +1573,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 8,305 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1648,8 +1654,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.slavelake.ca/AgendaCenter",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1663,7 +1669,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 6,782 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1680,8 +1686,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.devon.ca/Government/Town-Hall/Council-Meetings/Council-Agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1695,7 +1701,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 6,578 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1776,8 +1782,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.stettler.net/the-town/council/agendas-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1791,7 +1797,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 5,748 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1808,8 +1814,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.vegreville.com/municipal/council/council-meetings/agendas-and-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1823,7 +1829,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 5,708 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1872,8 +1878,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.didsbury.ca/p/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1887,7 +1893,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 5,070 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1936,8 +1942,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.westlock.ca/p/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -1951,7 +1957,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 4,921 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2000,8 +2006,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.barrhead.ca/p/minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -2015,7 +2021,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 4,320 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2128,8 +2134,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "http://www.pinchercreek.ca/town/minutes.php",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -2143,7 +2149,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 3,642 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2288,8 +2294,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://threehills.ca/p/council-meeting-minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -2303,7 +2309,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 3,042 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2352,8 +2358,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.highlevel.ca/agendacenter",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -2367,7 +2373,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 3,922 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2480,8 +2486,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.sundre.com/p/meeting-minutes-and-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -2495,7 +2501,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Alberta. Pop. 2,672 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -8560,8 +8566,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://ponokacounty.civicweb.net/",
+      "councilPlatform": "CivicWeb",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -8575,7 +8581,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Municipal District in Alberta. Pop. 9,998 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -8592,8 +8598,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.vermilion-river.com/your-county/meeting-agendas-and-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -8607,7 +8613,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Municipal District in Alberta. Pop. 7,994 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -8624,8 +8630,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://mdgreenview.ab.ca/government/minutes-and-agendas/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -8639,7 +8645,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Municipal District in Alberta. Pop. 8,067 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -8720,8 +8726,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.cypress.ab.ca/p/minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -8735,7 +8741,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Municipal District in Alberta. Pop. 7,524 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -8816,8 +8822,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://county.camrose.ab.ca/county-administration/agendas-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.alberta.ca/highway-geometric-design-guide",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -8831,7 +8837,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Municipal District in Alberta. Pop. 8,504 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

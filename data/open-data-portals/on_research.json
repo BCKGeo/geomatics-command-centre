@@ -2361,8 +2361,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://princeedwardcounty.civicweb.net/Portal/MeetingSchedule.aspx",
+      "councilPlatform": "CivicWeb",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -2376,7 +2376,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "The County. Wine country. Single-tier municipality.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2823,8 +2823,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://calendar.orangeville.ca/meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -2838,7 +2838,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Dufferin County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2922,8 +2922,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-woolwich.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -2937,7 +2937,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Waterloo Region. Includes St. Jacobs and Elmira.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3054,8 +3054,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-grimsby.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3069,7 +3069,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3120,8 +3120,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.pelham.ca/pelham-government/council/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3135,7 +3135,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3153,8 +3153,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-thorold.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3168,7 +3168,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Canal City. Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3186,8 +3186,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.forterie.ca/town-hall/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3201,7 +3201,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Peace Bridge border crossing. Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3252,8 +3252,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://events.westlincoln.ca/meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3267,7 +3267,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3285,8 +3285,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.wainfleet.ca/town-hall/council/agendas-and-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3300,7 +3300,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3318,8 +3318,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-notl.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3333,7 +3333,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Wine capital. Shaw Festival. Part of Niagara Region.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3483,8 +3483,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.clarence-rockland.com/en/city-hall/council/meetings-minutes/council-regular-meeting-20-mar-2024",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3498,7 +3498,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Bilingual city near Ottawa.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3714,8 +3714,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-smithsfalls.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3729,7 +3729,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rideau Canal. Single-tier.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3747,8 +3747,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.gananoque.ca/town-hall/town-council/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3762,7 +3762,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Gateway to 1000 Islands.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3780,8 +3780,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.prescott.ca/town-hall/agendas-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3795,7 +3795,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Fort Town. St. Lawrence River.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3945,8 +3945,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://muskokalakes.civicweb.net/Portal/MeetingTypeList.aspx",
+      "councilPlatform": "CivicWeb",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3960,7 +3960,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Muskoka. Cottage country.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3978,8 +3978,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://lakeofbays.civicweb.net/Portal/MeetingTypeList.aspx",
+      "councilPlatform": "CivicWeb",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -3993,7 +3993,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Muskoka.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -4176,8 +4176,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.clearview.ca/government-committees/council/agenda-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -4191,7 +4191,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Includes Stayner. Part of Simcoe County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5001,8 +5001,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-porthope.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5016,7 +5016,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Northumberland County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5199,8 +5199,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.tillsonburg.ca/town-hall/council/agendas-and-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5214,7 +5214,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Oxford County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5265,8 +5265,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.saugeenshores.ca/en/town-hall/agendas-and-minutes.aspx",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5280,7 +5280,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Bruce County. Includes Port Elgin.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5397,8 +5397,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.westgrey.com/municipal-government/agendas-and-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5412,7 +5412,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Grey County. Includes Durham.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5430,8 +5430,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.hanover.ca/council-government/mayor-council/council-and-committee-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5445,7 +5445,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Grey County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5463,8 +5463,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-goderich.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5478,7 +5478,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Prettiest town in Canada. Part of Huron County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5529,8 +5529,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://calendar.arnprior.ca/meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5544,7 +5544,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Renfrew County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5562,8 +5562,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-renfrew.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5577,7 +5577,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Renfrew County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5595,8 +5595,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-carletonplace.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5610,7 +5610,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Lanark County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5694,8 +5694,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://greaternapanee.civicweb.net/Portal/",
+      "councilPlatform": "CivicWeb",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5709,7 +5709,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Lennox and Addington County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -5760,8 +5760,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-northgrenville.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -5775,7 +5775,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Includes Kemptville. Part of Leeds and Grenville.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6024,8 +6024,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.parrysound.ca/government/inside-town-council/agendas-and-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6039,7 +6039,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Georgian Bay. Parry Sound District.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6156,8 +6156,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.shelburne.ca/en/town-hall/agendas-and-minutes.aspx",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6171,7 +6171,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Dufferin County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6255,8 +6255,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.townofstmarys.com/town-government/agendas-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6270,7 +6270,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Stonetown. Part of Perth County.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6387,8 +6387,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://pub-lambtonshores.escribemeetings.com/",
+      "councilPlatform": "eScribe",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6402,7 +6402,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of Lambton County. Lake Huron beaches.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6651,8 +6651,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.northdundas.com/local-government-laws/council/council-reports-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6666,7 +6666,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of SDG.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6684,8 +6684,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.southglengarry.com/en/municipal-services/agendas-and-minutes.aspx",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6699,7 +6699,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of SDG.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -6717,8 +6717,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.southstormont.ca/en/town-hall/council-meetings.aspx",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www.library.mto.gov.on.ca/",
       "cadStandardsUrl": null,
       "constructionStandards": "OPSS.MUNI / OPSD (Ontario Provincial Standards)",
@@ -6732,7 +6732,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Part of SDG.",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     }
   ],

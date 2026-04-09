@@ -401,8 +401,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://humboldt.ca/minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -416,7 +416,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "City in Saskatchewan. Pop. 6,033 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -433,8 +433,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://melfort.ca/p/minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -448,7 +448,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "City in Saskatchewan. Pop. 5,992 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -497,8 +497,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://meadowlake.ca/p/meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -512,7 +512,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "City in Saskatchewan. Pop. 5,344 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -817,8 +817,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.battleford.ca/p/council-agenda-and-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -832,7 +832,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Saskatchewan. Pop. 4,400 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3185,8 +3185,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://nipawin.com/government/council/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -3200,7 +3200,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Saskatchewan. Pop. 4,570 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -3761,8 +3761,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://rosetown.ca/agendacenter",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -3776,7 +3776,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Saskatchewan. Pop. 2,514 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -4081,8 +4081,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://tisdale.ca/council-meeting-agenda-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -4096,7 +4096,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in Saskatchewan. Pop. 2,962 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -11473,8 +11473,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.rmcormanpark.ca/AgendaCenter",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://publications.saskatchewan.ca/#/categories/5230",
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -11488,7 +11488,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Municipality in Saskatchewan. Pop. 8,909 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

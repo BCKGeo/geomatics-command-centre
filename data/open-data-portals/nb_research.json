@@ -401,8 +401,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://capacadie.ca/en/municipality/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -416,7 +416,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 9,165 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -497,8 +497,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://tracadienb.ca/en/town-hall/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -512,7 +512,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 16,043 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -529,8 +529,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://sussex.ca/document-category/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -544,7 +544,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 4,440 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -561,8 +561,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://woodstocknb.ca/minutes-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -576,7 +576,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 5,553 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -593,8 +593,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://shediac.ca/en/town-hall/council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -608,7 +608,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 7,535 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -625,8 +625,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://beaurivage.org/municipality/meeting-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -640,7 +640,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 6,160 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -657,8 +657,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://hampton.ca/documents/town-hall-meeting-agenda/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -672,7 +672,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 4,395 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -721,8 +721,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://tantramarnb.com/administration-and-government/meetings-minutes-and-agendas",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -736,7 +736,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 6,099 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -785,8 +785,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://easterncharlotte.ca/council/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -800,7 +800,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 5,290 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -817,8 +817,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://memramcook.com/en/site_content/item/57-council-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -832,7 +832,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 5,045 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -913,8 +913,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.saintquentinnb.com/en/r%C3%A9unions-du-conseil",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -928,7 +928,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 2,141 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -945,8 +945,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://grandbaywestfield.ca/council-meetings-agendas-and-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -960,7 +960,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 4,967 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -977,8 +977,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://saint-antoine.ca/en/municipality/council-meetings/2022",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -992,7 +992,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 1,791 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1041,8 +1041,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.heron-bay.ca/meeting-archives-1",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1056,7 +1056,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 3,223 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1073,8 +1073,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.neguac.com/en/home-2/reunions/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1088,7 +1088,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 1,692 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1201,8 +1201,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://mairie-beausoleil.ca/en/town-hall/board-meetings-and-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1216,7 +1216,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Community in New Brunswick. Pop. 8,620 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1489,8 +1489,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://fundyalbert.ca/governance/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1504,7 +1504,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Community in New Brunswick. Pop. 4,910 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1521,8 +1521,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.hanwell.nb.ca/council/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1536,7 +1536,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Community in New Brunswick. Pop. 4,743 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1553,8 +1553,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://vonm.ca/town-hall/committees-of-council/council-meeting-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1568,7 +1568,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Village in New Brunswick. Pop. 4,153 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1905,8 +1905,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://town.ststephen.nb.ca/municipal-district-office/minutes-agendas-records-and-notice-meetings",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1920,7 +1920,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Town in New Brunswick. Pop. 4,510 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -1969,8 +1969,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.villageofgrandmanan.com/document-type/council-meeting-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -1984,7 +1984,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Rural Community in New Brunswick. Pop. 2,595 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2193,8 +2193,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://5-rivers.ca/city-hall/council-minutes/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -2208,7 +2208,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Village in New Brunswick. Pop. 3,000 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -2449,8 +2449,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://salisburynb.ca/municipal-office/council-meetings/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
       "cadStandardsUrl": null,
       "constructionStandards": "NBDTI Standard Specifications + Subdivision Standards",
@@ -2464,7 +2464,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Village in New Brunswick. Pop. 2,387 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {

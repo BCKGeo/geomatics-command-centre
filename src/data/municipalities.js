@@ -2981,7 +2981,7 @@ export const MUNICIPALITIES = [
     hasPortal: true,
     parentGeography: null,
     portalUrl: "https://clearwatermaps-clearwatercounty.hub.arcgis.com/pages/data",
-    councilUrl: null,
+    councilUrl: "https://www.clearwatercounty.ca/p/minutes-and-agendas",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3093,7 +3093,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://ponokacounty.civicweb.net/",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3191,7 +3191,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://county.camrose.ab.ca/county-administration/agendas-minutes/",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3219,7 +3219,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Improvement District No. 9 (Banff)",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://banff.ca/agendacenter",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3233,7 +3233,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://mdgreenview.ab.ca/government/minutes-and-agendas/",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3247,7 +3247,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.vermilion-river.com/your-county/meeting-agendas-and-minutes",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3303,7 +3303,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.cypress.ab.ca/p/minutes-agendas",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3401,7 +3401,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Municipal District of Lesser Slave River No. 124",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.slavelake.ca/AgendaCenter",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3429,7 +3429,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Northern Sunrise County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.peaceriver.ca/town-hall/town-council/agendas-minutes",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3457,7 +3457,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Leduc County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.devon.ca/Government/Town-Hall/Council-Meetings/Council-Agendas",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3541,7 +3541,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Stettler County No. 6",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.stettler.net/the-town/council/agendas-minutes",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3555,7 +3555,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Minburn No. 27, County of",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.vegreville.com/municipal/council/council-meetings/agendas-and-minutes",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3625,7 +3625,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Mountain View County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.didsbury.ca/p/council-meetings",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3667,7 +3667,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Westlock County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.westlock.ca/p/council-meetings",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3765,7 +3765,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Barrhead No. 11",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.barrhead.ca/p/minutes-agendas",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3849,7 +3849,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Mackenzie County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.highlevel.ca/agendacenter",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -3933,7 +3933,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "MD of Pincher Creek No. 9",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "http://www.pinchercreek.ca/town/minutes.php",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -4059,7 +4059,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kneehill County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://threehills.ca/p/council-meeting-minutes-agendas",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -4186,7 +4186,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Mountain View County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.sundre.com/p/meeting-minutes-and-agendas",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -7082,7 +7082,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rmcormanpark.ca/AgendaCenter",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
   },
   {
@@ -7096,7 +7096,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Humboldt No. 370",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://humboldt.ca/minutes-agendas",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
   },
   {
@@ -7110,7 +7110,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Flett's Springs No. 429",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://melfort.ca/p/minutes-agendas",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
     related: [{ name: "Flett's Springs No. 429", entityType: "Rural Municipality", population: 656, surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230" }],
   },
@@ -7125,7 +7125,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Meadow Lake No. 588",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://meadowlake.ca/p/meetings",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
   },
   {
@@ -7139,7 +7139,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Nipawin No. 487",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://nipawin.com/government/council/",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
   },
   {
@@ -7195,7 +7195,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Battle River No. 438",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.battleford.ca/p/council-agenda-and-minutes",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
   },
   {
@@ -7237,7 +7237,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Tisdale No. 427",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://tisdale.ca/council-meeting-agenda-minutes",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
     related: [{ name: "Star City", entityType: "Town", population: 374, surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230" }],
   },
@@ -7322,7 +7322,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "St. Andrews No. 287",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://rosetown.ca/agendacenter",
     surveyStandards: "https://publications.saskatchewan.ca/#/categories/5230",
   },
   {
@@ -14359,7 +14359,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.eaststpaul.com/p/meetings-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14373,7 +14373,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://rmofstanley.ca/p/council-meeting-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14387,7 +14387,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rockwood.ca/p/minutes-and-agendas",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14415,7 +14415,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rmofmacdonald.com/p/council-meetings",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14429,7 +14429,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.ritchot.com/p/meeting-agendas",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14457,7 +14457,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.labroquerie.com/p/agendas-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14499,7 +14499,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.whereyoubelong.ca/town-services/resources/meeting-minutes-agenda/",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14527,7 +14527,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.neepawa.ca/meeting-minutes/",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14541,7 +14541,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://townofthepas.ca/agendas-and-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14555,7 +14555,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rmofsteanne.com/main.php?p=24",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14569,7 +14569,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://rmofbrokenhead.civicweb.net/portal/",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14583,7 +14583,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.stonewall.ca/p/meeting-minutes-and-agendas",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14625,7 +14625,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rmofheadingley.ca/p/agendas-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14639,7 +14639,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://altona.ca/p/meeting-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14653,7 +14653,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.swanrivermanitoba.ca/p/agendas-minutes",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -14667,7 +14667,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rmdesalaberry.mb.ca/p/council-minutes-agendas",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -15647,7 +15647,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.rmofrosser.com/p/meeting-dates-minutes-agendas",
     surveyStandards: "https://www.gov.mb.ca/mti/contracts/manual.html",
   },
   {
@@ -17232,7 +17232,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.forterie.ca/town-hall/council-meetings/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17288,7 +17288,7 @@ export const MUNICIPALITIES = [
     hasPortal: true,
     parentGeography: "County of Dufferin",
     portalUrl: "https://data.orangeville.ca/",
-    councilUrl: null,
+    councilUrl: "https://calendar.orangeville.ca/meetings",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17316,7 +17316,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-grimsby.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17344,7 +17344,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Waterloo",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-woolwich.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17358,7 +17358,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.clarence-rockland.com/en/city-hall/council/meetings-minutes/council-regular-meeting-20-mar-2024",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17372,7 +17372,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://princeedwardcounty.civicweb.net/Portal/MeetingSchedule.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17442,7 +17442,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-thorold.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17708,7 +17708,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-notl.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17736,7 +17736,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Oxford",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.tillsonburg.ca/town-hall/council/agendas-and-minutes/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17764,7 +17764,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.pelham.ca/pelham-government/council/council-meetings/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17792,7 +17792,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "United Counties of Leeds and Grenville",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-northgrenville.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17834,7 +17834,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Northumberland",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-porthope.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17862,7 +17862,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Lennox and Addington",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://greaternapanee.civicweb.net/Portal/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17876,7 +17876,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Bruce",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.saugeenshores.ca/en/town-hall/agendas-and-minutes.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17904,7 +17904,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://events.westlincoln.ca/meetings",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -17932,7 +17932,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Simcoe",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.clearview.ca/government-committees/council/agenda-minutes",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18101,7 +18101,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "United Counties of Stormont, Dundas and Glengarry",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.southstormont.ca/en/town-hall/council-meetings.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18115,7 +18115,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "United Counties of Stormont, Dundas and Glengarry",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.southglengarry.com/en/municipal-services/agendas-and-minutes.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18143,7 +18143,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Grey",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.westgrey.com/municipal-government/agendas-and-minutes/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18185,7 +18185,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Lanark",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-carletonplace.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18255,7 +18255,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Lambton",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-lambtonshores.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18311,7 +18311,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "United Counties of Stormont, Dundas and Glengarry",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.northdundas.com/local-government-laws/council/council-reports-minutes",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18465,7 +18465,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Renfrew",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://calendar.arnprior.ca/meetings",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18493,7 +18493,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-smithsfalls.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18521,7 +18521,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Dufferin",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.shelburne.ca/en/town-hall/agendas-and-minutes.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18549,7 +18549,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Renfrew",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-renfrew.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18577,7 +18577,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Grey",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.hanover.ca/council-government/mayor-council/council-and-committee-meetings",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18605,7 +18605,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Huron",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-goderich.escribemeetings.com/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18661,7 +18661,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "District Municipality of Muskoka",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://muskokalakes.civicweb.net/Portal/MeetingTypeList.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18703,7 +18703,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "County of Perth",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.townofstmarys.com/town-government/agendas-minutes/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18717,7 +18717,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Regional Municipality of Niagara",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.wainfleet.ca/town-hall/council/agendas-and-minutes",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18731,7 +18731,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.parrysound.ca/government/inside-town-council/agendas-and-minutes/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18787,7 +18787,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.gananoque.ca/town-hall/town-council/council-meetings",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18857,7 +18857,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.prescott.ca/town-hall/agendas-minutes/",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -18871,7 +18871,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "District Municipality of Muskoka",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://lakeofbays.civicweb.net/Portal/MeetingTypeList.aspx",
     surveyStandards: "https://www.library.mto.gov.on.ca/",
   },
   {
@@ -19325,7 +19325,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
-    related: [{ name: "Rawdon", entityType: "Municipalite", population: 11719, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
+    related: [{ name: "Rawdon", entityType: "Municipalite", population: 11719, councilUrl: "http://rawdon.ca/administration-municipale/conseil-municipal/seances-du-conseil/", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
   {
     name: "Les Collines-de-l'Outaouais",
@@ -19530,7 +19530,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
-    related: [{ name: "Shannon", entityType: "Municipalite", population: 6432, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
+    related: [{ name: "Shannon", entityType: "Municipalite", population: 6432, councilUrl: "https://shannon.ca/en/municipal-life/council-meetings/", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
   {
     name: "D'Autray",
@@ -19927,7 +19927,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Montcalm",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.saint-lin-laurentides.com/decouvrir/votre-conseil/seances-du-conseil-et-proces-verbaux",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -19943,7 +19943,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
-    related: [{ name: "Plessisville", entityType: "Ville", population: 2655, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
+    related: [{ name: "Plessisville", entityType: "Ville", population: 2655, councilUrl: "https://plessisville.quebec/ma-ville/democratie/seances-du-conseil", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
   {
     name: "L'Assomption",
@@ -20157,7 +20157,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Quebec (agglomeration)",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://vsad.ca/calendrierseances",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -20360,7 +20360,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "La Riviere-du-Nord",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://st-colomban.qc.ca/ville/vie-democratique/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -20549,7 +20549,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Roussillon",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.ville.mercier.qc.ca/affaires-municipales/seances-du-conseil/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -20621,7 +20621,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "La Riviere-du-Nord",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.ville.prevost.qc.ca/guichet-citoyen/informations/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -20751,7 +20751,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
-    related: [{ name: "Notre-Dame-de-l'Ile-Perrot", entityType: "Ville", population: 11427, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }, { name: "Sainte-Anne-de-Bellevue", entityType: "Ville", population: 5027, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
+    related: [{ name: "Notre-Dame-de-l'Ile-Perrot", entityType: "Ville", population: 11427, councilUrl: "https://www.ndip.org/seances-du-conseil", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }, { name: "Sainte-Anne-de-Bellevue", entityType: "Ville", population: 5027, councilUrl: "https://www.ville.sainte-anne-de-bellevue.qc.ca/citoyens/vie-democratique/seances-du-conseil", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
   {
     name: "Saint-Sauveur",
@@ -20949,7 +20949,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Brome-Missisquoi",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://ville.farnham.qc.ca/ville/democratie/seances-du-conseil/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -20963,7 +20963,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Portneuf",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.ville.pontrouge.qc.ca/vie-municipale/vie-democratique/conseil-municipal/seances-du-conseil-municipal/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -20991,7 +20991,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Jacques-Cartier",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.villestoneham.com/ma-municipalite/democratie/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21005,7 +21005,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Vaudreuil-Soulanges",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://st-zotique.com/evenements/seance-du-conseil/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
     related: [{ name: "Les Coteaux", entityType: "Municipality", population: 5643, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
@@ -21076,7 +21076,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Coaticook",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.coaticook.ca/fr/ville/seances-publiques.php",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21119,7 +21119,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "La Cote-de-Beaupre",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://sbdl.net/notre-ville/conseil-municipal/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21147,7 +21147,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "La Cote-de-Beaupre",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.boischatel.ca/ma-ville/vie-democratique/seance-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21161,7 +21161,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Jacques-Cartier",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://lac-beauport.quebec/conseil-municipal/seances-du-conseil/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21245,7 +21245,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Portneuf",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://villededonnacona.com/fr/municipalite/conseil-municipal/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21372,7 +21372,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Montcalm",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://saint-calixte.ca/municipalite/mairie/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21414,7 +21414,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "L'Assomption",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.charlemagne.ca/la-ville/vie-democratique/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21442,7 +21442,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "L'Erable",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://princeville.quebec/conseil-municipal/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21485,7 +21485,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Les Collines-de-l'Outaouais",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://langegardien.qc.ca/la-municipalite/lorganisation-municipale/le-conseil-municipal/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21499,7 +21499,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Rouville",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.villesaintcesaire.com/ma-ville/ordres-du-jour-et-proces-verbaux/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -21640,7 +21640,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Montcalm",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://sra.quebec/seances-du-conseil",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
     related: [{ name: "Saint-Roch-Ouest", entityType: "Municipality", population: 262, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
@@ -22034,7 +22034,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "La Cote-de-Beaupre",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.villedebeaupre.com/pages/conseil-municipal-et-comites",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -22261,7 +22261,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Montreal (agglomeration)",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://baie-durfe.qc.ca/fr/vie-democratique/page/seances-du-conseil-municipal",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -22347,7 +22347,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
-    related: [{ name: "Portneuf", entityType: "MRC", population: 3329, surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
+    related: [{ name: "Portneuf", entityType: "MRC", population: 3329, councilUrl: "https://villedeportneuf.com/fr/ma-ville/conseil-municipal/seances-du-conseil", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
   {
     name: "Saint-André-Avellin",
@@ -23764,7 +23764,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: null,
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://fossambault-sur-le-lac.com/ville/democratie/diffusion-des-seances-du-conseil/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -27813,7 +27813,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Montreal (agglomeration)",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.senneville.ca/municipalite/vie-democratique/ordres-du-jour-proces-verbaux-et-visioconference/",
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
   },
   {
@@ -34030,7 +34030,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Acadian Peninsula",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://tracadienb.ca/en/town-hall/council-meetings",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34086,9 +34086,9 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southeast",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://capacadie.ca/en/municipality/council-meetings",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
-    related: [{ name: "Shediac", entityType: "Town", population: 7535, surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html" }],
+    related: [{ name: "Shediac", entityType: "Town", population: 7535, councilUrl: "https://shediac.ca/en/town-hall/council-meetings", surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html" }],
   },
   {
     name: "Oromocto",
@@ -34115,7 +34115,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kent",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://mairie-beausoleil.ca/en/town-hall/board-meetings-and-minutes",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34143,7 +34143,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kent",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://beaurivage.org/municipality/meeting-minutes/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34157,7 +34157,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southeast",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://tantramarnb.com/administration-and-government/meetings-minutes-and-agendas",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34171,7 +34171,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Western Valley",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://woodstocknb.ca/minutes-agendas",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34213,7 +34213,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southeast",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://easterncharlotte.ca/council/council-meetings/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34227,7 +34227,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southeast",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://memramcook.com/en/site_content/item/57-council-meetings",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34241,7 +34241,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Fundy Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://grandbaywestfield.ca/council-meetings-agendas-and-minutes/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34255,7 +34255,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southeast",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://fundyalbert.ca/governance/council-meetings/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34269,7 +34269,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Capital Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.hanwell.nb.ca/council/council-meetings/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34283,7 +34283,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southwest",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://town.ststephen.nb.ca/municipal-district-office/minutes-agendas-records-and-notice-meetings",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34297,7 +34297,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kings",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://sussex.ca/document-category/council-meetings/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34311,7 +34311,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Fundy Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://hampton.ca/documents/town-hall-meeting-agenda/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34353,7 +34353,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Capital Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://vonm.ca/town-hall/committees-of-council/council-meeting-minutes/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34437,7 +34437,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Restigouche",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.heron-bay.ca/meeting-archives-1",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34451,7 +34451,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kent",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://5-rivers.ca/city-hall/council-minutes/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34493,7 +34493,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southwest",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.villageofgrandmanan.com/document-type/council-meeting-minutes/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34507,7 +34507,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Southeast",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://salisburynb.ca/municipal-office/council-meetings/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34535,7 +34535,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Restigouche",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.saintquentinnb.com/en/r%C3%A9unions-du-conseil",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34591,7 +34591,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kent",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://saint-antoine.ca/en/municipality/council-meetings/2022",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -34605,7 +34605,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Greater Miramichi",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.neguac.com/en/home-2/reunions/",
     surveyStandards: "https://www2.gnb.ca/content/gnb/en/departments/dti/standards.html",
   },
   {
@@ -35040,7 +35040,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Hants County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.easthants.ca/meeting-minutes-agendas/",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35082,7 +35082,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Cumberland County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.cumberlandcounty.ns.ca/council-minutes-agendas.html",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35125,7 +35125,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Lunenburg County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://chester.ca/government/council/council-meetings",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35139,7 +35139,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Queens County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.regionofqueens.com/council-governance/council-agendas-minutes-audio/",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35181,7 +35181,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Richmond County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.richmondcounty.ca/council/municipal-documents-agendas-minutes-and-finances/regular-council/council-minutes.html",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35209,7 +35209,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Yarmouth County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.munargyle.com/minutes-agendas-and-recordings.html",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35223,7 +35223,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Digby County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.clarenovascotia.com/en/governance/council/council-meeting-minutes",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35239,7 +35239,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: "https://www.townofyarmouth.ca/agendas-minutes-livestream.html",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
-    related: [{ name: "Yarmouth District", entityType: "District Municipality", population: 9962, surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
+    related: [{ name: "Yarmouth District", entityType: "District Municipality", population: 9962, councilUrl: "https://munyarmouth.ca/index.php/government/agendas-minutes", surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
   },
   {
     name: "Victoria County",
@@ -35252,7 +35252,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Victoria County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pub-victoria.escribemeetings.com/",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35268,7 +35268,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: "https://kentville.ca/town-hall/council-committees",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
-    related: [{ name: "Kings County", entityType: "County Municipality", population: 28832, surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
+    related: [{ name: "Kings County", entityType: "County Municipality", population: 28832, councilUrl: "https://www.countyofkings.ca/government/council/Agendas-Minutes", surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
   },
   {
     name: "Barrington",
@@ -35281,7 +35281,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Shelburne County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.barringtonmunicipality.com/council/barrington-council-minutes",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35452,7 +35452,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
-    related: [{ name: "Digby District", entityType: "District Municipality", population: 7272, surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
+    related: [{ name: "Digby District", entityType: "District Municipality", population: 7272, councilUrl: "https://digbymun.ca/government/council-meeting-minutes.html", surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
   },
   {
     name: "Middleton",
@@ -35536,7 +35536,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Lunenburg County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.townofmahonebay.ca/council-agendas-minutes--meeting-packages.html",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35592,7 +35592,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Annapolis County",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://annapoliscounty.ca/home/208",
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
   },
   {
@@ -35622,7 +35622,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://novascotia.ca/tran/highways/ssm/",
-    related: [{ name: "West Hants", entityType: "Regional Municipality", population: 19509, surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
+    related: [{ name: "West Hants", entityType: "Regional Municipality", population: 19509, councilUrl: "https://www.westhants.ca/government/council-documents.html", surveyStandards: "https://novascotia.ca/tran/highways/ssm/" }],
   },
   {
     name: "Parrsboro",
@@ -36553,7 +36553,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pcsp.civicweb.net/Portal/MeetingTypeList.aspx",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36567,7 +36567,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 10",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://townhvgb.com/town-hall/council-committees2/meetings-minutes-2/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36595,7 +36595,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 10",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://labradorwest.com/town-hall/council/all/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36609,7 +36609,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 7",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://clarenville.ca/town-hall/councilmeetingminutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36623,7 +36623,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 4",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.stephenville.ca/town-hall/meeting-minutes-live-videos",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
     related: [{ name: "Kippens", entityType: "Town", population: 1842, surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/" }],
   },
@@ -36653,7 +36653,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 2",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://marystown.ca/town-hall/minutes-agendas/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36667,7 +36667,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 5",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://townofdeerlake.ca/town-hall/council-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36695,7 +36695,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 3",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.portauxbasques.ca/town-hall/council-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36709,7 +36709,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 5",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pasadena.ca/council-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36737,7 +36737,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 8",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.lewisporte.ca/town/meetings/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36751,7 +36751,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 7",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.townofbonavista.com/minutes",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36794,7 +36794,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://townofharbourgrace.ca/town-hall/council-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36837,7 +36837,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://holyrood.ca/local-government/town-council/council-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
     related: [{ name: "Avondale", entityType: "Town", population: 584, surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/" }],
   },
@@ -36852,7 +36852,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://lbmcoc.ca/council-minutes-and-agenda/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -36938,7 +36938,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://pouchcove.ca/town-hall/meeting-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -37023,7 +37023,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://townofflatrock.com/meeting-minutes/",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -37065,7 +37065,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Division No. 1",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.witlessbay.ca/minutes",
     surveyStandards: "https://www.gov.nl.ca/ti/hdc/highway-specification-book/",
   },
   {
@@ -39243,7 +39243,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "South Slave Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://hayriver.com/council-agendas/",
     surveyStandards: null,
   },
   {
@@ -39257,7 +39257,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Beaufort Delta Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://calendar.inuvik.ca/council/",
     surveyStandards: null,
   },
   {
@@ -39271,7 +39271,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "South Slave Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.fortsmith.ca/municipal/governance/council-meetings",
     surveyStandards: null,
   },
   {
@@ -39706,7 +39706,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kivalliq Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://rankininlet.ca/documents/",
     surveyStandards: null,
   },
   {
@@ -39720,7 +39720,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "Kivalliq Region",
     portalUrl: null,
-    councilUrl: null,
+    councilUrl: "https://www.arviat.ca/hamlet-office/council-minutes",
     surveyStandards: null,
   },
   {

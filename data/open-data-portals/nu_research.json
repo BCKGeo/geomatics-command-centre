@@ -49,8 +49,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://rankininlet.ca/documents/",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": null,
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -64,7 +64,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 2,975 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
@@ -81,8 +81,8 @@
       "gisViewerName": null,
       "gisViewerUrl": null,
       "councilPortalName": null,
-      "councilUrl": null,
-      "councilPlatform": null,
+      "councilUrl": "https://www.arviat.ca/hamlet-office/council-minutes",
+      "councilPlatform": "Custom",
       "engineeringStandardsUrl": null,
       "cadStandardsUrl": null,
       "constructionStandards": null,
@@ -96,7 +96,7 @@
       "contactDepartment": "GIS/IT",
       "industryFocus": "Geospatial",
       "description": "Hamlet in Nunavut. Pop. 2,864 (2021 Census).",
-      "lastVerified": "2026-04-07",
+      "lastVerified": "2026-04-08",
       "researchStatus": "partial"
     },
     {
