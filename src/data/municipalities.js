@@ -282,7 +282,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: "https://www.cvrd.ca/board-meetings",
     surveyStandards: "https://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines",
-    related: [{ name: "North Cowichan", entityType: "District Municipality", population: 31990, portalUrl: "http://data.northcowichan.ca", councilUrl: "https://pub-northcowichan.escribemeetings.com/", surveyStandards: "https://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines" }],
+    related: [{ name: "North Cowichan", entityType: "District Municipality", population: 31990, portalUrl: "https://data.northcowichan.ca", councilUrl: "https://pub-northcowichan.escribemeetings.com/", surveyStandards: "https://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines" }],
   },
   {
     name: "Okanagan-Similkameen Regional District",
@@ -845,7 +845,7 @@ export const MUNICIPALITIES = [
     tier: 2,
     hasPortal: true,
     parentGeography: "Regional District of Nanaimo",
-    portalUrl: "http://www.parksville.ca/cms.asp?wpID=697",
+    portalUrl: "https://www.parksville.ca/cms.asp?wpID=697",
     councilUrl: "https://www.parksville.ca/city-hall/council",
     surveyStandards: "https://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines",
   },
@@ -3933,7 +3933,7 @@ export const MUNICIPALITIES = [
     hasPortal: false,
     parentGeography: "MD of Pincher Creek No. 9",
     portalUrl: null,
-    councilUrl: "http://www.pinchercreek.ca/town/minutes.php",
+    councilUrl: "https://www.pinchercreek.ca/town/minutes.php",
     surveyStandards: "https://www.alberta.ca/highway-geometric-design-guide",
   },
   {
@@ -19325,7 +19325,7 @@ export const MUNICIPALITIES = [
     portalUrl: null,
     councilUrl: null,
     surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
-    related: [{ name: "Rawdon", entityType: "Municipalite", population: 11719, councilUrl: "http://rawdon.ca/administration-municipale/conseil-municipal/seances-du-conseil/", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
+    related: [{ name: "Rawdon", entityType: "Municipalite", population: 11719, councilUrl: "https://rawdon.ca/administration-municipale/conseil-municipal/seances-du-conseil/", surveyStandards: "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/" }],
   },
   {
     name: "Les Collines-de-l'Outaouais",

@@ -12,7 +12,12 @@ const TABS = [
 export function Provincial() {
   const { B } = useTheme();
   const [tab, setTab] = useState("prov");
+  const [mapLoaded, setMapLoaded] = useState(false);
   const cardStyle = { background: `linear-gradient(135deg,${B.surface},${B.surfaceHi})`, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, borderRadius: 0, padding: 16 };
+
+  // Trigger lazy load on first visit to map tab, then keep it mounted
+  if (tab === "muni" && !mapLoaded) setMapLoaded(true);
+
   return (
     <div>
       <div style={{ display: "flex", gap: 2, marginBottom: 12 }}>
@@ -35,14 +40,18 @@ export function Provincial() {
           </button>
         ))}
       </div>
-      <div style={{ ...cardStyle, maxWidth: tab === "muni" ? "none" : 720 }}>
-        {tab === "prov" && <ProvIntel initialProv="bc" />}
-        {tab === "muni" && (
+      {/* Provincial Intel */}
+      <div style={{ ...cardStyle, maxWidth: 720, display: tab === "prov" ? "block" : "none" }}>
+        <ProvIntel initialProv="bc" />
+      </div>
+      {/* Municipal Map -- kept mounted after first load to preserve MapLibre state */}
+      {mapLoaded && (
+        <div style={{ ...cardStyle, maxWidth: "none", display: tab === "muni" ? "block" : "none" }}>
           <Suspense fallback={<div style={{ color: B.textDim, fontSize: 12, padding: 16 }}>Loading map...</div>}>
             <MunicipalMap />
           </Suspense>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
