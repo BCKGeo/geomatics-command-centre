@@ -4,7 +4,6 @@ import { useLocation } from "../../context/LocationContext.jsx";
 import MapGL, { Source, Layer, Popup, NavigationControl } from "react-map-gl/maplibre";
 import { LngLatBounds } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { MUNICIPALITIES } from "../../data/municipalities.js";
 import { getShapeCategory, getCoverageScore, getCoverageColor, getSpriteId } from "../../data/entityCategories.js";
 import { registerSprites } from "../../data/markerSprites.js";
 import { MunicipalTable } from "./MunicipalTable.jsx";
@@ -24,54 +23,33 @@ const CLUSTER_COLORS = { small: "#6c8cff", medium: "#e6a817", large: "#e05252" }
 const SPARSE_PROVINCES = new Set(["YT", "NT", "NU"]);
 const isSparse = (m) => SPARSE_PROVINCES.has(m.province) || (m.province === "QC" && m.lat > 50);
 
-// Build GeoJSON once from MUNICIPALITIES, split into dense (clustered) and sparse (unclustered)
-const { geojsonData, sparseGeojsonData } = (() => {
-  const denseFeatures = [];
-  const sparseFeatures = [];
-  for (const m of MUNICIPALITIES) {
-    if (m.lat == null || m.lon == null) continue;
-    const coverageScore = getCoverageScore(m);
-    const shapeCategory = getShapeCategory(m.entityType);
-    const coverageColor = getCoverageColor(coverageScore);
-    const hasStandards = Boolean(m.surveyStandards);
-    const feature = {
-      type: "Feature",
-      geometry: { type: "Point", coordinates: [m.lon, m.lat] },
-      properties: {
-        name: m.name,
-        province: m.province,
-        population: m.population || 0,
-        entityType: m.entityType,
-        tier: m.tier,
-        portalUrl: m.portalUrl || "",
-        councilUrl: m.councilUrl || "",
-        surveyStandards: m.surveyStandards || "",
-        coverageScore,
-        shapeCategory,
-        coverageColor,
-        hasStandards,
-        spriteId: getSpriteId(shapeCategory, coverageColor, hasStandards),
-        hasRelated: m.related ? m.related.length : 0,
-        _sourceIndex: denseFeatures.length + sparseFeatures.length,
-      },
-    };
-    if (isSparse(m)) sparseFeatures.push(feature);
-    else denseFeatures.push(feature);
-  }
+// Build GeoJSON feature from a municipality entry
+function buildFeature(m, indexOffset) {
+  const coverageScore = getCoverageScore(m);
+  const shapeCategory = getShapeCategory(m.entityType);
+  const coverageColor = getCoverageColor(coverageScore);
+  const hasStandards = Boolean(m.surveyStandards);
   return {
-    geojsonData: { type: "FeatureCollection", features: denseFeatures },
-    sparseGeojsonData: { type: "FeatureCollection", features: sparseFeatures },
+    type: "Feature",
+    geometry: { type: "Point", coordinates: [m.lon, m.lat] },
+    properties: {
+      name: m.name,
+      province: m.province,
+      population: m.population || 0,
+      entityType: m.entityType,
+      tier: m.tier,
+      portalUrl: m.portalUrl || "",
+      councilUrl: m.councilUrl || "",
+      surveyStandards: m.surveyStandards || "",
+      coverageScore,
+      shapeCategory,
+      coverageColor,
+      hasStandards,
+      spriteId: getSpriteId(shapeCategory, coverageColor, hasStandards),
+      hasRelated: m.related ? m.related.length : 0,
+      _sourceIndex: indexOffset,
+    },
   };
-})();
-
-// Combined data for heatmaps (all points, no clustering)
-const allGeojsonData = { type: "FeatureCollection", features: [...geojsonData.features, ...sparseGeojsonData.features] };
-
-// Lookup table for quick municipality access -- keyed by "lat,lon-name"
-const municipalityByKey = new Map();
-for (const m of MUNICIPALITIES) {
-  if (m.lat == null || m.lon == null) continue;
-  municipalityByKey.set(`${m.lat},${m.lon}-${m.name}`, m);
 }
 
 // Province bounding boxes (approximate)
@@ -198,6 +176,8 @@ export const MunicipalMap = memo(function MunicipalMap() {
   const { B, theme } = useTheme();
   const { lat: userLat, lon: userLon, locSource } = useLocation();
   const mapRef = useRef(null);
+  const [municipalities, setMunicipalities] = useState(null);
+  const [dataError, setDataError] = useState(null);
   const [province, setProvince] = useState("All");
   const [search, setSearch] = useState("");
   const [popupInfo, setPopupInfo] = useState(null);
@@ -215,10 +195,56 @@ export const MunicipalMap = memo(function MunicipalMap() {
     } catch { return false; }
   });
 
-  const provinces = useMemo(() => {
-    const set = new Set(MUNICIPALITIES.map((m) => m.province));
-    return [...set].sort();
+  // Fetch municipality dataset on mount (not bundled into JS chunk)
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/municipalities.json")
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        if (!cancelled) setMunicipalities(data);
+      })
+      .catch((err) => {
+        if (!cancelled) setDataError(err.message);
+      });
+    return () => { cancelled = true; };
   }, []);
+
+  // Derived data -- built only after municipalities loads
+  const { geojsonData, sparseGeojsonData, allGeojsonData, municipalityByKey } = useMemo(() => {
+    if (!municipalities) {
+      return {
+        geojsonData: { type: "FeatureCollection", features: [] },
+        sparseGeojsonData: { type: "FeatureCollection", features: [] },
+        allGeojsonData: { type: "FeatureCollection", features: [] },
+        municipalityByKey: new Map(),
+      };
+    }
+    const denseFeatures = [];
+    const sparseFeatures = [];
+    const byKey = new Map();
+    for (const m of municipalities) {
+      if (m.lat == null || m.lon == null) continue;
+      const feature = buildFeature(m, denseFeatures.length + sparseFeatures.length);
+      if (isSparse(m)) sparseFeatures.push(feature);
+      else denseFeatures.push(feature);
+      byKey.set(`${m.lat},${m.lon}-${m.name}`, m);
+    }
+    return {
+      geojsonData: { type: "FeatureCollection", features: denseFeatures },
+      sparseGeojsonData: { type: "FeatureCollection", features: sparseFeatures },
+      allGeojsonData: { type: "FeatureCollection", features: [...denseFeatures, ...sparseFeatures] },
+      municipalityByKey: byKey,
+    };
+  }, [municipalities]);
+
+  const provinces = useMemo(() => {
+    if (!municipalities) return [];
+    const set = new Set(municipalities.map((m) => m.province));
+    return [...set].sort();
+  }, [municipalities]);
 
   // Debounced search
   const handleSearch = useCallback((value) => {
@@ -237,7 +263,8 @@ export const MunicipalMap = memo(function MunicipalMap() {
 
   // Filtered data for table -- province, search, then viewport bounds
   const filtered = useMemo(() => {
-    return MUNICIPALITIES.filter((m) => {
+    if (!municipalities) return [];
+    return municipalities.filter((m) => {
       if (m.lat == null || m.lon == null) return false;
       if (province !== "All" && m.province !== province) return false;
       if (debouncedSearch) {
@@ -252,7 +279,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
       }
       return true;
     });
-  }, [province, debouncedSearch, viewportBounds]);
+  }, [municipalities, province, debouncedSearch, viewportBounds]);
 
   // Flatten for table
   const tableRows = useMemo(() => {
@@ -356,7 +383,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
       setPopupInfo(null);
       setSelectedId(null);
     }
-  }, []);
+  }, [municipalityByKey]);
 
   // Hover cursor
   const onMouseEnter = useCallback(() => {
@@ -388,7 +415,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
     const m = municipalityByKey.get(`${row.lat},${row.lon}-${row.name}`) || row;
     setPopupInfo({ longitude: row.lon, latitude: row.lat, municipality: m });
     setSelectedId(`${row.lat},${row.lon}-${row.name}`);
-  }, []);
+  }, [municipalityByKey]);
 
   // Fit to search results
   useEffect(() => {
@@ -432,6 +459,22 @@ export const MunicipalMap = memo(function MunicipalMap() {
     alignItems: "center",
     gap: 4,
   };
+
+  if (dataError) {
+    return (
+      <div style={{ padding: 20, textAlign: "center", color: "#e05252", fontFamily: B.font, border: `1px solid ${B.border}`, borderRadius: 4 }}>
+        Failed to load municipalities: {dataError}
+      </div>
+    );
+  }
+
+  if (!municipalities) {
+    return (
+      <div style={{ padding: 20, textAlign: "center", color: B.textDim, fontFamily: B.font, border: `1px solid ${B.border}`, borderRadius: 4 }}>
+        Loading municipalities...
+      </div>
+    );
+  }
 
   if (!webglSupported) {
     return (

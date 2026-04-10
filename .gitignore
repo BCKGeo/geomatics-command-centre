@@ -3,6 +3,7 @@ dist/
 .DS_Store
 *.local
 .claude/
+.superpowers/
 stitch.zip
 __pycache__/
 data/open-data-portals/baseline/
