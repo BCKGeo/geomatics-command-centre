@@ -24,37 +24,42 @@ const timeoutSec = args.includes("--timeout") ? parseInt(args[args.indexOf("--ti
 const CONCURRENCY = 10;
 const DELAY_MS = 200;
 
-async function checkUrl(url, timeout) {
+const BROWSER_HEADERS = {
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "Accept-Language": "en-CA,en;q=0.9",
+  "Accept-Encoding": "gzip, deflate, br",
+};
+
+async function tryFetch(url, method, timeout) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout * 1000);
   try {
     const res = await fetch(url, {
-      method: "HEAD",
+      method,
       signal: controller.signal,
       redirect: "follow",
-      headers: { "User-Agent": "BCKGeo-LinkChecker/1.0" },
+      headers: BROWSER_HEADERS,
     });
     clearTimeout(timer);
-    return { url, status: res.status, ok: res.ok };
-  } catch {
+    return { status: res.status, ok: res.ok };
+  } catch (err) {
     clearTimeout(timer);
-    // Retry with GET if HEAD fails (some servers reject HEAD)
-    const controller2 = new AbortController();
-    const timer2 = setTimeout(() => controller2.abort(), timeout * 1000);
-    try {
-      const res = await fetch(url, {
-        method: "GET",
-        signal: controller2.signal,
-        redirect: "follow",
-        headers: { "User-Agent": "BCKGeo-LinkChecker/1.0" },
-      });
-      clearTimeout(timer2);
-      return { url, status: res.status, ok: res.ok };
-    } catch (err) {
-      clearTimeout(timer2);
-      return { url, status: 0, ok: false, error: err.cause?.code || err.message };
-    }
+    return { status: 0, ok: false, error: err.cause?.code || err.message };
   }
+}
+
+async function checkUrl(url, timeout) {
+  // Try HEAD first
+  let res = await tryFetch(url, "HEAD", timeout);
+  // If HEAD fails for any reason (network error, 4xx, 5xx), retry with GET
+  // Many servers reject HEAD or return 403/405 on HEAD but 200 on GET
+  if (!res.ok) {
+    const getRes = await tryFetch(url, "GET", timeout);
+    if (getRes.ok) res = getRes;
+    else if (getRes.status > 0) res = getRes; // Prefer HTTP status over network error
+  }
+  return { url, ...res };
 }
 
 function extractUrls(src, province) {
