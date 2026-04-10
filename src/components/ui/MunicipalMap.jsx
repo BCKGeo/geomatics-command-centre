@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect, memo } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
+import { useLocation } from "../../context/LocationContext.jsx";
 import MapGL, { Source, Layer, Popup, NavigationControl } from "react-map-gl/maplibre";
 import { LngLatBounds } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -195,6 +196,7 @@ const populationHeatLayer = {
 
 export const MunicipalMap = memo(function MunicipalMap() {
   const { B, theme } = useTheme();
+  const { lat: userLat, lon: userLon, locSource } = useLocation();
   const mapRef = useRef(null);
   const [province, setProvince] = useState("All");
   const [search, setSearch] = useState("");
@@ -204,6 +206,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
   const [overlays, setOverlays] = useState({ coverage: false, standards: false, population: false });
   const searchTimeout = useRef(null);
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [viewportBounds, setViewportBounds] = useState(null);
   const [isMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
   const [webglSupported] = useState(() => {
     try {
@@ -224,7 +227,15 @@ export const MunicipalMap = memo(function MunicipalMap() {
     searchTimeout.current = setTimeout(() => setDebouncedSearch(value), 250);
   }, []);
 
-  // Filtered data for table
+  // Track map viewport bounds for table filtering
+  const onMoveEnd = useCallback(() => {
+    const map = mapRef.current?.getMap();
+    if (!map) return;
+    const b = map.getBounds();
+    setViewportBounds({ west: b.getWest(), south: b.getSouth(), east: b.getEast(), north: b.getNorth() });
+  }, []);
+
+  // Filtered data for table -- province, search, then viewport bounds
   const filtered = useMemo(() => {
     return MUNICIPALITIES.filter((m) => {
       if (m.lat == null || m.lon == null) return false;
@@ -235,9 +246,13 @@ export const MunicipalMap = memo(function MunicipalMap() {
         const relatedMatch = m.related && m.related.some((r) => r.name.toLowerCase().includes(q));
         if (!nameMatch && !relatedMatch) return false;
       }
+      if (viewportBounds) {
+        if (m.lat < viewportBounds.south || m.lat > viewportBounds.north ||
+            m.lon < viewportBounds.west || m.lon > viewportBounds.east) return false;
+      }
       return true;
     });
-  }, [province, debouncedSearch]);
+  }, [province, debouncedSearch, viewportBounds]);
 
   // Flatten for table
   const tableRows = useMemo(() => {
@@ -424,7 +439,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
         <div style={{ padding: 20, textAlign: "center", color: B.textDim, fontFamily: B.font, border: `1px solid ${B.border}`, borderRadius: 4 }}>
           Your browser does not support WebGL maps. Browse the table below instead.
         </div>
-        <MunicipalTable rows={tableRows} B={B} selectedId={null} onRowClick={null} />
+        <MunicipalTable rows={tableRows} B={B} selectedId={null} onRowClick={null} userLat={locSource !== "default" ? userLat : null} userLon={locSource !== "default" ? userLon : null} />
       </div>
     );
   }
@@ -436,6 +451,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
       mapStyle={theme === "dark" ? STYLE_DARK : STYLE_LIGHT}
       onClick={onClick}
       onLoad={onMapLoad}
+      onMoveEnd={onMoveEnd}
       onStyleData={onMapStyleLoad}
       interactiveLayerIds={["clusters", "unclustered-circle", "sparse-circle", ...(spritesLoaded ? ["unclustered-point", "sparse-point"] : [])]}
       style={{ width: "100%", height: "100%" }}
@@ -580,7 +596,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
 
         {/* Bottom sheet with table */}
         <MobileBottomSheet B={B} resultCount={tableRows.length}>
-          <MunicipalTable rows={tableRows} B={B} selectedId={selectedId} onRowClick={onRowClick} />
+          <MunicipalTable rows={tableRows} B={B} selectedId={selectedId} onRowClick={onRowClick} userLat={locSource !== "default" ? userLat : null} userLon={locSource !== "default" ? userLon : null} />
         </MobileBottomSheet>
       </div>
     );
@@ -613,7 +629,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
 
       {/* Table */}
       <div id="municipal-table">
-        <MunicipalTable rows={tableRows} B={B} selectedId={selectedId} onRowClick={onRowClick} />
+        <MunicipalTable rows={tableRows} B={B} selectedId={selectedId} onRowClick={onRowClick} userLat={locSource !== "default" ? userLat : null} userLon={locSource !== "default" ? userLon : null} />
       </div>
     </div>
   );

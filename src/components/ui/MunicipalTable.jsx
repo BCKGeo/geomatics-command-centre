@@ -5,6 +5,14 @@ const PAGE_SIZE = 50;
 const COVERAGE_HEX = { green: "#4caf50", amber: "#e6a817", grey: "#555" };
 const COVERAGE_LABELS = { green: "Full", amber: "Partial", grey: "None" };
 
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 function LinkIcon({ url, label }) {
   if (!url) return <span style={{ color: "#555" }}>-</span>;
   return <a href={url} target="_blank" rel="noopener noreferrer" title={label} style={{ textDecoration: "none" }}>&#x2197;</a>;
@@ -28,12 +36,29 @@ function enrichRow(r) {
   return { ...r, coverageScore, coverageColor, shapeCategory, _enriched: true };
 }
 
-export function MunicipalTable({ rows, B, selectedId, onRowClick }) {
+export function MunicipalTable({ rows, B, selectedId, onRowClick, userLat, userLon }) {
+  const hasLocation = userLat != null && userLon != null;
   const [page, setPage] = useState(0);
-  const [sort, setSort] = useState({ col: "population", dir: "desc" });
+  const [sort, setSort] = useState({ col: hasLocation ? "distanceKm" : "population", dir: hasLocation ? "asc" : "desc" });
+  const [userChangedSort, setUserChangedSort] = useState(false);
   const selectedRef = useRef(null);
 
-  const enriched = useMemo(() => rows.map(enrichRow), [rows]);
+  const enriched = useMemo(() => rows.map((r) => {
+    const base = enrichRow(r);
+    if (hasLocation && r.lat != null && r.lon != null) {
+      return { ...base, distanceKm: haversineKm(userLat, userLon, r.lat, r.lon) };
+    }
+    return base;
+  }), [rows, hasLocation, userLat, userLon]);
+
+  // Switch to distance sort when location becomes available (unless user manually changed sort)
+  useEffect(() => {
+    if (hasLocation && !userChangedSort) {
+      setSort({ col: "distanceKm", dir: "asc" });
+    } else if (!hasLocation && !userChangedSort) {
+      setSort({ col: "population", dir: "desc" });
+    }
+  }, [hasLocation, userChangedSort]);
 
   useEffect(() => { setPage(0); }, [rows]);
 
@@ -62,7 +87,8 @@ export function MunicipalTable({ rows, B, selectedId, onRowClick }) {
   const pageRows = sorted.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   const toggleSort = (col) => {
-    setSort((prev) => prev.col === col ? { col, dir: prev.dir === "asc" ? "desc" : "asc" } : { col, dir: "desc" });
+    setUserChangedSort(true);
+    setSort((prev) => prev.col === col ? { col, dir: prev.dir === "asc" ? "desc" : "asc" } : { col, dir: col === "distanceKm" ? "asc" : "desc" });
   };
 
   useEffect(() => {
@@ -100,6 +126,7 @@ export function MunicipalTable({ rows, B, selectedId, onRowClick }) {
               {th("Type", "shapeCategory")}
               {th("Coverage", "coverageScore")}
               {th("Pop", "population")}
+              {hasLocation && th("Dist", "distanceKm", { textAlign: "right" })}
               <th style={{ padding: "4px 6px", borderBottom: `1px solid ${B.border}`, fontSize: 10, color: B.textDim }}>Links</th>
             </tr>
           </thead>
@@ -131,6 +158,11 @@ export function MunicipalTable({ rows, B, selectedId, onRowClick }) {
                     {r.surveyStandards && <span style={{ marginLeft: 3, fontSize: 9, color: "#4caf50", verticalAlign: "middle" }} title="Has survey standards">S</span>}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "right" }}>{r.population > 0 ? r.population.toLocaleString() : "-"}</td>
+                  {hasLocation && (
+                    <td style={{ ...cellStyle, textAlign: "right", fontSize: 10, color: B.textDim }}>
+                      {r.distanceKm != null ? `${Math.round(r.distanceKm).toLocaleString()} km` : "-"}
+                    </td>
+                  )}
                   <td style={{ ...cellStyle, textAlign: "center", fontSize: 10 }}>
                     {r.portalUrl || r.councilUrl || r.surveyStandards ? (<>
                       {r.portalUrl && <a href={r.portalUrl} target="_blank" rel="noopener noreferrer" title="Open Data Portal" style={{ color: B.pri, textDecoration: "none", marginRight: 4 }}>Data</a>}
