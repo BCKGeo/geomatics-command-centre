@@ -18,6 +18,9 @@
     "react-router-dom": "^7.13.2",
     "satellite.js": "^7.0.0"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "devDependencies": {
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
