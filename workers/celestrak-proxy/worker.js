@@ -4,15 +4,25 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:5173",
 ]);
 
-function corsOrigin(request) {
+function allowedOriginOrNull(request) {
   const origin = request.headers.get("Origin") || "";
-  return ALLOWED_ORIGINS.has(origin) ? origin : "https://dashboard.bckgeo.ca";
+  return ALLOWED_ORIGINS.has(origin) ? origin : null;
 }
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    const origin = corsOrigin(request);
+    const origin = allowedOriginOrNull(request);
+
+    // Fail closed: reject requests from unknown origins instead of
+    // stamping a default. Previous behavior exposed the worker to any
+    // caller with any Origin header.
+    if (!origin) {
+      return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
     // Handle CORS preflight
     if (request.method === "OPTIONS") {

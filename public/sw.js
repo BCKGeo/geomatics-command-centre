@@ -1,4 +1,4 @@
-const CACHE_NAME = "bckgeo-v5";
+const CACHE_NAME = "bckgeo-v6";
 const PRECACHE = ["/", "/index.html"];
 
 // Install: cache shell
@@ -18,6 +18,16 @@ self.addEventListener("activate", (e) => {
 });
 
 // Fetch: network-first for API calls, cache-first for assets
+const API_HOSTS = new Set([
+  "services.swpc.noaa.gov",
+  "api.open-meteo.com",
+  "api.weather.gc.ca",
+  "celestrak-proxy.bckgeo.workers.dev",
+  "api.bigdatacloud.net",
+]);
+
+const FONT_HOSTS = new Set(["fonts.googleapis.com", "fonts.gstatic.com"]);
+
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
 
@@ -25,13 +35,9 @@ self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET" || url.protocol === "chrome-extension:") return;
 
   // API calls: network-first with short cache fallback
-  if (
-    url.hostname.includes("swpc.noaa.gov") ||
-    url.hostname.includes("open-meteo.com") ||
-    url.hostname.includes("weather.gc.ca") ||
-    url.hostname.includes("workers.dev") ||
-    url.hostname.includes("bigdatacloud.net")
-  ) {
+  // (exact hostname match — previous .includes() would match attacker
+  // domains like evil-workers.dev.example.com)
+  if (API_HOSTS.has(url.hostname)) {
     e.respondWith(
       fetch(e.request)
         .then((res) => {
@@ -45,7 +51,7 @@ self.addEventListener("fetch", (e) => {
   }
 
   // Google Fonts: cache-first (long-lived)
-  if (url.hostname.includes("fonts.googleapis.com") || url.hostname.includes("fonts.gstatic.com")) {
+  if (FONT_HOSTS.has(url.hostname)) {
     e.respondWith(
       caches.match(e.request).then((cached) => cached || fetch(e.request).then((res) => {
         const clone = res.clone();
