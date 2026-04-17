@@ -8,3 +8,13 @@ stitch.zip
 __pycache__/
 data/open-data-portals/baseline/
 data/statcan/
+
+# Secrets (defense-in-depth; push protection is also on)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
