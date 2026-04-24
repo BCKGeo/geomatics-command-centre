@@ -75,7 +75,7 @@ The table `Links` column header itself is unchanged.
 - `councilUrl` → `municipalUrl` everywhere:
   - `public/municipalities.json` (runtime source of truth for the UI)
   - `data/open-data-portals/{ab,bc,mb,nb,nl,ns,nt,nu,on,pe,qc,sk,yt}_research.json` (research source of truth, per-province)
-  - All Python pipeline scripts that read or write the field (`research_pipeline.py`, `assemble_research.py`, `sync_municipalities_js.py`, `tier1_portals_fill.py`, `tier2_fill.py`, `tier3_fill.py`, `url_remediation.py`, `provincial_bulk_fill.py`, `qc_stub_fill.py`, `expand_quebec.py`, `stub_triage.py`, `build_excel.py`, `build_province_excel.py`)
+  - All Python pipeline scripts that read or write the field (13 scripts: `research_pipeline.py`, `assemble_research.py`, `sync_municipalities_js.py`, `tier1_portals_fill.py`, `tier2_fill.py`, `tier3_fill.py`, `url_remediation.py`, `provincial_bulk_fill.py`, `qc_stub_fill.py`, `expand_quebec.py`, `stub_triage.py`, `build_excel.py`, `build_province_excel.py`). The other four scripts in `scripts/` (`clean_phantom_portals.py`, `statcan_reconcile.py`, `tier1_standards_fill.py`, `validate_portals.py`) were audited and contain no `councilUrl` references — out of scope.
   - `src/components/ui/MunicipalMap.jsx` — `buildFeature` property assignment
   - `src/components/ui/MunicipalTable.jsx` — two references: the empty-state ternary guard (currently `r.portalUrl || r.councilUrl || r.surveyStandards`) **and** the cell-render branch. Both must be updated together or the empty-state check silently diverges from what renders.
   - `src/components/ui/MunicipalMapPopup.jsx` — two references: main entry and related-entities section.
@@ -148,6 +148,7 @@ buildFeature() → GeoJSON properties
   - `docs/superpowers/specs/` (historical spec docs including this one reference the old name for context)
   - `data/open-data-portals/baseline/` (historical snapshots, see §2)
   - Any `*.proposed.json` sidecar output from the normalize script (see §3)
+  - The diff output directory `diff/municipal_url_normalize/` (before/after diffs inherently contain the old field name)
   - Git history itself (only the working tree is gated)
 - **Link check**: `node scripts/check-links.js` runs clean end-to-end (fix in §4 makes this possible). Also verify `node scripts/check-links.js --province BC` exercises the restored province filter.
 - **Visual spot-check**: load the dashboard locally, navigate to Jurisdictions, confirm:
