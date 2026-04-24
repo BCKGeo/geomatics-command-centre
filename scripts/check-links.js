@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Link checker for public/municipalities.json.
- * Tests all portalUrl, councilUrl, and surveyStandards links for HTTP status.
+ * Tests all portalUrl, municipalUrl, and surveyStandards links for HTTP status.
  *
  * Usage:
  *   node scripts/check-links.js                # Check all URLs
@@ -66,16 +66,13 @@ function extractUrls(records, provinceFilter) {
   const urls = new Set();
   for (const m of records) {
     if (provinceFilter && m.province !== provinceFilter) continue;
-    // NOTE: reads councilUrl here because Phase 1 ships against the current
-    // data (pre-rename). Phase 2 Task 5 flips both references below to
-    // municipalUrl as part of the atomic field-rename commit.
     if (m.portalUrl) urls.add(m.portalUrl);
-    if (m.councilUrl) urls.add(m.councilUrl);
+    if (m.municipalUrl) urls.add(m.municipalUrl);
     if (m.surveyStandards) urls.add(m.surveyStandards);
     if (Array.isArray(m.related)) {
       for (const r of m.related) {
         if (r.portalUrl) urls.add(r.portalUrl);
-        if (r.councilUrl) urls.add(r.councilUrl);
+        if (r.municipalUrl) urls.add(r.municipalUrl);
         if (r.surveyStandards) urls.add(r.surveyStandards);
       }
     }

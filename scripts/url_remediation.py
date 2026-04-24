@@ -22,57 +22,57 @@ DATA_DIR = ROOT / "data" / "open-data-portals"
 URL_FIXES = [
     # BC
     {
-        "province": "BC", "entity": "Kamloops", "field": "councilUrl",
+        "province": "BC", "entity": "Kamloops", "field": "municipalUrl",
         "new_url": "https://www.kamloops.ca/city-hall/city-council/council-meetings",
     },
     # AB
     {
-        "province": "AB", "entity": "Lethbridge", "field": "councilUrl",
+        "province": "AB", "entity": "Lethbridge", "field": "municipalUrl",
         "new_url": "https://www.lethbridge.ca/council-administration-governance/agendas-minutes-and-council-meetings/",
     },
     {
-        "province": "AB", "entity": "Red Deer", "field": "councilUrl",
+        "province": "AB", "entity": "Red Deer", "field": "municipalUrl",
         "new_url": "https://www.reddeer.ca/city-government/mayor-and-city-councillors/council-meetings-and-schedule/",
     },
     {
-        "province": "AB", "entity": "Strathcona County", "field": "councilUrl",
+        "province": "AB", "entity": "Strathcona County", "field": "municipalUrl",
         "new_url": "https://www.strathcona.ca/council-county/mayor-council/council-meetings/agenda-packages-minutes-webcasts/",
     },
     {
-        "province": "AB", "entity": "Wood Buffalo", "field": "councilUrl",
+        "province": "AB", "entity": "Wood Buffalo", "field": "municipalUrl",
         "new_url": "https://www.rmwb.ca/local-government/mayor-council-and-administration/council/council-meetings-schedule/",
     },
     {
-        "province": "AB", "entity": "Grande Prairie", "field": "councilUrl",
+        "province": "AB", "entity": "Grande Prairie", "field": "municipalUrl",
         "new_url": "https://cityofgp.com/city-government/council-meetings",
     },
     {
-        "province": "AB", "entity": "Medicine Hat", "field": "councilUrl",
+        "province": "AB", "entity": "Medicine Hat", "field": "municipalUrl",
         "new_url": "https://www.medicinehat.ca/government-city-hall/mayor-city-council-administration/agendas-minutes/",
     },
     {
-        "province": "AB", "entity": "Rocky View County", "field": "councilUrl",
+        "province": "AB", "entity": "Rocky View County", "field": "municipalUrl",
         "new_url": "https://www.rockyview.ca/government/council/meetings-and-hearings",
     },
     {
-        "province": "AB", "entity": "Cochrane", "field": "councilUrl",
+        "province": "AB", "entity": "Cochrane", "field": "municipalUrl",
         "new_url": "https://www.cochrane.ca/government/council/council-meetings",
     },
     {
-        "province": "AB", "entity": "Parkland County", "field": "councilUrl",
+        "province": "AB", "entity": "Parkland County", "field": "municipalUrl",
         "new_url": "https://www.parklandcounty.com/county-government/meetings/",
     },
     {
-        "province": "AB", "entity": "Okotoks", "field": "councilUrl",
+        "province": "AB", "entity": "Okotoks", "field": "municipalUrl",
         "new_url": "https://www.okotoks.ca/your-government/your-council/council-meetings-agendas",
     },
     {
-        "province": "AB", "entity": "Fort Saskatchewan", "field": "councilUrl",
+        "province": "AB", "entity": "Fort Saskatchewan", "field": "municipalUrl",
         "new_url": "https://www.fortsask.ca/city-hall/city-council/council-meeting-agendas-and-minutes/",
     },
     # SK
     {
-        "province": "SK", "entity": "Prince Albert", "field": "councilUrl",
+        "province": "SK", "entity": "Prince Albert", "field": "municipalUrl",
         "new_url": "https://www.citypa.ca/city-hall/meetings-minutes-and-agendas/",
     },
     {
@@ -81,11 +81,11 @@ URL_FIXES = [
     },
     # MB
     {
-        "province": "MB", "entity": "Winnipeg", "field": "councilUrl",
+        "province": "MB", "entity": "Winnipeg", "field": "municipalUrl",
         "new_url": "https://www.winnipeg.ca/city-governance/mayor-council/council-committee-meetings",
     },
     {
-        "province": "MB", "entity": "Brandon", "field": "councilUrl",
+        "province": "MB", "entity": "Brandon", "field": "municipalUrl",
         "new_url": "https://www.brandon.ca/city-hall/agendas-and-minutes/",
     },
     # QC
@@ -95,17 +95,17 @@ URL_FIXES = [
     },
     # NB
     {
-        "province": "NB", "entity": "Saint John", "field": "councilUrl",
+        "province": "NB", "entity": "Saint John", "field": "municipalUrl",
         "new_url": "https://saintjohn.ca/en/city-hall/council-and-committees/minutes-agendas-and-records",
     },
     # NS
     {
-        "province": "NS", "entity": "Cape Breton (CBRM)", "field": "councilUrl",
+        "province": "NS", "entity": "Cape Breton (CBRM)", "field": "municipalUrl",
         "new_url": "https://cbrm.ns.ca/city-hall/committee-council-meetings/",
     },
     # PE
     {
-        "province": "PE", "entity": "Summerside", "field": "councilUrl",
+        "province": "PE", "entity": "Summerside", "field": "municipalUrl",
         "new_url": "https://www.summerside.ca/city_governance/council_chambers",
     },
 ]
@@ -133,7 +133,7 @@ AB_ADDITIONAL_COUNCIL_FIXES = [
 
 for name, url in AB_ADDITIONAL_COUNCIL_FIXES:
     URL_FIXES.append({
-        "province": "AB", "entity": name, "field": "councilUrl",
+        "province": "AB", "entity": name, "field": "municipalUrl",
         "new_url": url,
     })
 

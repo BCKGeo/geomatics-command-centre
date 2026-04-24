@@ -202,11 +202,11 @@ def discover_urls(entity, rate_limit=0.5):
                         discovered["apiEndpoint"] = "ArcGIS REST"
                         discovered["dataLicence"] = "OGL"
                 elif pattern_group == "civicweb":
-                    discovered["councilUrl"] = url
+                    discovered["municipalUrl"] = url
                     discovered["councilPortalName"] = "CivicWeb"
                     discovered["councilPlatform"] = "CivicWeb"
                 elif pattern_group == "escribe":
-                    discovered["councilUrl"] = url
+                    discovered["municipalUrl"] = url
                     discovered["councilPortalName"] = "eScribe"
                     discovered["councilPlatform"] = "eScribe"
                 break  # Found one in this group, move on
@@ -230,7 +230,7 @@ def make_empty_entity(name, entity_type, population, lat, lon, province, parent_
         "gisViewerName": None,
         "gisViewerUrl": None,
         "councilPortalName": None,
-        "councilUrl": None,
+        "municipalUrl": None,
         "councilPlatform": None,
         "engineeringStandardsUrl": None,
         "cadStandardsUrl": None,
@@ -301,7 +301,7 @@ def run_url_discovery(data, rate_limit=0.5):
 
     for i, entity in enumerate(entities):
         # Skip entities that already have portal URLs
-        if entity.get("openDataPortalUrl") and entity.get("councilUrl"):
+        if entity.get("openDataPortalUrl") and entity.get("municipalUrl"):
             continue
 
         tier = entity.get("tier", 3)
@@ -393,7 +393,7 @@ def run_pipeline(province, phases=None, skip_url_check=False):
             tier_counts[e.get("tier", 3)] += 1
             if e.get("openDataPortalUrl"):
                 portal_count += 1
-            if e.get("councilUrl"):
+            if e.get("municipalUrl"):
                 council_count += 1
 
         print(f"  Total entities: {len(entities)}")

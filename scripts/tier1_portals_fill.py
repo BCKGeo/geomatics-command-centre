@@ -191,7 +191,7 @@ VERIFIED = {
         "Haldimand County": {
             "openDataPortalUrl": "https://opendata-haldimand.hub.arcgis.com/",
             "portalPlatform": "ArcGIS Hub",
-            "councilUrl": "https://www.haldimandcounty.ca/government-administration/council/council-meetings/",
+            "municipalUrl": "https://www.haldimandcounty.ca/government-administration/council/council-meetings/",
             "councilPlatform": "Custom",
             "gisViewerUrl": "https://gis.haldimandcounty.ca/portal/apps/webappviewer/index.html?id=8a261d19234042fa81ee1f0dac0a3b22",
             "gisViewerName": "Haldimand County Interactive Map",
@@ -212,7 +212,7 @@ VERIFIED = {
     },
     "NS": {
         "Colchester": {
-            "councilUrl": "https://www.colchester.ca/meeting-agenda",
+            "municipalUrl": "https://www.colchester.ca/meeting-agenda",
             "councilPlatform": "Custom",
             "gisViewerUrl": "https://www.arcgis.com/apps/dashboards/510215b0a4384cbfaf901dac8b25347a",
             "gisViewerName": "Colchester Zoning Lookup",
@@ -244,25 +244,25 @@ VERIFIED = {
         "Longueuil (agglomeration)": {
             "openDataPortalUrl": "https://geohub.longueuil.quebec/pages/donnees-ouvertes",
             "portalPlatform": "ArcGIS Hub",
-            "councilUrl": "https://longueuil.quebec/fr/services/instances-decisionnelles-et-consultatives/conseil-agglomeration",
+            "municipalUrl": "https://longueuil.quebec/fr/services/instances-decisionnelles-et-consultatives/conseil-agglomeration",
             "councilPlatform": "Custom",
         },
         "Terrebonne": {
-            "councilUrl": "https://terrebonne.ca/seances-du-conseil-municipal/",
+            "municipalUrl": "https://terrebonne.ca/seances-du-conseil-municipal/",
             "councilPlatform": "Custom",
         },
         "Saint-Jean-sur-Richelieu": {
-            "councilUrl": "https://sjsr.ca/seances-du-conseil/",
+            "municipalUrl": "https://sjsr.ca/seances-du-conseil/",
             "councilPlatform": "Custom",
         },
         "Saint-Jerome": {
-            "councilUrl": "https://www.vsj.ca/event-category/seances-du-conseil-municipal/",
+            "municipalUrl": "https://www.vsj.ca/event-category/seances-du-conseil-municipal/",
             "councilPlatform": "Custom",
             "gisViewerUrl": "https://www.vsj.ca/carte-interactive/",
             "gisViewerName": "Saint-Jerome Carte Interactive",
         },
         "Granby": {
-            "councilUrl": "https://www.granby.ca/fr/seances-du-conseil-municipal",
+            "municipalUrl": "https://www.granby.ca/fr/seances-du-conseil-municipal",
             "councilPlatform": "Custom",
             "gisViewerUrl": "https://www.granby.ca/fr/cartes-et-plans-interactifs",
             "gisViewerName": "Granby Cartes Interactives",
@@ -270,23 +270,23 @@ VERIFIED = {
         "Shawinigan": {
             "openDataPortalUrl": "https://www.arcgis.com/home/item.html?id=868283d5a101427facd4ef07c8c7070e",
             "portalPlatform": "ArcGIS Hub",
-            "councilUrl": "https://www.shawinigan.ca/ville/conseil-municipal/seances-du-conseil/",
+            "municipalUrl": "https://www.shawinigan.ca/ville/conseil-municipal/seances-du-conseil/",
             "councilPlatform": "Custom",
             "gisViewerUrl": "https://www.shawinigan.ca/carte-interactive/",
             "gisViewerName": "Shawinigan Carte Interactive",
         },
         "Brossard": {
-            "councilUrl": "https://brossard.ca/assemblees-du-conseil-municipal/",
+            "municipalUrl": "https://brossard.ca/assemblees-du-conseil-municipal/",
             "councilPlatform": "Custom",
         },
         "Mirabel": {
-            "councilUrl": "https://mirabel.ca/evenements/seance-du-conseil-municipal-1",
+            "municipalUrl": "https://mirabel.ca/evenements/seance-du-conseil-municipal-1",
             "councilPlatform": "Custom",
             "gisViewerUrl": "https://mirabel.ca/carte-interactive",
             "gisViewerName": "Mirabel Carte Interactive",
         },
         "Chateauguay": {
-            "councilUrl": "https://ville.chateauguay.qc.ca/affaires-municipales/seances-du-conseil/",
+            "municipalUrl": "https://ville.chateauguay.qc.ca/affaires-municipales/seances-du-conseil/",
             "councilPlatform": "Custom",
         },
     },

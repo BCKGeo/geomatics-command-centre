@@ -16,7 +16,7 @@ DATA_DIR = ROOT / "data" / "open-data-portals"
 TODAY = date.today().isoformat()
 
 def c(url, platform="Custom"):
-    return {"councilUrl": url, "councilPlatform": platform}
+    return {"municipalUrl": url, "councilPlatform": platform}
 
 VERIFIED = {
     # ===================== ON =====================
