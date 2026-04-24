@@ -18,3 +18,8 @@ data/statcan/
 *.p12
 *.pfx
 secrets.json
+
+# Local workspace
+.worktrees/
+diff/
+/tmp/
