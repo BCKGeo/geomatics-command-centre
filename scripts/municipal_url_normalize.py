@@ -89,7 +89,7 @@ def infer_root_from_department(url: str) -> Optional[str]:
     return None
 
 
-def process_entry(entry: dict, results: list) -> Optional[str]:
+def process_entry(entry: dict, results: list, province: str) -> Optional[str]:
     """Returns the proposed municipalUrl (or existing value if unchanged)."""
     current = entry.get("municipalUrl")
     bucket = classify(current)
@@ -99,7 +99,7 @@ def process_entry(entry: dict, results: list) -> Optional[str]:
     # COUNCIL_PLATFORM is not auto-rewritten: too many platform-specific
     # domain conventions to safely infer the municipal front door.
     results.append({
-        "province": entry.get("province"),
+        "province": province,
         "name": entry.get("name"),
         "bucket": bucket.value,
         "before": current,
@@ -133,17 +133,17 @@ def save_province(prov: str, records: list) -> None:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
-def walk(records: list, results: list, apply: bool) -> int:
+def walk(records: list, results: list, apply: bool, province: str) -> int:
     """Walk records (including related[]). Returns number of rewrites proposed."""
     changes = 0
     for entry in records:
-        proposed = process_entry(entry, results)
+        proposed = process_entry(entry, results, province)
         if proposed and proposed != entry.get("municipalUrl"):
             changes += 1
             if apply:
                 entry["municipalUrl"] = proposed
         for rel in entry.get("related", []) or []:
-            proposed_rel = process_entry(rel, results)
+            proposed_rel = process_entry(rel, results, province)
             if proposed_rel and proposed_rel != rel.get("municipalUrl"):
                 changes += 1
                 if apply:
@@ -194,7 +194,7 @@ def main():
     for prov in provinces:
         records = load_province(prov)
         prov_results = []
-        changes = walk(records, prov_results, args.apply)
+        changes = walk(records, prov_results, args.apply, prov.upper())
         write_diff(prov, prov_results)
         all_results.extend(prov_results)
         total_changes += changes
