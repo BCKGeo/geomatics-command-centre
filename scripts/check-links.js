@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Link checker for municipalities.js.
+ * Link checker for public/municipalities.json.
  * Tests all portalUrl, councilUrl, and surveyStandards links for HTTP status.
  *
  * Usage:
@@ -62,16 +62,22 @@ async function checkUrl(url, timeout) {
   return { url, ...res };
 }
 
-function extractUrls(src, province) {
+function extractUrls(records, provinceFilter) {
   const urls = new Set();
-  const lines = src.split("\n");
-  const urlPattern = /https?:\/\/[^\s"',)]+/g;
-
-  for (const line of lines) {
-    if (province && !line.includes(`province: "${province}"`)) continue;
-    let match;
-    while ((match = urlPattern.exec(line)) !== null) {
-      urls.add(match[0]);
+  for (const m of records) {
+    if (provinceFilter && m.province !== provinceFilter) continue;
+    // NOTE: reads councilUrl here because Phase 1 ships against the current
+    // data (pre-rename). Phase 2 Task 5 flips both references below to
+    // municipalUrl as part of the atomic field-rename commit.
+    if (m.portalUrl) urls.add(m.portalUrl);
+    if (m.councilUrl) urls.add(m.councilUrl);
+    if (m.surveyStandards) urls.add(m.surveyStandards);
+    if (Array.isArray(m.related)) {
+      for (const r of m.related) {
+        if (r.portalUrl) urls.add(r.portalUrl);
+        if (r.councilUrl) urls.add(r.councilUrl);
+        if (r.surveyStandards) urls.add(r.surveyStandards);
+      }
     }
   }
   return [...urls];
@@ -103,8 +109,9 @@ async function main() {
   console.log("BCKGeo Link Checker");
   console.log("===================\n");
 
-  const src = readFileSync(join(ROOT, "src/data/municipalities.js"), "utf-8");
-  let urls = extractUrls(src, provinceFilter);
+  const raw = readFileSync(join(ROOT, "public/municipalities.json"), "utf-8");
+  const records = JSON.parse(raw);
+  let urls = extractUrls(records, provinceFilter);
 
   console.log(`Found ${urls.length} unique URLs` + (provinceFilter ? ` for ${provinceFilter}` : ""));
 
