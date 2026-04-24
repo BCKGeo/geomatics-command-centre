@@ -84,7 +84,7 @@ The table `Links` column header itself is unchanged.
 
 - **Rename ordering.** The rename is executed first as an atomic pass across all consumers (mechanical, one commit). The data-cleanup passes in §3 then operate on the already-renamed field. This avoids the normalize script needing to handle both field names simultaneously.
 
-- **Out of scope: baseline JSONs.** Files under `data/open-data-portals/baseline/` (`*_baseline.json`, `*_municipalities.json`, `*_tier1.json`, `*_tier2.json`, `*_standards.json`, `*_qa_report.json`, etc.) contain **zero** `councilUrl` occurrences — they are pre-field historical snapshots and do not need renaming.
+- **Out of scope: baseline JSONs.** Files under `data/open-data-portals/baseline/` (18 files: `*_baseline.json`, `*_municipalities.json`, `*_tier1.json`, `*_tier2.json`, `*_qa_report.json`, `national_qa_report.json`) contain ~2,478 `councilUrl` occurrences but are **historical intermediate snapshots**, not runtime or pipeline inputs. They're produced by earlier stages of the research pipeline and are only consumed by downstream scripts that have since been superseded by the `*_research.json` files. Leaving them with the old field name preserves their value as point-in-time artifacts. They are therefore explicitly excluded from both the rename and the grep-check gate (§7). Note: these are likely gitignored, which is why naive ripgrep passes may miss them — any verification grep must use `--no-ignore` or target the directory explicitly to see them.
 
 - **No backwards-compat alias.** The field disappears; clean rename. Any consumer that still reads `councilUrl` will break loudly at runtime or silently render blank cells — both are surfaced in the verification step.
 
@@ -143,7 +143,7 @@ buildFeature() → GeoJSON properties
 ### 7. Testing / verification
 
 - **Build check**: `npm run build` completes without errors or warnings about missing fields.
-- **Grep check**: zero hits for `councilUrl` in the repo, with these paths excluded from the gate:
+- **Grep check**: zero **substring occurrences** (not lines) of `councilUrl` in the repo. Because `public/municipalities.json` is minified to a single line, a line-counting grep (default `rg -c` / `grep -c`) would report at most `1` per file and hide hundreds of missed instances. The gate must count substring matches — e.g. `rg --count-matches councilUrl` or `grep -o councilUrl <file> | wc -l` — and sum across files. Paths excluded from the gate:
   - `node_modules/`
   - `docs/superpowers/specs/` (historical spec docs including this one reference the old name for context)
   - `data/open-data-portals/baseline/` (historical snapshots, see §2)
