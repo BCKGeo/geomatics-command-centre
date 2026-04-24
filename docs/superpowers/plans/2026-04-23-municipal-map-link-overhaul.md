@@ -27,7 +27,7 @@
 **Created:**
 - `scripts/municipal_url_normalize.py` — two-pass normalize script (classify, propose, apply)
 
-**Explicitly unchanged:** `data/open-data-portals/baseline/**` (historical snapshots, per spec §2); scripts `clean_phantom_portals.py`, `statcan_reconcile.py`, `tier1_standards_fill.py`, `validate_portals.py` (contain no `councilUrl` references, verified by grep).
+**Explicitly unchanged:** `data/open-data-portals/baseline/**` (historical snapshots, per spec §2); scripts `clean_phantom_portals.py`, `statcan_reconcile.py`, `tier1_standards_fill.py`, `validate_portals.py`, `data-to-json.mjs` (all contain no `councilUrl` references, verified by grep).
 
 ---
 
@@ -49,13 +49,16 @@ function extractUrls(records, provinceFilter) {
   const urls = new Set();
   for (const m of records) {
     if (provinceFilter && m.province !== provinceFilter) continue;
+    // NOTE: reads councilUrl here because Phase 1 ships against the current
+    // data (pre-rename). Phase 2 Task 5 flips both references below to
+    // municipalUrl as part of the atomic field-rename commit.
     if (m.portalUrl) urls.add(m.portalUrl);
-    if (m.councilUrl) urls.add(m.councilUrl);       // renamed in Phase 2
+    if (m.councilUrl) urls.add(m.councilUrl);
     if (m.surveyStandards) urls.add(m.surveyStandards);
     if (Array.isArray(m.related)) {
       for (const r of m.related) {
         if (r.portalUrl) urls.add(r.portalUrl);
-        if (r.councilUrl) urls.add(r.councilUrl);   // renamed in Phase 2
+        if (r.councilUrl) urls.add(r.councilUrl);
         if (r.surveyStandards) urls.add(r.surveyStandards);
       }
     }
@@ -91,7 +94,15 @@ node scripts/check-links.js --province BC --sample 10 --timeout 6
 
 Expected: "Found N unique URLs for BC" where N is notably smaller than the all-province count. Non-zero.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 4: Record baseline broken-count for later comparison**
+
+```bash
+node scripts/check-links.js --timeout 8 2>&1 | tee /tmp/check-links-baseline.log | grep -E "^Results:"
+```
+
+Note the "Results: X OK, Y broken" line. This is the pre-cleanup baseline; Phase 4 Step 1 must not exceed it (modulo normal flake). Jot Y down as `BASELINE_BROKEN` for reference.
+
+- [ ] **Step 5: Commit**
 
 ```bash
 git add scripts/check-links.js
@@ -181,14 +192,10 @@ And the related-entities pill block (current lines 57-59):
 
 ```bash
 cd "C:/Users/BCKGeoPC/Documents/_bckgeoai-infrastructure/bckgeoai-dashboard-v3"
+grep -c 'councilUrl' src/data/entityCategories.js src/components/ui/MunicipalMap.jsx src/components/ui/MunicipalTable.jsx src/components/ui/MunicipalMapPopup.jsx
 ```
 
-```powershell
-# PowerShell substring count across src/
-Get-Content -Raw src/data/entityCategories.js, src/components/ui/MunicipalMap.jsx, src/components/ui/MunicipalTable.jsx, src/components/ui/MunicipalMapPopup.jsx | Select-String -Pattern "councilUrl" -AllMatches | ForEach-Object { $_.Matches.Count } | Measure-Object -Sum
-```
-
-Expected: Sum = 0. Do **not** commit yet — rename must be atomic across data + scripts too.
+Expected: each file reports `0`. Do **not** commit yet — rename must be atomic across data + scripts too.
 
 ### Task 3: Rename in the Python pipeline scripts (×13)
 
@@ -205,11 +212,11 @@ For each of the 13 scripts in `scripts/`, open the file and replace every occurr
 
 - [ ] **Step 2: Verify — zero hits across scripts/**
 
-```powershell
-Get-ChildItem scripts/*.py | Get-Content -Raw | Select-String -Pattern "councilUrl" -AllMatches | ForEach-Object { $_.Matches.Count } | Measure-Object -Sum
+```bash
+grep -rc 'councilUrl' scripts/*.py | grep -v ':0$'
 ```
 
-Expected: Sum = 0.
+Expected: no output (every `.py` file has 0 matches, filtered out). If any file name prints with a non-zero count, rename missed.
 
 ### Task 4: Rename in the research JSONs (×13) and runtime JSON
 
@@ -221,31 +228,31 @@ Expected: Sum = 0.
 
 These files contain the key as `"councilUrl": "<url>"`. Substring replacement `"councilUrl":` → `"municipalUrl":` is safe (URL values never contain `councilUrl:`).
 
-On Windows PowerShell, do one file at a time to keep diffs small in case of any oddity:
+**Use `sed` via bash** — the env shell is Git Bash on Windows. Avoid PowerShell's `Set-Content -Encoding utf8` which writes a UTF-8 BOM on PS 5.1 and would break `json.load` in the Python pipeline.
 
-```powershell
-foreach ($prov in @("ab","bc","mb","nb","nl","ns","nt","nu","on","pe","qc","sk","yt")) {
-  $path = "data/open-data-portals/${prov}_research.json"
-  (Get-Content -Raw $path) -replace '"councilUrl":', '"municipalUrl":' | Set-Content -NoNewline -Encoding utf8 $path
-}
+```bash
+cd "C:/Users/BCKGeoPC/Documents/_bckgeoai-infrastructure/bckgeoai-dashboard-v3"
+for prov in ab bc mb nb nl ns nt nu on pe qc sk yt; do
+  sed -i 's/"councilUrl":/"municipalUrl":/g' "data/open-data-portals/${prov}_research.json"
+done
 ```
 
 - [ ] **Step 2: Rename in `public/municipalities.json`**
 
-```powershell
-(Get-Content -Raw public/municipalities.json) -replace '"councilUrl":', '"municipalUrl":' | Set-Content -NoNewline -Encoding utf8 public/municipalities.json
+```bash
+sed -i 's/"councilUrl":/"municipalUrl":/g' public/municipalities.json
 ```
 
 - [ ] **Step 3: Verify — zero substring hits across data JSONs and public/**
 
-```powershell
-Get-ChildItem -Path data/open-data-portals/*_research.json, public/municipalities.json | ForEach-Object {
-  $count = (Select-String -Path $_ -Pattern "councilUrl" -AllMatches).Matches.Count
-  "{0,-45} {1}" -f $_.Name, $count
-}
+```bash
+for f in data/open-data-portals/*_research.json public/municipalities.json; do
+  count=$(grep -o '"councilUrl":' "$f" | wc -l | tr -d ' ')
+  printf "%-50s %s\n" "$f" "$count"
+done
 ```
 
-Expected: all lines show count `0`.
+Expected: every line prints count `0`.
 
 ### Task 5: Rename in `scripts/check-links.js`
 
@@ -260,21 +267,17 @@ In the `extractUrls` function written in Task 1, change both `m.councilUrl` refe
 
 - [ ] **Step 1: Substring-count grep across the repo (the gate)**
 
-```powershell
-# Windows PowerShell — substring occurrences, respecting exclusion list from spec §7
-$excluded = @(
-  "node_modules",
-  "docs/superpowers/specs",
-  "data/open-data-portals/baseline",
-  "diff/municipal_url_normalize"
-)
-Get-ChildItem -Recurse -File | Where-Object {
-  $p = $_.FullName.Replace('\','/')
-  -not ($excluded | Where-Object { $p -like "*$_*" })
-} | Select-String -Pattern "councilUrl" -AllMatches
+Use ripgrep with `--no-ignore` so gitignored paths (like `data/open-data-portals/baseline/`) are seen, then exclude them explicitly. The exclusion list comes from spec §7.
+
+```bash
+rg --no-ignore --count-matches 'councilUrl' \
+  --glob '!node_modules/**' \
+  --glob '!docs/superpowers/specs/**' \
+  --glob '!data/open-data-portals/baseline/**' \
+  --glob '!diff/municipal_url_normalize/**'
 ```
 
-Expected: no output (zero matches). If any hit surfaces, investigate before proceeding.
+Expected: no output (zero matches). If any path prints with a non-zero count, investigate before proceeding.
 
 - [ ] **Step 2: Build cleanly**
 
@@ -290,7 +293,7 @@ Expected: exit 0, no warnings or errors about missing fields. `dist/` populated.
 node scripts/check-links.js --sample 30 --timeout 6
 ```
 
-Expected: runs to completion, prints OK/broken summary. Some broken are acceptable at this stage (cleanup in Phase 3 will improve, but dead council URLs can exist today).
+Expected: runs to completion, prints OK/broken summary. The broken count should be roughly proportional to `BASELINE_BROKEN / total * 30` recorded in Phase 1 Step 4 — a 30-URL sample isn't a gate, just a sanity signal that the rename didn't break the checker.
 
 - [ ] **Step 4: Dev-server visual check**
 
@@ -367,6 +370,19 @@ from municipal_url_normalize import classify, Bucket
 ])
 def test_classify(url, expected):
     assert classify(url) == expected
+
+
+from municipal_url_normalize import infer_root_from_department
+
+
+@pytest.mark.parametrize("url,expected", [
+    ("https://opendata.vancouver.ca",  "https://www.vancouver.ca"),
+    ("https://parks.edmonton.ca",      "https://www.edmonton.ca"),
+    ("https://data.crd.bc.ca",         "https://www.crd.bc.ca"),
+    ("https://city.ca",                None),  # 2 labels — cannot trim safely
+])
+def test_infer_root_from_department(url, expected):
+    assert infer_root_from_department(url) == expected
 ```
 
 - [ ] **Step 2: Run it, verify it fails (script doesn't exist yet)**
@@ -654,7 +670,7 @@ Open `diff/municipal_url_normalize/_flagged.tsv` in a spreadsheet tool. Sort by 
 - **Null**: the municipality genuinely has no public web presence — set `municipalUrl: null`.
 - **Keep**: the flagged URL is actually fine — e.g. a smaller municipality where the "council platform" is their only web presence. Document in a triage-notes column.
 
-Make these edits directly in the `*_research.json` files. Keep the scope bounded — if the flagged list exceeds ~250 rows, triage by tier first (tier 1 and 2 municipalities have the most user impact).
+Make these edits directly in the `*_research.json` files. **Cap this pass at 200 rows** (spec §3 expected volume). Triage by tier — tier 1 cities first, then tier 2, then tier 3. If the flagged list exceeds 200 rows, commit the top 200 and leave the rest as a follow-up issue (a TODO in `diff/municipal_url_normalize/_flagged_deferred.tsv` capturing unresolved rows, for a future session).
 
 - [ ] **Step 2: Regenerate `public/municipalities.json` from the updated research JSONs**
 
@@ -686,10 +702,10 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
 - [ ] **Step 1: Link-checker clean across all provinces (or near-clean)**
 
 ```bash
-node scripts/check-links.js --timeout 8
+node scripts/check-links.js --timeout 8 2>&1 | tee /tmp/check-links-final.log | grep -E "^Results:"
 ```
 
-Expected: summary of OK vs broken. Compare broken-list against pre-cleanup state — should be strictly smaller or similar, with known dead hosts addressed. Nulls in the research JSONs for any entries whose municipal URL is now confirmed dead; commit the nulls and regenerate `public/municipalities.json` if needed.
+Expected: `Results: X OK, Y broken` where `Y <= BASELINE_BROKEN` (recorded in Phase 1 Step 4), allowing for small network flake (≤ 5-URL tolerance). If `Y > BASELINE_BROKEN + 5`, investigate what the rename/cleanup broke before proceeding. Null any newly-broken URLs in the research JSONs, regenerate `public/municipalities.json`, and commit.
 
 - [ ] **Step 2: Build clean**
 
@@ -714,20 +730,15 @@ Stop the dev server.
 
 - [ ] **Step 4: Substring-count grep — final gate**
 
-```powershell
-$excluded = @(
-  "node_modules",
-  "docs/superpowers/specs",
-  "data/open-data-portals/baseline",
-  "diff/municipal_url_normalize"
-)
-Get-ChildItem -Recurse -File | Where-Object {
-  $p = $_.FullName.Replace('\','/')
-  -not ($excluded | Where-Object { $p -like "*$_*" })
-} | Select-String -Pattern "councilUrl" -AllMatches
+```bash
+rg --no-ignore --count-matches 'councilUrl' \
+  --glob '!node_modules/**' \
+  --glob '!docs/superpowers/specs/**' \
+  --glob '!data/open-data-portals/baseline/**' \
+  --glob '!diff/municipal_url_normalize/**'
 ```
 
-Expected: no output.
+Expected: no output. Note: the spec §7 exclusion list additionally mentions `*.proposed.json` sidecars; the plan uses a dry-run-until-apply model instead (no sidecar files are written), so that entry is not needed here.
 
 - [ ] **Step 5: Push (deploy)**
 
