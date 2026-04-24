@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 from enum import Enum
 from pathlib import Path
 from typing import Optional
@@ -188,6 +187,11 @@ def main():
     ap.add_argument("--apply", action="store_true", help="Write changes to research JSONs")
     args = ap.parse_args()
 
+    if args.province:
+        args.province = args.province.lower()
+        if args.province not in PROVINCES:
+            ap.error(f"unknown province '{args.province}'; expected one of: {', '.join(PROVINCES)}")
+
     provinces = [args.province] if args.province else PROVINCES
     all_results = []
     total_changes = 0
@@ -203,6 +207,7 @@ def main():
         print(f"{prov.upper()}: {len(prov_results):5d} entries, {changes:4d} proposed rewrites")
     n_flagged = write_flagged(all_results)
     summary(all_results)
+    print(f"Total proposed rewrites: {total_changes}")
     print(f"\nDiffs written to: {DIFF_DIR.relative_to(ROOT)}/")
     print(f"Flagged for manual review: {n_flagged} -> {FLAGGED_TSV.relative_to(ROOT)}")
     if not args.apply:

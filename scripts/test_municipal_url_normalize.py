@@ -1,6 +1,6 @@
 """Tests for the classify() function in municipal_url_normalize.py."""
 import pytest
-from municipal_url_normalize import classify, Bucket
+from municipal_url_normalize import classify, Bucket, infer_root_from_department
 
 
 @pytest.mark.parametrize("url,expected", [
@@ -17,15 +17,13 @@ from municipal_url_normalize import classify, Bucket
     # DEPARTMENT_SUBDOMAIN — right city, wrong front door
     ("https://opendata.vancouver.ca", Bucket.DEPARTMENT_SUBDOMAIN),
     ("https://parks.edmonton.ca", Bucket.DEPARTMENT_SUBDOMAIN),
-    # Empty / None
+    # Empty / None / garbage
     ("", Bucket.UNKNOWN),
     (None, Bucket.UNKNOWN),
+    ("not a url", Bucket.UNKNOWN),
 ])
 def test_classify(url, expected):
     assert classify(url) == expected
-
-
-from municipal_url_normalize import infer_root_from_department
 
 
 @pytest.mark.parametrize("url,expected", [
