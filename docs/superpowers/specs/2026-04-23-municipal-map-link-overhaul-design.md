@@ -50,13 +50,23 @@ Two problems:
 
 ### 1. UI labels and tooltips
 
-In `MunicipalTable.jsx` and `MunicipalMapPopup.jsx` (both main and related-entities sections):
+The two affordances use different label lengths on purpose: the table cell is space-constrained (short labels), the popup pill has room (longer labels). This follows the existing convention in the codebase (current popup uses `Data Portal` / `Standards` long-form already).
 
-| Slot      | Label (new) | Tooltip (new)              |
-| --------- | ----------- | -------------------------- |
-| slot 1    | `GIS`       | Open Data / GIS Portal     |
-| slot 2    | `Municipal` | Municipal Website          |
-| slot 3    | `Stds`      | Survey Standards           |
+**Table** — `MunicipalTable.jsx`:
+
+| Slot   | Label (new) | Tooltip (new)          |
+| ------ | ----------- | ---------------------- |
+| slot 1 | `GIS`       | Open Data / GIS Portal |
+| slot 2 | `Municipal` | Municipal Website      |
+| slot 3 | `Stds`      | Survey Standards       |
+
+**Popup** — `MunicipalMapPopup.jsx` (main entry **and** related-entities section — 2 occurrences):
+
+| Slot   | Label (new)    |
+| ------ | -------------- |
+| slot 1 | `Data Portal`  |
+| slot 2 | `Municipal`    |
+| slot 3 | `Standards`    |
 
 The table `Links` column header itself is unchanged.
 
@@ -67,10 +77,14 @@ The table `Links` column header itself is unchanged.
   - `data/open-data-portals/{ab,bc,mb,nb,nl,ns,nt,nu,on,pe,qc,sk,yt}_research.json` (research source of truth, per-province)
   - All Python pipeline scripts that read or write the field (`research_pipeline.py`, `assemble_research.py`, `sync_municipalities_js.py`, `tier1_portals_fill.py`, `tier2_fill.py`, `tier3_fill.py`, `url_remediation.py`, `provincial_bulk_fill.py`, `qc_stub_fill.py`, `expand_quebec.py`, `stub_triage.py`, `build_excel.py`, `build_province_excel.py`)
   - `src/components/ui/MunicipalMap.jsx` — `buildFeature` property assignment
-  - `src/components/ui/MunicipalTable.jsx` — cell rendering
-  - `src/components/ui/MunicipalMapPopup.jsx` — main + related rendering
-  - `src/data/entityCategories.js` — `getCoverageScore` reads this field; **this is a hard dependency** (coverage score drives marker color/shape, so the rename must be atomic with the field rename)
-  - `scripts/check-links.js` — comment reference (and see §4 on pre-existing bug)
+  - `src/components/ui/MunicipalTable.jsx` — two references: the empty-state ternary guard (currently `r.portalUrl || r.councilUrl || r.surveyStandards`) **and** the cell-render branch. Both must be updated together or the empty-state check silently diverges from what renders.
+  - `src/components/ui/MunicipalMapPopup.jsx` — two references: main entry and related-entities section.
+  - `src/data/entityCategories.js` — `getCoverageScore` reads this field; **this is a hard dependency** (coverage score drives marker color/shape, so the rename must be atomic with the field rename).
+  - `scripts/check-links.js` — comment reference (and see §4 on pre-existing bug).
+
+- **Rename ordering.** The rename is executed first as an atomic pass across all consumers (mechanical, one commit). The data-cleanup passes in §3 then operate on the already-renamed field. This avoids the normalize script needing to handle both field names simultaneously.
+
+- **Out of scope: baseline JSONs.** Files under `data/open-data-portals/baseline/` (`*_baseline.json`, `*_municipalities.json`, `*_tier1.json`, `*_tier2.json`, `*_standards.json`, `*_qa_report.json`, etc.) contain **zero** `councilUrl` occurrences — they are pre-field historical snapshots and do not need renaming.
 
 - **No backwards-compat alias.** The field disappears; clean rename. Any consumer that still reads `councilUrl` will break loudly at runtime or silently render blank cells — both are surfaced in the verification step.
 
@@ -98,10 +112,11 @@ The field rename is mechanical. The data cleanup is the substantive part.
 
 ### 4. Fix pre-existing bug: check-links.js
 
-`scripts/check-links.js` reads from `src/data/municipalities.js`, which no longer exists (data moved to `public/municipalities.json` per the memory commit `29e956b` perf: split data from code). The script is currently broken. Since we need it working for verification, fix it as part of this work:
+`scripts/check-links.js` reads from `src/data/municipalities.js`, which no longer exists (data moved to `public/municipalities.json` per the commit `29e956b` "perf: split data from code"). The script is currently broken. Since we need it working for verification, fix it as part of this work:
 
 - Change `readFileSync("src/data/municipalities.js")` → `readFileSync("public/municipalities.json")` + `JSON.parse`.
 - Update the URL-extraction logic: it currently regex-matches URLs out of a JS source file; switch to walking the parsed JSON and extracting `portalUrl`, `municipalUrl`, `surveyStandards` from each entry (including `related[]`).
+- **Preserve the `--province` flag.** The old implementation filtered by matching `province: "XX"` on the same source line as a URL (a JS-source artifact). The JSON-based implementation must replicate the filter by iterating records and comparing the `province` field before extracting URLs.
 - Update the inline doc comment to match.
 
 ### 5. Data flow (unchanged shape, renamed symbol)
@@ -128,8 +143,13 @@ buildFeature() → GeoJSON properties
 ### 7. Testing / verification
 
 - **Build check**: `npm run build` completes without errors or warnings about missing fields.
-- **Grep check**: zero hits for `councilUrl` in the repo (excluding `node_modules/`, historical spec docs in `docs/superpowers/specs/`, and git history).
-- **Link check**: `node scripts/check-links.js` runs clean (fix in §4 makes this possible).
+- **Grep check**: zero hits for `councilUrl` in the repo, with these paths excluded from the gate:
+  - `node_modules/`
+  - `docs/superpowers/specs/` (historical spec docs including this one reference the old name for context)
+  - `data/open-data-portals/baseline/` (historical snapshots, see §2)
+  - Any `*.proposed.json` sidecar output from the normalize script (see §3)
+  - Git history itself (only the working tree is gated)
+- **Link check**: `node scripts/check-links.js` runs clean end-to-end (fix in §4 makes this possible). Also verify `node scripts/check-links.js --province BC` exercises the restored province filter.
 - **Visual spot-check**: load the dashboard locally, navigate to Jurisdictions, confirm:
   - Column links read `GIS` / `Municipal` / `Stds`.
   - Hovering shows the updated tooltips.
