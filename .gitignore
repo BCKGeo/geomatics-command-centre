@@ -11,3 +11,4 @@ data/statcan/
 .worktrees/
 diff/
 /tmp/
+src/data/municipalities.js
