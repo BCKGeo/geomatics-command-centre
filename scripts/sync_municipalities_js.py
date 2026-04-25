@@ -60,7 +60,7 @@ def load_research_files():
                 "hasPortal": bool(entity.get("openDataPortalUrl")),
                 "parentGeography": entity.get("parentGeography"),
                 "portalUrl": entity.get("openDataPortalUrl"),
-                "councilUrl": entity.get("councilUrl"),
+                "municipalUrl": entity.get("municipalUrl"),
                 "surveyStandards": entity.get("engineeringStandardsUrl"),
             }
 
@@ -179,8 +179,8 @@ def format_related(related_list):
         fields.append(f'population: {r.get("population", 0)}')
         if r.get("portalUrl"):
             fields.append(f'portalUrl: {format_js_value(r["portalUrl"])}')
-        if r.get("councilUrl"):
-            fields.append(f'councilUrl: {format_js_value(r["councilUrl"])}')
+        if r.get("municipalUrl"):
+            fields.append(f'municipalUrl: {format_js_value(r["municipalUrl"])}')
         if r.get("surveyStandards"):
             fields.append(f'surveyStandards: {format_js_value(r["surveyStandards"])}')
         items.append("{ " + ", ".join(fields) + " }")
@@ -225,7 +225,7 @@ def generate_municipalities_js(entities_by_province):
             lines.append(f'    hasPortal: {format_js_value(entity.get("hasPortal", False))},')
             lines.append(f'    parentGeography: {format_js_value(entity.get("parentGeography"))},')
             lines.append(f'    portalUrl: {format_js_value(entity.get("portalUrl"))},')
-            lines.append(f'    councilUrl: {format_js_value(entity.get("councilUrl"))},')
+            lines.append(f'    municipalUrl: {format_js_value(entity.get("municipalUrl"))},')
             lines.append(f'    surveyStandards: {format_js_value(entity.get("surveyStandards"))},')
             if entity.get("related"):
                 lines.append(f'    related: {format_related(entity["related"])},')
@@ -272,7 +272,7 @@ def main():
                 "hasPortal": bool(fields.get("portalUrl") or fields.get("gisPortal")),
                 "parentGeography": fields.get("parentGeography"),
                 "portalUrl": fields.get("portalUrl") or fields.get("gisPortal"),
-                "councilUrl": fields.get("councilUrl"),
+                "municipalUrl": fields.get("municipalUrl"),
                 "surveyStandards": fields.get("surveyStandards"),
             }
             preserved += 1
@@ -296,7 +296,7 @@ def main():
     total = len(all_entities)
     with_coords = sum(1 for e in all_entities.values() if e.get("lat") and e.get("lon"))
     with_portal = sum(1 for e in all_entities.values() if e.get("hasPortal"))
-    with_council = sum(1 for e in all_entities.values() if e.get("councilUrl"))
+    with_council = sum(1 for e in all_entities.values() if e.get("municipalUrl"))
     tier_counts = {1: 0, 2: 0, 3: 0}
     for e in all_entities.values():
         t = e.get("tier", 3)

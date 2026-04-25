@@ -52,7 +52,7 @@ export function getShapeCategory(entityType) {
 }
 
 export function getCoverageScore(entry) {
-  return [entry.portalUrl, entry.councilUrl, entry.surveyStandards].filter(Boolean).length;
+  return [entry.portalUrl, entry.municipalUrl, entry.surveyStandards].filter(Boolean).length;
 }
 
 export function getCoverageColor(score) {

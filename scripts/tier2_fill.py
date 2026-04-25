@@ -23,7 +23,7 @@ def portal_entry(url, platform="ArcGIS Hub"):
     return entry
 
 def council_entry(url, platform="Custom"):
-    return {"councilUrl": url, "councilPlatform": platform}
+    return {"municipalUrl": url, "councilPlatform": platform}
 
 # All verified Tier 2 research results
 VERIFIED = {

@@ -193,7 +193,7 @@ def make_qc_entity(name, entity_type, population, lat, lon, parent_geo=None):
         "gisViewerName": None,
         "gisViewerUrl": None,
         "councilPortalName": None,
-        "councilUrl": None,
+        "municipalUrl": None,
         "councilPlatform": None,
         "engineeringStandardsUrl": "https://www.publicationsduquebec.gouv.qc.ca/produits-en-ligne/ouvrages-routiers/",
         "cadStandardsUrl": None,
@@ -334,7 +334,7 @@ def main():
         print(f"    Tier 2 (10-50K): {sum(1 for e in entities if e.get('tier') == 2)}")
         print(f"    Tier 3 (<10K): {sum(1 for e in entities if e.get('tier') == 3)}")
         print(f"    With portal: {sum(1 for e in entities if e.get('openDataPortalUrl'))}")
-        print(f"    With council: {sum(1 for e in entities if e.get('councilUrl'))}")
+        print(f"    With council: {sum(1 for e in entities if e.get('municipalUrl'))}")
 
 
 if __name__ == "__main__":

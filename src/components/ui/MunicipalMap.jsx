@@ -39,7 +39,7 @@ function buildFeature(m, indexOffset) {
       entityType: m.entityType,
       tier: m.tier,
       portalUrl: m.portalUrl || "",
-      councilUrl: m.councilUrl || "",
+      municipalUrl: m.municipalUrl || "",
       surveyStandards: m.surveyStandards || "",
       coverageScore,
       shapeCategory,

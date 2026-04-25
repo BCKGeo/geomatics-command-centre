@@ -41,10 +41,10 @@ for (const f of files) {
 
 const muniContent = readFileSync('src/data/municipalities.js', 'utf8');
 const munis = [];
-const muniRe = /\\{\\s*name:\\s*"([^"]+)",\\s*province:\\s*"(\\w+)",\\s*lat:\\s*([\\d.-]+),\\s*lon:\\s*([\\d.-]+),\\s*population:\\s*(\\d+),\\s*gisPortal:\\s*(?:"([^"]*?)"|null),\\s*councilUrl:\\s*(?:"([^"]*?)"|null),\\s*surveyStandards:\\s*(?:"([^"]*?)"|null)/g;
+const muniRe = /\\{\\s*name:\\s*"([^"]+)",\\s*province:\\s*"(\\w+)",\\s*lat:\\s*([\\d.-]+),\\s*lon:\\s*([\\d.-]+),\\s*population:\\s*(\\d+),\\s*gisPortal:\\s*(?:"([^"]*?)"|null),\\s*municipalUrl:\\s*(?:"([^"]*?)"|null),\\s*surveyStandards:\\s*(?:"([^"]*?)"|null)/g;
 let mm;
 while ((mm = muniRe.exec(muniContent)) !== null) {
-  munis.push({name:mm[1],province:mm[2],lat:+mm[3],lon:+mm[4],population:+mm[5],gisPortal:mm[6]||null,councilUrl:mm[7]||null,surveyStandards:mm[8]||null});
+  munis.push({name:mm[1],province:mm[2],lat:+mm[3],lon:+mm[4],population:+mm[5],gisPortal:mm[6]||null,municipalUrl:mm[7]||null,surveyStandards:mm[8]||null});
 }
 results['_municipalities'] = munis;
 console.log(JSON.stringify(results));
@@ -140,7 +140,7 @@ for pid in ['bc','ab','sk','mb','on','qc','nb','ns','pe','nl','yt','nt','nu']:
 
     for m in [x for x in data['_municipalities'] if x['province'] == pd['abbr']]:
         mrow = [pd['abbr'], m['name'], 'Municipal Government', f"{m['population']:,}",
-            None, m.get('gisPortal'), None, None, m.get('councilUrl'), m.get('surveyStandards'),
+            None, m.get('gisPortal'), None, None, m.get('municipalUrl'), m.get('surveyStandards'),
             None,None,None,None,None,None,None,None,None,None,
             f"Municipality in {prov_name}. Pop. {m['population']:,} (2021 Census).", '2026-04-05']
         for ci, val in enumerate(mrow, 1):

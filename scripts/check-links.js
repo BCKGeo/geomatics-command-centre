@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Link checker for municipalities.js.
- * Tests all portalUrl, councilUrl, and surveyStandards links for HTTP status.
+ * Link checker for public/municipalities.json.
+ * Tests all portalUrl, municipalUrl, and surveyStandards links for HTTP status.
  *
  * Usage:
  *   node scripts/check-links.js                # Check all URLs
@@ -62,16 +62,19 @@ async function checkUrl(url, timeout) {
   return { url, ...res };
 }
 
-function extractUrls(src, province) {
+function extractUrls(records, provinceFilter) {
   const urls = new Set();
-  const lines = src.split("\n");
-  const urlPattern = /https?:\/\/[^\s"',)]+/g;
-
-  for (const line of lines) {
-    if (province && !line.includes(`province: "${province}"`)) continue;
-    let match;
-    while ((match = urlPattern.exec(line)) !== null) {
-      urls.add(match[0]);
+  for (const m of records) {
+    if (provinceFilter && m.province !== provinceFilter) continue;
+    if (m.portalUrl) urls.add(m.portalUrl);
+    if (m.municipalUrl) urls.add(m.municipalUrl);
+    if (m.surveyStandards) urls.add(m.surveyStandards);
+    if (Array.isArray(m.related)) {
+      for (const r of m.related) {
+        if (r.portalUrl) urls.add(r.portalUrl);
+        if (r.municipalUrl) urls.add(r.municipalUrl);
+        if (r.surveyStandards) urls.add(r.surveyStandards);
+      }
     }
   }
   return [...urls];
@@ -103,8 +106,9 @@ async function main() {
   console.log("BCKGeo Link Checker");
   console.log("===================\n");
 
-  const src = readFileSync(join(ROOT, "src/data/municipalities.js"), "utf-8");
-  let urls = extractUrls(src, provinceFilter);
+  const raw = readFileSync(join(ROOT, "public/municipalities.json"), "utf-8");
+  const records = JSON.parse(raw);
+  let urls = extractUrls(records, provinceFilter);
 
   console.log(`Found ${urls.length} unique URLs` + (provinceFilter ? ` for ${provinceFilter}` : ""));
 

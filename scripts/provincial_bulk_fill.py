@@ -567,7 +567,7 @@ def print_stats(prov_code=None):
     fields = [
         "lidarAvailable", "orthophotoAvailable", "engineeringStandardsUrl",
         "constructionStandards", "wmsWfsEndpoints", "gisViewerUrl",
-        "councilUrl", "contactDepartment", "industryFocus", "lastVerified",
+        "municipalUrl", "contactDepartment", "industryFocus", "lastVerified",
         "openDataPortalUrl", "portalPlatform", "dataFormats",
     ]
 

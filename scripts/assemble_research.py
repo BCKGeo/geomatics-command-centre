@@ -138,7 +138,7 @@ def assemble(province_code):
         tier_counts[e.get("tier", 3)] += 1
         if e.get("openDataPortalUrl"):
             portal_count += 1
-        if e.get("councilUrl"):
+        if e.get("municipalUrl"):
             council_count += 1
         if e.get("engineeringStandardsUrl"):
             standards_count += 1

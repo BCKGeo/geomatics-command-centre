@@ -22,7 +22,7 @@ export function MunicipalMapPopup({ municipality, B }) {
 
       <div style={{ marginTop: 4 }}>
         {m.portalUrl && <a href={m.portalUrl} target="_blank" rel="noopener noreferrer" style={pillStyle(m.portalUrl)}>Data Portal &#x2197;</a>}
-        {m.councilUrl && <a href={m.councilUrl} target="_blank" rel="noopener noreferrer" style={pillStyle(m.councilUrl)}>Council &#x2197;</a>}
+        {m.municipalUrl && <a href={m.municipalUrl} target="_blank" rel="noopener noreferrer" style={pillStyle(m.municipalUrl)}>Municipal &#x2197;</a>}
         {m.surveyStandards && <a href={m.surveyStandards} target="_blank" rel="noopener noreferrer" style={pillStyle(m.surveyStandards)}>Standards &#x2197;</a>}
       </div>
 
@@ -55,7 +55,7 @@ function RelatedEntities({ related, B }) {
           {r.population > 0 && <span style={{ fontSize: 10, color: "#666" }}> | Pop. {r.population.toLocaleString()}</span>}
           <br />
           {r.portalUrl && <a href={r.portalUrl} target="_blank" rel="noopener noreferrer" style={pillStyle(r.portalUrl)}>Data &#x2197;</a>}
-          {r.councilUrl && <a href={r.councilUrl} target="_blank" rel="noopener noreferrer" style={pillStyle(r.councilUrl)}>Council &#x2197;</a>}
+          {r.municipalUrl && <a href={r.municipalUrl} target="_blank" rel="noopener noreferrer" style={pillStyle(r.municipalUrl)}>Municipal &#x2197;</a>}
           {r.surveyStandards && <a href={r.surveyStandards} target="_blank" rel="noopener noreferrer" style={pillStyle(r.surveyStandards)}>Standards &#x2197;</a>}
         </div>
       ))}

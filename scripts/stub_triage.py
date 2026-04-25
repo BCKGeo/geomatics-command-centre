@@ -26,7 +26,7 @@ DATA_DIR = ROOT / "data" / "open-data-portals"
 def classify_entity(entity):
     """Classify entity research status."""
     has_portal = bool(entity.get("openDataPortalUrl"))
-    has_council = bool(entity.get("councilUrl"))
+    has_council = bool(entity.get("municipalUrl"))
     has_standards = bool(entity.get("engineeringStandardsUrl"))
     has_gis = bool(entity.get("gisViewerUrl"))
     pop = entity.get("population", 0) or 0
@@ -34,7 +34,7 @@ def classify_entity(entity):
     # Count non-basic filled fields
     data_fields = [
         "openDataPortalUrl", "portalPlatform", "gisViewerUrl",
-        "councilUrl", "councilPlatform", "dataFormats",
+        "municipalUrl", "councilPlatform", "dataFormats",
         "apiEndpoint", "dataLicence", "cadStandardsUrl",
         "wmsWfsEndpoints", "contactDepartment",
     ]
