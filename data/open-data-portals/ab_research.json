@@ -1412,7 +1412,7 @@
     {
       "name": "Taber",
       "gisViewerUrl": "https://www.taber.ca/discover-taber/maps",
-      "municipalUrl": null,
+      "municipalUrl": "https://www.taber.ca",
       "lat": 49.7861,
       "lon": -112.1508,
       "coordinateSystem": "NAD83(CSRS) UTM Zone 12N; Provincial: Alberta 10-TM (EPSG:3402)",
