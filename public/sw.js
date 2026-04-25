@@ -1,75 +1,38 @@
-const CACHE_NAME = "bckgeo-v7";
-const PRECACHE = ["/", "/index.html"];
+// Self-unregistering kill-switch.
+//
+// The dashboard previously used a cache-first service worker for offline
+// support. We've moved to plain HTTP cache headers (see public/_headers) for
+// fresher updates without manual cache-name bumps. This SW exists only to
+// clean up after legacy v5/v6/v7 installations on returning users.
+//
+// On install: skip waiting so we activate immediately.
+// On activate: delete every cache, unregister this SW, then reload all open
+// clients so they pick up the cache-controlled HTTP behaviour without the
+// user having to refresh themselves.
+const CACHE_NAME = "bckgeo-killswitch-v1";
 
-// Install: cache shell
 self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting())
-  );
+  e.waitUntil(self.skipWaiting());
 });
 
-// Activate: clean old caches
 self.addEventListener("activate", (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    ).then(() => self.clients.claim())
-  );
-});
-
-// Fetch: network-first for API calls, cache-first for assets
-const API_HOSTS = new Set([
-  "services.swpc.noaa.gov",
-  "api.open-meteo.com",
-  "api.weather.gc.ca",
-  "celestrak-proxy.bckgeo.workers.dev",
-  "api.bigdatacloud.net",
-]);
-
-const FONT_HOSTS = new Set(["fonts.googleapis.com", "fonts.gstatic.com"]);
-
-self.addEventListener("fetch", (e) => {
-  const url = new URL(e.request.url);
-
-  // Skip non-GET and chrome-extension
-  if (e.request.method !== "GET" || url.protocol === "chrome-extension:") return;
-
-  // API calls: network-first with short cache fallback
-  // (exact hostname match — previous .includes() would match attacker
-  // domains like evil-workers.dev.example.com)
-  if (API_HOSTS.has(url.hostname)) {
-    e.respondWith(
-      fetch(e.request)
-        .then((res) => {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(e.request, clone));
-          return res;
-        })
-        .catch(() => caches.match(e.request))
-    );
-    return;
-  }
-
-  // Google Fonts: cache-first (long-lived)
-  if (FONT_HOSTS.has(url.hostname)) {
-    e.respondWith(
-      caches.match(e.request).then((cached) => cached || fetch(e.request).then((res) => {
-        const clone = res.clone();
-        caches.open(CACHE_NAME).then((c) => c.put(e.request, clone));
-        return res;
-      }))
-    );
-    return;
-  }
-
-  // App assets: cache-first, fallback to network
-  e.respondWith(
-    caches.match(e.request).then((cached) => cached || fetch(e.request).then((res) => {
-      if (res.ok) {
-        const clone = res.clone();
-        caches.open(CACHE_NAME).then((c) => c.put(e.request, clone));
+  e.waitUntil((async () => {
+    try {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((k) => caches.delete(k)));
+    } catch { /* ignore */ }
+    try {
+      await self.registration.unregister();
+    } catch { /* ignore */ }
+    try {
+      const clients = await self.clients.matchAll({ type: "window" });
+      for (const client of clients) {
+        try { client.navigate(client.url); } catch { /* ignore */ }
       }
-      return res;
-    }))
-  );
+    } catch { /* ignore */ }
+  })());
 });
+
+// While this SW is briefly active, do not intercept fetches — let the network
+// (and HTTP cache headers) handle them.
+self.addEventListener("fetch", () => { /* no-op */ });

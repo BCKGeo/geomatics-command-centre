@@ -6,12 +6,21 @@
   Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
   Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://services.swpc.noaa.gov https://api.weather.gc.ca https://api.open-meteo.com https://api.bigdatacloud.net https://nominatim.openstreetmap.org https://celestrak-proxy.bckgeo.workers.dev https://*.tile.openstreetmap.org https://demotiles.maplibre.org; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
 
+/
+  Cache-Control: no-cache, must-revalidate
+
+/index.html
+  Cache-Control: no-cache, must-revalidate
+
 /sw.js
-  Cache-Control: no-cache
+  Cache-Control: no-cache, no-store, must-revalidate
   Service-Worker-Allowed: /
 
 /manifest.json
   Cache-Control: public, max-age=86400
+
+/municipalities.json
+  Cache-Control: public, max-age=300, must-revalidate
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
