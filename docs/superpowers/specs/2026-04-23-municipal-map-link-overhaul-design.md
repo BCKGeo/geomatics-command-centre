@@ -173,6 +173,17 @@ buildFeature() → GeoJSON properties
 | `scripts/check-links.js`                             | Fix pre-existing bug + field rename                      |
 | `scripts/municipal_url_normalize.py`                 | **New** — audit + normalize script                       |
 
+### Helper scripts added during execution (post-spec)
+
+These weren't in the original component plan but emerged as the right tooling during implementation. Listed for spec/code parity.
+
+| File                                       | Purpose                                                                 |
+| ------------------------------------------ | ----------------------------------------------------------------------- |
+| `scripts/triage_flagged.py`                | Auto-triage `_flagged.tsv` from `municipal_url_normalize.py`. For each flagged COUNCIL_PLATFORM entry, derives a candidate municipal front-door URL from the hostname/name, HEAD/GET-verifies, and writes a `_triage_decisions.tsv`. Conservative: defers ambiguous rows. |
+| `scripts/triage_apply.py`                  | Reads `_triage_decisions.tsv` and applies REWRITE rows back to the research JSONs (in-place edit, preserves wrapper shape). DEFER rows go to `_flagged_deferred.tsv`. |
+| `scripts/strip_muniurl_paths.py`           | Strip every `municipalUrl` to its scheme+host root; null any root that doesn't probe alive. Re-applies the spirit of commit `ca0e40a` to currently-drifted data. Retry-aware: requires two failed probes before nulling, and treats 401/403 as alive (municipal sites with bot protection still serve real users). |
+| `scripts/restore_nulled_muniurls.py`       | Reverses false-negative nullings from the strip pass. Walks current research JSONs for `municipalUrl: null`, recovers the pre-strip URL via `git show <ref>` (default: parent of the strip commit), strips to root, and re-probes with the retry-aware probe. Restores roots that come back reachable. |
+
 ## Risks and mitigations
 
 | Risk                                                        | Mitigation                                                      |
@@ -187,3 +198,14 @@ buildFeature() → GeoJSON properties
 - Regenerate the 13 provincial Excel deliverables from the cleaned data.
 - Consider re-introducing a separate `councilRecordsUrl` field later if a use case surfaces.
 - Expand URL coverage for municipalities that currently have no `municipalUrl` at all.
+- Drop `src/main.jsx` lines 15–19 (legacy SW `update()` trigger) once telemetry confirms the kill-switch SW has propagated to all returning users.
+
+## Implementation deltas (post-spec)
+
+Items where the implementation diverged from the spec, captured for honesty:
+
+- **Spec §1 popup labels** described `Stds` for the table but `Standards` for the popup. During visual review the table label was unified to `Standards` for symmetry; both affordances now use the long form.
+- **Spec §3 Pass 1 normalize** was effectively a no-op against the current data — commit `ca0e40a` had already cleaned all DEPARTMENT_SUBDOMAIN entries. The 164 flagged COUNCIL_PLATFORM entries were instead handled by the auto-triage script (`triage_flagged.py` + `triage_apply.py`), which resolved 142 with HTTP-verified rewrites and deferred 22.
+- **A late deep-path strip pass** (`strip_muniurl_paths.py` + commit `3efc90b`) was added when the regenerated `public/municipalities.json` surfaced ~170 latent broken deep-path URLs that had drifted into the research JSONs after `ca0e40a`. This was re-applying the spirit of `ca0e40a` to current data.
+- **A subsequent restore pass** (`restore_nulled_muniurls.py` + commit `391782d`) recovered 8 of 18 falsely-nulled URLs after the initial strip ran without retry-or-bot-block tolerance.
+- **Service worker dropped** in commit `4d13e9f`. The dashboard previously used a cache-first SW for offline support; in practice we don't need offline use, and the cache-first pattern made every UI tweak require a manual `CACHE_NAME` bump to invalidate stale assets in returning users' browsers. Migrated to plain HTTP cache headers (`public/_headers`) plus a self-unregistering kill-switch SW for legacy installs. Out of scope of the original spec but tightly related to the rollout.

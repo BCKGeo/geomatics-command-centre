@@ -315,7 +315,7 @@ def build_province_excel(province_code):
         ("Tier 2 (pop 10k-50k)", str(sum(1 for e in entities if e.get("tier") == 2))),
         ("Tier 3 (pop <10k)", str(sum(1 for e in entities if e.get("tier") == 3))),
         ("With open data portal", str(sum(1 for e in entities if e.get("openDataPortalUrl")))),
-        ("With council URL", str(sum(1 for e in entities if e.get("municipalUrl")))),
+        ("With municipal URL", str(sum(1 for e in entities if e.get("municipalUrl")))),
         ("Data source", "BCKGeo Research Pipeline + Agent Verification"),
         ("Maintained by", "Ben Koops, AScT - BCKGeo (ben@bckgeo.ca)"),
         ("Last updated", data.get("lastUpdated", date.today().isoformat())),

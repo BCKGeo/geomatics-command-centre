@@ -307,7 +307,7 @@ def main():
     print(f"\nTotal entities: {total}")
     print(f"  With coordinates: {with_coords}")
     print(f"  With portal: {with_portal}")
-    print(f"  With council URL: {with_council}")
+    print(f"  With municipal URL: {with_council}")
     print(f"  Tier 1: {tier_counts[1]}, Tier 2: {tier_counts[2]}, Tier 3: {tier_counts[3]}")
     print(f"\nBy province:")
     for prov in PROVINCE_ORDER:
