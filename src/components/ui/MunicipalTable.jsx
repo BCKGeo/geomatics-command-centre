@@ -1,9 +1,20 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, useSyncExternalStore } from "react";
 import { getShapeCategory, getCoverageScore, getCoverageColor } from "../../data/entityCategories.js";
 
 const PAGE_SIZE = 50;
 const COVERAGE_HEX = { green: "#4caf50", amber: "#e6a817", grey: "#555" };
 const COVERAGE_LABELS = { green: "Full", amber: "Partial", grey: "None" };
+
+function useMediaQuery(query) {
+  const subscribe = (cb) => {
+    const mql = window.matchMedia(query);
+    mql.addEventListener("change", cb);
+    return () => mql.removeEventListener("change", cb);
+  };
+  const getSnapshot = () => window.matchMedia(query).matches;
+  const getServerSnapshot = () => false;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 function haversineKm(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -38,6 +49,10 @@ function enrichRow(r) {
 
 export function MunicipalTable({ rows, B, selectedId, onRowClick, userLat, userLon }) {
   const hasLocation = userLat != null && userLon != null;
+  const isNarrow = useMediaQuery("(max-width: 480px)");
+  const linkLabels = isNarrow
+    ? { gis: "GIS", municipal: "Mun", standards: "Stds" }
+    : { gis: "GIS", municipal: "Municipal", standards: "Standards" };
   const [page, setPage] = useState(0);
   const [sort, setSort] = useState({ col: hasLocation ? "distanceKm" : "population", dir: hasLocation ? "asc" : "desc" });
   const [userChangedSort, setUserChangedSort] = useState(false);
@@ -165,9 +180,9 @@ export function MunicipalTable({ rows, B, selectedId, onRowClick, userLat, userL
                   )}
                   <td style={{ ...cellStyle, textAlign: "center", fontSize: 10 }}>
                     {r.portalUrl || r.municipalUrl || r.surveyStandards ? (<>
-                      {r.portalUrl && <a href={r.portalUrl} target="_blank" rel="noopener noreferrer" title="Open Data / GIS Portal" style={{ color: "#c08800", textDecoration: "none", marginRight: 4 }}>GIS</a>}
-                      {r.municipalUrl && <a href={r.municipalUrl} target="_blank" rel="noopener noreferrer" title="Municipal Website" style={{ color: B.pri, textDecoration: "none", marginRight: 4 }}>Municipal</a>}
-                      {r.surveyStandards && <a href={r.surveyStandards} target="_blank" rel="noopener noreferrer" title="Survey Standards" style={{ color: "#4caf50", textDecoration: "none" }}>Standards</a>}
+                      {r.portalUrl && <a href={r.portalUrl} target="_blank" rel="noopener noreferrer" title="Open Data / GIS Portal" style={{ color: "#c08800", textDecoration: "none", marginRight: 4 }}>{linkLabels.gis}</a>}
+                      {r.municipalUrl && <a href={r.municipalUrl} target="_blank" rel="noopener noreferrer" title="Municipal Website" style={{ color: B.pri, textDecoration: "none", marginRight: 4 }}>{linkLabels.municipal}</a>}
+                      {r.surveyStandards && <a href={r.surveyStandards} target="_blank" rel="noopener noreferrer" title="Survey Standards" style={{ color: "#4caf50", textDecoration: "none" }}>{linkLabels.standards}</a>}
                     </>) : <span style={{ color: "#555" }}>--</span>}
                   </td>
                 </tr>

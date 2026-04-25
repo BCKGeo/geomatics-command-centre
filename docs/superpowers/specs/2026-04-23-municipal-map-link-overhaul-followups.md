@@ -124,13 +124,11 @@ Effort: 45 min including setup of testing-library if not present.
 
 ### UX
 
-#### 8. Mobile narrow-viewport label width
+#### 8. ~~Mobile narrow-viewport label width~~ — DONE (2026-04-24)
 
-"GIS Municipal Standards" wraps awkwardly on narrow Android viewports. Cell is `whiteSpace: "nowrap"` so it scrolls horizontally — not broken, just ugly.
+`MunicipalTable.jsx` now switches link labels from `GIS / Municipal / Standards` to `GIS / Mun / Stds` at viewport width ≤ 480px via an inline `useMediaQuery` (`useSyncExternalStore` + `window.matchMedia`).
 
-**Approach:** at viewport width < 480px, switch the labels back to short forms (`GIS`, `Mun`, `Stds`). Conditional via `window.matchMedia` or a `useMediaQuery` hook.
-
-Effort: 20 min. Low priority.
+Note: only the table was touched. `MunicipalMapPopup.jsx` keeps full labels (the popup has more horizontal room).
 
 ## Suggested order
 
@@ -139,12 +137,12 @@ If doing one focused session, in order of value:
 1. ~~**#4 npm audit fix**~~ — done 2026-04-24
 2. ~~**#1 7 truly-dead URLs**~~ — done 2026-04-24
 3. ~~**#3 ESLint baseline**~~ — done 2026-04-24 (spawned #3a, #3b)
-4. **#5 drop legacy SW code** (only if past 2026-04-30)
-5. **#3b ESLint warnings cleanup** (30-45 min)
-6. **#2 deferred council-platform URLs** (only if you want to grind through all 22)
-7. **#3a react-hooks v7 strict-rule cleanup** (1-2 hr, own session)
-8. **#7 component tests** (nice to have, not urgent)
-9. **#8 mobile label width** (cosmetic)
+4. ~~**#8 mobile label width**~~ — done 2026-04-24
+5. **#5 drop legacy SW code** (only if past 2026-04-30)
+6. **#3b ESLint warnings cleanup** (30-45 min)
+7. **#2 deferred council-platform URLs** (only if you want to grind through all 22)
+8. **#3a react-hooks v7 strict-rule cleanup** (1-2 hr, own session)
+9. **#7 component tests** (nice to have, not urgent)
 10. **#6 minor deps** (optional)
 
 Skip / defer: major dependency bumps (React 19, Vite 8) — own session.
