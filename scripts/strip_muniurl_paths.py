@@ -31,6 +31,12 @@ USER_AGENT = (
 TIMEOUT = 8.0
 DELAY = 0.15
 
+# Retry policy: re-probe once after RETRY_DELAY seconds before declaring DEAD.
+# This prevents transient network blips from nulling otherwise-valid URLs on
+# a re-run. Set to 0 retries for fastest-but-most-destructive runs.
+RETRIES = 1
+RETRY_DELAY = 5.0
+
 
 def is_already_root(url: str) -> bool:
     """True if the URL has no meaningful path/query/fragment."""
@@ -45,22 +51,36 @@ def root_of(url: str) -> str:
     return f"{parsed.scheme}://{parsed.netloc}"
 
 
-def probe(url: str) -> bool:
-    """HEAD then GET. True if 2xx. Follows redirects."""
+# Status codes considered "host is reachable for a real user even if the
+# probe is being deflected." These survive as alive in the eyes of the strip
+# script. 401/403 are typical bot-blocks on municipal sites (Cloudflare bot
+# fight mode, AWS WAF, UA-based blocking) where a real browser still works.
+# Note: 404 is NOT in this set — a literal 404 on the root means the site
+# really has no front door at that URL.
+ALIVE_STATUS_CODES = {200, 201, 202, 203, 204, 205, 206, 401, 403}
+
+
+def _probe_once(url: str) -> bool:
+    """One probe attempt: HEAD then GET. True if the host responds with a
+    status that suggests a real user could reach it (see ALIVE_STATUS_CODES).
+    """
     headers = {"User-Agent": USER_AGENT, "Accept": "*/*"}
     for method in ("HEAD", "GET"):
         try:
             req = urllib.request.Request(url, headers=headers, method=method)
             with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-                if 200 <= resp.status < 300:
+                if resp.status in ALIVE_STATUS_CODES:
                     return True
-                # Non-2xx final response — try GET if HEAD gave us an ugly code
+                # Non-alive final response — try GET if HEAD gave us an ugly code
                 if method == "HEAD":
                     continue
                 return False
         except urllib.error.HTTPError as e:
-            # Some servers reject HEAD; try GET before giving up.
-            if method == "HEAD" and e.code in (400, 403, 405, 501):
+            # 401/403 are bot-blocks; treat as alive.
+            if e.code in ALIVE_STATUS_CODES:
+                return True
+            # Some servers reject HEAD with 4xx; try GET before giving up.
+            if method == "HEAD" and e.code in (400, 405, 501):
                 continue
             return False
         except (urllib.error.URLError, TimeoutError, ConnectionError, OSError):
@@ -71,6 +91,23 @@ def probe(url: str) -> bool:
             if method == "HEAD":
                 continue
             return False
+    return False
+
+
+def probe(url: str, retries: int = RETRIES, retry_delay: float = RETRY_DELAY) -> bool:
+    """Probe with retry. Returns True only if any attempt succeeds (2xx).
+    Returns False only if all attempts fail.
+
+    The retry guards against transient network failures (timeout, connection
+    reset, intermittent 5xx, DNS hiccups) wrongly nulling live URLs. Most
+    failures are real (NXDOMAIN, 4xx) and will fail both attempts quickly,
+    so the cost on already-dead URLs is just `retry_delay` extra seconds.
+    """
+    for attempt in range(retries + 1):
+        if _probe_once(url):
+            return True
+        if attempt < retries:
+            time.sleep(retry_delay)
     return False
 
 
