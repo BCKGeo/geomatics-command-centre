@@ -55,19 +55,27 @@ Effort: 2-3 hours total if done all at once. Could be batched / split.
 
 ### Code quality
 
-#### 3. ESLint baseline
+#### 3. ~~ESLint baseline~~ — DONE (2026-04-24)
 
-The project has no ESLint config. Adding a baseline `eslint.config.js` would catch unused vars, missing deps in hooks, accessibility regressions.
+`eslint.config.js` flat config with React + classic React Hooks rules. `npm run lint` exits 0 with 32 warnings (tech debt). Strict react-hooks v7 rules (`set-state-in-effect`, `purity`, `refs`, `immutability`, etc.) are intentionally NOT enabled — they flag legitimate legacy patterns that need real review. See "react-hooks v7 strict-rule cleanup" below.
 
-**Approach:**
-```bash
-npm install -D eslint @vitejs/plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
-# create eslint.config.js with React + React Hooks + a11y rules
-# add "lint": "eslint ." to package.json scripts
-# fix anything red, commit
-```
+#### 3a. react-hooks v7 strict-rule cleanup (new)
 
-Effort: 30 min. Be ready for some yelling on initial run; auto-fix what's safe, manually triage the rest.
+When the ESLint baseline went in we kept only `rules-of-hooks` + `exhaustive-deps` from `eslint-plugin-react-hooks` v7 because the v7 recommended preset would have erred on legacy patterns:
+
+- `react-hooks/set-state-in-effect` — 4 sites (CommandCentre.jsx, FlightOps.jsx, usePolledFeed.js, useSatellites.js)
+- `react-hooks/purity` — 2 sites (Date.now() in render, in usePolledFeed.js)
+- `react-hooks/refs` — 1 site
+
+Each needs the React-recommended pattern (state-derivation in render, lazy state init, or moving the side-effect outside the effect).
+
+Effort: 1-2 hours, own session. Re-enable each rule after fixing.
+
+#### 3b. ESLint warnings cleanup (new)
+
+32 warnings from the baseline run (mostly unused imports/vars + a few `exhaustive-deps`). Walk the list, delete or `_`-prefix dead code, fix or justify the deps.
+
+Effort: 30-45 min, own session.
 
 #### 4. ~~`npm audit fix` for postcss CVE~~ — DONE (2026-04-24)
 
@@ -130,12 +138,14 @@ If doing one focused session, in order of value:
 
 1. ~~**#4 npm audit fix**~~ — done 2026-04-24
 2. ~~**#1 7 truly-dead URLs**~~ — done 2026-04-24
-3. **#3 ESLint baseline** (catches future bugs)
+3. ~~**#3 ESLint baseline**~~ — done 2026-04-24 (spawned #3a, #3b)
 4. **#5 drop legacy SW code** (only if past 2026-04-30)
-5. **#2 deferred council-platform URLs** (only if you want to grind through all 22)
-6. **#7 component tests** (nice to have, not urgent)
-7. **#8 mobile label width** (cosmetic)
-8. **#6 minor deps** (optional)
+5. **#3b ESLint warnings cleanup** (30-45 min)
+6. **#2 deferred council-platform URLs** (only if you want to grind through all 22)
+7. **#3a react-hooks v7 strict-rule cleanup** (1-2 hr, own session)
+8. **#7 component tests** (nice to have, not urgent)
+9. **#8 mobile label width** (cosmetic)
+10. **#6 minor deps** (optional)
 
 Skip / defer: major dependency bumps (React 19, Vite 8) — own session.
 
