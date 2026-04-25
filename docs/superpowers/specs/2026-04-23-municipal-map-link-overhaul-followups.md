@@ -28,28 +28,19 @@ The original work shipped over commits `5f0bd09 → 9bd46ad` on main. Production
 
 ### Data quality
 
-#### 1. 7 truly-dead `municipalUrl` values to investigate
+#### 1. ~~7 truly-dead `municipalUrl` values to investigate~~ — DONE (2026-04-24)
 
-These all returned persistent connection failures or a 404 on root. Some may be rebrands / domain moves rather than genuinely dead.
+All 7 turned out to be rebrands / DNS changes. Replacements:
 
-| Entity | Province | Last-known URL | Probe result |
-| --- | --- | --- | --- |
-| Iqaluit (City of) | NU | `https://www.city.iqaluit.nu.ca` | connection fail |
-| Wheatland County | AB | `https://www.wheatlandcounty.ca` | connection fail |
-| Yellowhead County | AB | `https://www.yellowheadcounty.ab.ca` | connection fail |
-| Northern Rockies Regional District (NCRD)? | BC | `https://www.ncrd.bc.ca` | connection fail |
-| Spallumcheen | BC | `https://www.spallumcheen.ca` | connection fail |
-| Bradford West Gwillimbury | ON | `https://bradfordwestgwillimbury.civicweb.net` | civicweb, DNS dead |
-| Regional District of Kootenay Boundary (RDKB) | BC | `https://www.rdkb.com` | 404 on root |
-
-**Approach for each:**
-1. Search the web for the municipality's actual current website (rebrand check)
-2. If found: update the entity's `municipalUrl` directly in `data/open-data-portals/<prov>_research.json`
-3. Regenerate via `python scripts/sync_municipalities_js.py && node scripts/data-to-json.mjs`
-4. Verify in `public/municipalities.json`
-5. Commit + push
-
-Effort: 5-15 min per entity, mostly research.
+| Entity | Province | New URL |
+| --- | --- | --- |
+| Iqaluit (City of) | NU | `https://www.iqaluit.ca` |
+| Wheatland County | AB | `https://wheatlandcounty.ca` (apex only; www subdomain dead) |
+| Yellowhead County | AB | `https://www.yhcounty.ca` |
+| North Coast Regional District (NCRD) | BC | `https://www.ncrdbc.com` (was Skeena-Queen Charlotte until 2016; the followups doc had this mislabeled "Northern Rockies") |
+| Spallumcheen | BC | `https://www.spallumcheentwp.bc.ca` |
+| Bradford West Gwillimbury | ON | `https://www.townofbwg.com` (off civicweb) |
+| Regional District of Kootenay Boundary (RDKB) | BC | `https://www.rdkb.com` (returns 403 — alive per project probe rules) |
 
 #### 2. 22 deferred council-platform URLs
 
@@ -78,15 +69,9 @@ npm install -D eslint @vitejs/plugin-react eslint-plugin-react-hooks eslint-plug
 
 Effort: 30 min. Be ready for some yelling on initial run; auto-fix what's safe, manually triage the rest.
 
-#### 4. `npm audit fix` for postcss CVE
+#### 4. ~~`npm audit fix` for postcss CVE~~ — DONE (2026-04-24)
 
-```bash
-npm audit fix
-```
-
-Moderate severity, low real-risk for this site (no user-controlled CSS), but free fix.
-
-Effort: <2 min. Verify build still passes; commit.
+postcss 8.5.8 → 8.5.10 (GHSA-qx2v-qp2m-jg93). Build + 241 tests pass.
 
 #### 5. Drop legacy SW update-trigger
 
@@ -143,8 +128,8 @@ Effort: 20 min. Low priority.
 
 If doing one focused session, in order of value:
 
-1. **#4 npm audit fix** (2 min, free)
-2. **#1 7 truly-dead URLs** (research + fix, biggest user-visible win)
+1. ~~**#4 npm audit fix**~~ — done 2026-04-24
+2. ~~**#1 7 truly-dead URLs**~~ — done 2026-04-24
 3. **#3 ESLint baseline** (catches future bugs)
 4. **#5 drop legacy SW code** (only if past 2026-04-30)
 5. **#2 deferred council-platform URLs** (only if you want to grind through all 22)
