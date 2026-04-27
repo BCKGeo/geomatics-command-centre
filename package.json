@@ -12,11 +12,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "maplibre-gl": "^5.22.0",
+    "maplibre-gl": "^5.24.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-map-gl": "^8.1.0",
-    "react-router-dom": "^7.14.0",
+    "react-map-gl": "^8.1.1",
+    "react-router-dom": "^7.14.2",
     "satellite.js": "^7.0.0"
   },
   "engines": {
@@ -34,6 +34,6 @@
     "globals": "^17.5.0",
     "proj4": "^2.20.8",
     "vite": "^6.0.0",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.5"
   }
 }
