@@ -1,3 +1,0 @@
-name = "celestrak-proxy"
-main = "worker.js"
-compatibility_date = "2026-04-01"

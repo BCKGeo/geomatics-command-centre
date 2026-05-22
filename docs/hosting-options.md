@@ -99,7 +99,6 @@ bckgeo.ca (Cloudflare Pages)
   |-> React SPA (code-split, lazy-loaded tabs)
   |
   |-> Cloudflare Workers
-  |     |-> celestrak-proxy (satellite TLE data)
   |     |-> stripe-webhook (payment events)
   |     |-> kp-alert-cron (scheduled email alerts)
   |

@@ -87,11 +87,7 @@ export function SkyplotFallback() {
       <div style={{ fontSize: 32, marginBottom: 8 }}>{"\uD83D\uDEF0\uFE0F"}</div>
       <div style={{ fontSize: 12, fontWeight: 700, color: B.text, marginBottom: 6 }}>Satellite Visibility</div>
       <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5, marginBottom: 10 }}>
-        Deploy the Celestrak proxy worker to enable real-time GNSS satellite tracking.
-      </div>
-      <div style={{ fontSize: 10, color: B.textDim, fontFamily: "monospace", marginBottom: 8 }}>
-        cd workers/celestrak-proxy<br />
-        npx wrangler deploy
+        TLE data unavailable. Try refreshing, or check the live Celestrak source below.
       </div>
       <a href="https://celestrak.org/GPS/" target="_blank" rel="noopener noreferrer"
         style={{ fontSize: 10, color: B.pri, textDecoration: "underline" }}>

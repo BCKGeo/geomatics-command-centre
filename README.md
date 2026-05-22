@@ -21,7 +21,7 @@ A real-time operations dashboard for Canadian geomatics professionals. Aggregate
 - **MapLibre GL JS** for the jurisdictions map (WebGL, clustered markers, heatmaps)
 - **Tailwind-ish** inline styles with a shared theme context (dark/light)
 - **Cloudflare Pages** hosting, auto-deploy from `main`
-- **Cloudflare Worker** (`workers/celestrak-proxy/`) for CORS-proxied satellite TLE data
+- Satellite TLE data pre-fetched from celestrak.org at build time (see `scripts/fetch-tles.mjs`), refreshed daily by a scheduled GitHub Action
 
 ## Development
 
@@ -36,6 +36,7 @@ Requires Node 22 LTS (pinned via `.node-version`).
 
 ## Scripts
 
+- `scripts/fetch-tles.mjs` -- Pre-fetch GNSS TLEs from celestrak.org into `public/tles.json` (runs automatically via `prebuild`/`predev`)
 - `scripts/check-links.js` -- Validate all URLs in `public/municipalities.json`
 - `scripts/data-to-json.mjs` -- Regenerate JSON from the master data file
 - `scripts/validate_portals.py` -- Detect phantom ArcGIS Hub portal redirects
@@ -44,12 +45,7 @@ Requires Node 22 LTS (pinned via `.node-version`).
 
 The dashboard auto-deploys to [dashboard.bckgeo.ca](https://dashboard.bckgeo.ca) on every push to `main` via Cloudflare Pages. No manual deploy step.
 
-The `celestrak-proxy` Worker is deployed separately:
-
-```bash
-cd workers/celestrak-proxy
-npx wrangler deploy
-```
+A scheduled GitHub Action (`.github/workflows/refresh-tles.yml`) triggers a daily Pages rebuild so the bundled TLE data stays current. To enable, create a deploy hook in the Pages project settings and store the URL as the `CF_PAGES_DEPLOY_HOOK` repo secret.
 
 ## Security
 

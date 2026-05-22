@@ -35,7 +35,7 @@ export function CommandCentre() {
   const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
   const { data: aqhi, lastUpdated: aqhiUpdated } = useAQHI(lat, lon);
-  const { satellites: sat, tleLastUpdated: satUpdated, proxyAvailable: satProxy } = useSatellites(lat, lon);
+  const { satellites: sat, tleLastUpdated: satUpdated, tleAvailable: satProxy } = useSatellites(lat, lon);
   const [utc, setUtc] = useState(new Date());
   const [sun, setSun] = useState({ altitude: 0, azimuth: 0 });
   const [fieldTz, setFieldTz] = useState("");

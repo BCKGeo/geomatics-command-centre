@@ -24,3 +24,6 @@ secrets.json
 diff/
 /tmp/
 src/data/municipalities.js
+
+# Build artefact: TLE data pre-fetched from celestrak.org
+public/tles.json

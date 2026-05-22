@@ -25,7 +25,6 @@ This repository hosts a **static React SPA** deployed to Cloudflare Pages at das
 ### In scope
 - Client-side XSS, prototype pollution, or other code injection via the React app
 - Supply-chain issues in npm dependencies
-- Issues in the `celestrak-proxy` Cloudflare Worker (`workers/celestrak-proxy/`)
 - Leaked secrets, tokens, or credentials in the repo or build artifacts
 - CSRF or open-redirect in any interactive endpoint
 
@@ -40,8 +39,8 @@ This repository hosts a **static React SPA** deployed to Cloudflare Pages at das
 - **No user authentication** as of this writing; nothing behind a login
 - **No backend database**; no PII is collected, stored, or transmitted
 - **Location data** is used client-side only (GPS or manual coordinate entry) and stored in `localStorage` on the user's device. Coordinates are sent to BigDataCloud for reverse geocoding and to Open-Meteo / NOAA for weather and space weather data
-- **Cloudflare Worker** at `celestrak-proxy.bckgeo.workers.dev` is a read-only relay for Celestrak satellite TLE data with a hard-coded whitelist of acceptable `groups` parameters and origin-restricted CORS
-- All third-party API calls are from the browser, not proxied through our infrastructure (except Celestrak)
+- **Satellite TLE data** is pre-fetched from `celestrak.org` at build time by `scripts/fetch-tles.mjs` and served as a static asset (`public/tles.json`). No runtime relay
+- All third-party API calls are from the browser, not proxied through our infrastructure
 
 ## Dependencies and Monitoring
 
