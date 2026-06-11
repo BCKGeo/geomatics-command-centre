@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
@@ -11,9 +11,46 @@ import { KpCell } from "../ui/KpCell.jsx";
 import { FreshBadge } from "../ui/FreshBadge.jsx";
 import { ForecastRow } from "../ui/ForecastRow.jsx";
 import { Skyplot, SkyplotFallback } from "../ui/Skyplot.jsx";
-import { LocationMap } from "../ui/LocationMap.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
 import { WMO, DEFAULT_TZ } from "../../data/constants.js";
+
+// Lazy: LocationMap pulls in react-map-gl + maplibre-gl (~280 KB gzip) — keep
+// it off the home page's critical path.
+const LocationMap = lazy(() => import("../ui/LocationMap.jsx").then(m => ({ default: m.LocationMap })));
+
+// Owns the 1s sun-position tick so the rest of the page doesn't re-render with it.
+function SunMoonCard({ B, cardStyle, insetStyle, lat, lon }) {
+  const [sun, setSun] = useState(() => calcSun(new Date(), lat, lon));
+
+  useEffect(() => {
+    setSun(calcSun(new Date(), lat, lon));
+    const t = setInterval(() => setSun(calcSun(new Date(), lat, lon)), 1000);
+    return () => clearInterval(t);
+  }, [lat, lon]);
+
+  const moon = getMoon(new Date());
+
+  return (
+    <div style={cardStyle}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+        <span>{sun.altitude > 0 ? "☀️" : "🌙"}</span>
+        <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Sun & Moon</h2>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+        <div style={{ ...insetStyle, padding: 8, textAlign: "center" }}>
+          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>SUN ALT</div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: sun.altitude > 0 ? B.gold : B.textDim, fontFamily: B.display }}>{sun.altitude.toFixed(1)}{"°"}</div>
+          <div style={{ fontSize: 10, color: B.textMid }}>Az {sun.azimuth.toFixed(1)}{"°"}</div>
+        </div>
+        <div style={{ ...insetStyle, padding: 8, textAlign: "center" }}>
+          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>MOON</div>
+          <div style={{ fontSize: 20, marginBottom: 2 }}>{moon.icon}</div>
+          <div style={{ fontSize: 10, color: B.textMid }}>{moon.name} {moon.illum}%</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const stations = [
   { i: "\u2708\uFE0F", t: "Flight Ops", d: "RPAS regs, NOTAMs, airspace", to: "/flight-ops" },
@@ -36,29 +73,6 @@ export function CommandCentre() {
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
   const { data: aqhi, lastUpdated: aqhiUpdated } = useAQHI(lat, lon);
   const { satellites: sat, tleLastUpdated: satUpdated, tleAvailable: satProxy } = useSatellites(lat, lon);
-  const [utc, setUtc] = useState(new Date());
-  const [sun, setSun] = useState({ altitude: 0, azimuth: 0 });
-  const [fieldTz, setFieldTz] = useState("");
-  const [typewriterText, setTypewriterText] = useState("");
-
-  // ── Clock & Typewriter ──
-  useEffect(() => {
-    const t = setInterval(() => { const n = new Date(); setUtc(n); setSun(calcSun(n, lat, lon)); }, 1000);
-    return () => clearInterval(t);
-  }, [lat, lon]);
-
-  useEffect(() => {
-    const words = ["GEOMATICS", "GEODESY", "REMOTE SENSING", "GIS", "SPATIAL AI", "LiDAR", "PHOTOGRAMMETRY", "RPAS"];
-    let wi = 0, ci = 0, deleting = false, pause = 0;
-    const t = setInterval(() => {
-      const word = words[wi];
-      if (pause > 0) { pause--; return; }
-      if (!deleting) { ci++; setTypewriterText(word.substring(0, ci)); if (ci === word.length) { deleting = true; pause = 28; } }
-      else { ci--; setTypewriterText(word.substring(0, ci)); if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; pause = 6; } }
-    }, 65);
-    return () => clearInterval(t);
-  }, []);
-
   // ── Extract Data ──
   const kp = sw?.kp?.slice(-9) || [], sc = sw?.scales || {}, gS = sc["0"]?.G?.Scale || "0", sS = sc["0"]?.S?.Scale || "0", rS = sc["0"]?.R?.Scale || "0";
   // NOAA summary endpoints return arrays: [{proton_speed,time_tag}], [{bt,bz_gsm,time_tag}], [{flux,time_tag}]
@@ -70,9 +84,6 @@ export function CommandCentre() {
   const magBz = swMag?.Bz || swMag?.bz_gsm || "--";
   const fluxVal = swFlux?.Flux || swFlux?.flux || "--";
   const cur = wx?.current || {}, dy = wx?.daily || {}, wc = cur.weather_code ?? 0, wi = WMO[wc] || { i: "\u2753", d: "Unknown" };
-  const moon = getMoon(new Date());
-
-  const getFieldTzTime = () => { if (!fieldTz) return "--:--:--"; return utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: fieldTz }); };
 
   const cardStyle = { background: `linear-gradient(135deg,${B.surface},${B.surfaceHi})`, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, borderRadius: 0, padding: 16 };
   const insetStyle = { background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL };
@@ -113,7 +124,9 @@ export function CommandCentre() {
         {/* Weather + Location Map */}
         <div style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
           <div style={{ marginBottom: 10 }}>
-            <LocationMap />
+            <Suspense fallback={<div style={{ height: 252 }} />}>
+              <LocationMap />
+            </Suspense>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
             <span>{"\uD83C\uDF24\uFE0F"}</span>
@@ -305,24 +318,7 @@ export function CommandCentre() {
         </div>
 
         {/* Sun & Moon */}
-        <div style={cardStyle}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <span>{sun.altitude > 0 ? "\u2600\uFE0F" : "\uD83C\uDF19"}</span>
-            <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: B.text }}>Sun & Moon</h2>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-            <div style={{ ...insetStyle, padding: 8, textAlign: "center" }}>
-              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>SUN ALT</div>
-              <div style={{ fontSize: 20, fontWeight: 800, color: sun.altitude > 0 ? B.gold : B.textDim, fontFamily: B.display }}>{sun.altitude.toFixed(1)}{"\u00B0"}</div>
-              <div style={{ fontSize: 10, color: B.textMid }}>Az {sun.azimuth.toFixed(1)}{"\u00B0"}</div>
-            </div>
-            <div style={{ ...insetStyle, padding: 8, textAlign: "center" }}>
-              <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.font, letterSpacing: 1, marginBottom: 4 }}>MOON</div>
-              <div style={{ fontSize: 20, marginBottom: 2 }}>{moon.icon}</div>
-              <div style={{ fontSize: 10, color: B.textMid }}>{moon.name} {moon.illum}%</div>
-            </div>
-          </div>
-        </div>
+        <SunMoonCard B={B} cardStyle={cardStyle} insetStyle={insetStyle} lat={lat} lon={lon} />
       </div>
 
       {/* ═══ GNSS Conditions Summary ═══ */}

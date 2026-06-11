@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Link, useLocation as useRouterLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { LocationProvider, useLocation } from "./context/LocationContext.jsx";
-import { DARK, LIGHT } from "./lib/theme.js";
 
 // Pages — lazy-loaded so each tab is its own chunk
 const CommandCentre = lazy(() => import("./components/pages/CommandCentre.jsx").then(m => ({ default: m.CommandCentre })));
@@ -101,11 +100,26 @@ function LocationChip({ B, insetStyle }) {
   );
 }
 
-function Layout() {
-  const { theme, B, toggleTheme } = useTheme();
-  const routerLocation = useRouterLocation();
+// Leaf components for high-frequency state: keeps the 65ms typewriter and
+// 1s clock ticks from re-rendering the entire Layout tree (nav + active page).
+function Typewriter({ B }) {
+  const [text, setText] = useState("");
+  useEffect(() => {
+    const words = ["GEOMATICS", "GEODESY", "REMOTE SENSING", "GIS", "SPATIAL AI", "LiDAR", "PHOTOGRAMMETRY", "RPAS"];
+    let wi = 0, ci = 0, deleting = false, pause = 0;
+    const t = setInterval(() => {
+      const word = words[wi];
+      if (pause > 0) { pause--; return; }
+      if (!deleting) { ci++; setText(word.substring(0, ci)); if (ci === word.length) { deleting = true; pause = 28; } }
+      else { ci--; setText(word.substring(0, ci)); if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; pause = 6; } }
+    }, 65);
+    return () => clearInterval(t);
+  }, []);
 
-  // Zulu / Local clock
+  return <div style={{ fontSize: 10, color: B.textDim, marginTop: 4, letterSpacing: ".2em", fontFamily: B.font }} className="tagline">{text}</div>;
+}
+
+function ClockStrip({ B, insetStyle }) {
   const [utc, setUtc] = useState(new Date());
   const [fieldTz, setFieldTz] = useState("");
   const userTz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "America/Toronto";
@@ -115,25 +129,50 @@ function Layout() {
     return () => clearInterval(t);
   }, []);
 
-  // Typewriter
-  const [typewriterText, setTypewriterText] = useState("");
-  useEffect(() => {
-    const words = ["GEOMATICS", "GEODESY", "REMOTE SENSING", "GIS", "SPATIAL AI", "LiDAR", "PHOTOGRAMMETRY", "RPAS"];
-    let wi = 0, ci = 0, deleting = false, pause = 0;
-    const t = setInterval(() => {
-      const word = words[wi];
-      if (pause > 0) { pause--; return; }
-      if (!deleting) { ci++; setTypewriterText(word.substring(0, ci)); if (ci === word.length) { deleting = true; pause = 28; } }
-      else { ci--; setTypewriterText(word.substring(0, ci)); if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; pause = 6; } }
-    }, 65);
-    return () => clearInterval(t);
-  }, []);
-
   const getFieldTzTime = () => {
     if (!fieldTz) return "--:--:--";
     return utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: fieldTz });
   };
 
+  return (
+    <>
+      <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
+        <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>ZULU</div>
+        <div style={{ fontSize: 16, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums", textShadow: `0 0 8px ${B.gold}44` }}>{utc.toISOString().substring(11, 19)}Z</div>
+      </div>
+      <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
+        <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>LOCAL</div>
+        <div style={{ fontSize: 16, fontWeight: 700, color: B.text, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums" }}>{utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: userTz })}</div>
+      </div>
+      <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center", minWidth: 100 }}>
+        <select value={fieldTz} onChange={e => setFieldTz(e.target.value)} style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, background: "transparent", border: "none", letterSpacing: 1, cursor: "pointer", textAlign: "center", width: "100%", padding: 0, outline: "none", WebkitAppearance: "none", appearance: "none" }}>
+          <option value="">FIELD TZ</option>
+          <option value="Pacific/Honolulu">HST (UTC-10)</option>
+          <option value="America/Anchorage">AKST (UTC-9)</option>
+          <option value="America/Los_Angeles">PST (UTC-8)</option>
+          <option value="America/Denver">MST (UTC-7)</option>
+          <option value="America/Chicago">CST (UTC-6)</option>
+          <option value="America/New_York">EST (UTC-5)</option>
+          <option value="America/Halifax">AST (UTC-4)</option>
+          <option value="America/St_Johns">NST (UTC-3:30)</option>
+          <option value="Europe/London">GMT (UTC+0)</option>
+          <option value="Europe/Paris">CET (UTC+1)</option>
+          <option value="Europe/Helsinki">EET (UTC+2)</option>
+          <option value="Asia/Dubai">GST (UTC+4)</option>
+          <option value="Asia/Kolkata">IST (UTC+5:30)</option>
+          <option value="Asia/Tokyo">JST (UTC+9)</option>
+          <option value="Australia/Sydney">AEST (UTC+10)</option>
+          <option value="Pacific/Auckland">NZST (UTC+12)</option>
+        </select>
+        <div style={{ fontSize: 16, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums" }}>{getFieldTzTime()}</div>
+      </div>
+    </>
+  );
+}
+
+function Layout() {
+  const { theme, B, toggleTheme } = useTheme();
+  const routerLocation = useRouterLocation();
   const navRef = useRef(null);
 
   // Auto-center active nav tab on route change
@@ -213,7 +252,7 @@ function Layout() {
             </div>
             <div>
               <h1 style={{ margin: 0, fontSize: 20, fontWeight: 900, color: B.text, letterSpacing: ".15em", fontFamily: B.display, lineHeight: 1 }}>BCK<span style={{ color: B.priBr }}>Geo</span></h1>
-              <div style={{ fontSize: 10, color: B.textDim, marginTop: 4, letterSpacing: ".2em", fontFamily: B.font }} className="tagline">{typewriterText}</div>
+              <Typewriter B={B} />
             </div>
           </div>
           <div className="clock-row" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
@@ -222,36 +261,7 @@ function Layout() {
               {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
             </button>
             <LocationChip B={B} insetStyle={insetStyle} />
-            <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
-              <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>ZULU</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums", textShadow: `0 0 8px ${B.gold}44` }}>{utc.toISOString().substring(11, 19)}Z</div>
-            </div>
-            <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center" }}>
-              <div style={{ fontSize: 10, color: B.textDim, letterSpacing: 2, fontFamily: B.font }}>LOCAL</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: B.text, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums" }}>{utc.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: userTz })}</div>
-            </div>
-            <div style={{ ...insetStyle, padding: "4px 12px", textAlign: "center", minWidth: 100 }}>
-              <select value={fieldTz} onChange={e => setFieldTz(e.target.value)} style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, background: "transparent", border: "none", letterSpacing: 1, cursor: "pointer", textAlign: "center", width: "100%", padding: 0, outline: "none", WebkitAppearance: "none", appearance: "none" }}>
-                <option value="">FIELD TZ</option>
-                <option value="Pacific/Honolulu">HST (UTC-10)</option>
-                <option value="America/Anchorage">AKST (UTC-9)</option>
-                <option value="America/Los_Angeles">PST (UTC-8)</option>
-                <option value="America/Denver">MST (UTC-7)</option>
-                <option value="America/Chicago">CST (UTC-6)</option>
-                <option value="America/New_York">EST (UTC-5)</option>
-                <option value="America/Halifax">AST (UTC-4)</option>
-                <option value="America/St_Johns">NST (UTC-3:30)</option>
-                <option value="Europe/London">GMT (UTC+0)</option>
-                <option value="Europe/Paris">CET (UTC+1)</option>
-                <option value="Europe/Helsinki">EET (UTC+2)</option>
-                <option value="Asia/Dubai">GST (UTC+4)</option>
-                <option value="Asia/Kolkata">IST (UTC+5:30)</option>
-                <option value="Asia/Tokyo">JST (UTC+9)</option>
-                <option value="Australia/Sydney">AEST (UTC+10)</option>
-                <option value="Pacific/Auckland">NZST (UTC+12)</option>
-              </select>
-              <div style={{ fontSize: 16, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: 2, fontVariantNumeric: "tabular-nums" }}>{getFieldTzTime()}</div>
-            </div>
+            <ClockStrip B={B} insetStyle={insetStyle} />
           </div>
         </div>
 

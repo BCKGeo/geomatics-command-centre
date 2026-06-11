@@ -19,8 +19,11 @@
 /manifest.json
   Cache-Control: public, max-age=86400
 
+# Static build data — regenerated only when the research pipeline runs.
+# stale-while-revalidate keeps repeat loads instant while picking up new
+# deploys in the background.
 /municipalities.json
-  Cache-Control: public, max-age=300, must-revalidate
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /tles.json
   Cache-Control: public, max-age=3600, must-revalidate
