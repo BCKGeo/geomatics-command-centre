@@ -16,27 +16,27 @@
   },
   "dependencies": {
     "maplibre-gl": "^5.22.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-map-gl": "^8.1.0",
     "react-router-dom": "^7.14.0",
     "satellite.js": "^7.0.0"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": "^20.19.0 || >=22.12.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
     "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
     "proj4": "^2.20.8",
-    "vite": "^6.0.0",
+    "vite": "^8.0.16",
     "vitest": "^4.1.4"
   }
 }
