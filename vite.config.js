@@ -13,6 +13,10 @@ export default defineConfig({
     },
   },
   build: {
+    // maplibre-gl's WebGL engine is an irreducible ~1 MB; it's already isolated
+    // into vendor-maplibre and loaded only where the map renders, so raise the
+    // warning limit to silence the noise while still flagging a real regression.
+    chunkSizeWarningLimit: 1100,
     rollupOptions: {
       output: {
         // Vite 8 bundles with Rolldown, whose manualChunks only accepts the
@@ -26,9 +30,5 @@ export default defineConfig({
         },
       },
     },
-  },
-  server: {
-    // SPA fallback for dev server
-    historyApiFallback: true,
   },
 })

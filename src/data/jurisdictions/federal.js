@@ -24,11 +24,11 @@ export default {id:"ca",name:"Federal / National",abbr:"CA",categories:[
   ]},
   {category:"Base Mapping",links:[
     {n:"CanVec Topographic Data",d:"Federal vector topographic data covering all of Canada",u:"https://open.canada.ca/data/en/dataset/8ba2aa2a-7bb9-4448-b4d7-f164409fe056"},
-    {n:"National Topographic System (NTS)",d:"Canada's standardized topographic map grid system",u:"https://natural-resources.canada.ca/maps-tools-publications/maps/topographic-maps/10995"},
+    {n:"National Topographic System (NTS)",d:"Canada's standardized topographic map grid system",u:"https://natural-resources.canada.ca/maps-tools-publications/maps/topographic-maps/national-topographic-system-maps"},
   ]},
   {category:"Imagery",links:[
-    {n:"EODMS",d:"Earth Observation Data Management System — satellite imagery",u:"https://www.eodms-sgdot.nrcan-rncan.gc.ca/index_en.jsp"},
-    {n:"National Air Photo Library",d:"Historical aerial photography archive",u:"https://natural-resources.canada.ca/maps-tools-publications/satellite-imagery-air-photos/air-photos/national-air-photo-library/920"},
+    {n:"EODMS",d:"Earth Observation Data Management System: satellite imagery",u:"https://www.eodms-sgdot.nrcan-rncan.gc.ca/index_en.jsp"},
+    {n:"National Air Photo Library",d:"Historical aerial photography archive",u:"https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/air-photos-library/national-air-photo-library"},
   ]},
   {category:"LiDAR / Elevation",links:[
     {n:"HRDEM CanElevation Series",d:"Federal high-resolution DEM from LiDAR and satellite",u:"https://open.canada.ca/data/en/dataset/957782bf-847c-4644-a757-e383c0057995"},
@@ -49,7 +49,7 @@ export default {id:"ca",name:"Federal / National",abbr:"CA",categories:[
     {n:"CLSS Map Browser",d:"Canada Lands Survey cadastral parcels for territories",u:"https://clss.nrcan-rncan.gc.ca/mb-nc/en/index.html"},
   ]},
   {category:"Geological Survey",links:[
-    {n:"Geological Survey of Canada",d:"National geological mapping and geoscience research",u:"https://natural-resources.canada.ca/earth-sciences/geology"},
+    {n:"Geological Survey of Canada",d:"National geological mapping and geoscience research",u:"https://natural-resources.canada.ca/science-data/science-research/geoscience"},
   ]},
   {category:"Legislation",links:[
     {n:"Canada Lands Surveyors Act",d:"SC 1998, c. 14",u:"https://laws-lois.justice.gc.ca/eng/acts/l-5.8/"},
@@ -66,6 +66,6 @@ export default {id:"ca",name:"Federal / National",abbr:"CA",categories:[
     {n:"Standards Council of Canada",d:"Canada's representative to ISO and IEC",u:"https://scc-ccn.ca/"},
     {n:"ISO TC 211",d:"Geographic Information/Geomatics standards",u:"https://www.isotc211.org/"},
     {n:"MMCD",d:"Master Municipal Construction Documents Association",u:"https://www.mmcd.net/"},
-    {n:"CCDC",d:"Canadian Construction Documents Committee — standard contracts",u:"https://www.ccdc.org/"},
+    {n:"CCDC",d:"Canadian Construction Documents Committee: standard contracts",u:"https://www.ccdc.org/"},
   ]},
 ]};

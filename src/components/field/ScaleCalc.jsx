@@ -135,14 +135,14 @@ export function ScaleCalc({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
         <input value={lastEdited==="ground"?groundDist:computedGround} onChange={e=>{setGroundDist(e.target.value);setLastEdited("ground");}} inputMode="decimal" style={{...inp,width:"100%",maxWidth:120,flex:1,minWidth:70}} placeholder="0.0000"/>
         <span style={{fontSize:11,color:B.textDim}}>m</span>
         <span style={{fontSize:11,color:B.textDim}}>{"\u2192"}</span>
-        <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="ground"&&computedGrid?computedGrid+" m":"\u2014"}</span>
+        <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="ground"&&computedGrid?computedGrid+" m":"-"}</span>
       </div>
       <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
         <label style={{fontSize:11,color:B.textMid,width:60}}>Grid</label>
         <input value={lastEdited==="grid"?gridDist:computedGrid} onChange={e=>{setGridDist(e.target.value);setLastEdited("grid");}} inputMode="decimal" style={{...inp,width:"100%",maxWidth:120,flex:1,minWidth:70}} placeholder="0.0000"/>
         <span style={{fontSize:11,color:B.textDim}}>m</span>
         <span style={{fontSize:11,color:B.textDim}}>{"\u2192"}</span>
-        <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="grid"&&computedGround?computedGround+" m":"\u2014"}</span>
+        <span style={{fontFamily:B.font,fontSize:12,color:B.priBr}}>{lastEdited==="grid"&&computedGround?computedGround+" m":"-"}</span>
       </div>
     </div>
   </div>);

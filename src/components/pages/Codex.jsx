@@ -41,7 +41,7 @@ export function Codex() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${B.gold}` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>CODEX {"\u2014"} GEOMATICS GLOSSARY</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.gold, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>CODEX: GEOMATICS GLOSSARY</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           Terminology reference for surveying, GNSS, remote sensing, GIS, and RPAS operations. {ALL_TERMS.length} terms across {SECTIONS.length} disciplines.
         </div>

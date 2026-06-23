@@ -15,7 +15,7 @@ const AIRSPACE = [
 
 /* Updated to reflect 2025 amendments (phased Nov 4, 2025) */
 const OP_CATEGORIES = [
-  { cat: "Micro", weight: "< 250 g", cert: "None required", age: "N/A", airspace: "Uncontrolled", vlos: "VLOS", people: "No restrictions", notes: "No registration or pilot cert. SFOC required to fly at advertised events (new Apr 2025)." },
+  { cat: "Micro", weight: "< 250 g", cert: "None required", age: "N/A", airspace: "Uncontrolled", vlos: "VLOS", people: "No restrictions", notes: "No registration or pilot cert. SFOC required to fly at advertised events (since Apr 2025)." },
   { cat: "Basic", weight: "250 g - 25 kg", cert: "Pilot Certificate - Basic Operations", age: "14+", airspace: "Uncontrolled only", vlos: "VLOS", people: "> 30 m (100 ft) from any person", notes: "> 5.6 km from certified airports, > 1.9 km from heliports. Certificate does not expire." },
   { cat: "Advanced", weight: "250 g - 150 kg", cert: "Pilot Certificate - Advanced Operations", age: "16+", airspace: "Controlled (w/ ATC permission)", vlos: "VLOS, EVLOS, Sheltered", people: "> 5 m (small), > 30 m (medium), or over people w/ declarations", notes: "Includes EVLOS (w/ Visual Observer, 3.7 km range), sheltered ops near structures, and medium drone VLOS. $25 cert fee." },
   { cat: "Level 1 Complex", weight: "250 g - 150 kg", cert: "Pilot Certificate - Level 1 Complex + RPOC", age: "18+", airspace: "Uncontrolled only", vlos: "BVLOS", people: "> 1 km from populated areas (> 5 ppl/km2)", notes: "Lower-risk BVLOS. 20+ hrs ground school, flight review. > 9.3 km from aerodromes. RPOC required. $125 cert fee." },
@@ -54,7 +54,7 @@ const SFOC_TRIGGERS = [
   { q: "Higher-risk BVLOS not covered by Level 1 Complex?", sfoc: true },
   { q: "RPAS over 150 kg?", sfoc: true },
   { q: "Operations in restricted/prohibited airspace?", sfoc: true },
-  { q: "Flying a micro drone at an advertised event? (new Apr 2025)", sfoc: true },
+  { q: "Flying a micro drone at an advertised event? (since Apr 2025)", sfoc: true },
   { q: "Night ops without Advanced cert + anti-collision lights?", sfoc: true },
   { q: "Experimental or novel aircraft/payload?", sfoc: true },
   { q: "Operations outside all standard category rules?", sfoc: true },
@@ -99,7 +99,7 @@ export function FlightOps() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid #3bbffa` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>RPAS OPERATIONS {"\u2014"} CANADA (2025 FRAMEWORK)</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.pri, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>RPAS OPERATIONS: CANADA (2025 FRAMEWORK)</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           Canadian RPAS regulations under the Aeronautics Act and CARs Part IX now define five operation categories: Micro, Basic, Advanced, Level 1 Complex, and Special Operations. The 2025 amendments (phased Apr/Nov 2025) introduced BVLOS under Level 1 Complex, EVLOS and sheltered ops under Advanced, and medium drone (25-150 kg) support without SFOC.
         </div>

@@ -10,16 +10,23 @@ function dmmssToDecimal(dmmss) {
   const mmss = frac * 100;
   const min = Math.trunc(mmss + 1e-9);
   const sec = (mmss - min) * 100;
+  // Reject malformed DMS: a fat-fingered "45.7530" (75 minutes) would otherwise
+  // convert silently. Minutes and seconds fields must each be < 60.
+  if (min >= 60 || Math.round(sec) >= 60) return NaN;
   return deg + min / 60 + sec / 3600;
 }
 
 /** Convert decimal degrees to DDD.MMSS string */
 function decimalToDmmss(dd) {
-  const deg = Math.trunc(dd);
+  let deg = Math.trunc(dd);
   const rest = (dd - deg) * 60;
-  const min = Math.trunc(rest + 1e-9);
-  const sec = (rest - min) * 60;
-  return `${deg}.${String(min).padStart(2, "0")}${sec.toFixed(0).padStart(2, "0")}`;
+  let min = Math.trunc(rest + 1e-9);
+  let sec = Math.round((rest - min) * 60);
+  // Carry a rounded-up 60 so the string never shows invalid "60" seconds/minutes.
+  if (sec >= 60) { sec -= 60; min += 1; }
+  if (min >= 60) { min -= 60; deg += 1; }
+  if (deg >= 360) deg -= 360; // wrap bearing
+  return `${deg}.${String(min).padStart(2, "0")}${String(sec).padStart(2, "0")}`;
 }
 
 /** Convert decimal degrees to radians */

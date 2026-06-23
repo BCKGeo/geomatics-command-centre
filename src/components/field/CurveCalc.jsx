@@ -131,7 +131,7 @@ export function CurveCalc() {
           )}
           {filledCount >= 2 && !result && (
             <div style={{ marginTop: 8, padding: 8, background: "#ef444420", border: "1px solid #ef444440", borderRadius: 4, fontSize: 11, color: B.text }}>
-              This input combination requires iterative solution {"\u2014"} use R or {"\u0394"} as one input.
+              This input combination requires iterative solution. Use R or {"\u0394"} as one input.
             </div>
           )}
 

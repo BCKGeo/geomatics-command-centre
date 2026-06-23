@@ -56,7 +56,7 @@ const PPP_TIPS = {
     "Request both NAD83(CSRS) and ITRF output for comparison",
   ],
   "Results": [
-    "Check residuals \u2014 outliers indicate multipath or obstruction",
+    "Check residuals. Outliers indicate multipath or obstruction",
     "Orthometric height (H) = ellipsoidal (h) minus geoid (N)",
     "Repeat observations on different days for reliability",
   ],
@@ -74,7 +74,7 @@ export function Geodesy() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${B.sec}` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>GEODESY {"\u2014"} CANADIAN SPATIAL REFERENCE SYSTEM</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>GEODESY: CANADIAN SPATIAL REFERENCE SYSTEM</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           Canada's official geodetic framework is NAD83(CSRS) tied to ITRF via NRCan's CSRS-PPP service. Vertical datum is CGVD2013 (geoid-based). Magnetic declination computed from WMM2025. For GNSS surveys, always specify datum realization + epoch.
         </div>
@@ -120,7 +120,7 @@ export function Geodesy() {
                     <span style={{ fontSize: 9, color: d.status === "current" ? "#22c55e" : "#ef4444", fontFamily: B.font, fontWeight: 700 }}>{d.status.toUpperCase()}</span>
                   </div>
                 </div>
-                <div style={{ fontSize: 10, color: B.textMid, marginTop: 1 }}>{d.frame} {"\u2014"} {d.use}</div>
+                <div style={{ fontSize: 10, color: B.textMid, marginTop: 1 }}>{d.frame}: {d.use}</div>
               </div>
             ))}
           </div>

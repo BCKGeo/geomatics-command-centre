@@ -17,7 +17,7 @@ A real-time operations dashboard for Canadian geomatics professionals. Aggregate
 
 ## Tech Stack
 
-- **React 18** + **Vite 6** (SPA, code-split per route)
+- **React 19** + **Vite 8** (SPA, code-split per route)
 - **MapLibre GL JS** for the jurisdictions map (WebGL, clustered markers, heatmaps)
 - **Tailwind-ish** inline styles with a shared theme context (dark/light)
 - **Cloudflare Pages** hosting, auto-deploy from `main`

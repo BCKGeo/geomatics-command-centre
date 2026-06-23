@@ -157,7 +157,8 @@ export function computePDOP(satellites) {
     }
   }
 
-  // Extract inverse diagonal: Q[0][0] + Q[1][1] + Q[2][2] + Q[3][3]
-  const trace = aug[0][4] + aug[1][5] + aug[2][6] + aug[3][7];
+  // PDOP = sqrt(Q[0][0] + Q[1][1] + Q[2][2]): position terms only.
+  // The 4th diagonal Q[3][3] is the receiver-clock variance; including it gives GDOP, not PDOP.
+  const trace = aug[0][4] + aug[1][5] + aug[2][6];
   return trace > 0 ? Math.sqrt(trace) : null;
 }

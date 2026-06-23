@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
 import { useSpaceWeather } from "../../hooks/useSpaceWeather.js";
@@ -14,8 +14,10 @@ import { Skyplot, SkyplotFallback } from "../ui/Skyplot.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
 import { WMO, DEFAULT_TZ } from "../../data/constants.js";
 
-// Lazy: LocationMap pulls in react-map-gl + maplibre-gl (~280 KB gzip) — keep
-// it off the home page's critical path.
+// LocationMap pulls in react-map-gl + maplibre-gl (~280 KB gzip). lazy() only
+// splits the chunk; we ALSO defer mounting until the browser is idle (see
+// showMap below) so the heavy WebGL bundle never competes with first paint or
+// the live-feed fetches.
 const LocationMap = lazy(() => import("../ui/LocationMap.jsx").then(m => ({ default: m.LocationMap })));
 
 // Owns the 1s sun-position tick so the rest of the page doesn't re-render with it.
@@ -65,9 +67,18 @@ const stations = [
 export function CommandCentre() {
   const { theme, B } = useTheme();
   const { lat, lon, cityName } = useLocation();
-  const navigate = useNavigate();
 
   const userTz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : DEFAULT_TZ;
+
+  // Defer the heavy maplibre map until the browser is idle so it doesn't compete
+  // with first paint or the live-feed fetches. A placeholder holds its slot.
+  const [showMap, setShowMap] = useState(false);
+  useEffect(() => {
+    const ric = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
+    const cancel = window.cancelIdleCallback || clearTimeout;
+    const id = ric(() => setShowMap(true), { timeout: 2000 });
+    return () => cancel(id);
+  }, []);
 
   const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
@@ -124,9 +135,13 @@ export function CommandCentre() {
         {/* Weather + Location Map */}
         <div style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
           <div style={{ marginBottom: 10 }}>
-            <Suspense fallback={<div style={{ height: 252 }} />}>
-              <LocationMap />
-            </Suspense>
+            {showMap ? (
+              <Suspense fallback={<div style={{ height: 252, background: B.inset, border: `1px solid ${B.border}` }} />}>
+                <LocationMap />
+              </Suspense>
+            ) : (
+              <div style={{ height: 252, background: B.inset, border: `1px solid ${B.border}` }} />
+            )}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
             <span>{"\uD83C\uDF24\uFE0F"}</span>
@@ -360,14 +375,14 @@ export function CommandCentre() {
         <div style={{ fontFamily: B.font, fontSize: 10, color: B.textDim, letterSpacing: 2, marginBottom: 8 }}>STATIONS</div>
         <div className="cmd-stations" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 8 }}>
           {stations.map(s => (
-            <div key={s.t} onClick={() => navigate(s.to)} className="station-card"
-              style={{ background: B.surface, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, padding: "14px 16px", cursor: "pointer", display: "flex", alignItems: "center", gap: 12 }}>
+            <Link key={s.t} to={s.to} className="station-card"
+              style={{ background: B.surface, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, padding: "14px 16px", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
               <div style={{ fontSize: 22, width: 36, textAlign: "center" }}>{s.i}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <h3 style={{ fontFamily: B.font, fontSize: 12, fontWeight: 700, letterSpacing: ".06em", margin: 0, color: B.priBr }}>{s.t}</h3>
                 <p style={{ fontSize: 10, color: B.textDim, lineHeight: 1.4, margin: "2px 0 0" }}>{s.d}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

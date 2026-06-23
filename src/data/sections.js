@@ -1,6 +1,6 @@
 // Resource link sections for Flight Ops, Geodesy, GIS, and Remote Sensing
 export const SECTIONS = [
-  { title:"Transport Canada — RPAS", color:"#3bbffa", icon:"✈️", links:[
+  { title:"Transport Canada: RPAS", color:"#3bbffa", icon:"✈️", links:[
     {n:"CARs Part IX (Full Regulations)",d:"Canadian Aviation Regulations governing RPAS operations",u:"https://laws-lois.justice.gc.ca/eng/regulations/sor-96-433/page-112.html"},
     {n:"Flying Your Drone Safely & Legally",d:"Transport Canada's rules and guidelines for drone pilots",u:"https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/flying-your-drone-safely-legally"},
     {n:"2025 Regulation Changes Summary",d:"Summary of recent changes to Canadian drone regulations",u:"https://tc.canada.ca/en/aviation/drone-safety/2025-summary-changes-canada-drone-regulations"},
@@ -14,7 +14,7 @@ export const SECTIONS = [
     {n:"AirData (Flight Logging)",d:"Cloud-based drone flight log management and analytics",u:"https://app.airdata.com/"},
   ]},
   { title:"NOTAMs & Airspace", color:"#3bbffa", icon:"🚨", links:[
-    {n:"CFPS NOTAMs (NAV CANADA)",d:"Canadian Flight Planning System — active NOTAMs search",u:"https://plan.navcanada.ca/wxrecall/"},
+    {n:"CFPS NOTAMs (NAV CANADA)",d:"Canadian Flight Planning System: active NOTAMs search",u:"https://plan.navcanada.ca/wxrecall/"},
     {n:"NAV CANADA Flight Planning",d:"Integrated flight planning and weather briefing portal",u:"https://plan.navcanada.ca/"},
     {n:"Aviation Weather (AWWS)",d:"Aviation weather reports, forecasts, and SIGMETs",u:"https://spaces.navcanada.ca/workspace/flightplanning/"},
     {n:"Designated Airspace Handbook",d:"Reference guide for Canadian airspace classifications",u:"https://www.navcanada.ca/en/aeronautical-information/operational-guides.aspx"},
@@ -23,7 +23,7 @@ export const SECTIONS = [
     {n:"Aurora Forecast (NOAA)",d:"30-minute aurora borealis forecast and imagery",u:"https://www.swpc.noaa.gov/products/aurora-30-minute-forecast"},
     {n:"NOAA SWPC Dashboard",d:"Real-time space weather monitoring and alerts",u:"https://www.swpc.noaa.gov/"},
   ]},
-  { title:"NRCan — Geodetic & Geomatics", color:"#3bbffa", icon:"🌍", links:[
+  { title:"NRCan: Geodetic & Geomatics", color:"#3bbffa", icon:"🌍", links:[
     {n:"CSRS-PPP Online Service",d:"Free GNSS post-processing for cm-level positioning",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/ppp.php"},
     {n:"CSRS-PPP Updates & Info",d:"Release notes and technical documentation for CSRS-PPP",u:"https://webapp.csrs-scrs.nrcan-rncan.gc.ca/geod/tools-outils/ppp-info.php?locale=en"},
     {n:"About CSRS",d:"Overview of the Canadian Spatial Reference System",u:"https://natural-resources.canada.ca/science-data/science-research/geomatics/geodetic-reference-systems/canadian-spatial-reference-system-csrs"},
@@ -41,7 +41,7 @@ export const SECTIONS = [
     {n:"IGS Network",d:"International GNSS Service global tracking station network",u:"https://network.igs.org/"},
     {n:"UNAVCO GNSS Data",d:"Geodetic GNSS data archive and research infrastructure",u:"https://www.unavco.org/"},
     {n:"NOAA NCEI Mag Calc",d:"Online magnetic field calculator using WMM and IGRF",u:"https://www.ngdc.noaa.gov/geomag/calculators/magcalc.shtml"},
-    {n:"WMM (NOAA/BGS)",d:"World Magnetic Model — global geomagnetic reference",u:"https://www.ncei.noaa.gov/products/world-magnetic-model"},
+    {n:"WMM (NOAA/BGS)",d:"World Magnetic Model: global geomagnetic reference",u:"https://www.ncei.noaa.gov/products/world-magnetic-model"},
     {n:"NGS Coord Converter",d:"NOAA coordinate conversion and transformation tool",u:"https://www.ngs.noaa.gov/NCAT/"},
     {n:"SpaceWeatherLive",d:"Real-time aurora, solar activity, and geomagnetic data",u:"https://www.spaceweatherlive.com/"},
   ]},

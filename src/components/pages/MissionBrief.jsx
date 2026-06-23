@@ -1,4 +1,9 @@
 import { useTheme } from "../../context/ThemeContext.jsx";
+import { GLOSSARY } from "../../data/glossary.js";
+
+// Derived from the glossary so the count can't drift when terms are added.
+const TERM_COUNT = Object.values(GLOSSARY).reduce((n, terms) => n + terms.length, 0);
+const DISCIPLINE_COUNT = Object.keys(GLOSSARY).length;
 
 export function MissionBrief() {
   const { B } = useTheme();
@@ -16,7 +21,7 @@ export function MissionBrief() {
     { label: "Remote Sensing", desc: "Overlap guides, spectral indices, accuracy specs, processing software comparison, LAS classification, point cloud formats." },
     { label: "Jurisdictions", desc: "Provincial intel for all 13 jurisdictions plus federal, and an interactive municipal map with 40 Canadian cities." },
     { label: "Survey Tools", desc: "12 calculators: coordinates, inverse, forward, scale, area, intersections, curves, photo scale, mag dec, units, traverse closure, levelling." },
-    { label: "Codex", desc: "159 domain-specific terms across 10 disciplines." },
+    { label: "Codex", desc: `${TERM_COUNT} domain-specific terms across ${DISCIPLINE_COUNT} disciplines.` },
     { label: "Mission Brief", desc: "You are here." },
   ];
 
@@ -30,7 +35,7 @@ export function MissionBrief() {
         </div>
         <div style={{ ...bodyText, display: "flex", flexDirection: "column", gap: 8 }}>
           <p style={{ margin: 0 }}>A geomatics operations dashboard built by a working professional, for working professionals.</p>
-          <p style={{ margin: 0 }}>Consolidates the tools, feeds, and references that field geomatics technologists actually need — instead of 47 browser tabs.</p>
+          <p style={{ margin: 0 }}>Consolidates the tools, feeds, and references that field geomatics technologists actually need, instead of 47 browser tabs.</p>
           <p style={{ margin: 0 }}>Built from 18+ years of survey, mapping, and remote sensing experience across western Canada.</p>
         </div>
       </div>
@@ -68,7 +73,7 @@ export function MissionBrief() {
           {[
             { n: "NOAA Space Weather Prediction Center", u: "https://www.swpc.noaa.gov/", d: "Kp index, solar wind, X-ray flux" },
             { n: "Open-Meteo", u: "https://open-meteo.com/", d: "Local weather forecasts and conditions" },
-            { n: "WMM2025", u: "https://www.ncei.noaa.gov/products/world-magnetic-model", d: "World Magnetic Model (2025\u20132030 validity)" },
+            { n: "WMM2025", u: "https://www.ncei.noaa.gov/products/world-magnetic-model", d: "World Magnetic Model (2025 to 2030 validity)" },
             { n: "BigDataCloud", u: "https://www.bigdatacloud.com/", d: "Reverse geocoding (browser-side only)" },
           ].map(l => (
             <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" className="lnk"
@@ -99,7 +104,7 @@ export function MissionBrief() {
         <div style={{ ...bodyText, display: "flex", flexDirection: "column", gap: 6 }}>
           <p style={{ margin: 0 }}>React, Vite, Cloudflare Pages.</p>
           <p style={{ margin: 0 }}>Open APIs, no backend, no database.</p>
-          <p style={{ margin: 0 }}>Client-side only — everything runs in the browser.</p>
+          <p style={{ margin: 0 }}>Client-side only. Everything runs in the browser.</p>
         </div>
       </div>
     </div>

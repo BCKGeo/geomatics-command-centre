@@ -170,7 +170,7 @@ export function InverseCalc() {
             </div>
           ) : result && !result.converged ? (
             <div style={{ marginTop: 10, padding: 8, background: "#ef444420", border: "1px solid #ef444440", borderRadius: 4, fontSize: 11, color: B.text }}>
-              Points are nearly antipodal {"\u2014"} Vincenty does not converge for this geometry.
+              Points are nearly antipodal. Vincenty does not converge for this geometry.
             </div>
           ) : null}
         </div>

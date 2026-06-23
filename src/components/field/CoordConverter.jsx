@@ -86,7 +86,7 @@ export function CoordConverter({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
   const lockBtn=(locked,onToggle)=><button onClick={onToggle} style={{background:"none",border:"none",cursor:"pointer",fontSize:12,padding:"2px 4px",color:locked?B.textDim:B.priBr}} title={locked?"Auto-detected. Click to override.":"Manual override. Click to auto-detect."}>{locked?"\uD83D\uDD12":"\uD83D\uDD13"}</button>;
 
   return(<div>
-    <HelpPanel text={"Enter geographic coordinates in Decimal Degrees (DD) or Degrees-Minutes-Seconds (DMS). UTM and MTM projections are computed automatically for your location. To override the auto-detected zone, click the lock icon. For heights, enter your ellipsoidal height from GNSS and geoid undulation (N) from NRCan\u2019s GPS\u00B7H tool \u2014 orthometric height is computed as H = h \u2212 N. All coordinates reference NAD83(CSRS) on the GRS80 ellipsoid. Heights reference CGVD2013."}/>
+    <HelpPanel text={"Enter geographic coordinates in Decimal Degrees (DD) or Degrees-Minutes-Seconds (DMS). UTM and MTM projections are computed automatically for your location. To override the auto-detected zone, click the lock icon. For heights, enter your ellipsoidal height from GNSS and geoid undulation (N) from NRCan\u2019s GPS\u00B7H tool. Orthometric height is computed as H = h \u2212 N. All coordinates reference NAD83(CSRS) on the GRS80 ellipsoid. Heights reference CGVD2013."}/>
     <div style={{fontSize:11,color:B.textMid,marginBottom:4}}>Convert between geographic coordinates (DD/DMS) and projected coordinates (UTM, MTM).</div>
     <div style={{fontSize:10,color:B.textDim,marginBottom:8}}>NAD83(CSRS) {"\u00B7"} GRS80 {"\u00B7"} CGVD2013</div>
     <div style={{display:"flex",gap:4,marginBottom:10}}>
@@ -115,12 +115,12 @@ export function CoordConverter({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
     )}
     {/* Height inputs */}
     <div style={{display:"flex",gap:8,marginBottom:12,alignItems:"center",flexWrap:"wrap"}}>
-      <label style={{fontSize:11,color:B.textMid}}>h<Tip text={"Ellipsoidal height \u2014 the height above the GRS80 ellipsoid as measured by GNSS. This is NOT the same as elevation above sea level."}/></label>
+      <label style={{fontSize:11,color:B.textMid}}>h<Tip text={"Ellipsoidal height: the height above the GRS80 ellipsoid as measured by GNSS. This is NOT the same as elevation above sea level."}/></label>
       <input value={hElip} onChange={e=>setHElip(e.target.value)} placeholder="Ellipsoidal" inputMode="decimal" style={{...inp,width:"100%",maxWidth:100,flex:1,minWidth:70}}/>
-      <label style={{fontSize:11,color:B.textMid}}>N<Tip text={"Geoid undulation \u2014 the separation between the GRS80 ellipsoid and the geoid at your location. Get this from your GNSS processing software or NRCan\u2019s GPS\u00B7H tool. In most of Canada, N is positive (geoid above ellipsoid)."}/></label>
+      <label style={{fontSize:11,color:B.textMid}}>N<Tip text={"Geoid undulation: the separation between the GRS80 ellipsoid and the geoid at your location. Get this from your GNSS processing software or NRCan\u2019s GPS\u00B7H tool. In most of Canada, N is positive (geoid above ellipsoid)."}/></label>
       <input value={nGeoid} onChange={e=>setNGeoid(e.target.value)} placeholder="Geoid Und." inputMode="decimal" style={{...inp,width:"100%",maxWidth:100,flex:1,minWidth:70}}/>
-      <span style={{fontSize:11,color:B.textMid}}>H<Tip text={"Orthometric height \u2014 height above mean sea level (CGVD2013). Computed as H = h \u2212 N."}/></span>
-      <span style={{fontFamily:B.font,fontSize:12,color:!isNaN(orthoH)?B.priBr:B.textDim,fontWeight:600}}>{!isNaN(orthoH)?orthoH.toFixed(3)+" m":"\u2014"}</span>
+      <span style={{fontSize:11,color:B.textMid}}>H<Tip text={"Orthometric height: height above mean sea level (CGVD2013). Computed as H = h \u2212 N."}/></span>
+      <span style={{fontFamily:B.font,fontSize:12,color:!isNaN(orthoH)?B.priBr:B.textDim,fontWeight:600}}>{!isNaN(orthoH)?orthoH.toFixed(3)+" m":"-"}</span>
       <span style={{fontSize:10,color:B.textDim}}>m</span>
     </div>
     {/* Zone controls */}

@@ -8,7 +8,7 @@ export default {id:"mb",name:"Manitoba",abbr:"MB",categories:[
   {category:"Map Viewer",links:[{n:"Manitoba GIS Map Gallery",d:"Collection of interactive provincial maps",u:"https://www.manitoba.ca/iem/geo/index.html"}]},
   {category:"Parcel / Cadastral",links:[{n:"Manitoba Land Titles",d:"Provincial land titles and property registration",u:"https://teranetmanitoba.ca/land-titles/"}]},
   {category:"Base Mapping",links:[{n:"Manitoba Topographic Maps",d:"Provincial topographic map series",u:"https://mli.gov.mb.ca/topo_mapping/index.html"}]},
-  {category:"Imagery",links:[{n:"Manitoba Land Initiative — Digital Imagery",d:"Provincial orthophoto and satellite imagery downloads",u:"https://mli.gov.mb.ca/ortho/index.html"}]},
+  {category:"Imagery",links:[{n:"Manitoba Land Initiative: Digital Imagery",d:"Provincial orthophoto and satellite imagery downloads",u:"https://mli.gov.mb.ca/ortho/index.html"}]},
   {category:"LiDAR / Elevation",links:[{n:"Manitoba LiDAR",d:"Provincial LiDAR elevation data",u:"https://geoportal.gov.mb.ca/search?q=lidar"}]},
   {category:"Hydrography",links:[{n:"Manitoba Waterbody Data",d:"Provincial waterbody and waterway feature layers",u:"https://geoportal.gov.mb.ca/maps/manitoba::manitoba-waterbody-data/explore"}]},
   {category:"Geodetic Control",links:[{n:"Manitoba Spatial Reference Network",d:"Provincial control network coordinates and survey monuments",u:"https://mli.gov.mb.ca/spatial_ref/index.html"}]},

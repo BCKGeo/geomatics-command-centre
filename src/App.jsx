@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, NavLink, Link, useLocation as useRouterLo
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { LocationProvider, useLocation } from "./context/LocationContext.jsx";
 
-// Pages — lazy-loaded so each tab is its own chunk
+// Pages: lazy-loaded so each tab is its own chunk
 const CommandCentre = lazy(() => import("./components/pages/CommandCentre.jsx").then(m => ({ default: m.CommandCentre })));
 const FlightOps = lazy(() => import("./components/pages/FlightOps.jsx").then(m => ({ default: m.FlightOps })));
 const Geodesy = lazy(() => import("./components/pages/Geodesy.jsx").then(m => ({ default: m.Geodesy })));
@@ -196,11 +196,11 @@ function Layout() {
         .north-arrow-svg:hover {animation-duration:1.5s}
         .tagline::after {content:'_';animation:blink-cursor .6s step-end infinite;color:${B.priBr}}
 
-        /* Scrollable tab bars — shared */
+        /* Scrollable tab bars: shared */
         .nav-strip::-webkit-scrollbar,.survey-tabs::-webkit-scrollbar,.prov-btns::-webkit-scrollbar,.spatial-tabs::-webkit-scrollbar{display:none}
         .nav-strip,.survey-tabs,.prov-btns,.spatial-tabs{scrollbar-width:none}
 
-        /* Targeted media queries — behavior changes only */
+        /* Targeted media queries: behavior changes only */
         @media(max-width:768px){
           .cmd-hero{grid-template-columns:1fr !important}
           .cmd-split{grid-template-columns:1fr !important}

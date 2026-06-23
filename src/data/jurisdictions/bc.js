@@ -11,7 +11,7 @@ export default {id:"bc",name:"British Columbia",abbr:"BC",categories:[
   {category:"Imagery",links:[{n:"BC Air Photos",d:"Historical and current aerial photography archive",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/digital-imagery/air-photos"}]},
   {category:"LiDAR / Elevation",links:[{n:"LidarBC",d:"Provincial LiDAR acquisition and distribution program",u:"https://lidar.gov.bc.ca/"}]},
   {category:"Geodetic Control",links:[{n:"BC Geodetic Control",d:"Provincial geodetic control monument database",u:"https://www2.gov.bc.ca/gov/content/data/geographic-data-services/geo-spatial-referencing/survey-control-operations"}]},
-  {category:"Land Registry",links:[{n:"myLTSA",d:"Land Title and Survey Authority — title search and registration",u:"https://www.ltsa.ca/",paid:true}]},
+  {category:"Land Registry",links:[{n:"myLTSA",d:"Land Title and Survey Authority: title search and registration",u:"https://www.ltsa.ca/",paid:true}]},
   {category:"Geological Survey",links:[{n:"BC Geological Survey",d:"Geoscience maps, publications, and mineral data",u:"https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/british-columbia-geological-survey"}]},
   {category:"Hydrography",links:[{n:"BC Water Resources Atlas",d:"Surface water, groundwater, and watershed data",u:"https://www2.gov.bc.ca/gov/content/environment/air-land-water/water"}]},
   {category:"Legislation",links:[

@@ -137,19 +137,6 @@ function drawIcon(shape, color, ring) {
 // ---- public API ----
 
 /**
- * Sprite ID list for external consumption (e.g. layer style expressions).
- */
-export const SPRITE_IDS = [];
-
-const colorNames = Object.keys(COLORS);
-for (const shape of SHAPES) {
-  for (const colorName of colorNames) {
-    SPRITE_IDS.push(`${shape}-${colorName}`);
-    SPRITE_IDS.push(`${shape}-${colorName}-ring`);
-  }
-}
-
-/**
  * Register all 24 marker sprites on the given MapLibre map instance.
  * Call this once after the map's 'load' event fires.
  *

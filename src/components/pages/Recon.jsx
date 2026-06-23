@@ -4,15 +4,15 @@ import { LinkCard } from "../ui/LinkCard.jsx";
 import { SECTIONS } from "../../data/sections.js";
 
 const SENSORS = [
-  { name: "Optical (Passive)", bands: "RGB, NIR, SWIR", platforms: "Sentinel-2, Landsat, Drone", res: "0.03 m \u2013 30 m", note: "Clear sky required", bestFor: "Orthophotos, NDVI, change detection" },
-  { name: "SAR (Active)", bands: "C-band, L-band", platforms: "Sentinel-1, RADARSAT", res: "5 m \u2013 25 m", note: "Day/night, through cloud", bestFor: "Deformation monitoring, flood mapping" },
-  { name: "LiDAR (Active)", bands: "905 nm / 1550 nm", platforms: "Airborne, Terrestrial, Mobile", res: "1 \u2013 100+ pts/m\u00B2", note: "Point cloud + intensity", bestFor: "DTM/DSM, forestry, corridor mapping" },
-  { name: "Photogrammetry", bands: "RGB (stereo)", platforms: "Drone, Aerial, Satellite", res: "0.01 m \u2013 1 m", note: "SfM or stereo matching", bestFor: "Stockpile volumes, 3D models, orthos" },
+  { name: "Optical (Passive)", bands: "RGB, NIR, SWIR", platforms: "Sentinel-2, Landsat, Drone", res: "0.03 m to 30 m", note: "Clear sky required", bestFor: "Orthophotos, NDVI, change detection" },
+  { name: "SAR (Active)", bands: "C-band, L-band", platforms: "Sentinel-1, RADARSAT", res: "5 m to 25 m", note: "Day/night, through cloud", bestFor: "Deformation monitoring, flood mapping" },
+  { name: "LiDAR (Active)", bands: "905 nm / 1550 nm", platforms: "Airborne, Terrestrial, Mobile", res: "1 to 100+ pts/m\u00B2", note: "Point cloud + intensity", bestFor: "DTM/DSM, forestry, corridor mapping" },
+  { name: "Photogrammetry", bands: "RGB (stereo)", platforms: "Drone, Aerial, Satellite", res: "0.01 m to 1 m", note: "SfM or stereo matching", bestFor: "Stockpile volumes, 3D models, orthos" },
 ];
 
 const POINT_CLOUD_FORMATS = [
   { fmt: "LAS 1.4", desc: "ASPRS standard, supports classification, GPS time, RGB, NIR" },
-  { fmt: "LAZ", desc: "Compressed LAS (Martin Isenburg), 5\u201310x smaller" },
+  { fmt: "LAZ", desc: "Compressed LAS (Martin Isenburg), 5 to 10x smaller" },
   { fmt: "E57", desc: "ASTM standard for terrestrial laser scanning, stores images" },
   { fmt: "COPC", desc: "Cloud-Optimized Point Cloud, LAZ + spatial index for streaming" },
   { fmt: "PLY/PCD", desc: "Research formats, common in 3D vision / ML pipelines" },
@@ -81,8 +81,8 @@ const LAS_CODES = [
   { code: 9, label: "Water" },
   { code: 10, label: "Rail" },
   { code: 11, label: "Road Surface" },
-  { code: 13, label: "Wire \u2013 Guard" },
-  { code: 14, label: "Wire \u2013 Conductor" },
+  { code: 13, label: "Wire - Guard" },
+  { code: 14, label: "Wire - Conductor" },
   { code: 15, label: "Transmission Tower" },
   { code: 17, label: "Bridge Deck" },
   { code: 18, label: "High Noise" },
@@ -97,7 +97,7 @@ export function Recon() {
     <div>
       {/* Domain Context */}
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${B.acc}` }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: B.acc, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>REMOTE SENSING {"\u2014"} IMAGERY, LiDAR, PHOTOGRAMMETRY</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: B.acc, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>REMOTE SENSING: IMAGERY, LiDAR, PHOTOGRAMMETRY</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
           Remote sensing and 3D data capture for geomatics. Optical imagery needs clear skies; SAR works through cloud. LiDAR delivers direct 3D point clouds; photogrammetry derives them from overlapping photos. Always check point density specs against your deliverable requirements.
         </div>

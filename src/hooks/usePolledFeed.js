@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function usePolledFeed({ fetchFn, interval, enabled = true }) {
   const [data, setData] = useState(null);
@@ -8,31 +8,37 @@ export function usePolledFeed({ fetchFn, interval, enabled = true }) {
   const fetchRef = useRef(fetchFn);
   fetchRef.current = fetchFn;
 
-  const doFetch = useCallback(async (initial) => {
-    if (initial) setLoading(true);
-    try {
-      const result = await fetchRef.current();
-      setData(result);
-      setError(null);
-      setLastUpdated(new Date());
-    } catch (e) {
-      setError(e.message || "Fetch failed");
-    } finally {
-      if (initial) setLoading(false);
-    }
-  }, []);
-
-  // Re-run when fetchFn identity changes (e.g. new lat/lon)
+  // Re-run when fetchFn identity changes (e.g. new lat/lon). A `cancelled` flag
+  // scoped to each effect run stops a slow in-flight fetch for the OLD inputs
+  // from resolving after a newer one and overwriting state with stale data
+  // (last-write-wins race), and avoids state updates after unmount.
   useEffect(() => {
     if (!enabled) return;
+    let cancelled = false;
+
+    const doFetch = async (initial) => {
+      if (initial) setLoading(true);
+      try {
+        const result = await fetchRef.current();
+        if (cancelled) return;
+        setData(result);
+        setError(null);
+        setLastUpdated(new Date());
+      } catch (e) {
+        if (cancelled) return;
+        setError(e.message || "Fetch failed");
+      } finally {
+        if (!cancelled && initial) setLoading(false);
+      }
+    };
+
     doFetch(true);
     const id = setInterval(() => doFetch(false), interval);
-    return () => clearInterval(id);
-  }, [enabled, interval, doFetch, fetchFn]);
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
+  }, [enabled, interval, fetchFn]);
 
-  const stale = lastUpdated ? Date.now() - lastUpdated.getTime() > interval * 2 : false;
-
-  const refresh = useCallback(() => doFetch(false), [doFetch]);
-
-  return { data, error, loading, lastUpdated, stale, refresh };
+  return { data, error, loading, lastUpdated };
 }

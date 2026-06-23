@@ -11,7 +11,7 @@ export function Terms() {
     <div style={{ maxWidth: 720, margin: "0 auto" }}>
       <div style={{ ...card, borderLeft: `3px solid ${B.priBr}` }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: B.text, fontFamily: B.display, letterSpacing: ".1em", marginBottom: 4 }}>TERMS OF USE</div>
-        <div style={{ fontSize: 11, color: B.textDim }}>BCKGeo Command Centre {"\u2014"} Last updated April 2026</div>
+        <div style={{ fontSize: 11, color: B.textDim }}>BCKGeo Command Centre. Last updated April 2026</div>
       </div>
 
       <div style={card}>
