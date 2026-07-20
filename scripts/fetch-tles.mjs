@@ -23,9 +23,10 @@ async function main() {
 
   const result = await buildTleFile({ outPath: OUT_PATH, fallbackPath: FALLBACK_PATH });
 
-  if (result.source === "fallback") {
+  if (result.source !== "fresh") {
     console.warn(
-      "WARNING: Celestrak unreachable; shipped stale TLE fallback snapshot. " +
+      `WARNING: Celestrak unreachable for ${result.failedGroups.join(", ")}; ` +
+        `stale fallback used for ${result.staleGroups.join(", ") || "none"}. ` +
         "Satellite positions may be degraded until the next successful build."
     );
   }

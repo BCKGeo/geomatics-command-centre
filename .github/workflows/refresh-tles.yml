@@ -25,4 +25,4 @@ jobs:
             echo "::warning::CF_PAGES_DEPLOY_HOOK not set; skipping"
             exit 0
           fi
-          curl -fsS -X POST "$HOOK"
+          curl --retry 3 --retry-all-errors -fsS -X POST "$HOOK"

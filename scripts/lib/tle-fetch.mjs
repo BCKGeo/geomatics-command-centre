@@ -3,8 +3,10 @@
 //
 // Celestrak drops connections and rate-limits intermittently, which used to
 // kill the daily Cloudflare Pages build. Strategy: retry each group with
-// backoff and a per-request timeout; if a group still fails, fall back to the
-// committed snapshot (scripts/tles-fallback.json) so the build always ships.
+// backoff and a per-request timeout; groups that still fail are substituted
+// individually from the committed snapshot (scripts/tles-fallback.json,
+// keyed by group) so one flaky constellation never discards fresh data for
+// the others and the build always ships.
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
@@ -51,6 +53,27 @@ export async function fetchGroup(
   throw lastErr;
 }
 
+// Returns the snapshot object keyed by group, null if the file is absent,
+// and throws (descriptively) if the file exists but is unusable.
+async function readFallback(fallbackPath) {
+  let raw;
+  try {
+    raw = await readFile(fallbackPath, "utf8");
+  } catch {
+    return null;
+  }
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (err) {
+    throw new Error(`fallback snapshot at ${fallbackPath} is not valid JSON: ${err.message}`);
+  }
+  if (data === null || typeof data !== "object" || Array.isArray(data)) {
+    throw new Error(`fallback snapshot at ${fallbackPath} must be an object keyed by group`);
+  }
+  return data;
+}
+
 export async function buildTleFile({
   groups = DEFAULT_GROUPS,
   outPath,
@@ -64,30 +87,51 @@ export async function buildTleFile({
 } = {}) {
   await mkdir(dirname(outPath), { recursive: true });
 
-  try {
-    const results = await Promise.all(
-      groups.map((g) => fetchGroup(g, { fetchImpl, attempts, backoffMs, timeoutMs, log }))
-    );
-    const merged = results.flat();
-    const counts = groups.map((g, i) => `${g}=${results[i].length}`).join(" ");
-    log(`Got ${merged.length} entries (${counts})`);
-    await writeFile(outPath, JSON.stringify(merged));
-    return { source: "fresh", count: merged.length };
-  } catch (err) {
-    warn(`TLE fetch failed (${err.message}); trying fallback snapshot`);
-    let raw;
-    try {
-      raw = await readFile(fallbackPath, "utf8");
-    } catch {
-      throw new Error(
-        `TLE fetch failed (${err.message}) and no fallback snapshot at ${fallbackPath}`
-      );
-    }
-    const fallback = JSON.parse(raw);
-    if (!Array.isArray(fallback) || fallback.length === 0) {
-      throw new Error(`fallback snapshot at ${fallbackPath} is empty or invalid`);
-    }
-    await writeFile(outPath, JSON.stringify(fallback));
-    return { source: "fallback", count: fallback.length };
+  const settled = await Promise.allSettled(
+    groups.map((g) => fetchGroup(g, { fetchImpl, attempts, backoffMs, timeoutMs, log }))
+  );
+  const failedGroups = groups.filter((_, i) => settled[i].status === "rejected");
+
+  let fallback = null;
+  if (failedGroups.length > 0) {
+    const reasons = settled
+      .filter((s) => s.status === "rejected")
+      .map((s) => s.reason?.message ?? String(s.reason))
+      .join("; ");
+    warn(`TLE fetch failed for ${failedGroups.join(", ")} (${reasons}); trying fallback snapshot`);
+    fallback = await readFallback(fallbackPath);
   }
+
+  const merged = [];
+  const staleGroups = [];
+  let freshCount = 0;
+  groups.forEach((g, i) => {
+    if (settled[i].status === "fulfilled") {
+      merged.push(...settled[i].value);
+      freshCount++;
+    } else if (Array.isArray(fallback?.[g]) && fallback[g].length > 0) {
+      merged.push(...fallback[g]);
+      staleGroups.push(g);
+      warn(`${g}: using stale fallback entries`);
+    } else {
+      warn(`${g}: no fresh data and no fallback entries; group omitted`);
+    }
+  });
+
+  if (merged.length === 0) {
+    throw new Error(`TLE fetch failed for all groups and no usable fallback at ${fallbackPath}`);
+  }
+
+  await writeFile(outPath, JSON.stringify(merged));
+
+  const source =
+    failedGroups.length === 0 ? "fresh" : freshCount === 0 ? "fallback" : "partial";
+  const counts = groups
+    .map((g, i) =>
+      settled[i].status === "fulfilled" ? `${g}=${settled[i].value.length}` : `${g}=FAILED`
+    )
+    .join(" ");
+  log(`Got ${merged.length} entries (${counts})`);
+
+  return { source, count: merged.length, staleGroups, failedGroups };
 }

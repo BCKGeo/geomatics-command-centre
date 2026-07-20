@@ -11,7 +11,6 @@ export default [
       "node_modules/",
       "src/data/municipalities.js",
       "public/municipalities.json",
-      "scripts/",
       ".worktrees/",
       "diff/",
     ],
@@ -53,6 +52,21 @@ export default [
   },
   {
     files: ["**/*.test.{js,jsx}", "**/test/**/*.{js,jsx}"],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.vitest },
+    },
+  },
+  {
+    // Build scripts run under Node only (no browser globals).
+    files: ["scripts/**/*.{js,mjs}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: { ...globals.node },
+    },
+  },
+  {
+    files: ["scripts/**/*.test.mjs"],
     languageOptions: {
       globals: { ...globals.node, ...globals.vitest },
     },

@@ -82,6 +82,14 @@ describe("buildTleFile", () => {
     await rm(dir, { recursive: true, force: true });
   });
 
+  // Fallback snapshots are keyed by group so failed groups can be
+  // substituted individually.
+  const writeFallback = async (byGroup) => {
+    const p = join(dir, "tles-fallback.json");
+    await writeFile(p, JSON.stringify(byGroup));
+    return p;
+  };
+
   it("writes merged groups and reports source fresh", async () => {
     const fetchImpl = async (url) => {
       if (url.includes("gps-ops")) return okResponse([sat("GPS-1")]);
@@ -103,14 +111,14 @@ describe("buildTleFile", () => {
     expect(written).toHaveLength(3);
   });
 
-  it("falls back to the committed snapshot when a group keeps failing", async () => {
-    const fallback = [sat("STALE-1"), sat("STALE-2")];
-    const fallbackPath = join(dir, "tles-fallback.json");
-    await writeFile(fallbackPath, JSON.stringify(fallback));
-
+  it("substitutes fallback entries only for the groups that keep failing", async () => {
+    const fallbackPath = await writeFallback({
+      "gps-ops": [sat("STALE-GPS")],
+      beidou: [sat("STALE-BDS-1"), sat("STALE-BDS-2")],
+    });
     const fetchImpl = async (url) => {
       if (url.includes("beidou")) throw new Error("fetch failed");
-      return okResponse([sat("GPS-1")]);
+      return okResponse([sat("FRESH-GPS")]);
     };
     const outPath = join(dir, "tles.json");
     const result = await buildTleFile({
@@ -123,13 +131,61 @@ describe("buildTleFile", () => {
       log: noLog,
       warn: noLog,
     });
-    expect(result.source).toBe("fallback");
-    expect(result.count).toBe(2);
-    const written = JSON.parse(await readFile(outPath, "utf8"));
-    expect(written.map((s) => s.OBJECT_NAME)).toEqual(["STALE-1", "STALE-2"]);
+    expect(result.source).toBe("partial");
+    expect(result.count).toBe(3);
+    const names = JSON.parse(await readFile(outPath, "utf8")).map((s) => s.OBJECT_NAME);
+    expect(names).toContain("FRESH-GPS");
+    expect(names).toContain("STALE-BDS-1");
+    expect(names).toContain("STALE-BDS-2");
+    expect(names).not.toContain("STALE-GPS");
   });
 
-  it("throws when fetching fails and no fallback snapshot exists", async () => {
+  it("uses the full fallback when every group fails", async () => {
+    const fallbackPath = await writeFallback({
+      "gps-ops": [sat("STALE-GPS")],
+      "glo-ops": [sat("STALE-GLO")],
+    });
+    const fetchImpl = async () => {
+      throw new Error("fetch failed");
+    };
+    const outPath = join(dir, "tles.json");
+    const result = await buildTleFile({
+      groups: ["gps-ops", "glo-ops"],
+      outPath,
+      fallbackPath,
+      fetchImpl,
+      attempts: 2,
+      backoffMs: 0,
+      log: noLog,
+      warn: noLog,
+    });
+    expect(result.source).toBe("fallback");
+    expect(result.count).toBe(2);
+  });
+
+  it("ships fresh groups and skips failed ones when no fallback exists", async () => {
+    const fetchImpl = async (url) => {
+      if (url.includes("beidou")) throw new Error("fetch failed");
+      return okResponse([sat("FRESH-GPS")]);
+    };
+    const outPath = join(dir, "tles.json");
+    const result = await buildTleFile({
+      groups: ["gps-ops", "beidou"],
+      outPath,
+      fallbackPath: join(dir, "missing-fallback.json"),
+      fetchImpl,
+      attempts: 2,
+      backoffMs: 0,
+      log: noLog,
+      warn: noLog,
+    });
+    expect(result.source).toBe("partial");
+    expect(result.count).toBe(1);
+    const names = JSON.parse(await readFile(outPath, "utf8")).map((s) => s.OBJECT_NAME);
+    expect(names).toEqual(["FRESH-GPS"]);
+  });
+
+  it("throws when every group fails and no fallback snapshot exists", async () => {
     const fetchImpl = async () => {
       throw new Error("fetch failed");
     };
@@ -145,5 +201,25 @@ describe("buildTleFile", () => {
         warn: noLog,
       })
     ).rejects.toThrow();
+  });
+
+  it("throws a descriptive error when the fallback snapshot is corrupt", async () => {
+    const fallbackPath = join(dir, "tles-fallback.json");
+    await writeFile(fallbackPath, '{"gps-ops": [truncated');
+    const fetchImpl = async () => {
+      throw new Error("fetch failed");
+    };
+    await expect(
+      buildTleFile({
+        groups: ["gps-ops"],
+        outPath: join(dir, "tles.json"),
+        fallbackPath,
+        fetchImpl,
+        attempts: 2,
+        backoffMs: 0,
+        log: noLog,
+        warn: noLog,
+      })
+    ).rejects.toThrow(/fallback/i);
   });
 });

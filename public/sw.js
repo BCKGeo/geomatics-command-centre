@@ -9,7 +9,6 @@
 // On activate: delete every cache, unregister this SW, then reload all open
 // clients so they pick up the cache-controlled HTTP behaviour without the
 // user having to refresh themselves.
-const CACHE_NAME = "bckgeo-killswitch-v1";
 
 self.addEventListener("install", (e) => {
   e.waitUntil(self.skipWaiting());
@@ -27,7 +26,8 @@ self.addEventListener("activate", (e) => {
     try {
       const clients = await self.clients.matchAll({ type: "window" });
       for (const client of clients) {
-        try { client.navigate(client.url); } catch { /* ignore */ }
+        // navigate() rejects for clients this SW does not control
+        await client.navigate(client.url).catch(() => {});
       }
     } catch { /* ignore */ }
   })());
