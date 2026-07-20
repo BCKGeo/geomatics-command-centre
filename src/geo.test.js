@@ -20,9 +20,17 @@ function utmDef(zone, south) {
   return `+proj=utm +zone=${zone}${south ? ' +south' : ''} +ellps=GRS80 +units=m +no_defs`;
 }
 
-// MTM definitions (NRCan convention: 3° zones, k0=0.9999, FE=304800)
+// MTM definitions (NRCan convention: 3° zones, k0=0.9999, FE=304800).
+// Central meridians per EPSG (NAD83 / MTM zones 1-17, EPSG:32181-32197):
+// zones 1-2 (Newfoundland) are -53 and -56; zones 3+ follow -(49.5 + 3z),
+// e.g. zone 8 (Montreal, EPSG:32188 / CSRS EPSG:2950) = -73.5.
+function mtmTrueCM(zone) {
+  if (zone === 1) return -53;
+  if (zone === 2) return -56;
+  return -(49.5 + 3 * zone);
+}
 function mtmProj4Def(zone) {
-  const cm = -(50.5 + 3 * zone);
+  const cm = mtmTrueCM(zone);
   return `+proj=tmerc +lat_0=0 +lon_0=${cm} +k=0.9999 +x_0=304800 +y_0=0 +ellps=GRS80 +units=m +no_defs`;
 }
 
@@ -114,6 +122,13 @@ describe('DD to DMS', () => {
     // Should either show ~60 seconds with minute rollover or 59.99"
     expect(r.d).toBe(45);
     expect(r.mAdj + r.s / 60).toBeCloseTo(59.999, 1);
+  });
+
+  it('carries a full minute into degrees (54° 0\' 0", never 53° 60\')', () => {
+    const r = ddToDms(53.99999999);
+    expect(r.d).toBe(54);
+    expect(r.mAdj).toBe(0);
+    expect(r.s).toBe(0);
   });
 
   it('handles 180 degrees (antimeridian)', () => {
@@ -248,16 +263,24 @@ describe('MTM Zone Detection', () => {
 });
 
 describe('MTM Central Meridian', () => {
-  it('Zone 1 → CM -53.5°', () => {
-    expect(mtmCM(1)).toBe(-53.5);
+  it('Zone 1 (Newfoundland) → CM -53° (EPSG:32181)', () => {
+    expect(mtmCM(1)).toBe(-53);
   });
 
-  it('Zone 10 → CM -80.5°', () => {
-    expect(mtmCM(10)).toBe(-80.5);
+  it('Zone 2 (Newfoundland) → CM -56° (EPSG:32182)', () => {
+    expect(mtmCM(2)).toBe(-56);
   });
 
-  it('CMs are 3° apart', () => {
-    for (let z = 1; z < 17; z++) {
+  it('Zone 8 (Montreal) → CM -73.5° (EPSG:32188 / CSRS EPSG:2950)', () => {
+    expect(mtmCM(8)).toBe(-73.5);
+  });
+
+  it('Zone 10 (Toronto) → CM -79.5° (EPSG:32190)', () => {
+    expect(mtmCM(10)).toBe(-79.5);
+  });
+
+  it('CMs are 3° apart from zone 3 up', () => {
+    for (let z = 3; z < 17; z++) {
       expect(mtmCM(z + 1) - mtmCM(z)).toBeCloseTo(-3, 10);
     }
   });
@@ -400,13 +423,13 @@ describe('Grid Scale Factor', () => {
   });
 
   it('MTM k0=0.9999 at central meridian', () => {
-    const k = gridScaleFactor(49, -80.5, -80.5, 0.9999);
+    const k = gridScaleFactor(49, -79.5, -79.5, 0.9999);
     expect(k).toBeCloseTo(0.9999, 6);
   });
 
   it('MTM scale factor is closer to 1.0 than UTM (narrower zones)', () => {
     // 1° from CM, MTM should be closer to 1.0 than UTM
-    const kMtm = gridScaleFactor(49, -79.5, -80.5, 0.9999);
+    const kMtm = gridScaleFactor(49, -78.5, -79.5, 0.9999);
     const kUtm = gridScaleFactor(49, -122, -123, 0.9996);
     expect(Math.abs(kMtm - 1.0)).toBeLessThan(Math.abs(kUtm - 1.0));
   });
@@ -599,8 +622,8 @@ describe('MTM Applicability', () => {
     expect(isMtmApplicable(-63.58)).toBe(true);
   });
 
-  it('returns true at the boundary (-103.0)', () => {
-    expect(isMtmApplicable(-103.0)).toBe(true);
+  it('returns true at the boundary (-102.0, zone 17 CM -100.5 minus 1.5)', () => {
+    expect(isMtmApplicable(-102.0)).toBe(true);
   });
 
   it('returns false for Calgary (-114.07)', () => {
@@ -615,12 +638,37 @@ describe('MTM Applicability', () => {
     expect(isMtmApplicable(-123.12)).toBe(false);
   });
 
-  it('returns true just east of boundary (-102.99)', () => {
-    expect(isMtmApplicable(-102.99)).toBe(true);
+  it('returns true just east of boundary (-101.99)', () => {
+    expect(isMtmApplicable(-101.99)).toBe(true);
   });
 
-  it('returns false just west of boundary (-103.01)', () => {
-    expect(isMtmApplicable(-103.01)).toBe(false);
+  it('returns false just west of boundary (-102.01)', () => {
+    expect(isMtmApplicable(-102.01)).toBe(false);
+  });
+});
+
+describe('MTM zone selection (corrected CMs)', () => {
+  it('Montreal (-73.56) → zone 8', () => {
+    expect(getMtmZone(-73.56)).toBe(8);
+  });
+
+  it('Ottawa (-75.70) → zone 9 (CM -76.5)', () => {
+    expect(getMtmZone(-75.7009)).toBe(9);
+  });
+
+  it("St. John's (-52.71) → zone 1 (CM -53)", () => {
+    expect(getMtmZone(-52.7126)).toBe(1);
+  });
+
+  it('Grand Falls-Windsor (-55.65) → zone 2 (CM -56)', () => {
+    expect(getMtmZone(-55.65)).toBe(2);
+  });
+
+  it('easting at a zone central meridian equals the 304 800 m false easting', () => {
+    // Lon -73.5 is exactly the zone 8 CM; on the CM the TM easting is the FE.
+    const r = geoToMtm(45.5, -73.5);
+    expect(r.zone).toBe(8);
+    expect(r.easting).toBeCloseTo(304800, 6);
   });
 });
 
@@ -745,6 +793,24 @@ describe('Vincenty Direct', () => {
     const inv = vincentyInverse(start.lat, start.lon, dest.lat, dest.lon);
     expect(inv.distance).toBeCloseTo(dist, 2);
     expect(inv.fwdAzimuth).toBeCloseTo(az, 2);
+  });
+
+  it('reverse azimuth equals the dest-to-origin forward azimuth (oblique NE line)', () => {
+    const dest = vincentyDirect(53.9171, -122.7497, 45, 10000);
+    const back = vincentyInverse(dest.lat, dest.lon, 53.9171, -122.7497);
+    expect(dest.revAzimuth).toBeCloseTo(back.fwdAzimuth, 4);
+  });
+
+  it('reverse azimuth equals the dest-to-origin forward azimuth (oblique SW line)', () => {
+    const dest = vincentyDirect(49.0, -123.0, 225, 80000);
+    const back = vincentyInverse(dest.lat, dest.lon, 49.0, -123.0);
+    expect(dest.revAzimuth).toBeCloseTo(back.fwdAzimuth, 4);
+  });
+
+  it('reverse azimuth is consistent with vincentyInverse revAzimuth', () => {
+    const dest = vincentyDirect(45.0, -75.0, 60, 25000);
+    const inv = vincentyInverse(45.0, -75.0, dest.lat, dest.lon);
+    expect(dest.revAzimuth).toBeCloseTo(inv.revAzimuth, 4);
   });
 
   it('round-trip: 5 different azimuths at 100 km', () => {

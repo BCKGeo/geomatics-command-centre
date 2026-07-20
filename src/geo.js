@@ -4,14 +4,17 @@
 
 export const GRS80_A=6378137,GRS80_F=1/298.257222101,GRS80_E2=2*GRS80_F-GRS80_F*GRS80_F,GRS80_EP2=GRS80_E2/(1-GRS80_E2);
 
-export function ddToDms(dd){const s=dd<0?-1:1,a=Math.abs(dd),d=Math.floor(a),mr=(a-d)*60,m=Math.floor(mr),sec=Math.round((mr-m)*6000)/100;return{d,m,s:sec>=60?0:sec,sign:s,mAdj:sec>=60?m+1:m};}
+export function ddToDms(dd){const s=dd<0?-1:1,a=Math.abs(dd);let d=Math.floor(a);const mr=(a-d)*60,m=Math.floor(mr);let sec=Math.round((mr-m)*6000)/100,mA=m;if(sec>=60){sec=0;mA=m+1;}if(mA>=60){mA=0;d+=1;}return{d,m,s:sec,sign:s,mAdj:mA};}
 export function dmsToDd(d,m,s,sign){return sign*(Math.abs(d)+m/60+s/3600);}
 
 export function getUtmZone(lon){return Math.max(1,Math.min(60,Math.floor((lon+180)/6)+1));}
 export function utmCM(z){return z*6-183;}
-export function getMtmZone(lon){return Math.max(1,Math.min(17,Math.round((-lon-50.5)/3)));}
-export function mtmCM(z){return-(50.5+3*z);}
-export const MTM_WEST_LIMIT = -103.0; // Western boundary of MTM zone 17
+// MTM central meridians per EPSG (NAD83 / MTM zones 1-17, EPSG:32181-32197):
+// zones 1-2 (Newfoundland) are -53 and -56; zones 3+ follow -(49.5 + 3z),
+// e.g. zone 8 (Montreal, EPSG:32188 / CSRS EPSG:2950) = -73.5.
+export function getMtmZone(lon){if(lon>=-54.5)return 1;if(lon>=-57.5)return 2;return Math.max(3,Math.min(17,Math.round((-lon-49.5)/3)));}
+export function mtmCM(z){if(z===1)return -53;if(z===2)return -56;return-(49.5+3*z);}
+export const MTM_WEST_LIMIT = -102.0; // Western boundary of MTM zone 17 (CM -100.5 minus 1.5)
 export function isMtmApplicable(lon) { return lon >= MTM_WEST_LIMIT; }
 
 export function geoToTM(latD,lonD,cm,k0,fe,fn){
@@ -48,8 +51,8 @@ export function utmEpsg(zone,hemi){return hemi==="N"?26900+zone:32700+zone;}
 export function utmEpsgStr(zone,hemi){return`EPSG:${utmEpsg(zone,hemi)}`;}
 
 export function gridScaleFactor(latD,lonD,cm,k0){
-  const R=Math.PI/180,p=latD*R,dl=(lonD-cm)*R,cp=Math.cos(p),sp=Math.sin(p);
-  const N=GRS80_A/Math.sqrt(1-GRS80_E2*sp*sp),T=Math.tan(p)*Math.tan(p),C=GRS80_EP2*cp*cp,A=cp*dl;
+  const R=Math.PI/180,p=latD*R,dl=(lonD-cm)*R,cp=Math.cos(p);
+  const T=Math.tan(p)*Math.tan(p),C=GRS80_EP2*cp*cp,A=cp*dl;
   const A2=A*A,A4=A2*A2;
   return k0*(1+(1+C)*A2/2+(5-4*T+42*C+13*C*C-28*GRS80_EP2)*A4/24);
 }
@@ -121,7 +124,10 @@ export function vincentyDirect(lat1D, lon1D, azD, dist) {
   const lam = Math.atan2(sinS * sAz, cU1 * cosS - sU1 * sinS * cAz);
   const C = f / 16 * cos2a * (4 + f * (4 - 3 * cos2a));
   const L = lam - (1 - C) * f * sAlpha * (sig + C * sinS * (cos2sm + C * cosS * (-1 + 2 * cos2sm * cos2sm)));
-  let rev = Math.atan2(sAlpha, sU1 * sinS - cU1 * cosS * cAz) / R;
+  // Back bearing dest→origin: Vincenty's α2 (forward at dest) plus 180°,
+  // i.e. atan2 with both components negated. Matches vincentyInverse's
+  // revAzimuth convention.
+  let rev = Math.atan2(-sAlpha, sU1 * sinS - cU1 * cosS * cAz) / R;
   if (rev < 0) rev += 360;
   return { lat: lat2 / R, lon: lon1D + L / R, revAzimuth: rev };
 }

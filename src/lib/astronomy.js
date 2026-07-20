@@ -2,7 +2,13 @@ import { DEFAULT_LAT, DEFAULT_LON } from '../data/constants.js';
 
 // ── Sun Position ──
 export function calcSun(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
-  const r=Math.PI/180, jd=Math.floor(365.25*(date.getUTCFullYear()+4716))+Math.floor(30.6001*((date.getUTCMonth()+1<3?date.getUTCMonth()+13:date.getUTCMonth()+1)))+date.getUTCDate()+(date.getUTCHours()+date.getUTCMinutes()/60)/24-1524.5;
+  const r=Math.PI/180;
+  // Meeus Julian Day: Jan/Feb count as months 13-14 of the prior year, and
+  // the Gregorian correction B is required (without it JD is ~13 days off).
+  let y=date.getUTCFullYear(), mo=date.getUTCMonth()+1;
+  if(mo<3){y-=1;mo+=12;}
+  const A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+  const jd=Math.floor(365.25*(y+4716))+Math.floor(30.6001*(mo+1))+date.getUTCDate()+B+(date.getUTCHours()+date.getUTCMinutes()/60)/24-1524.5;
   const T=(jd-2451545)/36525, L0=(280.46646+T*(36000.76983+.0003032*T))%360, M=(357.52911+T*(35999.05029-.0001537*T))*r;
   const C=(1.914602-T*.004817)*Math.sin(M)+.019993*Math.sin(2*M), sL=(L0+C)*r, ob=(23.439291-.0130042*T)*r;
   const dec=Math.asin(Math.sin(ob)*Math.sin(sL)), eq=(L0-(Math.atan2(Math.cos(ob)*Math.sin(sL),Math.cos(sL))/r))*4;
@@ -16,7 +22,8 @@ export function calcSun(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
 export function getMoon(date) {
   const y=date.getFullYear(), m=date.getMonth()+1, d=date.getDate();
   let c2,e; if(m<3){c2=y-1;e=m+12;}else{c2=y;e=m;}
-  const jd=Math.floor(365.25*(c2+4716))+Math.floor(30.6001*(e+1))+d-1524.5;
+  const A=Math.floor(c2/100), B=2-A+Math.floor(A/4); // Gregorian correction (13 days, ~44% of a lunation)
+  const jd=Math.floor(365.25*(c2+4716))+Math.floor(30.6001*(e+1))+d+B-1524.5;
   const ds=(jd-2451550.1)%29.530588853, ph=((ds<0?ds+29.530588853:ds)/29.530588853);
   const il=Math.round((1-Math.cos(ph*2*Math.PI))/2*100);
   let nm,ic;
@@ -57,10 +64,11 @@ export function calcMagDec(lat, lon, altKm=0, date=new Date()) {
 
 export function xrayClass(flux) {
   if (!flux || flux <= 0) return { cls: "--", color: "#4a5a80" };
-  const log = Math.log10(flux);
-  if (log >= -4) return { cls: "X" + (flux/1e-4).toFixed(1), color: "#dc2626" };
-  if (log >= -5) return { cls: "M" + (flux/1e-5).toFixed(1), color: "#ef4444" };
-  if (log >= -6) return { cls: "C" + (flux/1e-6).toFixed(1), color: "#eab308" };
-  if (log >= -7) return { cls: "B" + (flux/1e-7).toFixed(1), color: "#22c55e" };
+  // Thresholds sit at 9.95 (not 10) of the class below so a mantissa that
+  // would round to 10.0 displays as 1.0 of the next class up.
+  if (flux >= 9.95e-5) return { cls: "X" + (flux/1e-4).toFixed(1), color: "#dc2626" };
+  if (flux >= 9.95e-6) return { cls: "M" + (flux/1e-5).toFixed(1), color: "#ef4444" };
+  if (flux >= 9.95e-7) return { cls: "C" + (flux/1e-6).toFixed(1), color: "#eab308" };
+  if (flux >= 9.95e-8) return { cls: "B" + (flux/1e-7).toFixed(1), color: "#22c55e" };
   return { cls: "A" + (flux/1e-8).toFixed(1), color: "#22c55e" };
 }
