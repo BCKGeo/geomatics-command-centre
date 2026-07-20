@@ -122,7 +122,7 @@ export function FlightOps() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{c.cat}</div>
                   <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <div style={{ fontSize: 10, color: B.accent, fontFamily: B.font }}>{c.weight}</div>
+                    <div style={{ fontSize: 10, color: B.acc, fontFamily: B.font }}>{c.weight}</div>
                     <span style={{ fontSize: 9, color: B.textDim }}>{expandedCat === c.cat ? "\u25B2" : "\u25BC"}</span>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ export function FlightOps() {
             <button onClick={() => setChecks(Object.fromEntries(PREFLIGHT_ITEMS.map(i => [i.id, true])))} style={{ background: "transparent", color: B.textDim, border: `1px solid ${B.border}`, padding: "4px 12px", fontSize: 10, fontFamily: B.font, cursor: "pointer" }}>Check All</button>
           </div>
           <div style={{ marginTop: 10, fontSize: 9, color: B.textDim, lineHeight: 1.4 }}>
-            Reference checklist only. Always follow your organization's SOPs and manufacturer guidelines.
+            Reference checklist only. Always follow your organization{"’"}s SOPs and manufacturer guidelines.
           </div>
         </div>
       )}
@@ -214,7 +214,7 @@ export function FlightOps() {
             {WEATHER_MINS.map(w => (
               <div key={w.condition} style={{ ...insetStyle, padding: "8px 12px", display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 12, alignItems: "center" }}>
                 <div style={{ fontSize: 11, fontWeight: 600, color: B.text }}>{w.condition}</div>
-                <div style={{ fontSize: 11, fontWeight: 700, color: B.accent, fontFamily: B.font, textAlign: "center" }}>{w.min}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: B.acc, fontFamily: B.font, textAlign: "center" }}>{w.min}</div>
                 <div style={{ fontSize: 10, color: B.textDim }}>{w.notes}</div>
               </div>
             ))}

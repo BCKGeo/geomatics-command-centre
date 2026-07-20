@@ -1,5 +1,5 @@
 import { useTheme } from "../../context/ThemeContext.jsx";
-import { CONSTELLATION_COLORS, PDOP_THRESHOLDS, pdopLevel } from "../../lib/satellites.js";
+import { CONSTELLATION_COLORS, pdopLevel } from "../../lib/satellites.js";
 
 const R = 90; // plot radius in SVG units
 const CX = 100, CY = 100; // center

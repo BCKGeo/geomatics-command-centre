@@ -23,7 +23,7 @@ export function Terms() {
 
         <div style={inset}>
           <div style={h}>2. NO WARRANTY</div>
-          <p style={p}>This tool is provided <b style={{ color: B.text }}>"as is" without warranty of any kind</b>, express or implied, including but not limited to warranties of accuracy, completeness, merchantability, or fitness for a particular purpose.</p>
+          <p style={p}>This tool is provided <b style={{ color: B.text }}>{"“"}as is{"”"} without warranty of any kind</b>, express or implied, including but not limited to warranties of accuracy, completeness, merchantability, or fitness for a particular purpose.</p>
           <p style={p}>Data is sourced from third-party providers (NOAA SWPC, Open-Meteo, Environment Canada, Celestrak, BigDataCloud) and may be delayed, incomplete, or inaccurate. The developer does not guarantee the availability, timeliness, or accuracy of any data displayed.</p>
         </div>
 
@@ -79,7 +79,7 @@ export function Terms() {
           <p style={p}>BCKGeo Command Centre collects <b style={{ color: B.text }}>no personal data</b>. There is no tracking, analytics, cookies, or server-side data collection.</p>
           <p style={p}>Geolocation is opt-in only. Your position is used client-side to fetch local weather, AQHI, and compute location-dependent values (magnetic declination, satellite visibility). It is never transmitted to or stored by BCKGeo servers.</p>
           <p style={p}>Weather and geocoding requests go directly from your browser to third-party APIs (Open-Meteo, BigDataCloud). Refer to their respective privacy policies for data handling practices.</p>
-          <p style={p}>A single localStorage flag records whether you have accepted the Survey Tools disclaimer. No other data is persisted.</p>
+          <p style={p}>Browser localStorage holds your theme preference and, if you set one, your saved location (coordinates and place name). Both stay on your device and can be cleared from your browser at any time. No other data is persisted.</p>
         </div>
 
         <div style={inset}>

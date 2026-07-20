@@ -80,7 +80,7 @@ export function CoordConverter({initialLat=DEFAULT_LAT,initialLon=DEFAULT_LON}){
 
   const inp={background:B.bg,border:`1px solid ${B.borderHi}`,borderRadius:4,padding:"4px 8px",color:B.text,fontSize:16,outline:"none",fontFamily:B.font,boxSizing:"border-box"};
   const dmsInp={...inp,width:"100%",maxWidth:48,textAlign:"center"};
-  const toggleBtn=(active,label)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
+  const toggleBtn=(active)=>({padding:"4px 10px",fontSize:11,fontWeight:active?700:400,fontFamily:B.font,color:active?B.bg:B.textMid,background:active?B.priBr:"transparent",border:`1px solid ${active?B.priBr:B.border}`,borderRadius:3,cursor:"pointer"});
   const outRow={display:"flex",alignItems:"center",justifyContent:"space-between",padding:"5px 10px",borderRadius:4,background:B.bg,border:`1px solid ${B.border}`,marginBottom:4};
   const copyBtn=(txt,label)=><button onClick={()=>copyText(txt,label)} style={{background:"none",border:"none",cursor:"pointer",fontSize:11,color:copied===label?B.priBr:B.textDim,fontFamily:B.font,padding:"2px 6px"}}>{copied===label?"\u2713":"📋"}</button>;
   const lockBtn=(locked,onToggle)=><button onClick={onToggle} style={{background:"none",border:"none",cursor:"pointer",fontSize:12,padding:"2px 4px",color:locked?B.textDim:B.priBr}} title={locked?"Auto-detected. Click to override.":"Manual override. Click to auto-detect."}>{locked?"\uD83D\uDD12":"\uD83D\uDD13"}</button>;

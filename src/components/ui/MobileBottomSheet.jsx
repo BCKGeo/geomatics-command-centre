@@ -1,8 +1,6 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 
 const SNAP_COLLAPSED = 0;
-const SNAP_HALF = 1;
-const SNAP_FULL = 2;
 
 // Snap positions as fraction of viewport height (from bottom)
 const SNAP_HEIGHTS = [0.12, 0.5, 0.92];

@@ -63,8 +63,6 @@ export function InverseCalc() {
   const renderSvg = () => {
     if (!result || !result.converged || result.distance === 0) return null;
     const sz = 220, cx = sz / 2, cy = sz / 2, r = 80;
-    const fwdRad = (result.fwdAzimuth - 90) * Math.PI / 180;
-    const revRad = (result.revAzimuth - 90) * Math.PI / 180;
     // Place A at center-left, B relative to A based on azimuth
     const ax = cx - 40, ay = cy + 20;
     const bx = ax + r * Math.sin(result.fwdAzimuth * Math.PI / 180);

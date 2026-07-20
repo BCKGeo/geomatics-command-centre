@@ -338,7 +338,9 @@ export function CommandCentre() {
 
       {/* ═══ GNSS Conditions Summary ═══ */}
       {(() => {
-        const latestKp = kp.length > 0 ? parseFloat(kp[kp.length - 1]?.Kp || kp[kp.length - 1]?.kp_index || 0) : 0;
+        // NOAA planetary-k-index.json is array-of-arrays: [time, Kp, ...] with a header row
+        const lastKpRow = kp.length > 1 ? kp[kp.length - 1] : null;
+        const latestKp = Array.isArray(lastKpRow) ? parseFloat(lastKpRow[1]) || 0 : 0;
         const gScale = parseInt(gS) || 0;
         const isStorm = wc >= 95; // thunderstorm codes
         const isRain = wc >= 51 && wc < 95;

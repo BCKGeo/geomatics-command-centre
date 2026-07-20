@@ -202,7 +202,7 @@ export function Recon() {
             <div key={o.deliverable} style={{ ...insetStyle, padding: "6px 10px", display: "grid", gridTemplateColumns: "1fr 55px 55px 1fr", gap: 8, alignItems: "center" }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: B.text }}>{o.deliverable}</div>
               <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font, textAlign: "center" }}>{o.forward}</div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: B.accent, fontFamily: B.font, textAlign: "center" }}>{o.side}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: B.acc, fontFamily: B.font, textAlign: "center" }}>{o.side}</div>
               <div style={{ fontSize: 10, color: B.textDim }}>{o.notes}</div>
             </div>
           ))}
@@ -219,7 +219,7 @@ export function Recon() {
                 <span style={{ fontSize: 12, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{s.index}</span>
                 <span style={{ fontSize: 9, color: B.textDim, fontFamily: "monospace" }}>{s.range}</span>
               </div>
-              <div style={{ fontSize: 10, fontFamily: "monospace", color: B.accent, marginBottom: 3 }}>{s.formula}</div>
+              <div style={{ fontSize: 10, fontFamily: "monospace", color: B.acc, marginBottom: 3 }}>{s.formula}</div>
               <div style={{ fontSize: 10, color: B.textMid }}>{s.use}</div>
             </div>
           ))}
@@ -237,7 +237,7 @@ export function Recon() {
             <div key={a.method} style={{ ...insetStyle, padding: "6px 10px", display: "grid", gridTemplateColumns: "1fr 70px 70px 1fr", gap: 8, alignItems: "center" }}>
               <div style={{ fontSize: 10, fontWeight: 600, color: B.text }}>{a.method}</div>
               <div style={{ fontSize: 10, fontWeight: 700, color: B.priBr, fontFamily: B.font, textAlign: "center" }}>{a.hz}</div>
-              <div style={{ fontSize: 10, fontWeight: 700, color: B.accent, fontFamily: B.font, textAlign: "center" }}>{a.vt}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, color: B.acc, fontFamily: B.font, textAlign: "center" }}>{a.vt}</div>
               <div style={{ fontSize: 9, color: B.textDim }}>{a.notes}</div>
             </div>
           ))}

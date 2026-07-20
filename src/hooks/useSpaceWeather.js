@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { usePolledFeed } from "./usePolledFeed.js";
-import { NOAA_KP, NOAA_SCALES, NOAA_WIND_SPEED, NOAA_WIND_MAG, NOAA_XRAY, NOAA_XRAY_FLUX, NOAA_ALERTS } from "../data/constants.js";
+import { NOAA_KP, NOAA_SCALES, NOAA_WIND_SPEED, NOAA_WIND_MAG, NOAA_F107, NOAA_XRAY, NOAA_ALERTS } from "../data/constants.js";
 
 const INTERVAL = 12e4; // 2 minutes
 
@@ -11,8 +11,8 @@ export function useSpaceWeather() {
       fetch(NOAA_SCALES).then(r => r.json()),
       fetch(NOAA_WIND_SPEED).then(r => r.json()),
       fetch(NOAA_WIND_MAG).then(r => r.json()),
+      fetch(NOAA_F107).then(r => r.json()),
       fetch(NOAA_XRAY).then(r => r.json()),
-      fetch(NOAA_XRAY_FLUX).then(r => r.json()),
       fetch(NOAA_ALERTS).then(r => r.json()),
     ]);
     return {

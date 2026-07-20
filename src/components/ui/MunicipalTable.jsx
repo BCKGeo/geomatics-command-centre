@@ -24,11 +24,6 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function LinkIcon({ url, label }) {
-  if (!url) return <span style={{ color: "#555" }}>-</span>;
-  return <a href={url} target="_blank" rel="noopener noreferrer" title={label} style={{ textDecoration: "none" }}>&#x2197;</a>;
-}
-
 function ShapeIcon({ shape, color, hasStandards, size = 10 }) {
   const ring = hasStandards ? { border: `2px solid #fff`, boxShadow: "0 0 3px rgba(255,255,255,0.4)" } : {};
   if (shape === "city") return <span style={{ display: "inline-block", width: size, height: size, borderRadius: "50%", background: color, ...ring }} />;
@@ -77,12 +72,6 @@ export function MunicipalTable({ rows, B, selectedId, onRowClick, userLat, userL
 
   useEffect(() => { setPage(0); }, [rows]);
 
-  useEffect(() => {
-    if (selectedId && selectedRef.current) {
-      selectedRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }, [selectedId]);
-
   const sorted = useMemo(() => {
     const s = [...enriched];
     s.sort((a, b) => {
@@ -106,14 +95,25 @@ export function MunicipalTable({ rows, B, selectedId, onRowClick, userLat, userL
     setSort((prev) => prev.col === col ? { col, dir: prev.dir === "asc" ? "desc" : "asc" } : { col, dir: col === "distanceKm" ? "asc" : "desc" });
   };
 
+  // Jump to the selected row's page only when the selection or ordering
+  // changes. With `page` in the deps this snapped back on every manual
+  // page change, locking pagination while a marker was selected.
   useEffect(() => {
     if (!selectedId) return;
     const idx = sorted.findIndex((r) => `${r.lat},${r.lon}-${r.name}` === selectedId);
     if (idx >= 0) {
       const targetPage = Math.floor(idx / PAGE_SIZE);
-      if (targetPage !== page) setPage(targetPage);
+      setPage((p) => (p === targetPage ? p : targetPage));
     }
-  }, [selectedId, sorted, page]);
+  }, [selectedId, sorted]);
+
+  // page/sorted deps: when selection triggers the page switch above, the
+  // selected row only exists in the DOM after the new page renders.
+  useEffect(() => {
+    if (selectedId && selectedRef.current) {
+      selectedRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [selectedId, page, sorted]);
 
   const th = (label, col, extra) => (
     <th

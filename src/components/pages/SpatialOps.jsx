@@ -91,7 +91,8 @@ export function SpatialOps() {
   const insetStyle = { background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL };
 
   const copyCmd = (cmd, i) => {
-    navigator.clipboard.writeText(cmd).then(() => { setCopied(i); setTimeout(() => setCopied(null), 1500); });
+    // clipboard rejects on non-secure contexts or denied permission
+    navigator.clipboard.writeText(cmd).then(() => { setCopied(i); setTimeout(() => setCopied(null), 1500); }).catch(() => {});
   };
 
   return (
@@ -171,7 +172,7 @@ export function SpatialOps() {
             {UTM_ZONES.map(z => (
               <div key={z.zone} style={{ ...insetStyle, padding: "5px 10px", display: "grid", gridTemplateColumns: "50px 60px 1fr", gap: 8, alignItems: "center" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{z.zone}</div>
-                <div style={{ fontSize: 10, color: B.accent, fontFamily: B.font }}>{z.cm}</div>
+                <div style={{ fontSize: 10, color: B.acc, fontFamily: B.font }}>{z.cm}</div>
                 <div style={{ fontSize: 10, color: B.textMid }}>{z.provinces}</div>
               </div>
             ))}

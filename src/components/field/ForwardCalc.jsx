@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
-import { vincentyDirect, ddToDms, dmsToDd, geoToUtm, getUtmZone } from "../../geo.js";
+import { vincentyDirect, ddToDms, dmsToDd, geoToUtm } from "../../geo.js";
 import { DEFAULT_LAT, DEFAULT_LON } from "../../data/constants.js";
 
 export function ForwardCalc() {
@@ -29,7 +29,6 @@ export function ForwardCalc() {
   const utm = result ? geoToUtm(result.lat, result.lon) : null;
 
   const fmtDms = (dd) => { const d = ddToDms(Math.abs(dd)); return `${d.d}\u00B0 ${d.mAdj}' ${d.s.toFixed(2)}"`; };
-  const fmtDist = (m) => m >= 1000 ? `${m.toFixed(3)} m (${(m / 1000).toFixed(3)} km)` : `${m.toFixed(3)} m`;
 
   const switchMode = (m) => {
     if (m === mode) return;

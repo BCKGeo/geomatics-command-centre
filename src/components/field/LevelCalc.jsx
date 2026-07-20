@@ -26,7 +26,6 @@ export function LevelCalc() {
   const hasStart = !isNaN(startElev);
   const hasClose = !isNaN(closeElev);
 
-  let results = null;
   let misclosure = null;
   let adjustedResults = null;
 
@@ -46,7 +45,6 @@ export function LevelCalc() {
     }
 
     if (valid && rows.length > 0) {
-      results = rows;
       const computedClose = rows[rows.length - 1].elev;
       misclosure = computedClose - closeElev;
 

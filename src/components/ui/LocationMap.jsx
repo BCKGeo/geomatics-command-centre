@@ -28,6 +28,9 @@ export function LocationMap() {
     setQuery("");
   }, [setManualLocation]);
 
+  // Cancel any queued Nominatim lookup on unmount (setState after unmount)
+  useEffect(() => () => { if (debounceRef.current) clearTimeout(debounceRef.current); }, []);
+
   const handleSearch = useCallback((q) => {
     setQuery(q);
     if (debounceRef.current) clearTimeout(debounceRef.current);

@@ -53,18 +53,21 @@ export function CurveCalc() {
     // Place PI at top center
     const piX = sz / 2, piY = pad + 20;
     const halfDelta = dRad / 2;
-    // Tangent lines go down-left and down-right from PI
+    // Tangent lines go down-left and down-right from PI. The included
+    // angle between the tangent rays is 180 - delta, so each ray sits at
+    // (90 - delta/2) from the vertical bisector.
     const tLen = 80; // visual tangent length (scaled)
-    const pcX = piX - tLen * Math.sin(halfDelta);
-    const pcY = piY + tLen * Math.cos(halfDelta);
-    const ptX = piX + tLen * Math.sin(halfDelta);
-    const ptY = piY + tLen * Math.cos(halfDelta);
-    // Center of curve (below PI)
+    const pcX = piX - tLen * Math.cos(halfDelta);
+    const pcY = piY + tLen * Math.sin(halfDelta);
+    const ptX = piX + tLen * Math.cos(halfDelta);
+    const ptY = piY + tLen * Math.sin(halfDelta);
+    // Center of curve on the bisector below PI: dist(PI,center) = T/sin(delta/2),
+    // radius R = T/tan(delta/2) (from T = R tan(delta/2)).
     const rVisual = tLen / Math.tan(halfDelta || 0.01);
     const cenX = piX;
-    const cenY = piY + tLen / Math.cos(halfDelta || 0.01);
-    // Arc from PC to PT (centered at cenX, cenY with radius rVisual)
-    const arcR = Math.sqrt((pcX - cenX) ** 2 + (pcY - cenY) ** 2);
+    const cenY = piY + tLen / Math.sin(halfDelta || 0.01);
+    // Arc from PC to PT (centered at cenX, cenY)
+    const arcR = rVisual;
     const largeArc = result.delta > 180 ? 1 : 0;
     // Chord midpoint
     const midX = (pcX + ptX) / 2;

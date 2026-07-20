@@ -4,7 +4,9 @@ import { useTheme } from "../../context/ThemeContext.jsx";
 /** Convert DDD.MMSS bearing to decimal degrees */
 function dmmssToDecimal(dmmss) {
   const val = parseFloat(dmmss);
-  if (isNaN(val)) return NaN;
+  // Bearings are 0-360; a negative DDD.MMSS would otherwise ADD its
+  // minutes/seconds to the negative degrees (-45.3020 -> -44.494).
+  if (isNaN(val) || val < 0) return NaN;
   const deg = Math.trunc(val);
   const frac = Math.abs(val - deg);
   const mmss = frac * 100;
@@ -183,7 +185,7 @@ export function TraverseCalc() {
   return (
     <div>
       <div style={{ fontSize: 11, color: B.textMid, marginBottom: 4 }}>Compute traverse closure from bearings (DDD.MMSS) and distances (metres).</div>
-      <div style={{ fontSize: 10, color: B.textDim, marginBottom: 8 }}>Bearing format: 45.3020 = 45{"\u00B0"} 30' 20" {"\u00B7"} Plane coordinates (grid bearings)</div>
+      <div style={{ fontSize: 10, color: B.textDim, marginBottom: 8 }}>Bearing format: 45.3020 = 45{"\u00B0"} 30{"\u2032"} 20{"\u2033"} {"\u00B7"} Plane coordinates (grid bearings)</div>
 
       <div className="cmd-split" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 16 }}>
         <div>

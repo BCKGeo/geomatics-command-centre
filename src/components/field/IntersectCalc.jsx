@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
-import { ddToDms, dmsToDd, geoToUtm, getUtmZone, utmCM, geoToTM, tmToGeo } from "../../geo.js";
+import { ddToDms, geoToUtm, getUtmZone, utmCM, geoToTM, tmToGeo } from "../../geo.js";
 import { DEFAULT_LAT, DEFAULT_LON } from "../../data/constants.js";
 
 function solveIntersection(mode, latA, lonA, latB, lonB, valA, valB) {
@@ -23,7 +23,11 @@ function solveIntersection(mode, latA, lonA, latB, lonB, valA, valB) {
     const dxB = Math.sin(azB), dyB = Math.cos(azB);
     const det = dxA * dyB - dyA * dxB;
     if (Math.abs(det) < 1e-10) return { solutions: [], error: "Lines are parallel" };
+    // Parameters along both rays; both must be forward (>= 0), otherwise
+    // the lines only cross behind one of the bearings.
     const t = ((bx - ax) * dyB - (by - ay) * dxB) / det;
+    const s = ((bx - ax) * dyA - (by - ay) * dxA) / det;
+    if (t < 0 || s < 0) return { solutions: [], error: "Bearings do not intersect in the forward direction" };
     const ix = ax + t * dxA, iy = ay + t * dyA;
     return { solutions: [toGeo(ix, iy)] };
   }
@@ -74,10 +78,13 @@ export function IntersectCalc() {
   const [calcMode, setCalcMode] = useState("bearing-bearing");
   const [aLat, setALat] = useState(String(DEFAULT_LAT));
   const [aLon, setALon] = useState(String(DEFAULT_LON));
-  const [bLat, setBLat] = useState("43.6532");
-  const [bLon, setBLon] = useState("-79.3832");
-  const [valA, setValA] = useState("225"); // bearing or distance depending on mode
-  const [valB, setValB] = useState("45");  // bearing or distance depending on mode
+  // B defaults ~20 km from A so the UTM plane solution stays inside the
+  // tool's stated < 50 km validity range (the old Toronto default was
+  // ~350 km and several zone-widths from A's central meridian).
+  const [bLat, setBLat] = useState("45.5000");
+  const [bLon, setBLon] = useState("-75.5000");
+  const [valA, setValA] = useState("45");  // bearing or distance depending on mode
+  const [valB, setValB] = useState("315"); // bearing or distance depending on mode
   const [copied, setCopied] = useState("");
 
   const latA = parseFloat(aLat) || 0, lonA = parseFloat(aLon) || 0;
@@ -166,9 +173,9 @@ export function IntersectCalc() {
       <div style={{ fontSize: 11, color: B.textMid, marginBottom: 4 }}>Find intersection point(s) from two lines or circles. Computed in UTM projection (accurate for distances &lt; 50 km).</div>
       <div style={{ fontSize: 10, color: B.textDim, marginBottom: 8 }}>Select intersection mode, then enter coordinates and bearing/distance values.</div>
       <div style={{ display: "flex", gap: 4, marginBottom: 10, flexWrap: "wrap" }}>
-        <button onClick={() => { setCalcMode("bearing-bearing"); setValA("225"); setValB("45"); }} style={toggleBtn(calcMode === "bearing-bearing")}>Bearing-Bearing</button>
-        <button onClick={() => { setCalcMode("bearing-distance"); setValA("225"); setValB("100000"); }} style={toggleBtn(calcMode === "bearing-distance")}>Bearing-Distance</button>
-        <button onClick={() => { setCalcMode("distance-distance"); setValA("200000"); setValB("200000"); }} style={toggleBtn(calcMode === "distance-distance")}>Distance-Distance</button>
+        <button onClick={() => { setCalcMode("bearing-bearing"); setValA("45"); setValB("315"); }} style={toggleBtn(calcMode === "bearing-bearing")}>Bearing-Bearing</button>
+        <button onClick={() => { setCalcMode("bearing-distance"); setValA("45"); setValB("20000"); }} style={toggleBtn(calcMode === "bearing-distance")}>Bearing-Distance</button>
+        <button onClick={() => { setCalcMode("distance-distance"); setValA("15000"); setValB("15000"); }} style={toggleBtn(calcMode === "distance-distance")}>Distance-Distance</button>
       </div>
       <div className="cmd-split" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 16 }}>
         <div>

@@ -76,7 +76,7 @@ export function Geodesy() {
       <div style={{ ...cardStyle, marginBottom: 12, borderLeft: `3px solid ${B.sec}` }}>
         <div style={{ fontSize: 12, fontWeight: 700, color: B.sec, fontFamily: B.font, letterSpacing: ".04em", marginBottom: 4 }}>GEODESY: CANADIAN SPATIAL REFERENCE SYSTEM</div>
         <div style={{ fontSize: 11, color: B.textMid, lineHeight: 1.5 }}>
-          Canada's official geodetic framework is NAD83(CSRS) tied to ITRF via NRCan's CSRS-PPP service. Vertical datum is CGVD2013 (geoid-based). Magnetic declination computed from WMM2025. For GNSS surveys, always specify datum realization + epoch.
+          Canada{"’"}s official geodetic framework is NAD83(CSRS) tied to ITRF via NRCan{"’"}s CSRS-PPP service. Vertical datum is CGVD2013 (geoid-based). Magnetic declination computed from WMM2025. For GNSS surveys, always specify datum realization + epoch.
         </div>
       </div>
 
@@ -199,7 +199,7 @@ export function Geodesy() {
             <div key={i} style={{ ...insetStyle, padding: "5px 10px", display: "grid", gridTemplateColumns: "65px 1fr 80px 1fr", gap: 8, alignItems: "center" }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: B.priBr, fontFamily: B.font }}>{o.target}</div>
               <div style={{ fontSize: 10, color: B.text }}>{o.method}</div>
-              <div style={{ fontSize: 10, fontWeight: 600, color: B.accent, fontFamily: B.font }}>{o.minTime}</div>
+              <div style={{ fontSize: 10, fontWeight: 600, color: B.acc, fontFamily: B.font }}>{o.minTime}</div>
               <div style={{ fontSize: 9, color: B.textDim }}>{o.notes}</div>
             </div>
           ))}

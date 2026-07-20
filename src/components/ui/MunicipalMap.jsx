@@ -16,7 +16,6 @@ const CANADA_ZOOM = 3;
 const STYLE_DARK = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
 const STYLE_LIGHT = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
 
-const COVERAGE_COLORS = { green: "#4caf50", amber: "#e6a817", grey: "#555555" };
 const CLUSTER_COLORS = { small: "#6c8cff", medium: "#e6a817", large: "#e05252" };
 
 // Sparse regions: always show individual markers, never cluster
@@ -195,10 +194,13 @@ export const MunicipalMap = memo(function MunicipalMap() {
     } catch { return false; }
   });
 
+  // Clear any pending search debounce on unmount
+  useEffect(() => () => { if (searchTimeout.current) clearTimeout(searchTimeout.current); }, []);
+
   // Fetch municipality dataset on mount (not bundled into JS chunk)
   useEffect(() => {
     let cancelled = false;
-    fetch("/municipalities.json")
+    fetch(`${import.meta.env.BASE_URL}municipalities.json`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
@@ -212,33 +214,40 @@ export const MunicipalMap = memo(function MunicipalMap() {
     return () => { cancelled = true; };
   }, []);
 
-  // Derived data -- built only after municipalities loads
-  const { geojsonData, sparseGeojsonData, allGeojsonData, municipalityByKey } = useMemo(() => {
+  // Derived data -- built only after municipalities loads. Filtered by
+  // province at the source level so clusters and heatmaps respect the
+  // selection too (a layer filter can't reach into cluster aggregates).
+  const { geojsonData, sparseGeojsonData, allGeojsonData, municipalityByKey, municipalityByIndex } = useMemo(() => {
     if (!municipalities) {
       return {
         geojsonData: { type: "FeatureCollection", features: [] },
         sparseGeojsonData: { type: "FeatureCollection", features: [] },
         allGeojsonData: { type: "FeatureCollection", features: [] },
         municipalityByKey: new Map(),
+        municipalityByIndex: [],
       };
     }
     const denseFeatures = [];
     const sparseFeatures = [];
     const byKey = new Map();
+    const byIndex = [];
     for (const m of municipalities) {
       if (m.lat == null || m.lon == null) continue;
-      const feature = buildFeature(m, denseFeatures.length + sparseFeatures.length);
+      byKey.set(`${m.lat},${m.lon}-${m.name}`, m);
+      if (province !== "All" && m.province !== province) continue;
+      const feature = buildFeature(m, byIndex.length);
+      byIndex.push(m);
       if (isSparse(m)) sparseFeatures.push(feature);
       else denseFeatures.push(feature);
-      byKey.set(`${m.lat},${m.lon}-${m.name}`, m);
     }
     return {
       geojsonData: { type: "FeatureCollection", features: denseFeatures },
       sparseGeojsonData: { type: "FeatureCollection", features: sparseFeatures },
       allGeojsonData: { type: "FeatureCollection", features: [...denseFeatures, ...sparseFeatures] },
       municipalityByKey: byKey,
+      municipalityByIndex: byIndex,
     };
-  }, [municipalities]);
+  }, [municipalities, province]);
 
   const provinces = useMemo(() => {
     if (!municipalities) return [];
@@ -295,20 +304,21 @@ export const MunicipalMap = memo(function MunicipalMap() {
     return rows;
   }, [filtered]);
 
-  // Map source filter expression (province + search)
-  const sourceFilter = useMemo(() => {
-    const conditions = [];
-    if (province !== "All") {
-      conditions.push(["==", ["get", "province"], province]);
-    }
-    if (debouncedSearch) {
-      const q = debouncedSearch.toLowerCase();
-      conditions.push(["in", q, ["downcase", ["get", "name"]]]);
-    }
-    if (conditions.length === 0) return undefined;
-    if (conditions.length === 1) return conditions[0];
-    return ["all", ...conditions];
-  }, [province, debouncedSearch]);
+  // Search matches independent of the map viewport, used by the
+  // fit-to-search effect. Basing that effect on `filtered` (which includes
+  // viewportBounds) both missed off-screen matches and re-triggered itself
+  // through moveend -> setViewportBounds -> new array identity.
+  const searchTargets = useMemo(() => {
+    if (!municipalities || !debouncedSearch) return [];
+    const q = debouncedSearch.toLowerCase();
+    return municipalities.filter((m) => {
+      if (m.lat == null || m.lon == null) return false;
+      if (province !== "All" && m.province !== province) return false;
+      const nameMatch = m.name.toLowerCase().includes(q);
+      const relatedMatch = m.related && m.related.some((r) => r.name.toLowerCase().includes(q));
+      return nameMatch || relatedMatch;
+    });
+  }, [municipalities, province, debouncedSearch]);
 
   // Opacity for markers based on search (dim non-matching)
   const markerOpacity = useMemo(() => {
@@ -347,7 +357,15 @@ export const MunicipalMap = memo(function MunicipalMap() {
     map.on("style.load", () => {
       registerSprites(map);
     });
-  }, []);
+    // Hover cursor. Delegated layer listeners live on the Map, not the
+    // style, so registering once here survives style/theme changes.
+    // (Previously registered on every styledata event, which stacked
+    // duplicate listeners without bound.)
+    for (const layerId of ["clusters", "unclustered-point", "unclustered-circle", "sparse-point", "sparse-circle"]) {
+      map.on("mouseenter", layerId, onMouseEnter);
+      map.on("mouseleave", layerId, onMouseLeave);
+    }
+  }, [onMouseEnter, onMouseLeave]);
 
   // Click handler for clusters and points
   const onClick = useCallback((e) => {
@@ -367,14 +385,14 @@ export const MunicipalMap = memo(function MunicipalMap() {
       return;
     }
 
-    // Check unclustered points (all marker layers)
+    // Check unclustered points (all marker layers). Look up by
+    // _sourceIndex: geometry from queryRenderedFeatures is quantized to
+    // the vector-tile grid, so a lat/lon-string key never matches.
     const pointFeatures = map.queryRenderedFeatures(e.point, { layers: ["unclustered-point", "unclustered-circle", "sparse-point", "sparse-circle"] });
     if (pointFeatures.length > 0) {
       const feature = pointFeatures[0];
-      const props = feature.properties;
       const coords = feature.geometry.coordinates;
-      const key = `${coords[1]},${coords[0]}-${props.name}`;
-      const m = municipalityByKey.get(key);
+      const m = municipalityByIndex[feature.properties._sourceIndex];
       if (m) {
         setPopupInfo({ longitude: coords[0], latitude: coords[1], municipality: m });
         setSelectedId(`${m.lat},${m.lon}-${m.name}`);
@@ -383,7 +401,7 @@ export const MunicipalMap = memo(function MunicipalMap() {
       setPopupInfo(null);
       setSelectedId(null);
     }
-  }, [municipalityByKey]);
+  }, [municipalityByIndex]);
 
   // Hover cursor
   const onMouseEnter = useCallback(() => {
@@ -394,16 +412,6 @@ export const MunicipalMap = memo(function MunicipalMap() {
     const map = mapRef.current?.getMap();
     if (map) map.getCanvas().style.cursor = "";
   }, []);
-
-  // Set up hover listeners
-  const onMapStyleLoad = useCallback(() => {
-    const map = mapRef.current?.getMap();
-    if (!map) return;
-    for (const layerId of ["clusters", "unclustered-point", "unclustered-circle", "sparse-point", "sparse-circle"]) {
-      map.on("mouseenter", layerId, onMouseEnter);
-      map.on("mouseleave", layerId, onMouseLeave);
-    }
-  }, [onMouseEnter, onMouseLeave]);
 
   // Table row click -> fly to marker
   const onRowClick = useCallback((row) => {
@@ -417,20 +425,20 @@ export const MunicipalMap = memo(function MunicipalMap() {
     setSelectedId(`${row.lat},${row.lon}-${row.name}`);
   }, [municipalityByKey]);
 
-  // Fit to search results
+  // Fit to search results (viewport-independent, see searchTargets)
   useEffect(() => {
-    if (!debouncedSearch || !filtered.length) return;
+    if (!searchTargets.length) return;
     const map = mapRef.current?.getMap();
     if (!map) return;
 
-    if (filtered.length === 1) {
-      map.flyTo({ center: [filtered[0].lon, filtered[0].lat], zoom: 10, duration: 800 });
+    if (searchTargets.length === 1) {
+      map.flyTo({ center: [searchTargets[0].lon, searchTargets[0].lat], zoom: 10, duration: 800 });
     } else {
       const bounds = new LngLatBounds();
-      for (const m of filtered) bounds.extend([m.lon, m.lat]);
+      for (const m of searchTargets) bounds.extend([m.lon, m.lat]);
       map.fitBounds(bounds, { padding: 40, maxZoom: 10, duration: 800 });
     }
-  }, [debouncedSearch, filtered]);
+  }, [searchTargets]);
 
   const toggleOverlay = useCallback((key) => {
     setOverlays((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -495,7 +503,6 @@ export const MunicipalMap = memo(function MunicipalMap() {
       onClick={onClick}
       onLoad={onMapLoad}
       onMoveEnd={onMoveEnd}
-      onStyleData={onMapStyleLoad}
       interactiveLayerIds={["clusters", "unclustered-circle", "sparse-circle", ...(spritesLoaded ? ["unclustered-point", "sparse-point"] : [])]}
       style={{ width: "100%", height: "100%" }}
       attributionControl={false}

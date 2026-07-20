@@ -41,7 +41,9 @@ export function SurveyTools() {
   });
 
   useEffect(() => {
-    window.location.hash = tab;
+    // replaceState: assigning location.hash pushes history entries the
+    // router doesn't know about, breaking the Back button on this page.
+    window.history.replaceState(null, "", `#${tab}`);
   }, [tab]);
 
   const cardStyle = { background: `linear-gradient(135deg,${B.surface},${B.surfaceHi})`, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, borderRadius: 0, padding: 16 };

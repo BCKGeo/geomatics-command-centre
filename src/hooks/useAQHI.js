@@ -15,7 +15,9 @@ export function useAQHI(lat, lon) {
     const minLat = clamp(lat - 0.5, -90, 90), maxLat = clamp(lat + 0.5, -90, 90);
     const bbox = `${minLon},${minLat},${maxLon},${maxLat}`;
     const url = `${EC_AQHI}?f=json&limit=1&sortby=-observation_datetime&bbox=${bbox}`;
-    const data = await fetch(url).then(r => r.json());
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
     const f = data?.features?.[0];
     if (!f) return null;
     return {

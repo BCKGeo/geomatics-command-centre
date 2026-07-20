@@ -37,9 +37,13 @@ export function AreaCalc() {
     const minLat = Math.min(...lats), maxLat = Math.max(...lats), minLon = Math.min(...lons), maxLon = Math.max(...lons);
     const spanLat = maxLat - minLat || 0.001, spanLon = maxLon - minLon || 0.001;
     const pad = 30, sz = 220, draw = sz - 2 * pad;
-    const scale = Math.min(draw / spanLon, draw / spanLat);
+    // A degree of longitude shrinks by cos(lat); without this the sketch
+    // is stretched E-W ~1.7x at northern BC latitudes.
+    const lonScale = Math.cos(((minLat + maxLat) / 2) * Math.PI / 180) || 0.001;
+    const spanLonEff = spanLon * lonScale;
+    const scale = Math.min(draw / spanLonEff, draw / spanLat);
     const pts = parsed.map(p => ({
-      x: pad + (p.lon - minLon) * scale + (draw - spanLon * scale) / 2,
+      x: pad + (p.lon - minLon) * lonScale * scale + (draw - spanLonEff * scale) / 2,
       y: pad + (maxLat - p.lat) * scale + (draw - spanLat * scale) / 2,
     }));
     const polyStr = pts.map(p => `${p.x},${p.y}`).join(" ");

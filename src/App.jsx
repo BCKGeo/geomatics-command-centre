@@ -71,7 +71,7 @@ function LocationChip({ B, insetStyle }) {
           boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
         }}>
           <div style={{ fontSize: 11, color: B.text, marginBottom: 6 }}>
-            {lat.toFixed(4)}&deg;N, {Math.abs(lon).toFixed(4)}&deg;W
+            {Math.abs(lat).toFixed(4)}&deg;{lat >= 0 ? "N" : "S"}, {Math.abs(lon).toFixed(4)}&deg;{lon >= 0 ? "E" : "W"}
           </div>
           <div style={{ display: "flex", gap: 4 }}>
             <button

@@ -10,11 +10,11 @@ function reverseGeocode(lat, lon) {
 }
 
 function coordsLabel(lat, lon) {
-  return `${lat.toFixed(4)}N, ${Math.abs(lon).toFixed(4)}W`;
+  return `${Math.abs(lat).toFixed(4)}${lat >= 0 ? "N" : "S"}, ${Math.abs(lon).toFixed(4)}${lon >= 0 ? "E" : "W"}`;
 }
 
-function saveLocation(lat, lon, city) {
-  localStorage.setItem("bckgeo_location", JSON.stringify({ lat, lon, city }));
+function saveLocation(lat, lon, city, source) {
+  localStorage.setItem("bckgeo_location", JSON.stringify({ lat, lon, city, source }));
 }
 
 export function LocationProvider({ children }) {
@@ -35,7 +35,8 @@ export function LocationProvider({ children }) {
         setUserLat(p.lat);
         setUserLon(p.lon);
         setCityName(p.city);
-        setLocSource("gps");
+        // Older saves predate the source field; assume gps for those
+        setLocSource(p.source === "manual" ? "manual" : "gps");
       } catch {}
     }
   }, []);
@@ -52,12 +53,12 @@ export function LocationProvider({ children }) {
         reverseGeocode(latitude, longitude)
           .then(city => {
             setCityName(city);
-            saveLocation(latitude, longitude, city);
+            saveLocation(latitude, longitude, city, "gps");
           })
           .catch(() => {
             const fallback = coordsLabel(latitude, longitude);
             setCityName(fallback);
-            saveLocation(latitude, longitude, fallback);
+            saveLocation(latitude, longitude, fallback, "gps");
           })
           .finally(() => setLocLoading(false));
       },
@@ -84,12 +85,12 @@ export function LocationProvider({ children }) {
     reverseGeocode(newLat, newLon)
       .then(city => {
         setCityName(city);
-        saveLocation(newLat, newLon, city);
+        saveLocation(newLat, newLon, city, "manual");
       })
       .catch(() => {
         const fallback = coordsLabel(newLat, newLon);
         setCityName(fallback);
-        saveLocation(newLat, newLon, fallback);
+        saveLocation(newLat, newLon, fallback, "manual");
       });
   }, []);
 
