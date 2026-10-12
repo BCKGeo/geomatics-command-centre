@@ -4,6 +4,7 @@ import { useLocation } from "../../context/LocationContext.jsx";
 import MapGL, { Source, Layer, Popup, NavigationControl } from "react-map-gl/maplibre";
 import { LngLatBounds } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import "../../lib/maplibreWorker.js";
 import { getShapeCategory, getCoverageScore, getCoverageColor, getSpriteId } from "../../data/entityCategories.js";
 import { registerSprites } from "../../data/markerSprites.js";
 import { MunicipalTable } from "./MunicipalTable.jsx";
@@ -348,10 +349,19 @@ export const MunicipalMap = memo(function MunicipalMap() {
     }
   }, []);
 
+  // Hover cursor (declared before onMapLoad, which lists them as deps)
+  const onMouseEnter = useCallback(() => {
+    const map = mapRef.current?.getMap();
+    if (map) map.getCanvas().style.cursor = "pointer";
+  }, []);
+  const onMouseLeave = useCallback(() => {
+    const map = mapRef.current?.getMap();
+    if (map) map.getCanvas().style.cursor = "";
+  }, []);
+
   // Map load: register sprites + re-register on style changes
   const onMapLoad = useCallback((e) => {
-    const map = e.target;
-    registerSprites(map);
+    const map = e.target;    registerSprites(map);
     setSpritesLoaded(true);
     // Re-register sprites when style reloads (MapLibre clears custom images)
     map.on("style.load", () => {
@@ -378,17 +388,20 @@ export const MunicipalMap = memo(function MunicipalMap() {
       const feature = clusterFeatures[0];
       const clusterId = feature.properties.cluster_id;
       const source = map.getSource("municipalities");
-      source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-        if (err) return;
-        map.flyTo({ center: feature.geometry.coordinates, zoom: Math.min(zoom, 14), duration: 500 });
-      });
+      // Promise API (MapLibre 4+ dropped the callback form)
+      source.getClusterExpansionZoom(clusterId)
+        .then((zoom) => map.flyTo({ center: feature.geometry.coordinates, zoom: Math.min(zoom, 14), duration: 500 }))
+        .catch(() => {});
       return;
     }
 
     // Check unclustered points (all marker layers). Look up by
     // _sourceIndex: geometry from queryRenderedFeatures is quantized to
     // the vector-tile grid, so a lat/lon-string key never matches.
-    const pointFeatures = map.queryRenderedFeatures(e.point, { layers: ["unclustered-point", "unclustered-circle", "sparse-point", "sparse-circle"] });
+    // Icon layers only exist once sprites load; MapLibre 6 throws when
+    // queried for a missing layer, so query only the ones present.
+    const pointLayers = ["unclustered-point", "unclustered-circle", "sparse-point", "sparse-circle"].filter((id) => map.getLayer(id));
+    const pointFeatures = map.queryRenderedFeatures(e.point, { layers: pointLayers });
     if (pointFeatures.length > 0) {
       const feature = pointFeatures[0];
       const coords = feature.geometry.coordinates;
@@ -402,16 +415,6 @@ export const MunicipalMap = memo(function MunicipalMap() {
       setSelectedId(null);
     }
   }, [municipalityByIndex]);
-
-  // Hover cursor
-  const onMouseEnter = useCallback(() => {
-    const map = mapRef.current?.getMap();
-    if (map) map.getCanvas().style.cursor = "pointer";
-  }, []);
-  const onMouseLeave = useCallback(() => {
-    const map = mapRef.current?.getMap();
-    if (map) map.getCanvas().style.cursor = "";
-  }, []);
 
   // Table row click -> fly to marker
   const onRowClick = useCallback((row) => {

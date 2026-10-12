@@ -20,6 +20,14 @@ updates:
     commit-message:
       prefix: "chore(deps)"
       include: "scope"
+    # ESLint 10 is blocked until eslint-plugin-react supports it (7.37.5
+    # peers eslint ^9.7 at most). The weekly maintenance routine reports held
+    # majors, so remove this once the plugin catches up.
+    ignore:
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@eslint/js"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

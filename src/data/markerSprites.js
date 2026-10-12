@@ -149,7 +149,9 @@ export function registerSprites(map) {
         const id = ring ? `${shape}-${colorName}-ring` : `${shape}-${colorName}`;
         if (map.hasImage(id)) continue;
         const canvas = drawIcon(shape, hex, ring);
-        map.addImage(id, canvas, { pixelRatio: 1 });
+        // MapLibre 6 no longer accepts a canvas element; hand it ImageData.
+        const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height);
+        map.addImage(id, pixels, { pixelRatio: 1 });
       }
     }
   }
