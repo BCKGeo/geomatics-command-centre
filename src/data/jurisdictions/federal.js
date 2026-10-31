@@ -68,4 +68,5 @@ export default {id:"ca",name:"Federal / National",abbr:"CA",categories:[
     {n:"MMCD",d:"Master Municipal Construction Documents Association",u:"https://www.mmcd.net/"},
     {n:"CCDC",d:"Canadian Construction Documents Committee: standard contracts",u:"https://www.ccdc.org/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"Canada Labour Program",d:"Federally regulated workplaces, Canada Labour Code Part II",u:"https://www.canada.ca/en/services/jobs/workplace/health-safety.html"}]},
 ]};

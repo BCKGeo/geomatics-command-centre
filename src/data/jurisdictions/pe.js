@@ -17,4 +17,5 @@ export default {id:"pe",name:"Prince Edward Island",abbr:"PE",categories:[
   {category:"Legislation",links:[
     {n:"Land Surveyors Act",d:"RSPEI 1988, c. L-3.1",u:"https://www.canlii.org/en/pe/laws/stat/rspei-1988-c-l-3.1/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"WCB PEI",d:"Workers Compensation Board, OHS Act",u:"https://www.wcb.pe.ca/"}]},
 ]};

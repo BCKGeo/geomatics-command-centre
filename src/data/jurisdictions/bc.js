@@ -17,4 +17,5 @@ export default {id:"bc",name:"British Columbia",abbr:"BC",categories:[
   {category:"Legislation",links:[
     {n:"Land Surveyors Act",d:"RSBC 1996, c. 248",u:"https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96248_01"},
   ]},
+  {category:"Workplace Safety",links:[{n:"WorkSafeBC",d:"OHS Regulation, working alone 4.20.1 to 4.23",u:"https://www.worksafebc.com/en"}]},
 ]};

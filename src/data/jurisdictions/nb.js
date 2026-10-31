@@ -17,4 +17,5 @@ export default {id:"nb",name:"New Brunswick",abbr:"NB",categories:[
   {category:"Legislation",links:[
     {n:"New Brunswick Land Surveyors Act",d:"2017",u:"https://www.canlii.org/en/nb/laws/stat/snb-2017-c-53/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"WorkSafeNB",d:"Occupational Health and Safety Act",u:"https://www.worksafenb.ca/"}]},
 ]};

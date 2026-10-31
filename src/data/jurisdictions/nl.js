@@ -17,4 +17,5 @@ export default {id:"nl",name:"Newfoundland & Labrador",abbr:"NL",categories:[
   {category:"Legislation",links:[
     {n:"Land Surveyors Act, 1991",d:"SNL 1991, c. 37",u:"https://www.canlii.org/en/nl/laws/stat/snl-1991-c-37/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"WorkplaceNL",d:"Occupational Health and Safety Act",u:"https://workplacenl.ca/"}]},
 ]};

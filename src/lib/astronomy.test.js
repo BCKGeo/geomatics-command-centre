@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calcSun, getMoon, xrayClass } from './astronomy.js';
+import { calcSun, sunEvents, getMoon, xrayClass } from './astronomy.js';
 
 // ── Sun position ──
 // Anchored on solstice/equinox geometry: at 12:00 UTC on lon 0 the sun is
@@ -78,5 +78,38 @@ describe('xrayClass', () => {
   it('handles missing flux', () => {
     expect(xrayClass(0).cls).toBe('--');
     expect(xrayClass(null).cls).toBe('--');
+  });
+});
+
+// ── Sun events ──
+describe('sunEvents', () => {
+  it('orders dawn, sunrise, sunset, dusk on an ordinary day', () => {
+    const r = sunEvents(new Date(2026, 9, 31, 12), 53.92, -122.75);
+    expect(r.civilDawn).toBeInstanceOf(Date);
+    expect(r.civilDawn < r.sunrise).toBe(true);
+    expect(r.sunrise < r.sunset).toBe(true);
+    expect(r.sunset < r.civilDusk).toBe(true);
+    expect(r.polarDay).toBe(false);
+    expect(r.polarNight).toBe(false);
+    // Open-Meteo gives 08:09 and 17:38 local (PDT) for Prince George on this day
+    const sameDay = (d) => d.getFullYear() === 2026 && d.getMonth() === 9 && d.getDate() === 31;
+    expect(sameDay(r.sunrise) && sameDay(r.sunset)).toBe(true);
+    const dayLen = (r.sunset - r.sunrise) / 36e5;
+    expect(Math.abs(dayLen - 9.48)).toBeLessThan(0.15);
+  });
+
+  it('returns nulls and the polar flag in the polar night', () => {
+    const r = sunEvents(new Date(2026, 11, 21, 12), 82, -62); // Alert, NU
+    expect(r.sunrise).toBeNull();
+    expect(r.sunset).toBeNull();
+    expect(r.polarNight).toBe(true);
+    expect(r.polarDay).toBe(false);
+  });
+
+  it('returns nulls and the polar flag in the polar day', () => {
+    const r = sunEvents(new Date(2026, 5, 21, 12), 82, -62);
+    expect(r.sunrise).toBeNull();
+    expect(r.polarDay).toBe(true);
+    expect(r.polarNight).toBe(false);
   });
 });

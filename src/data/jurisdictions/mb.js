@@ -17,4 +17,5 @@ export default {id:"mb",name:"Manitoba",abbr:"MB",categories:[
   {category:"Legislation",links:[
     {n:"The Land Surveyors Act",d:"CCSM c. L60",u:"https://www.canlii.org/en/mb/laws/stat/ccsm-c-l60/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"SAFE Work Manitoba",d:"Workplace Safety and Health Act",u:"https://www.safemanitoba.com/"}]},
 ]};

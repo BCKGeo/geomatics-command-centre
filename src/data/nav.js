@@ -2,7 +2,7 @@
 // that own the tabs, and the quick lookup index, so the lookup can never
 // drift from what the pages actually show.
 export const NAV = [
-  { path: "/", label: "Command Centre", icon: "🖥️", d: "Weather, space weather, Kp index, GNSS conditions, satellites", k: "home dashboard weather kp aurora solar wind satellites sun" },
+  { path: "/", label: "Command Centre", icon: "🖥️", d: "Weather, space weather, Kp index, GNSS conditions, satellites, field safety", k: "home dashboard weather kp aurora solar wind satellites sun safety" },
   { path: "/flight-ops", label: "Flight Ops", icon: "✈️", d: "RPAS categories, airspace, pre-flight checklist, weather minimums, SFOC", k: "drone rpas uav airspace notam checklist" },
   { path: "/geodesy", label: "Geodesy", icon: "🌍", d: "CSRS-PPP, datums, geoid models, RTK networks, observation times", k: "datum epoch nad83 csrs ppp geoid rtk gnss" },
   { path: "/gis", label: "GIS", icon: "🗺️", d: "CRS reference, formats, UTM zones, GDAL quick ref, analysis ops", k: "spatial epsg crs gdal ogr formats utm" },
@@ -20,6 +20,11 @@ export const EXTRA_PAGES = [
 
 // Tabs are addressed as /page#id. Each page reads the router hash on mount
 // and on every navigation, so the lookup can land on a tab directly.
+// Anchored sections on the Command Centre, addressed as /#id.
+export const COMMAND_CENTRE_SECTIONS = [
+  { id: "safety", label: "Field Safety", d: "UV index, AQHI and smoke, humidex and wind chill, daylight, working alone, WorkSafe links", k: "uv sun aqhi air quality smoke pm2.5 humidex heat wind chill cold frostbite daylight sunrise sunset twilight working alone lone worker check-in worksafe ohs regulator" },
+];
+
 export const FLIGHT_OPS_TABS = [
   ["categories", "Operation Categories"],
   ["airspace", "Airspace"],

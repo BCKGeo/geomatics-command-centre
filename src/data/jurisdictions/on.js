@@ -18,4 +18,5 @@ export default {id:"on",name:"Ontario",abbr:"ON",categories:[
   {category:"Legislation",links:[
     {n:"Surveyors Act",d:"RSO 1990, c. S.29",u:"https://www.canlii.org/en/on/laws/stat/rso-1990-c-s29/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"Ontario workplace health and safety",d:"Occupational Health and Safety Act",u:"https://www.ontario.ca/page/workplace-health-and-safety"}]},
 ]};

@@ -17,4 +17,5 @@ export default {id:"sk",name:"Saskatchewan",abbr:"SK",categories:[
   {category:"Legislation",links:[
     {n:"Land Surveyors and Professional Surveyors Act",d:"SS 1995, c. L-3.1",u:"https://www.canlii.org/en/sk/laws/stat/ss-1995-c-l-3.1/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"WorkSafe Saskatchewan",d:"Saskatchewan Employment Act, OHS Regulations",u:"https://www.worksafesask.ca/"}]},
 ]};

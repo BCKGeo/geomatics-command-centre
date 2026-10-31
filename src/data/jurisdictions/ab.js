@@ -17,4 +17,5 @@ export default {id:"ab",name:"Alberta",abbr:"AB",categories:[
   {category:"Legislation",links:[
     {n:"Land Surveyors Act",d:"RSA 2000, c. L-3",u:"https://www.canlii.org/en/ab/laws/stat/rsa-2000-c-l-3/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"Alberta OHS",d:"Occupational Health and Safety Act and Code",u:"https://www.alberta.ca/occupational-health-safety"}]},
 ]};

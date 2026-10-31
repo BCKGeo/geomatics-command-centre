@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { buildStaticIndex, buildNewsIndex, buildPortalIndex, search, groupResults, normalize } from "./search.js";
-import { NAV, FLIGHT_OPS_TABS, JURISDICTION_TABS } from "../data/nav.js";
+import { NAV, COMMAND_CENTRE_SECTIONS, FLIGHT_OPS_TABS, JURISDICTION_TABS } from "../data/nav.js";
 import { SURVEY_TOOLS } from "../data/surveyTools.js";
 import { GIS_TABS, CRS_CHEAT, GDAL_CMDS } from "../data/gis.js";
 import { GLOSSARY } from "../data/glossary.js";
@@ -12,7 +12,7 @@ const termCount = Object.values(GLOSSARY).reduce((n, t) => n + t.length, 0);
 
 describe("what is indexed", () => {
   it("every nav page, the terms page, and every tab on the tabbed pages", () => {
-    expect(count("page")).toBe(NAV.length + 1 + FLIGHT_OPS_TABS.length + GIS_TABS.length + JURISDICTION_TABS.length);
+    expect(count("page")).toBe(NAV.length + 1 + COMMAND_CENTRE_SECTIONS.length + FLIGHT_OPS_TABS.length + GIS_TABS.length + JURISDICTION_TABS.length);
     expect(INDEX.find((e) => e.title === "Terms of Use").to).toBe("/terms");
     expect(INDEX.find((e) => e.title === "GIS: UTM Zones").to).toBe("/gis#utm");
   });
@@ -136,5 +136,17 @@ describe("ranking", () => {
     expect(g[0].kind).toBe("term");
     expect(g[0].items[0].title).toBe("RTK");
     for (const grp of g) expect(grp.items.every((i) => i.kind === grp.kind)).toBe(true);
+  });
+});
+
+describe("field safety section", () => {
+  const index = buildStaticIndex();
+  it.each(["UV", "AQHI", "humidex", "wind chill", "daylight", "working alone"])("'%s' finds the Field Safety card", (q) => {
+    const r = search(index, q);
+    expect(r.some((e) => e.to === "/#safety")).toBe(true);
+  });
+  it("finds the provincial WorkSafe links", () => {
+    const r = search(index, "worksafe");
+    expect(r.some((e) => e.kind === "provlink" && /worksafe/i.test(e.title))).toBe(true);
   });
 });

@@ -1,16 +1,18 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation as useRouterLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
 import { useSpaceWeather } from "../../hooks/useSpaceWeather.js";
 import { useWeather } from "../../hooks/useWeather.js";
 import { useAQHI } from "../../hooks/useAQHI.js";
+import { useAirQuality } from "../../hooks/useAirQuality.js";
 import { useSatellites } from "../../hooks/useSatellites.js";
 import { GaugeRing } from "../ui/GaugeRing.jsx";
 import { KpCell } from "../ui/KpCell.jsx";
 import { FreshBadge } from "../ui/FreshBadge.jsx";
 import { ForecastRow } from "../ui/ForecastRow.jsx";
 import { Skyplot, SkyplotFallback } from "../ui/Skyplot.jsx";
+import { FieldSafety } from "../ui/FieldSafety.jsx";
 import { calcSun, getMoon, calcMagDec, xrayClass } from "../../lib/astronomy.js";
 import { WMO, DEFAULT_TZ } from "../../data/constants.js";
 
@@ -67,6 +69,17 @@ const stations = [
 export function CommandCentre() {
   const { theme, B } = useTheme();
   const { lat, lon, cityName } = useLocation();
+  const routerLocation = useRouterLocation();
+
+  // The quick lookup lands on /#safety; scroll there once the page has rendered.
+  useEffect(() => {
+    const id = routerLocation.hash.replace("#", "");
+    if (!id) return;
+    // Twice: once now, once after the alerts and map above have laid out.
+    const go = () => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const t1 = setTimeout(go, 50), t2 = setTimeout(go, 900);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [routerLocation.hash]);
 
   const userTz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : DEFAULT_TZ;
 
@@ -83,6 +96,7 @@ export function CommandCentre() {
   const { data: sw, error: sErr, lastUpdated: swUpdated } = useSpaceWeather();
   const { data: wx, error: wErr, lastUpdated: wxUpdated } = useWeather(lat, lon, userTz);
   const { data: aqhi, lastUpdated: aqhiUpdated } = useAQHI(lat, lon);
+  const { data: aq, lastUpdated: aqUpdated } = useAirQuality(lat, lon, userTz);
   const { satellites: sat, tleLastUpdated: satUpdated, tleAvailable: satProxy } = useSatellites(lat, lon);
   // ── Extract Data ──
   const kp = sw?.kp?.slice(-9) || [], sc = sw?.scales || {}, gS = sc["0"]?.G?.Scale || "0", sS = sc["0"]?.S?.Scale || "0", rS = sc["0"]?.R?.Scale || "0";
@@ -335,6 +349,10 @@ export function CommandCentre() {
         {/* Sun & Moon */}
         <SunMoonCard B={B} cardStyle={cardStyle} insetStyle={insetStyle} lat={lat} lon={lon} />
       </div>
+
+      {/* ═══ Field Safety (direction record item 2) ═══ */}
+      <FieldSafety B={B} cardStyle={cardStyle} insetStyle={insetStyle} lat={lat} lon={lon}
+        wx={wx} wxUpdated={wxUpdated} wErr={wErr} aqhi={aqhi} aqhiUpdated={aqhiUpdated} aq={aq} aqUpdated={aqUpdated} />
 
       {/* ═══ GNSS Conditions Summary ═══ */}
       {(() => {

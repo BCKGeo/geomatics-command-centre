@@ -18,4 +18,5 @@ export default {id:"ns",name:"Nova Scotia",abbr:"NS",categories:[
   {category:"Legislation",links:[
     {n:"Land Surveyors Act",d:"Chapter 38, Acts of 2010",u:"https://www.canlii.org/en/ns/laws/stat/sns-2010-c-38/latest/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"Nova Scotia OHS",d:"Department of Labour, Skills and Immigration",u:"https://novascotia.ca/lae/healthandsafety/"}]},
 ]};

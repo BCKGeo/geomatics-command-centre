@@ -16,4 +16,5 @@ export default {id:"nt",name:"Northwest Territories",abbr:"NT",categories:[
   {category:"Legislation",links:[
     {n:"Canada Lands Surveyors Act",d:"Federal jurisdiction",u:"https://laws-lois.justice.gc.ca/eng/acts/l-5.8/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"WSCC",d:"Workers' Safety and Compensation Commission, NT and NU",u:"https://www.wscc.nt.ca/"}]},
 ]};

@@ -17,4 +17,5 @@ export default {id:"qc",name:"Quebec",abbr:"QC",categories:[
   {category:"Legislation",links:[
     {n:"Loi sur les arpenteurs-geometres",d:"RLRQ c. A-23",u:"https://www.canlii.org/fr/qc/legis/lois/rlrq-c-a-23/derniere/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"CNESST",d:"Workplace health and safety regulator for Quebec",u:"https://www.cnesst.gouv.qc.ca/en"}]},
 ]};

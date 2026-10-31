@@ -16,4 +16,5 @@ export default {id:"yt",name:"Yukon",abbr:"YT",categories:[
   {category:"Legislation",links:[
     {n:"Canada Lands Surveyors Act",d:"Federal jurisdiction",u:"https://laws-lois.justice.gc.ca/eng/acts/l-5.8/"},
   ]},
+  {category:"Workplace Safety",links:[{n:"Yukon WCB",d:"Workers' Safety and Compensation Board",u:"https://www.wcb.yk.ca/"}]},
 ]};

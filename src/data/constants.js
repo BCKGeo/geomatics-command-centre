@@ -13,7 +13,12 @@ export const DEFAULT_CITY = "Ottawa, ON (default)";
 export const DEFAULT_TZ = "America/Toronto";
 
 export function buildWeatherUrl(lat, lon, tz) {
-  return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code,apparent_temperature,precipitation,cloud_cover,surface_pressure&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,sunrise,sunset,uv_index_max&timezone=${encodeURIComponent(tz)}&forecast_days=7`;
+  return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code,apparent_temperature,precipitation,cloud_cover,surface_pressure,dew_point_2m,uv_index&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,sunrise,sunset,uv_index_max&timezone=${encodeURIComponent(tz)}&forecast_days=7`;
+}
+
+// Open-Meteo air quality (CAMS model). PM2.5 feeds the Field Safety smoke line.
+export function buildAirQualityUrl(lat, lon, tz) {
+  return `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=pm2_5,pm10&timezone=${encodeURIComponent(tz)}`;
 }
 
 export const WMO = {

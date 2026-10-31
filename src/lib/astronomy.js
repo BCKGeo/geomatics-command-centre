@@ -18,6 +18,35 @@ export function calcSun(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
   return {altitude:alt/r, azimuth:((az/r)+360)%360};
 }
 
+// ── Sun events for a local calendar day ──
+// Scans the day in 2-minute steps for altitude crossings, then bisects each
+// to the second. Sunrise and sunset use -0.833 deg (refraction plus the solar
+// radius); civil twilight uses -6 deg, the usual definition. A missing
+// crossing (polar day or night) is null and the flags say which.
+export function sunEvents(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
+  const start=new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
+  const end=new Date(start.getTime()+864e5);
+  const alt=(t)=>calcSun(new Date(t), lat, lon).altitude;
+  const cross=(h, rising)=>{
+    const step=12e4;
+    let prev=alt(start.getTime())-h;
+    for(let t=start.getTime()+step;t<=end.getTime();t+=step){
+      const cur=alt(t)-h;
+      if(rising ? (prev<0&&cur>=0) : (prev>=0&&cur<0)){
+        let lo=t-step, hi=t;
+        for(let i=0;i<20;i++){const mid=(lo+hi)/2; const v=alt(mid)-h; if(rising ? v<0 : v>=0) lo=mid; else hi=mid;}
+        return new Date(Math.round((lo+hi)/2));
+      }
+      prev=cur;
+    }
+    return null;
+  };
+  const sunrise=cross(-0.833,true), sunset=cross(-0.833,false);
+  const civilDawn=cross(-6,true), civilDusk=cross(-6,false);
+  const noon=alt(start.getTime()+432e5);
+  return {sunrise, sunset, civilDawn, civilDusk, polarDay: !sunrise&&!sunset&&noon>0, polarNight: !sunrise&&!sunset&&noon<=0};
+}
+
 // ── Moon Phase ──
 export function getMoon(date) {
   const y=date.getFullYear(), m=date.getMonth()+1, d=date.getDate();
