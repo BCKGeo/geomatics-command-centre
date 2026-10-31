@@ -68,3 +68,8 @@ Unverified: every number about audience size, ad rates, sponsorship rates and an
 3. What the broader "self-improvement" idea is beyond professional development.
 4. Who builds and maintains the exam prep content, and how often Transport Canada changes the exams.
 5. Whether the learning surface is a subdomain (learn.bckgeo.ca) or a route, which decides the hosting and code split.
+
+## Build log
+
+- 2026-10-31: item 1, quick lookup, built in 7107f0a. Header button, "/" or Ctrl/Cmd+K, grouped results across pages and tabs, survey tools, jurisdictions, Codex, CRS and GDAL reference, resource links, municipal portals and the news wire. Checked by eye in dark and light themes and at phone width.
+- Item 5, donation link: pending Ben naming the service and URL.
