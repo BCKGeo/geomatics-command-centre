@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { buildStaticIndex, buildNewsIndex, buildPortalIndex, search, groupResults, normalize } from "./search.js";
-import { NAV, COMMAND_CENTRE_SECTIONS, FLIGHT_OPS_TABS, JURISDICTION_TABS } from "../data/nav.js";
+import { NAV, COMMAND_CENTRE_SECTIONS, CAREER_SECTIONS, FLIGHT_OPS_TABS, JURISDICTION_TABS } from "../data/nav.js";
+import { PATHWAYS } from "../data/career.js";
 import { SURVEY_TOOLS } from "../data/surveyTools.js";
 import { GIS_TABS, CRS_CHEAT, GDAL_CMDS } from "../data/gis.js";
 import { GLOSSARY } from "../data/glossary.js";
@@ -12,9 +13,22 @@ const termCount = Object.values(GLOSSARY).reduce((n, t) => n + t.length, 0);
 
 describe("what is indexed", () => {
   it("every nav page, the terms page, and every tab on the tabbed pages", () => {
-    expect(count("page")).toBe(NAV.length + 1 + COMMAND_CENTRE_SECTIONS.length + FLIGHT_OPS_TABS.length + GIS_TABS.length + JURISDICTION_TABS.length);
+    expect(count("page")).toBe(NAV.length + 1 + COMMAND_CENTRE_SECTIONS.length + CAREER_SECTIONS.length + PATHWAYS.length + FLIGHT_OPS_TABS.length + GIS_TABS.length + JURISDICTION_TABS.length);
     expect(INDEX.find((e) => e.title === "Terms of Use").to).toBe("/terms");
     expect(INDEX.find((e) => e.title === "GIS: UTM Zones").to).toBe("/gis#utm");
+  });
+
+  it("the Career sections and pathways, each landing on its anchor", () => {
+    expect(INDEX.find((e) => e.title === "Career: CPD Hour Log").to).toBe("/career#cpd");
+    expect(INDEX.find((e) => e.title === "Career: News Wire").to).toBe("/career#news");
+    expect(INDEX.find((e) => e.title === "Career: BCLS pathway").to).toBe("/career#bcls");
+    for (const q of ["CPD", "AScT", "BCLS", "CLS", "RPAS Advanced", "reading", "news"]) {
+      const hits = search(INDEX, q);
+      expect(hits.some((h) => String(h.to || "").startsWith("/career")), q).toBe(true);
+    }
+    // "CLS" must put the CLS pathway above the BCLS one (exact word beats substring)
+    const cls = search(INDEX, "CLS").filter((h) => String(h.to || "").startsWith("/career#"));
+    expect(cls[0].to).toBe("/career#cls");
   });
 
   it("the 12 survey tools, each landing on its tab", () => {

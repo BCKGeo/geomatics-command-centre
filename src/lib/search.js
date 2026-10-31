@@ -1,7 +1,8 @@
 // Quick lookup index. Built from the data modules the site already ships
 // (nothing is copied), plus the news wire and municipal portals, which the
 // Lookup component loads when it opens. Pure functions, tested in search.test.js.
-import { NAV, EXTRA_PAGES, COMMAND_CENTRE_SECTIONS, FLIGHT_OPS_TABS, JURISDICTION_TABS } from "../data/nav.js";
+import { NAV, EXTRA_PAGES, COMMAND_CENTRE_SECTIONS, CAREER_SECTIONS, FLIGHT_OPS_TABS, JURISDICTION_TABS } from "../data/nav.js";
+import { PATHWAYS, READING } from "../data/career.js";
 import { SURVEY_TOOLS } from "../data/surveyTools.js";
 import { GIS_TABS, CRS_CHEAT, GDAL_CMDS } from "../data/gis.js";
 import { GLOSSARY } from "../data/glossary.js";
@@ -65,6 +66,14 @@ export function buildStaticIndex() {
   for (const sct of COMMAND_CENTRE_SECTIONS) {
     out.push(entry("page", `${pageLabel("/")}: ${sct.label}`, sct.d, { to: `/#${sct.id}` }, sct.k));
   }
+
+  for (const sct of CAREER_SECTIONS) {
+    out.push(entry("page", `${pageLabel("/career")}: ${sct.label}`, sct.d, { to: `/career#${sct.id}` }, sct.k));
+  }
+  for (const p of PATHWAYS) {
+    out.push(entry("page", `${pageLabel("/career")}: ${p.title} pathway`, `${p.full}, ${p.body}: ${p.steps.length} steps`, { to: `/career#${p.id}` }, p.k));
+  }
+  for (const r of READING) out.push(entry("link", r.n, `Reading list, ${r.by}: ${r.d}`, { href: r.u }, "reading reference"));
 
   for (const t of SURVEY_TOOLS) out.push(entry("tool", t.label, t.d, { to: `/survey-tools#${t.id}` }, t.k));
 

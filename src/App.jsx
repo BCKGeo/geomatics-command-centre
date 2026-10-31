@@ -13,6 +13,7 @@ const Recon = lazy(() => import("./components/pages/Recon.jsx").then(m => ({ def
 const Provincial = lazy(() => import("./components/pages/Provincial.jsx").then(m => ({ default: m.Provincial })));
 const SurveyTools = lazy(() => import("./components/pages/SurveyTools.jsx").then(m => ({ default: m.SurveyTools })));
 const Codex = lazy(() => import("./components/pages/Codex.jsx").then(m => ({ default: m.Codex })));
+const Career = lazy(() => import("./components/pages/Career.jsx").then(m => ({ default: m.Career })));
 const MissionBrief = lazy(() => import("./components/pages/MissionBrief.jsx").then(m => ({ default: m.MissionBrief })));
 const Terms = lazy(() => import("./components/pages/Terms.jsx").then(m => ({ default: m.Terms })));
 // Quick lookup: loaded on first open so the index data stays out of the first paint
@@ -327,6 +328,7 @@ function Layout() {
           <Route path="/jurisdictions" element={<Provincial />} />
           <Route path="/survey-tools" element={<SurveyTools />} />
           <Route path="/codex" element={<Codex />} />
+          <Route path="/career" element={<Career />} />
           <Route path="/mission-brief" element={<MissionBrief />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>

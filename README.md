@@ -14,6 +14,7 @@ A real-time operations dashboard for Canadian geomatics professionals. Aggregate
 - **Jurisdictions** -- Provincial intel + interactive map of 3,061 Canadian municipalities with portal, council, and survey standards links; distance-sort by GPS, viewport filtering
 - **Survey Tools** -- Photo scale, curve, area, and intersection calculators
 - **Codex** -- Searchable glossary of geomatics terms and standards
+- **Career** -- CPD hour log (browser local storage only, CSV export), certification pathways (AScT, BCLS, CLS, RPAS Advanced) cited to the certifying bodies, primary reading list, geomatics news wire
 
 ## Tech Stack
 
