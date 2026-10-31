@@ -1,7 +1,7 @@
 # Content pilot: real field footage, AI production, a non-geospatial audience
 
 Date: 2026-10-31
-Status: draft for Ben's approval. Nothing is produced or posted until he agrees. Follows `2026-10-31-direction.md` and `2026-11-market-research.md`.
+Status: draft for Ben's read. Plan approved by Ben on 2026-10-31, scrub section (6a) added the same day on his yes. Nothing is produced or posted until he has read the whole spec and agreed. Follows `2026-10-31-direction.md` and `2026-11-market-research.md`.
 Tier: 2 (deliverable). Every platform rule below is traced to the platform's own page, read on 2026-10-31, or marked unverified. Every piece that is later posted is Tier 3: Ben does the final step himself, nothing is posted by Claude, and no Qwen output goes out unreviewed.
 
 ## 1. Question the pilot answers
@@ -106,7 +106,7 @@ Two formats. Format A, "What you're looking at": a scan or point cloud explainer
 
 ### B2. Geospatial tongue twister
 
-- Source: `\\BCKGeo-NAS\BCKGeoUAV\42460 Bednesti Lake S Rd` aerial or the May long weekend clips in `E:\Video-Creations\footage`. Cleared (NAS, personal), with the property yes for Bednesti if that backdrop is used.
+- Source: the May long weekend clips in `E:\Video-Creations\footage` by default (personal, cleared); `\\BCKGeo-NAS\BCKGeoUAV\42460 Bednesti Lake S Rd` only as a fallback, with that property's yes and the full section 6a scrub.
 - Hook: the twister itself, on screen and in Ben's voice from the first frame. Example to refine: "seven steady survey stakes set straight by the swamp".
 - Length: 15 to 20 s. Shape: Ben reads it three times, faster each time, fails once; the captions keep pace; last frame says "the people who say this for a living built dashboard.bckgeo.ca/go/<slug>".
 - Voice: Ben, with captions. Ben's voice is kept so the piece is not a "text montage" under the Instagram policy.
@@ -155,8 +155,9 @@ All production runs on this workstation and apex. Nothing leaves the LAN until B
 | 2. Classify and caption | ffmpeg samples one frame every 2 s; Qwen3-VL on apex (192.168.0.42:8083) returns scene type, motion, subject and a one-line caption per clip; `analyze.py` steadiness and horizon score beside it | `clips.json` per piece | 0 |
 | 3. Brief and script | Ben writes two lines (what it is, what is true about it); Qwen3.8-27B (192.168.0.42:8080) drafts three scripts under 90 words from the brief and `clips.json`; Ben picks and edits one | `script.md` | 8 min |
 | 4. Voice | Ben records three takes on phone or headset and drops the file in the piece folder. For A3, Piper (local, offline, to be installed) renders the script; Ben listens once | `voice.wav` | 5 min |
-| 5. Captions and cut | whisper (installed) produces word-timed SRT from the take; ffmpeg converts to styled ASS and burns in; reframe to 1080 by 1920; `level.py` horizon levelling; `build.py` NVENC settings; end card with the `/go/` link text | `final.mp4` | 0 |
-| 6. Review | `E:\Video-Creations\review\<piece>\` holds `final.mp4`, `script.md`, `sources.md` (one line per factual claim with the job file or page it rests on), `checklist.md` (clearance yes recorded, label decision per platform, final-form PASS). Ben watches, corrects, approves | approved folder | 7 min |
+| 5. Captions and cut | whisper (installed) produces word-timed SRT from the take; ffmpeg converts to styled ASS and burns in; reframe to 1080 by 1920; `level.py` horizon levelling; `build.py` NVENC settings; end card with the `/go/` link text; all source metadata dropped on this render (section 6a) | `final.mp4` | 0 |
+| 5a. Scrub | metadata gate, frame flags and blur, words check, as in section 6a; Ben views the flagged clips at full size | `scrub.md` | 5 min |
+| 6. Review | `E:\Video-Creations\review\<piece>\` holds `final.mp4`, `script.md`, `sources.md` (one line per factual claim with the job file or page it rests on), `checklist.md` (clearance yes recorded, scrub PASS, label decision per platform, final-form PASS). Ben watches, corrects, approves | approved folder | 7 min |
 | 7. Post | Ben uploads to the four platforms himself, pastes the per-platform `/go/` link, sets the AI label where section 3.1 says so, records the post URLs in `checklist.md` | four posts | 12 min |
 
 Scan fly-throughs (A1 reuses an existing mp4; A2 and A3 need new ones) are recorded by Ben in Cyclone3DR or CloudCompare, about 10 min each, because no scripted point cloud renderer exists here yet. If the pilot passes, a scripted orbit (CloudCompare command line or a small Open3D script) is the first automation to add.
@@ -165,9 +166,42 @@ Text-to-speech choice: Piper, local and offline, MIT licensed, with a single Eng
 
 Qwen's place: it classifies clips and drafts scripts. Every script is edited by Ben before it is voiced, and every factual line in it is traced in `sources.md` to the job data or a Tier A page. Qwen output never reaches a platform unreviewed.
 
-Ben's time: about 37 min per piece, roughly double for the first one. Five pieces: about 3.5 h in the month, plus the clearance conversations for A1 and A2. Machine time (renders, Qwen passes) does not count against him.
+Ben's time: about 42 min per piece, roughly double for the first one. Five pieces: about 4 h in the month, plus the clearance conversations for A1 and A2. Machine time (renders, Qwen passes) does not count against him.
 
-New code this pipeline needs, each a small script in `E:\Video-Creations\scripts`: `classify_vl.py` (frame sampling and the Qwen3-VL call), `draft_script.py` (the Qwen chat call with the brief and captions), `short.py` (whisper to ASS, reframe, burn-in, end card, assembling the review folder). About a day of build, done after this spec is approved and before piece B1.
+New code this pipeline needs, each a small script in `E:\Video-Creations\scripts`: `classify_vl.py` (frame sampling and the Qwen3-VL call, including the privacy flags of section 6a), `draft_script.py` (the Qwen chat call with the brief and captions), `short.py` (whisper to ASS, reframe, blur boxes, burn-in, end card, metadata gate, assembling the review folder). About a day and a half of build, done after this spec is approved and before piece B1.
+
+## 6a. Scrub before review
+
+Decided by Ben on 2026-10-31: the pilot can use the material, but every published copy is scrubbed of location, names, people and plates. Three layers, all applied to the rendered copy in the review folder. The sources on the NAS, D:, E: and S: are read and never changed, and no script in this pipeline opens a source file for writing.
+
+### Layer 1, file metadata (automatic, hard gate)
+
+- DJI video carries GPS in two places: the `.SRT` sidecar (latitude, longitude and altitude per frame) and a data track inside the MP4. Photos carry GPS, camera serial and capture time in EXIF. Point clouds carry a coordinate system and real-world coordinates in the LAS or e57 header.
+- The render in step 5 re-encodes video and audio only, drops every metadata atom and tag, and never copies a sidecar. Point clouds never leave the LAN: only a rendered video of them does, and a render carries no coordinates.
+- Gate: `short.py` runs ffprobe and exiftool on `final.mp4` after the render and fails the piece if any location, GPS, serial, creation time or device tag survives. The result is written to `scrub.md`. A piece with a failed gate cannot be approved.
+- Exception by design: A3 (LidarBC) is about a public dataset of the city, and its location is the point of the piece. The gate still runs, because the render should carry no metadata; the location is spoken, not embedded.
+
+### Layer 2, what is in the frame (automatic flags, human decision)
+
+- Qwen3-VL already looks at a frame every 2 s for classification; in the same pass it flags people, faces, licence plates, readable text, house numbers, mailbox names, signage, vehicles with company marks, and in scans, any document or label the scanner caught. Flags go into `clips.json` per clip with the frame time.
+- A face and plate detector (YOLO on the workstation GPU) draws boxes on the flagged ranges; ffmpeg blurs the boxes in the render. Automated detection misses angled plates and reflections, so it is a first pass, not the decision.
+- Ben views every flagged clip at full size before approval. A clip with more to blur than a blur can hide is dropped, not patched. Lake, forest and chamber interiors should mostly pass clean; property flyovers (Jorgenson, Toombs, Bednesti, Wright Creek) are where this bites, so those pieces prefer the wide and high shots.
+- No piece shows a person recognisably unless that person has given written consent that is filed in the piece folder. In the pilot the plan is simply no recognisable people.
+
+### Layer 3, words (checklist)
+
+- No street address, road name, parcel, job number, client name or capture date in any filename, caption, description, end card or post text.
+- Locations are named at lake, park or region level only, and never for a client property.
+- Piece folders are named by piece ID (A1 to B2). Source folder names on the NAS are addresses and are never copied into anything that leaves the LAN.
+- The LinkedIn post, which reaches people who know the region, gets the same rule, not a looser one.
+
+### Compliance note
+
+BC's Personal Information Protection Act applies to Skyland Imaging and BCKGeo as private organizations, and an image of an identifiable person is personal information under it, so publishing one would normally need consent. That reading was not re-checked against the Act this session and is marked unverified until the spec cites the section; the pilot does not rely on it, because recognisable people are blurred or cut regardless. Plates and house numbers are blurred for the same reason: it costs nothing and removes the argument.
+
+### What it costs
+
+About 5 min of Ben's time per piece (viewing flagged clips), already counted in the 42 min above, plus exiftool and a YOLO face and plate model installed once on the workstation. B2 defaults to the May long weekend backdrop rather than Bednesti so that the scrub tooling is proven on non-property footage before the property pieces are cut.
 
 ## 7. Measurement, win line and stop rule
 
@@ -197,6 +231,7 @@ What is not measured: followers, likes, comments, watch time. They are recorded 
 - Workers Analytics Engine free-tier limits. Read before the function is built.
 - Instagram per-tool monetization eligibility and any LinkedIn creator payout. Not read, and not needed for the pilot.
 - Whether BCKGeo accounts already exist on TikTok and Instagram. Ben creates any missing ones himself; none are created by Claude.
+- The PIPA reading in section 6a. Cite the section or drop the sentence before anything is posted.
 - Music: none in the pilot. Ben's voice and ambient audio only, which also avoids every platform's licensed-audio rules. If a piece needs a bed later, the choice goes through the same review.
 
 ## 9. Weekly log
