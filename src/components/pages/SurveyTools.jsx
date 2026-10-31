@@ -1,6 +1,8 @@
 import { useState, useEffect, lazy, Suspense } from "react";
+import { useLocation as useRouterLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { useLocation } from "../../context/LocationContext.jsx";
+import { SURVEY_TOOLS as TABS } from "../../data/surveyTools.js";
 
 // Calculators are lazy-loaded so only the active tab's code is fetched, instead
 // of bundling all 12 into one chunk when the tab switcher shows one at a time.
@@ -17,28 +19,22 @@ const IntersectCalc = lazy(() => import("../field/IntersectCalc.jsx").then(m => 
 const TraverseCalc = lazy(() => import("../field/TraverseCalc.jsx").then(m => ({ default: m.TraverseCalc })));
 const LevelCalc = lazy(() => import("../field/LevelCalc.jsx").then(m => ({ default: m.LevelCalc })));
 
-const TABS = [
-  { id: "coords", label: "Coordinates", icon: "\uD83D\uDCE1" },
-  { id: "inverse", label: "Inverse", icon: "\uD83D\uDCCD" },
-  { id: "forward", label: "Forward", icon: "\u27A1\uFE0F" },
-  { id: "scale", label: "Scale Factors", icon: "\uD83D\uDCCF" },
-  { id: "area", label: "Area", icon: "\u2B1B" },
-  { id: "intersect", label: "Intersections", icon: "\u2716\uFE0F" },
-  { id: "curves", label: "Curves", icon: "\u27B0" },
-  { id: "photo", label: "Photo Scale", icon: "\uD83D\uDCF7" },
-  { id: "mag", label: "Mag Dec", icon: "\uD83E\uDDED" },
-  { id: "units", label: "Units", icon: "\u2696\uFE0F" },
-  { id: "traverse", label: "Traverse", icon: "\uD83D\uDCB9" },
-  { id: "level", label: "Levelling", icon: "\uD83D\uDCD0" },
-];
 
 export function SurveyTools() {
   const { B } = useTheme();
   const { lat, lon } = useLocation();
+  const routerLocation = useRouterLocation();
   const [tab, setTab] = useState(() => {
     const hash = window.location.hash.replace("#", "");
     return TABS.find(t => t.id === hash)?.id || "coords";
   });
+
+  // The quick lookup navigates to /survey-tools#<tool>; follow the hash on
+  // every navigation, including when this page is already mounted.
+  useEffect(() => {
+    const id = routerLocation.hash.replace("#", "");
+    if (TABS.some(t => t.id === id)) setTab(id);
+  }, [routerLocation]);
 
   useEffect(() => {
     // replaceState: assigning location.hash pushes history entries the

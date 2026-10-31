@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { GLOSSARY } from "../../data/glossary.js";
 
@@ -8,9 +9,16 @@ const LETTERS = [...new Set(ALL_TERMS.map(t => t.dt[0].toUpperCase()))].sort();
 
 export function Codex() {
   const { B } = useTheme();
-  const [query, setQuery] = useState("");
+  const location = useLocation();
+  const [query, setQuery] = useState(() => decodeURIComponent(location.hash.replace("#", "")));
   const [catFilter, setCatFilter] = useState("All");
   const scrollRef = useRef(null);
+
+  // The quick lookup lands on /codex#<term>; show that term on every navigation.
+  useEffect(() => {
+    const term = decodeURIComponent(location.hash.replace("#", ""));
+    if (term) { setQuery(term); setCatFilter("All"); }
+  }, [location]);
 
   const cardStyle = { background: `linear-gradient(135deg,${B.surface},${B.surfaceHi})`, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, borderRadius: 0, padding: 16 };
   const insetStyle = { background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL };

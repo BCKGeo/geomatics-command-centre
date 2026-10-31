@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Link, useLocation as useRouterLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { LocationProvider, useLocation } from "./context/LocationContext.jsx";
+import { NAV } from "./data/nav.js";
 
 // Pages: lazy-loaded so each tab is its own chunk
 const CommandCentre = lazy(() => import("./components/pages/CommandCentre.jsx").then(m => ({ default: m.CommandCentre })));
@@ -14,18 +15,9 @@ const SurveyTools = lazy(() => import("./components/pages/SurveyTools.jsx").then
 const Codex = lazy(() => import("./components/pages/Codex.jsx").then(m => ({ default: m.Codex })));
 const MissionBrief = lazy(() => import("./components/pages/MissionBrief.jsx").then(m => ({ default: m.MissionBrief })));
 const Terms = lazy(() => import("./components/pages/Terms.jsx").then(m => ({ default: m.Terms })));
+// Quick lookup: loaded on first open so the index data stays out of the first paint
+const Lookup = lazy(() => import("./components/ui/Lookup.jsx").then(m => ({ default: m.Lookup })));
 
-const NAV = [
-  { path: "/", label: "Command Centre", icon: "\uD83D\uDDA5\uFE0F" },
-  { path: "/flight-ops", label: "Flight Ops", icon: "\u2708\uFE0F" },
-  { path: "/geodesy", label: "Geodesy", icon: "\uD83C\uDF0D" },
-  { path: "/gis", label: "GIS", icon: "\uD83D\uDDFA\uFE0F" },
-  { path: "/remote-sensing", label: "Remote Sensing", icon: "\uD83D\uDC41\uFE0F" },
-  { path: "/jurisdictions", label: "Jurisdictions", icon: "\uD83C\uDFDB\uFE0F" },
-  { path: "/survey-tools", label: "Survey Tools", icon: "\uD83D\uDD27" },
-  { path: "/codex", label: "Codex", icon: "\uD83D\uDD0E" },
-  { path: "/mission-brief", label: "Mission Brief", icon: "\uD83D\uDCDD" },
-];
 
 function LocationChip({ B, insetStyle }) {
   const { cityName, locSource, locLoading, requestLocation, resetLocation, lat, lon } = useLocation();
@@ -174,6 +166,22 @@ function Layout() {
   const { theme, B, toggleTheme } = useTheme();
   const routerLocation = useRouterLocation();
   const navRef = useRef(null);
+  const [lookupOpen, setLookupOpen] = useState(false);
+
+  // Global shortcuts: "/" (outside a text field) or Ctrl/Cmd+K open the lookup.
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && e.key.toLowerCase() === "k") { e.preventDefault(); setLookupOpen(o => !o); return; }
+      if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.target;
+      const tag = t?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || t?.isContentEditable) return;
+      e.preventDefault();
+      setLookupOpen(true);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   // Auto-center active nav tab on route change
   useEffect(() => {
@@ -217,6 +225,8 @@ function Layout() {
         @media(min-width:769px){
           .recon-pipeline .arrow-v{display:none !important}
         }
+        @media(max-width:1100px){.lookup-label{display:none !important}}
+        @media(max-width:768px){.lookup-hint{display:none !important}}
         @media(max-width:480px){
           .header-inner{flex-direction:column;align-items:flex-start}
           .clock-row{flex-wrap:wrap}
@@ -237,6 +247,11 @@ function Layout() {
       `}</style>
 
       <div className="scanlines" />
+      {lookupOpen && (
+        <Suspense fallback={null}>
+          <Lookup onClose={() => setLookupOpen(false)} />
+        </Suspense>
+      )}
       <div style={{ height: 3, background: `linear-gradient(90deg,${B.pri},${B.priBr},${B.acc})` }} />
 
       {/* Header */}
@@ -256,6 +271,12 @@ function Layout() {
             </div>
           </div>
           <div className="clock-row" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+            <button onClick={() => setLookupOpen(true)} title="Search the site (/ or Ctrl+K)" aria-label="Search the site" aria-haspopup="dialog" aria-expanded={lookupOpen}
+              style={{ ...insetStyle, padding: "4px 12px", minHeight: 38, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, color: B.textDim, fontFamily: B.font }}>
+              <span style={{ fontSize: 14 }}>{"\uD83D\uDD0D"}</span>
+              <span className="lookup-label" style={{ fontSize: 10, letterSpacing: 1 }}>SEARCH</span>
+              <span className="lookup-hint" style={{ fontSize: 9, border: `1px solid ${B.border}`, borderRadius: 3, padding: "1px 5px", color: B.textDim }}>/</span>
+            </button>
             <button onClick={toggleTheme} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               style={{ background: B.surface, border: `2px solid ${B.borderHi}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, width: 38, height: 38, minHeight: 38, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 18, padding: 0, color: B.text, transition: "all .15s" }}>
               {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}

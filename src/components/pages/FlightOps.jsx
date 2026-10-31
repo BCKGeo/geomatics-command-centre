@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { LinkCard } from "../ui/LinkCard.jsx";
 import { SECTIONS } from "../../data/sections.js";
+import { FLIGHT_OPS_TABS as TABS } from "../../data/nav.js";
 
 const AIRSPACE = [
   { cls: "A", alt: "FL600 \u2192 FL180", rules: "IFR only", color: "#ef4444" },
@@ -71,22 +73,20 @@ const NEW_2025 = [
   { change: "Penalty Increases", detail: "Individual fines $1,000-$5,000. Corporate fines $5,000-$25,000. Cumulative for multiple violations.", color: "#ef4444" },
 ];
 
-const TABS = [
-  ["categories", "Operation Categories"],
-  ["airspace", "Airspace"],
-  ["preflight", "Pre-Flight"],
-  ["weather", "Weather Mins"],
-  ["sfoc", "SFOC Check"],
-  ["changes", "2025 Changes"],
-  ["links", "Resources"],
-];
 
 export function FlightOps() {
   const { B } = useTheme();
-  const [tab, setTab] = useState("categories");
+  const location = useLocation();
+  const [tab, setTab] = useState(() => TABS.find(([k]) => k === location.hash.replace("#", ""))?.[0] || "categories");
   const [checks, setChecks] = useState({});
   const [sfocAnswers, setSfocAnswers] = useState({});
   const [expandedCat, setExpandedCat] = useState(null);
+
+  // Follow /flight-ops#<tab> from the quick lookup on every navigation.
+  useEffect(() => {
+    const id = location.hash.replace("#", "");
+    if (TABS.some(([k]) => k === id)) setTab(id);
+  }, [location]);
   const cardStyle = { background: `linear-gradient(135deg,${B.surface},${B.surfaceHi})`, border: `2px solid ${B.border}`, borderTopColor: B.bvL, borderLeftColor: B.bvL, borderBottomColor: B.bvD, borderRightColor: B.bvD, borderRadius: 0, padding: 16 };
   const insetStyle = { background: B.inset, border: `2px solid ${B.border}`, borderTopColor: B.bvD, borderLeftColor: B.bvD, borderBottomColor: B.bvL, borderRightColor: B.bvL };
 
