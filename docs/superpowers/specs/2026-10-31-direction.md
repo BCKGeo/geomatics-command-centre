@@ -72,4 +72,4 @@ Unverified: every number about audience size, ad rates, sponsorship rates and an
 ## Build log
 
 - 2026-10-31: item 1, quick lookup, built in 7107f0a. Header button, "/" or Ctrl/Cmd+K, grouped results across pages and tabs, survey tools, jurisdictions, Codex, CRS and GDAL reference, resource links, municipal portals and the news wire. Checked by eye in dark and light themes and at phone width.
-- Item 5, donation link: pending Ben naming the service and URL.
+- 2026-10-31: item 5, donation link, built in f8adca5. GitHub Sponsors link in the footer and a one-line Support card on Mission Brief, plus .github/FUNDING.yml. The Sponsors profile for the BCKGeo org is not active yet (the URL redirects to the org page), so Ben activates it on GitHub before the link does anything.
