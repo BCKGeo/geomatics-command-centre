@@ -21,7 +21,7 @@ A real-time operations dashboard for Canadian geomatics professionals. Aggregate
 - **MapLibre GL JS** for the jurisdictions map (WebGL, clustered markers, heatmaps)
 - **Tailwind-ish** inline styles with a shared theme context (dark/light)
 - **Cloudflare Pages** hosting, auto-deploy from `main`
-- Satellite TLE data pre-fetched from celestrak.org at build time (see `scripts/fetch-tles.mjs`), refreshed daily by a scheduled GitHub Action
+- Satellite TLE data (celestrak.org) and geomatics news feeds (Transport Canada, NRCan, BC Gov News, LTSA, ACLS, ASTTBC, GoGeomatics) pre-fetched at build time (see `scripts/fetch-tles.mjs` and `scripts/fetch-feeds.mjs`), refreshed daily by a scheduled GitHub Action
 
 ## Development
 
@@ -37,6 +37,7 @@ Requires Node 22 LTS (pinned via `.node-version`).
 ## Scripts
 
 - `scripts/fetch-tles.mjs` -- Pre-fetch GNSS TLEs from celestrak.org into `public/tles.json` (runs automatically via `prebuild`/`predev`)
+- `scripts/fetch-feeds.mjs` -- Pre-fetch news feeds into `public/feeds.json` (runs automatically via `prebuild`/`predev`); `--write-fallback` refreshes the committed `scripts/feeds-fallback.json` snapshot
 - `scripts/check-links.js` -- Validate all URLs in `public/municipalities.json`
 - `scripts/data-to-json.mjs` -- Regenerate JSON from the master data file
 - `scripts/validate_portals.py` -- Detect phantom ArcGIS Hub portal redirects

@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "fetch-tles": "node scripts/fetch-tles.mjs",
-    "predev": "node scripts/fetch-tles.mjs",
-    "prebuild": "node scripts/fetch-tles.mjs",
+    "fetch-feeds": "node scripts/fetch-feeds.mjs",
+    "fetch-data": "node scripts/fetch-tles.mjs && node scripts/fetch-feeds.mjs",
+    "predev": "npm run fetch-data",
+    "prebuild": "npm run fetch-data",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

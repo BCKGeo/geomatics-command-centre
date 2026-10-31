@@ -1,5 +1,6 @@
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { GLOSSARY } from "../../data/glossary.js";
+import { NewsWire } from "../ui/NewsWire.jsx";
 
 // Derived from the glossary so the count can't drift when terms are added.
 const TERM_COUNT = Object.values(GLOSSARY).reduce((n, terms) => n + terms.length, 0);
@@ -22,11 +23,23 @@ export function MissionBrief() {
     { label: "Jurisdictions", desc: "Provincial intel for all 13 jurisdictions plus federal, and an interactive municipal map with 40 Canadian cities." },
     { label: "Survey Tools", desc: "12 calculators: coordinates, inverse, forward, scale, area, intersections, curves, photo scale, mag dec, units, traverse closure, levelling." },
     { label: "Codex", desc: `${TERM_COUNT} domain-specific terms across ${DISCIPLINE_COUNT} disciplines.` },
-    { label: "Mission Brief", desc: "You are here." },
+    { label: "Mission Brief", desc: "Geomatics news wire from regulators and professional bodies, plus this project brief." },
   ];
 
   return (
     <div style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: 12 }}>
+      {/* News Wire */}
+      <div style={cardStyle}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <span>{"📰"}</span>
+          <h2 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: B.priBr }}>News Wire</h2>
+        </div>
+        <div style={{ fontSize: 11, color: B.textMid, marginBottom: 10 }}>
+          Transport Canada, NRCan, BC Water, Land and Resource Stewardship, LTSA, ACLS, ASTTBC and GoGeomatics. Newest first.
+        </div>
+        <NewsWire />
+      </div>
+
       {/* What This Is */}
       <div style={cardStyle}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
@@ -75,6 +88,9 @@ export function MissionBrief() {
             { n: "Open-Meteo", u: "https://open-meteo.com/", d: "Local weather forecasts and conditions" },
             { n: "WMM2025", u: "https://www.ncei.noaa.gov/products/world-magnetic-model", d: "World Magnetic Model (2025 to 2030 validity)" },
             { n: "BigDataCloud", u: "https://www.bigdatacloud.com/", d: "Reverse geocoding (browser-side only)" },
+            { n: "Canada.ca News API", u: "https://www.canada.ca/en/news.html", d: "Transport Canada and NRCan releases (bundled at build time)" },
+            { n: "BC Gov News", u: "https://news.gov.bc.ca/ministries/water-land-and-resource-stewardship", d: "Water, Land and Resource Stewardship releases" },
+            { n: "LTSA, ACLS, ASTTBC, GoGeomatics", u: "https://ltsa.ca/", d: "Professional body and trade press RSS feeds" },
           ].map(l => (
             <a key={l.u} href={l.u} target="_blank" rel="noopener noreferrer" className="lnk"
               style={{ padding: "8px 12px", color: B.text, fontSize: 12 }}>
@@ -94,7 +110,7 @@ export function MissionBrief() {
         <div style={{ ...bodyText, display: "flex", flexDirection: "column", gap: 6 }}>
           <p style={{ margin: 0 }}>Zero tracking. No cookies, no analytics, no accounts, no data collection.</p>
           <p style={{ margin: 0 }}>Location is opt-in and never stored server-side.</p>
-          <p style={{ margin: 0 }}>All API requests go directly from browser to source.</p>
+          <p style={{ margin: 0 }}>Live API requests go directly from browser to source. News feeds and satellite elements are bundled at build time, so no third-party site sees you read them.</p>
         </div>
       </div>
 
