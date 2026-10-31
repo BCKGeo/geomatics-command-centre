@@ -1,7 +1,7 @@
 # Content pilot: real field footage, AI production, a non-geospatial audience
 
 Date: 2026-10-31
-Status: draft for Ben's read. Plan approved by Ben on 2026-10-31, scrub section (6a) added the same day on his yes. Nothing is produced or posted until he has read the whole spec and agreed. Follows `2026-10-31-direction.md` and `2026-11-market-research.md`.
+Status: agreed by Ben on 2026-10-31 (plan approved, scrub section 6a added on his yes, full spec agreed the same day). Nothing is produced or posted until the builds in sections 5 and 6 exist and the clearances in section 4 are in hand. Follows `2026-10-31-direction.md` and `2026-11-market-research.md`.
 Tier: 2 (deliverable). Every platform rule below is traced to the platform's own page, read on 2026-10-31, or marked unverified. Every piece that is later posted is Tier 3: Ben does the final step himself, nothing is posted by Claude, and no Qwen output goes out unreviewed.
 
 ## 1. Question the pilot answers
