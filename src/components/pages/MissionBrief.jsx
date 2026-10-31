@@ -114,6 +114,14 @@ export function MissionBrief() {
         </div>
       </div>
 
+      {/* Support */}
+      <div style={cardStyle}>
+        <h3 style={sectionTitle}>Support</h3>
+        <div style={bodyText}>
+          <p style={{ margin: 0 }}>Free, no ads, no tracking. If it saves you time in the field, you can <a href="https://github.com/sponsors/BCKGeo" target="_blank" rel="noopener noreferrer" style={{ color: B.pri, textDecoration: "none", fontWeight: 600 }}>sponsor BCKGeo on GitHub</a>.</p>
+        </div>
+      </div>
+
       {/* Built With */}
       <div style={cardStyle}>
         <h3 style={sectionTitle}>Built With</h3>

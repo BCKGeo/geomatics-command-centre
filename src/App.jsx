@@ -337,7 +337,7 @@ function Layout() {
       <div className="no-print" style={{ borderTop: `2px solid ${B.border}`, padding: "10px clamp(12px, 3vw, 24px)", marginTop: 16, paddingBottom: "calc(10px + env(safe-area-inset-bottom, 0px))" }}>
         <div className="footer-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
           <span style={{ fontSize: 11, fontWeight: 700, color: B.pri, fontFamily: B.display, letterSpacing: ".1em" }}>BCKGeo</span>
-          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.sans }}>Weather: Open-Meteo {"\u00B7"} Space Wx: NOAA SWPC {"\u00B7"} Mag Dec: WMM2025 {"\u00B7"} <Link to="/terms" style={{ color: B.pri, textDecoration: "none" }}>Terms of Use</Link></div>
+          <div style={{ fontSize: 10, color: B.textDim, fontFamily: B.sans }}>Weather: Open-Meteo {"\u00B7"} Space Wx: NOAA SWPC {"\u00B7"} Mag Dec: WMM2025 {"\u00B7"} <Link to="/terms" style={{ color: B.pri, textDecoration: "none" }}>Terms of Use</Link> {"·"} <a href="https://github.com/sponsors/BCKGeo" target="_blank" rel="noopener noreferrer" style={{ color: B.pri, textDecoration: "none" }}>Sponsor on GitHub</a></div>
         </div>
         <div className="footer-disclaimer" style={{ fontSize: 9, color: B.textDim, fontFamily: B.sans, lineHeight: 1.5, marginTop: 6, textAlign: "center" }}>
           Reference and estimation tool only. Not for legal survey, navigation, or regulatory compliance. Verify all data against authoritative sources. No warranty expressed or implied.
