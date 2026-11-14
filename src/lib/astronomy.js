@@ -18,13 +18,20 @@ export function calcSun(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
   return {altitude:alt/r, azimuth:((az/r)+360)%360};
 }
 
-// ── Sun events for a local calendar day ──
+// ── Sun events for a calendar day at a location ──
 // Scans the day in 2-minute steps for altitude crossings, then bisects each
 // to the second. Sunrise and sunset use -0.833 deg (refraction plus the solar
 // radius); civil twilight uses -6 deg, the usual definition. A missing
 // crossing (polar day or night) is null and the flags say which.
+//
+// The day is the viewer's calendar date, but the 24 h window is the
+// location's own mean solar day (solar midnight to solar midnight, from the
+// longitude), not the browser's. Scanning the browser's day paired one day's
+// sunset with the next day's sunrise whenever the viewer's time zone was far
+// from the location (any UTC machine looking at western Canada).
 export function sunEvents(date, lat=DEFAULT_LAT, lon=DEFAULT_LON) {
-  const start=new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
+  const solarOffset=lon/15*36e5; // ms the location's mean solar time is ahead of UTC
+  const start=new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())-solarOffset);
   const end=new Date(start.getTime()+864e5);
   const alt=(t)=>calcSun(new Date(t), lat, lon).altitude;
   const cross=(h, rising)=>{

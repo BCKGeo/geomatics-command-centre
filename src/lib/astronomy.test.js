@@ -91,11 +91,25 @@ describe('sunEvents', () => {
     expect(r.sunset < r.civilDusk).toBe(true);
     expect(r.polarDay).toBe(false);
     expect(r.polarNight).toBe(false);
-    // Open-Meteo gives 08:09 and 17:38 local (PDT) for Prince George on this day
-    const sameDay = (d) => d.getFullYear() === 2026 && d.getMonth() === 9 && d.getDate() === 31;
-    expect(sameDay(r.sunrise) && sameDay(r.sunset)).toBe(true);
+    // Open-Meteo gives 08:09 and 17:38 local (PDT, UTC-7) for Prince George on
+    // this day. Checked as absolute instants so the test does not depend on
+    // the time zone of the machine running it (it used to fail under UTC).
+    const minutesOff = (d, utcMs) => Math.abs(d.getTime() - utcMs) / 6e4;
+    expect(minutesOff(r.sunrise, Date.UTC(2026, 9, 31, 15, 9))).toBeLessThan(5);
+    expect(minutesOff(r.sunset, Date.UTC(2026, 10, 1, 0, 38))).toBeLessThan(5);
     const dayLen = (r.sunset - r.sunrise) / 36e5;
     expect(Math.abs(dayLen - 9.48)).toBeLessThan(0.15);
+  });
+
+  it('gives the same instants whatever calendar-day window the browser is in', () => {
+    // A location 8 h of solar time west of Greenwich: the events must sit
+    // around the location's solar noon, sunrise before it and sunset after.
+    const r = sunEvents(new Date(2026, 9, 31, 12), 53.92, -122.75);
+    const solarNoon = Date.UTC(2026, 9, 31, 12) + 122.75 / 15 * 36e5;
+    expect(r.sunrise.getTime()).toBeLessThan(solarNoon);
+    expect(r.sunset.getTime()).toBeGreaterThan(solarNoon);
+    expect(solarNoon - r.civilDawn.getTime()).toBeLessThan(12 * 36e5);
+    expect(r.civilDusk.getTime() - solarNoon).toBeLessThan(12 * 36e5);
   });
 
   it('returns nulls and the polar flag in the polar night', () => {
